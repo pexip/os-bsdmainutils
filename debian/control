@@ -1,13 +1,15 @@
 Source: bsdmainutils
 Section: utils
 Priority: important
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Bsdmainutils Team <pkg-bsdmainutils@teams.debian.net>
-Uploaders: Giacomo Catenazzi <cate@debian.org>, Michael Meskes <meskes@debian.org>
+XSBC-Pexip-Original-Uploaders: Giacomo Catenazzi <cate@debian.org>, Michael Meskes <meskes@debian.org>
 Build-Depends: debhelper (>= 7), libncurses5-dev, quilt (>= 0.40), python-hdate
 Standards-Version: 3.9.2
 Vcs-Git: git://git.debian.org/git/bsdmainutils/bsdmainutils.git
 Vcs-Browser: http://git.debian.org/?p=bsdmainutils/bsdmainutils.git
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: bsdmainutils
 Architecture: any

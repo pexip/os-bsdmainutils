@@ -1,3 +1,9 @@
+bsdmainutils (8.2.3ubuntu1pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 24 Dec 2013 13:29:21 +0000
+
 bsdmainutils (8.2.3ubuntu1) precise; urgency=low
 
   * Make bsdmainutils Multi-Arch: foreign, so that it can satisfy
