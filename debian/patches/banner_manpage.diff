@@ -1,0 +1,24 @@
+Description: Rename program to printerbanner in manpage.
+Author: Michael Meskes <meskes@debian.org>
+
+--- freebsd/usr.bin/banner/banner.6	2009-10-03 18:17:50.000000000 +0200
++++ bsdmainutils/usr.bin/banner/banner.6	2009-10-03 18:19:19.000000000 +0200
+@@ -33,10 +33,10 @@
+ .\" $FreeBSD$
+ .\"
+ .Dd January 26, 2005
+-.Dt BANNER 6
++.Dt PRINTERBANNER 1
+ .Os
+ .Sh NAME
+-.Nm banner
++.Nm printerbanner
+ .Nd print large banner on printer
+ .Sh SYNOPSIS
+ .Nm
+@@ -80,3 +80,5 @@
+ Sometimes it runs letters together.
+ .Pp
+ Messages are limited to 1024 characters in length.
++.Pp
++This program is called just banner on FreeBSD.

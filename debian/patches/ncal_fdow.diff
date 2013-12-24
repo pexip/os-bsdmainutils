@@ -1,0 +1,122 @@
+Description: Use locale to figure out first day of week and first week of year.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmaintuils/usr.bin/ncal/calendar.c	2011-01-03 13:19:17.000000000 +0100
++++ bsdmaintuils/usr.bin/ncal/calendar.c	2011-01-03 13:19:39.000000000 +0100
+@@ -25,8 +25,10 @@
+  */
+ 
+ #include <sys/cdefs.h>
++#include <langinfo.h>
+ 
+ #include "calendar.h"
++extern int weekstart;
+ 
+ #ifndef NULL
+ #define NULL 0
+@@ -254,14 +256,16 @@
+ 	idt.m = 10;
+ 	idt.d = 0;
+ 
+-	nd = ndaysgi(&idt);
++	nd = ndaysgi(&idt) - 1 + weekstart;
+ 	/*
+ 	 * If more than 3 days of this week are in the preceding year, the
+-	 * next week is week 1 (and the next monday is the answer),
+-	 * otherwise this week is week 1 and the last monday is the
++	 * next week is week 1 (and the next sunday/monday is the answer),
++	 * otherwise this week is week 1 and the last sunday/monday is the
+ 	 * answer.
+ 	 */
+-	if ((wd = weekday(nd)) > 3)
++
++	/* 3 may or may not be correct, better use what the locale says */
++	if ((wd = weekday(nd)) >= *nl_langinfo(_NL_TIME_WEEK_1STWEEK))
+ 		return (nd - wd + 7);
+ 	else
+ 		return (nd - wd);
+--- bsdmainutils/usr.bin/ncal/ncal.c	2011-01-03 13:16:30.000000000 +0100
++++ bsdmainutils/usr.bin/ncal/ncal.c	2011-01-03 13:27:47.000000000 +0100
+@@ -165,6 +165,7 @@
+ int     nswitch;		/* user defined switch date */
+ int	nswitchb;		/* switch date for backward compatibility */
+ int	highlightdate;
++int	weekstart = 0;		/* day the week starts on (Sun [0] - Sat [6]) */
+ 
+ char	*center(char *s, char *t, int w);
+ wchar_t *wcenter(wchar_t *s, wchar_t *t, int w);
+@@ -253,6 +254,23 @@
+ 	if (flag_backward)
+ 		nswitchb = ndaysj(&ukswitch);
+ 
++	/* Determine on what day the week starts. */
++#ifdef __GLIBC__
++	if (!flag_backward) 
++	{
++		int first_week_i;
++		date first_week_d;
++		date sunday = { .y = 1997, .m = 11, .d = 30 };
++
++		first_week_i = (intptr_t) nl_langinfo(_NL_TIME_WEEK_1STDAY);
++		first_week_d.d = first_week_i % 100;
++		first_week_i /= 100;
++		first_week_d.m = first_week_i % 100;
++		first_week_i /= 100;
++		first_week_d.y = first_week_i;
++		weekstart = *nl_langinfo(_NL_TIME_FIRST_WEEKDAY) + (ndaysj(&first_week_d) - ndaysj(&sunday)) % 7 - 1;
++	}
++#endif
+ 	before = after = -1;
+ 
+ 	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wy")) != -1)
+@@ -384,6 +402,10 @@
+ 		usage();
+ 	}
+ 
++	/* Technically not correct, but removes the need to add 1 later on */
++	if (flag_backward) 
++		weekstart++;
++
+ 	if (flag_month != NULL) {
+ 		if (parsemonth(flag_month, &m, &y)) {
+ 			errx(EX_USAGE,
+@@ -541,7 +563,13 @@
+ 	struct tm tm;
+ 	char    buf[MAX_WIDTH];
+ #ifndef D_MD_ORDER
+-	static int d_first = 1; /* XXX */
++	static int d_first = -1; /* XXX */
++	char * str = nl_langinfo(D_FMT);
++
++	if (d_first < 0) {
++		for (; *str && *str != 'd' && *str != 'm'; str++);
++		d_first = (*str == 'm') ? 0 : 1;
++	}
+ #else
+ 	static int d_first = -1;
+ 
+@@ -799,10 +827,13 @@
+ 		jan1 = firstday(y, 1);
+ 
+ 	/*
+-	 * Set firstm to the day number of monday of the first week of
++	 * Set firstm to the day number of the day starting the first week of
+ 	 * this month. (This might be in the last month)
+ 	 */
+-	firstm = first - weekday(first);
++	if (weekstart == 0)
++		firstm = first - (weekday(first) + 1) % 7;
++	else
++		firstm = first - weekday(first);
+ 
+ 	/* Set ds (daystring) and dw (daywidth) according to the jd_flag. */
+ 	if (jd_flag) {
+@@ -958,7 +989,7 @@
+ 	memset(&tm, 0, sizeof(tm));
+ 
+ 	for (i = 0; i != 7; i++) {
+-		tm.tm_wday = (i+1) % 7;
++		tm.tm_wday = (i+weekstart) % 7;
+ 		wcsftime(buf, sizeof(buf), L"%a", &tm);
+ 		for (len = 2; len > 0; --len) {
+ 			if ((width = wcswidth(buf, len)) <= 2)

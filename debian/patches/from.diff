@@ -1,0 +1,121 @@
+Description: Make program compile on Debian and work with Maildirs 
+Author: Michael Meskes <meskes@debian.org>
+
+--- freebsd/usr.bin/from/from.c	2009-12-19 20:46:26.000000000 +0100
++++ bsdmainutils/usr.bin/from/from.c	2010-01-21 11:43:20.000000000 +0100
+@@ -43,9 +43,10 @@
+ #endif
+ #endif /* not lint */
+ #include <sys/cdefs.h>
+-__FBSDID("$FreeBSD$");
+ 
+ #include <sys/types.h>
++#include <sys/stat.h>
++#include <dirent.h>
+ #include <ctype.h>
+ #include <err.h>
+ #include <pwd.h>
+@@ -57,6 +58,7 @@
+ 
+ int match(const char *, const char *);
+ static void usage(void);
++static int handle_file (char*, int, FILE *);
+ 
+ int
+ main(int argc, char **argv)
+@@ -66,6 +68,9 @@
+ 	int ch, count, newline;
+ 	const char *file;
+ 	char *sender, *p;
++	struct dirent *dent;
++	DIR *dir;
++	struct stat statbuf;
+ #if MAXPATHLEN > BUFSIZ
+ 	char buf[MAXPATHLEN];
+ #else
+@@ -111,6 +116,24 @@
+ 		}
+ 	}
+ 
++	if (strcmp(file, "-") != 0 && !lstat(file, &statbuf) && S_ISDIR(statbuf.st_mode)) { /* maildir */
++		if (!chdir(file) && !chdir("cur")) {
++			dir = opendir(".");
++			if (dir) {
++				while (dent = readdir(dir)) {
++					if (lstat(dent->d_name, &statbuf))
++						continue;
++					if (!S_ISREG(statbuf.st_mode))
++						continue;
++					if ((mbox = fopen(dent->d_name, "r")) == NULL) {
++						errx(1, "can't read %s", dent->d_name);
++					}
++					count = handle_file(sender, count, mbox);
++				}
++			}
++		}
++	}
++	else {
+ 	/* read from stdin */
+ 	if (strcmp(file, "-") == 0) {
+ 		mbox = stdin;
+@@ -118,25 +141,48 @@
+ 	else if ((mbox = fopen(file, "r")) == NULL) {
+ 		errx(1, "can't read %s", file);
+ 	}
++        count = handle_file(sender, count, mbox);
++	}
++	if (count != -1)
++		printf("There %s %d message%s in your incoming mailbox.\n",
++		    count == 1 ? "is" : "are", count, count == 1 ? "" : "s"); 
++	exit(0);
++}
++
++static int 
++handle_file(char *sender, int count, FILE *mbox)
++{
++        int newline;
++#if MAXPATHLEN > BUFSIZ
++	char buf[MAXPATHLEN]; 
++#else
++	char buf[BUFSIZ];
++#endif
+ 	for (newline = 1; fgets(buf, sizeof(buf), mbox);) {
+ 		if (*buf == '\n') {
+ 			newline = 1;
+ 			continue;
+ 		}
+-		if (newline && !strncmp(buf, "From ", 5) &&
+-		    (!sender || match(buf + 5, sender))) {
+-			if (count != -1)
+-				count++;
+-			else
+-				printf("%s", buf);
++		if (newline) {
++			if (!strncmp(buf, "Return-Path: <", 14)) {
++				/* maildir format does not have a From line, the address is only listed as Return-Path */
++				int i, j;
++
++				sprintf(buf, "From ");
++				for (i = 14, j = 5; buf[i] != '>'; buf[j++] = buf[i++]);
++				sprintf(buf + j, "\n");
++			}
++			if (!strncmp(buf, "From ", 5) &&
++			    (!sender || match(buf + 5, sender))) {
++				if (count != -1)
++					count++;
++				else
++					printf("%s", buf);
++			}
++			newline = 0;
+ 		}
+-		newline = 0;
+ 	}
+-	if (count != -1)
+-		printf("There %s %d message%s in your incoming mailbox.\n",
+-		    count == 1 ? "is" : "are", count, count == 1 ? "" : "s"); 
+-	fclose(mbox);
+-	exit(0);
++        return count;
+ }
+ 
+ static void

@@ -1,0 +1,21 @@
+Description: Explain cal in manpage.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/ncal/ncal.1	2009-11-01 17:26:26.000000000 +0100
++++ bsdmainutils/usr.bin/ncal/ncal.1	2009-11-01 17:28:33.000000000 +0100
+@@ -183,6 +183,15 @@
+ .Nm ncal
+ command appeared in
+ .Fx 2.2.6 .
++The output of the
++.Nm cal
++command is supposed to be bit for bit compatible to the original Unix
++.Nm cal
++command, because its output is processed by other programs like CGI scripts,
++that should not be broken. Therefore it will always output 8 lines, even if
++only 7 contain data. This extra blank line also appears with the original
++.Nm cal
++command, at least on solaris 8
+ .Sh AUTHORS
+ The
+ .Nm ncal

@@ -1,0 +1,33 @@
+Description: Make program compile on Debian.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsd/freebsd/look/look.c	2009-10-29 12:18:22.000000000 +0100
++++ bsdmainutils/usr.bin/look/look.c	2009-10-29 12:18:03.000000000 +0100
+@@ -46,7 +46,6 @@
+ #endif
+ #endif /* not lint */
+ #include <sys/cdefs.h>
+-__FBSDID("$FreeBSD$");
+ 
+ /*
+  * look -- find lines in a sorted list.
+@@ -74,6 +73,10 @@
+ 
+ #include "pathnames.h"
+ 
++#ifndef SIZE_T_MAX
++# define SIZE_T_MAX INT_MAX
++#endif
++
+ static char _path_words[] = _PATH_WORDS;
+ 
+ #define	EQUAL		0
+@@ -172,7 +175,7 @@
+ 	writep = key;
+ 	while ((clen = mbrtowc(&ch, readp, MB_LEN_MAX, NULL)) != 0) {
+ 		if (clen == (size_t)-1 || clen == (size_t)-2)
+-			errc(2, EILSEQ, NULL);
++			errx(2, "%s", strerror(EILSEQ));
+ 		if (fflag)
+ 			ch = towlower(ch);
+ 		if (!dflag || iswalnum(ch))

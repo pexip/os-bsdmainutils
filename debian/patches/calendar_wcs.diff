@@ -1,0 +1,674 @@
+Description: Make calendar UTF-8 aware.
+Author: Michael Meskes <meskes@debian.org>
+
+diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/calendar.h
+--- bsdmainutils/usr.bin/calendar/calendar.h	2010-04-04 15:05:50.000000000 +0200
++++ bsdmainutils/usr.bin/calendar/calendar.h	2010-04-04 15:01:30.000000000 +0200
+@@ -30,6 +30,7 @@
+  */
+ 
+ #include <sys/uio.h>
++#include <wchar.h>
+ 
+ extern struct passwd *pw;
+ extern int doall;
+@@ -41,45 +42,45 @@
+ extern char *optarg;
+ 
+ struct fixs {
+-	char *name;
++	wchar_t *name;
+ 	int len;
+ };
+ 
+ struct event {
+ 	time_t	when;
+-	char	print_date[31];
+-	char	**desc;
+-	char	*ldesc;
++	wchar_t	print_date[31];
++	wchar_t	**desc;
++	wchar_t	*ldesc;
+ 	struct event	*next;
+ };
+ 
+ struct match {
+ 	time_t	when;
+-	char	print_date[30];
++	wchar_t	print_date[30];
+ 	int	bodun;
+ 	int	var;
+ 	struct match	*next;
+ };
+ 
+ struct specialev {
+-	char *name;
++	wchar_t *name;
+ 	int nlen;
+-	char *uname;
++	wchar_t *uname;
+ 	int ulen;
+ 	int (*getev)(int);
+ };
+ 
+ void	 cal(void);
+ void	 closecal(FILE *);
+-int	 getday(char *);
+-int	 getdayvar(char *);
+-int	 getfield(char *, char **, int *);
+-int	 getmonth(char *);
++int	 getday(wchar_t *);
++int	 getdayvar(wchar_t *);
++int	 getfield(wchar_t *, wchar_t **, int *);
++int	 getmonth(wchar_t *);
+ int	 pesach(int);
+ int	 easter(int);
+ int	 paskha(int);
+ void	 insert(struct event **, struct event *);
+-struct match	*isnow(char *, int);
++struct match	*isnow(wchar_t *, int);
+ FILE	*opencal(void);
+ void	 settime(time_t *);
+ time_t	 Mktime(char *);
+@@ -102,12 +103,12 @@
+ 
+ /* Special events; see also setnnames() in day.c */
+ /* '=' is not a valid character in a special event name */
+-#define PESACH "pesach"
+-#define PESACHLEN (sizeof(PESACH) - 1)
+-#define EASTER "easter"
+-#define EASTERNAMELEN (sizeof(EASTER) - 1)
+-#define PASKHA "paskha"
+-#define PASKHALEN (sizeof(PASKHA) - 1)
++#define PESACH L"pesach"
++#define PESACHLEN ((sizeof(PESACH) / sizeof(wchar_t)) - 1)
++#define EASTER L"easter"
++#define EASTERNAMELEN ((sizeof(EASTER) / sizeof(wchar_t)) - 1)
++#define PASKHA L"paskha"
++#define PASKHALEN ((sizeof(PASKHA) / sizeof(wchar_t)) - 1)
+ 
+ /* calendars */
+ extern enum calendars { GREGORIAN = 0, JULIAN, LUNAR } calendar;
+diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
+--- bsdmainutils/usr.bin/calendar/day.c	2010-04-04 15:05:50.000000000 +0200
++++ bsdmainutils/usr.bin/calendar/day.c	2010-04-04 14:56:03.000000000 +0200
+@@ -62,13 +62,13 @@
+ 	{ 0, -1, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 },
+ };
+ 
+-static char *days[] = {
+-	"sun", "mon", "tue", "wed", "thu", "fri", "sat", NULL,
++static wchar_t *days[] = {
++	L"sun", L"mon", L"tue", L"wed", L"thu", L"fri", L"sat", NULL,
+ };
+ 
+-static char *months[] = {
+-	"jan", "feb", "mar", "apr", "may", "jun",
+-	"jul", "aug", "sep", "oct", "nov", "dec", NULL,
++static wchar_t *months[] = {
++	L"jan", L"feb", L"mar", L"apr", L"may", L"jun",
++	L"jul", L"aug", L"sep", L"oct", L"nov", L"dec", NULL,
+ };
+ 
+ static struct fixs fndays[8];         /* full national days names */
+@@ -81,63 +81,63 @@
+ void
+ setnnames(void)
+ {
+-	char buf[80];
++	wchar_t buf[80];
+ 	int i, l;
+ 	struct tm tm;
+ 
+ 	for (i = 0; i < 7; i++) {
+ 		tm.tm_wday = i;
+-		l = strftime(buf, sizeof(buf), "%a", &tm);
+-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
++		l = wcsftime(buf, sizeof(buf), L"%a", &tm);
++		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
+ 			;
+ 		buf[l] = '\0';
+ 		if (ndays[i].name != NULL)
+ 			free(ndays[i].name);
+-		if ((ndays[i].name = strdup(buf)) == NULL)
++		if ((ndays[i].name = wcsdup(buf)) == NULL)
+ 			err(1, NULL);
+-		ndays[i].len = strlen(buf);
++		ndays[i].len = wcslen(buf);
+ 
+-		l = strftime(buf, sizeof(buf), "%A", &tm);
+-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
++		l = wcsftime(buf, sizeof(buf), L"%A", &tm);
++		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
+ 			;
+ 		buf[l] = '\0';
+ 		if (fndays[i].name != NULL)
+ 			free(fndays[i].name);
+-		if ((fndays[i].name = strdup(buf)) == NULL)
++		if ((fndays[i].name = wcsdup(buf)) == NULL)
+ 			err(1, NULL);
+-		fndays[i].len = strlen(buf);
++		fndays[i].len = wcslen(buf);
+ 	}
+ 
+ 	for (i = 0; i < 12; i++) {
+ 		tm.tm_mon = i;
+-		l = strftime(buf, sizeof(buf), "%b", &tm);
+-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
++		l = wcsftime(buf, sizeof(buf), L"%b", &tm);
++		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
+ 			;
+ 		buf[l] = '\0';
+ 		if (nmonths[i].name != NULL)
+ 			free(nmonths[i].name);
+-		if ((nmonths[i].name = strdup(buf)) == NULL)
++		if ((nmonths[i].name = wcsdup(buf)) == NULL)
+ 			err(1, NULL);
+-		nmonths[i].len = strlen(buf);
++		nmonths[i].len = wcslen(buf);
+ 
+-		l = strftime(buf, sizeof(buf), "%B", &tm);
+-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
++		l = wcsftime(buf, sizeof(buf), L"%B", &tm);
++		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
+ 			;
+ 		buf[l] = '\0';
+ 		if (fnmonths[i].name != NULL)
+ 			free(fnmonths[i].name);
+-		if ((fnmonths[i].name = strdup(buf)) == NULL)
++		if ((fnmonths[i].name = wcsdup(buf)) == NULL)
+ 			err(1, NULL);
+-		fnmonths[i].len = strlen(buf);
++		fnmonths[i].len = wcslen(buf);
+ 	}
+ 	/* Hardwired special events */
+-	spev[0].name = strdup(PESACH);
++	spev[0].name = wcsdup(PESACH);
+ 	spev[0].nlen = PESACHLEN;
+ 	spev[0].getev = pesach;
+-	spev[1].name = strdup(EASTER);
++	spev[1].name = wcsdup(EASTER);
+ 	spev[1].nlen = EASTERNAMELEN;
+ 	spev[1].getev = easter;
+-	spev[2].name = strdup(PASKHA);
++	spev[2].name = wcsdup(PASKHA);
+ 	spev[2].nlen = PASKHALEN;
+ 	spev[2].getev = paskha;
+ 	for (i = 0; i < NUMEV; i++) {
+@@ -261,7 +261,7 @@
+  * with \t, is shown along with the matched line.
+  */
+ struct match *
+-isnow(char *endp, int bodun)
++isnow(wchar_t *endp, int bodun)
+ {
+ 	int day = 0, flags = 0, month = 0, v1, v2, i;
+ 	int monthp, dayp, varp = 0;
+@@ -386,7 +386,7 @@
+ 	 */
+ 	if (flags & F_ISDAY) {
+ #if DEBUG
+-		fprintf(stderr, "\nday: %d %s month %d\n", day, endp, month);
++		fprintf(stderr, "\nday: %d %ls month %d\n", day, endp, month);
+ #endif
+ 
+ 		varp = 1;
+@@ -458,11 +458,11 @@
+ 			}
+ 
+ 			(void)mktime(&tmtmp);
+-			if (strftime(tmp->print_date,
++			if (wcsftime(tmp->print_date,
+ 			    sizeof(tmp->print_date),
+ 			/*    "%a %b %d", &tm);  Skip weekdays */
+-			    "%b %d", &tmtmp) == 0)
+-				tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
++			    L"%b %d", &tmtmp) == 0)
++				tmp->print_date[sizeof(tmp->print_date) - 1] = L'\0';
+ 
+ 			tmp->var   = varp;
+ 			tmp->next  = NULL;
+@@ -542,7 +542,7 @@
+ 			}
+ 			/* How many days apart are we */
+ 			if ((ttmp = mktime(&tmtmp)) == -1)
+-				warnx("time out of range: %s", endp);
++				warnx("time out of range: %ls", endp);
+ 			else {
+ 				tdiff = difftime(ttmp, f_time)/ SECSPERDAY;
+ 				if (tdiff <= offset + f_dayAfter ||
+@@ -552,11 +552,11 @@
+ 					if ((tmp = malloc(sizeof(struct match))) == NULL)
+ 						err(1, NULL);
+ 					tmp->when = ttmp;
+-					if (strftime(tmp->print_date,
++					if (wcsftime(tmp->print_date,
+ 					    sizeof(tmp->print_date),
+ 					/*    "%a %b %d", &tm);  Skip weekdays */
+-					    "%b %d", &tmtmp) == 0)
+-						tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
++					    L"%b %d", &tmtmp) == 0)
++						tmp->print_date[sizeof(tmp->print_date) - 1] = L'\0';
+ 					tmp->bodun = bodun && tdiff == -1;
+ 					tmp->var   = varp;
+ 					tmp->next  = NULL;
+@@ -577,38 +577,38 @@
+ 
+ 
+ int
+-getmonth(char *s)
++getmonth(wchar_t *s)
+ {
+-	char **p;
++	wchar_t **p;
+ 	struct fixs *n;
+ 
+ 	for (n = fnmonths; n->name; ++n)
+-		if (!strncasecmp(s, n->name, n->len))
++		if (!wcsncasecmp(s, n->name, n->len))
+ 			return ((n - fnmonths) + 1);
+ 	for (n = nmonths; n->name; ++n)
+-		if (!strncasecmp(s, n->name, n->len))
++		if (!wcsncasecmp(s, n->name, n->len))
+ 			return ((n - nmonths) + 1);
+ 	for (p = months; *p; ++p)
+-		if (!strncasecmp(s, *p, 3))
++		if (!wcsncasecmp(s, *p, 3))
+ 			return ((p - months) + 1);
+ 	return (0);
+ }
+ 
+ 
+ int
+-getday(char *s)
++getday(wchar_t *s)
+ {
+-	char **p;
++	wchar_t **p;
+ 	struct fixs *n;
+ 
+ 	for (n = fndays; n->name; ++n)
+-		if (!strncasecmp(s, n->name, n->len))
++		if (!wcsncasecmp(s, n->name, n->len))
+ 			return ((n - fndays) + 1);
+ 	for (n = ndays; n->name; ++n)
+-		if (!strncasecmp(s, n->name, n->len))
++		if (!wcsncasecmp(s, n->name, n->len))
+ 			return ((n - ndays) + 1);
+ 	for (p = days; *p; ++p)
+-		if (!strncasecmp(s, *p, 3))
++		if (!wcsncasecmp(s, *p, 3))
+ 			return ((p - days) + 1);
+ 	return (0);
+ }
+@@ -619,21 +619,21 @@
+  * ... etc ...
+  */
+ int
+-getdayvar(char *s)
++getdayvar(wchar_t *s)
+ {
+ 	int offset;
+ 
+ 
+-	offset = strlen(s);
++	offset = wcslen(s);
+ 
+ 	/* Sun+1 or Wednesday-2
+ 	 *    ^              ^   */
+ 
+ 	/* printf ("x: %s %s %d\n", s, s + offset - 2, offset); */
+ 	switch(*(s + offset - 2)) {
+-	case '-':
+-	case '+':
+-	    return(atoi(s + offset - 2));
++	case L'-':
++	case L'+':
++	    return(wcstol(s + offset - 2, (wchar_t **) NULL, 10));
+ 	    break;
+ 	}
+ 
+@@ -642,15 +642,15 @@
+ 	 */
+ 
+ 	/* last */
+-	if      (offset > 4 && !strcasecmp(s + offset - 4, "last"))
++	if      (offset > 4 && !wcscasecmp(s + offset - 4, L"last"))
+ 	    return(-1);
+-	else if (offset > 5 && !strcasecmp(s + offset - 5, "first"))
++	else if (offset > 5 && !wcscasecmp(s + offset - 5, L"first"))
+ 	    return(+1);
+-	else if (offset > 6 && !strcasecmp(s + offset - 6, "second"))
++	else if (offset > 6 && !wcscasecmp(s + offset - 6, L"second"))
+ 	    return(+2);
+-	else if (offset > 5 && !strcasecmp(s + offset - 5, "third"))
++	else if (offset > 5 && !wcscasecmp(s + offset - 5, L"third"))
+ 	    return(+3);
+-	else if (offset > 6 && !strcasecmp(s + offset - 6, "fourth"))
++	else if (offset > 6 && !wcscasecmp(s + offset - 6, L"fourth"))
+ 	    return(+4);
+ 
+ 	/* no offset detected */
+diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
+--- bsdmainutils/usr.bin/calendar/io.c	2010-04-04 15:05:50.000000000 +0200
++++ bsdmainutils/usr.bin/calendar/io.c	2010-04-04 14:50:18.000000000 +0200
+@@ -46,11 +46,12 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <wctype.h>
++#include <iconv.h>
+ 
+ #include "pathnames.h"
+ #include "calendar.h"
+ 
+-
+ struct iovec header[] = {
+ 	{ "From: ", 6 },
+ 	{ NULL, 0 },
+@@ -62,13 +63,37 @@
+ 	{ "Auto-Submitted: auto-generated\n\n", 32 },
+ };
+ 
++static size_t
++utf8towcs (wchar_t *out, char *in, size_t n)
++{
++	char *ip = in, *op = (char *) out;
++	size_t ibl = strlen(in), obl = n * sizeof(wchar_t);
++	static iconv_t cd = (iconv_t) -1;
++	int r;
++
++	if (cd == (iconv_t) -1)
++		if ((cd = iconv_open("WCHAR_T", "UTF-8")) == (iconv_t) -1) 
++			err(1, NULL);
++
++	r = iconv(cd, &ip, &ibl, &op, &obl);
++
++	if ((r == -1) && (errno != EINVAL) && (errno != E2BIG))
++		return -1;
++
++	if (obl >= sizeof(wchar_t))
++		*((wchar_t *) op) = L'\0';
++	else
++		*(((wchar_t *) op) - 1) = L'\0';
++	return r;
++}
+ 
+ void
+ cal(void)
+ {
+-	int ch, l, i, bodun = 0, bodun_maybe = 0, var, printing;
++	int ch, l, i, bodun = 0, bodun_maybe = 0, var, printing, nlen, utf8mode = 0;
+ 	struct event *events, *cur_evt, *ev1, *tmp;
+-	char buf[2048 + 1], *prefix = NULL, *p;
++	wchar_t buf[2048 + 1], *prefix = NULL, *p;
++	char filebuf[2048 + 1], *filep;
+ 	struct match *m;
+ 	FILE *fp;
+ 
+@@ -76,22 +101,41 @@
+ 	cur_evt = NULL;
+ 	if ((fp = opencal()) == NULL)
+ 		return;
+-	for (printing = 0; fgets(buf, sizeof(buf), stdin) != NULL;) {
+-		if ((p = strchr(buf, '\n')) != NULL)
+-			*p = '\0';
++	for (printing = 0; fgets(filebuf, sizeof(filebuf), stdin) != NULL;) {
++		if ((filep = strchr(filebuf, '\n')) != NULL)
++			*filep = '\0';
+ 		else
+ 			while ((ch = getchar()) != '\n' && ch != EOF);
+-		for (l = strlen(buf); l > 0 && isspace(buf[l - 1]); l--)
++		/* convert the line */
++	        if (utf8mode)
++        	        i = utf8towcs(buf, filebuf, 2048);
++		else
++			i = mbstowcs(buf, filebuf, 2048);
++
++		if (i == -1 )
++			continue;
++
++		for (l = wcslen(buf); l > 0 && iswspace(buf[l - 1]); l--)
+ 			;
+-		buf[l] = '\0';
+-		if (buf[0] == '\0')
++		buf[l] = L'\0';
++		if (buf[0] == L'\0')
+ 			continue;
+-		if (strncmp(buf, "LANG=", 5) == 0) {
+-			(void) setlocale(LC_ALL, buf + 5);
++
++		if (wcsncmp(buf, L"# ", 2) == 0)
++			continue;
++
++		if (wcsncmp(buf, L"LANG=", 5) == 0) {
++			if (strncasecmp(filebuf + 5, "utf-8", 5) == 0)
++				utf8mode = 1;
++			else {
++				utf8mode = 0;
++				if (setlocale(LC_ALL, filebuf + 5) == NULL)
++					errx(1, "switch to locale ``%s'' cannot be honored", filebuf + 5);
++			}
+ 			setnnames();
+-			if (!strcmp(buf + 5, "ru_RU.KOI8-R") ||
+-			    !strcmp(buf + 5, "uk_UA.KOI8-U") ||
+-			    !strcmp(buf + 5, "by_BY.KOI8-B")) {
++			if (!strcmp(filebuf + 5, "ru_RU.KOI8-R") ||
++			    !strcmp(filebuf + 5, "uk_UA.KOI8-U") ||
++			    !strcmp(filebuf + 5, "by_BY.KOI8-B")) {
+ 				bodun_maybe++;
+ 				bodun = 0;
+ 				if (prefix)
+@@ -100,60 +144,60 @@
+ 			} else
+ 				bodun_maybe = 0;
+ 			continue;
+-		} else if (strncmp(buf, "CALENDAR=", 9) == 0) {
+-			char *ep;
++		} else if (wcsncmp(buf, L"CALENDAR=", 9) == 0) {
++			wchar_t *ep;
+ 
+-			if (buf[9] == '\0')
++			if (buf[9] == L'\0')
+ 				calendar = 0;
+-			else if (!strcasecmp(buf + 9, "julian")) {
++			else if (!wcscasecmp(buf + 9, L"julian")) {
+ 				calendar = JULIAN;
+ 				errno = 0;
+-				julian = strtoul(buf + 14, &ep, 10);
+-				if (buf[0] == '\0' || *ep != '\0')
++				julian = wcstoul(buf + 14, &ep, 10);
++				if (buf[0] == L'\0' || *ep != L'\0')
+ 					julian = 13;
+ 				if ((errno == ERANGE && julian == ULONG_MAX) ||
+ 				    julian > 14)
+ 					errx(1, "Julian calendar offset is too large");
+-			} else if (!strcasecmp(buf + 9, "gregorian"))
++			} else if (!wcscasecmp(buf + 9, L"gregorian"))
+ 				calendar = GREGORIAN;
+-			else if (!strcasecmp(buf + 9, "lunar"))
++			else if (!wcscasecmp(buf + 9, L"lunar"))
+ 				calendar = LUNAR;
+-		} else if (bodun_maybe && strncmp(buf, "BODUN=", 6) == 0) {
++		} else if (bodun_maybe && wcsncmp(buf, L"BODUN=", 6) == 0) {
+ 			bodun++;
+ 			if (prefix)
+ 				free(prefix);
+-			if ((prefix = strdup(buf + 6)) == NULL)
++			if ((prefix = wcsdup(buf + 6)) == NULL)
+ 				err(1, NULL);
+ 			continue;
+ 		}
+ 		/* User defined names for special events */
+-		if ((p = strchr(buf, '='))) {
++		if ((p = wcschr(buf, L'='))) {
+ 			for (i = 0; i < NUMEV; i++) {
+-				if (strncasecmp(buf, spev[i].name,
++				if (wcsncasecmp(buf, spev[i].name,
+ 				    spev[i].nlen) == 0 &&
+ 				    (p - buf == spev[i].nlen) &&
+ 				    buf[spev[i].nlen + 1]) {
+ 					p++;
+ 					if (spev[i].uname != NULL)
+ 						free(spev[i].uname);
+-					if ((spev[i].uname = strdup(p)) == NULL)
++					if ((spev[i].uname = wcsdup(p)) == NULL)
+ 						err(1, NULL);
+-					spev[i].ulen = strlen(p);
++					spev[i].ulen = wcslen(p);
+ 					i = NUMEV + 1;
+ 				}
+ 			}
+ 			if (i > NUMEV)
+ 				continue;
+ 		}
+-		if (buf[0] != '\t') {
++		if (buf[0] != L'\t') {
+ 			printing = (m = isnow(buf, bodun)) ? 1 : 0;
+-			if ((p = strchr(buf, '\t')) == NULL) {
++			if ((p = wcschr(buf, L'\t')) == NULL) {
+ 				printing = 0;
+ 				continue;
+ 			}
+ 			/* Need the following to catch hardwired "variable"
+ 			 * dates */
+-			if (p > buf && p[-1] == '*')
++			if (p > buf && p[-1] == L'*')
+ 				var = 1;
+ 			else
+ 				var = 0;
+@@ -167,20 +211,22 @@
+ 						err(1, NULL);
+ 	
+ 					cur_evt->when = m->when;
+-					snprintf(cur_evt->print_date,
+-					    sizeof(cur_evt->print_date), "%s%c",
+-					    m->print_date, (var + m->var) ? '*' : ' ');
++					swprintf(cur_evt->print_date,
++					    (sizeof(cur_evt->print_date)/sizeof(wchar_t)), L"%ls%lc",
++					    m->print_date, (var + m->var) ? L'*' : L' ');
+ 					if (ev1) {
+ 						cur_evt->desc = ev1->desc;
+ 						cur_evt->ldesc = NULL;
+ 					} else {
+ 						if (m->bodun && prefix) {
+-							if (asprintf(&cur_evt->ldesc,
+-							    "\t%s %s", prefix,
+-							    p + 1) == -1)
+-								err(1, NULL);
++							nlen = wcslen(prefix) + wcslen(p);
++							if ((cur_evt->ldesc = malloc(nlen * sizeof (wchar_t))) == NULL)
++	                                                       	err(1, NULL);
++							swprintf(cur_evt->ldesc, nlen,
++							    L"\t%ls %ls", prefix,
++							    p + 1);
+ 						} else if ((cur_evt->ldesc =
+-						    strdup(p)) == NULL)
++						    wcsdup(p)) == NULL)
+ 							err(1, NULL);
+ 						cur_evt->desc = &(cur_evt->ldesc);
+ 						ev1 = cur_evt;
+@@ -192,16 +238,20 @@
+ 				}
+ 			}
+ 		} else if (printing) {
+-			if (asprintf(&p, "%s\n%s", ev1->ldesc,
+-			    buf) == -1)
++			wchar_t *ldesc;
++
++			nlen = wcslen(ev1->ldesc) + wcslen(buf) + 2;
++			if ((ldesc = malloc(nlen * sizeof (wchar_t))) == NULL)
+ 				err(1, NULL);
++			swprintf(ldesc, nlen, L"%ls\n%ls", ev1->ldesc, buf);
+ 			free(ev1->ldesc);
+-			ev1->ldesc = p;
++			ev1->ldesc = ldesc;
+ 		}
+ 	}
+ 	tmp = events;
+ 	while (tmp) {
+-		(void)fprintf(fp, "%s%s\n", tmp->print_date, *(tmp->desc));
++		(void)fprintf(fp, "%ls%ls", tmp->print_date, *(tmp->desc));
++		(void)fprintf(fp, "\n");
+ 		tmp = tmp->next;
+ 	}
+ 	tmp = events;
+@@ -216,31 +266,31 @@
+ }
+ 
+ int
+-getfield(char *p, char **endp, int *flags)
++getfield(wchar_t *p, wchar_t **endp, int *flags)
+ {
+ 	int val, var, i;
+-	char *start, savech;
++	wchar_t *start, savech;
+ 
+-	for (; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
++	for (; !iswdigit(*p) && !iswalpha(*p) && *p != L'*' && *p != L'\t'; ++p)
+ 		;
+-	if (*p == '*') {			/* `*' is every month */
++	if (*p == L'*') {			/* `*' is every month */
+ 		*flags |= F_ISMONTH;
+ 		*endp = p+1;
+ 		return (-1);	/* means 'every month' */
+ 	}
+-	if (isdigit(*p)) {
+-		val = strtol(p, &p, 10);	/* if 0, it's failure */
+-		for (; !isdigit(*p) && !isalpha(*p) && *p != '*'; ++p)
++	if (iswdigit(*p)) {
++		val = wcstol(p, &p, 10);	/* if 0, it's failure */
++		for (; !iswdigit(*p) && !iswalpha(*p) && *p != L'*'; ++p)
+ 			;
+ 		*endp = p;
+ 		return (val);
+ 	}
+-	for (start = p; isalpha(*++p);)
++	for (start = p; iswalpha(*++p);)
+ 		;
+ 
+ 	/* Sunday-1 */
+-	if (*p == '+' || *p == '-')
+-		for(; isdigit(*++p); )
++	if (*p == L'+' || *p == L'-')
++		for(; iswdigit(*++p); )
+ 			;
+ 
+ 	savech = *p;
+@@ -267,12 +317,12 @@
+ 	/* Try specials (Easter, Paskha, ...) */
+ 	else {
+ 		for (i = 0; i < NUMEV; i++) {
+-			if (strncasecmp(start, spev[i].name, spev[i].nlen) == 0) {
++			if (wcsncasecmp(start, spev[i].name, spev[i].nlen) == 0) {
+ 				start += spev[i].nlen;
+ 				val = i + 1;
+ 				i = NUMEV + 1;
+ 			} else if (spev[i].uname != NULL &&
+-			    strncasecmp(start, spev[i].uname, spev[i].ulen) == 0) {
++			    wcsncasecmp(start, spev[i].uname, spev[i].ulen) == 0) {
+ 				start += spev[i].ulen;
+ 				val = i + 1;
+ 				i = NUMEV + 1;
+@@ -280,9 +330,9 @@
+ 		}
+ 		if (i > NUMEV) {
+ 			switch(*start) {
+-			case '-':
+-			case '+':
+-				var = atoi(start);
++			case L'-':
++			case L'+':
++				var = wcstol(start, (wchar_t **) NULL, 10);
+ 				if (var > 365 || var < -365)
+ 					return (0); /* Someone is just being silly */
+ 				val += (NUMEV + 1) * var;
+@@ -300,7 +350,7 @@
+ 			return (0);
+ 		}
+ 	}
+-	for (*p = savech; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
++	for (*p = savech; !iswdigit(*p) && !iswalpha(*p) && *p != L'*' && *p != L'\t'; ++p)
+ 		;
+ 	*endp = p;
+ 	return (val);

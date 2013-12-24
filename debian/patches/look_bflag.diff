@@ -1,0 +1,138 @@
+Description: Add binary search option.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/look/look.1	2009-10-29 12:35:45.000000000 +0100
++++ bsdmainutils/usr.bin/look/look.1	2009-10-29 12:44:46.000000000 +0100
+@@ -40,7 +40,7 @@
+ .Nd display lines beginning with a given string
+ .Sh SYNOPSIS
+ .Nm
+-.Op Fl df
++.Op Fl bdf
+ .Op Fl t Ar termchar
+ .Ar string
+ .Op Ar
+@@ -52,11 +52,6 @@
+ which contain
+ .Ar string
+ as a prefix.
+-As
+-.Nm
+-performs a binary search, the lines in
+-.Ar file
+-must be sorted.
+ .Pp
+ If
+ .Ar file
+@@ -67,6 +62,15 @@
+ .Pp
+ The following options are available:
+ .Bl -tag -width indent
++.It Fl b
++Use a binary search on the given word list. If you are ignoring case with
++.Fl f
++or ignoring non-alphanumeric characters with
++.Fl d ,
++the file must be sorted in the same way. Please note that these options are the
++default if no filename is given. See
++.Xr sort 1
++for more information on sorting files. 
+ .It Fl d
+ Dictionary character set and order, i.e., only alphanumeric characters
+ are compared.
+@@ -107,6 +111,10 @@
+ option was specified.
+ This was incorrect and the current man page matches the historic
+ implementation.
++.Pp
++.Nm
++uses a linear search by default instead of a binary search, which is what most
++other implementations use by default.
+ .Sh SEE ALSO
+ .Xr grep 1 ,
+ .Xr sort 1
+--- bsdmainutils/usr.bin/look/look.c	2009-10-29 12:35:45.000000000 +0100
++++ bsdmainutils/usr.bin/look/look.c	2009-10-29 12:44:46.000000000 +0100
+@@ -83,7 +83,7 @@
+ #define	GREATER		1
+ #define	LESS		(-1)
+ 
+-int dflag, fflag;
++int dflag, fflag, bflag;
+ 
+ char    *binary_search(wchar_t *, unsigned char *, unsigned char *);
+ int      compare(wchar_t *, unsigned char *, unsigned char *);
+@@ -91,6 +91,7 @@
+ int      look(wchar_t *, unsigned char *, unsigned char *);
+ wchar_t	*prepkey(const char *, wchar_t);
+ void     print_from(wchar_t *, unsigned char *, unsigned char *);
++int      grep(wchar_t *, unsigned char *, unsigned char *);
+ 
+ static void usage(void);
+ 
+@@ -108,8 +109,11 @@
+ 
+ 	file = _path_words;
+ 	termchar = L'\0';
+-	while ((ch = getopt(argc, argv, "dft:")) != -1)
++	while ((ch = getopt(argc, argv, "bdft:")) != -1)
+ 		switch(ch) {
++		case 'b':
++			bflag = 1;
++			break;
+ 		case 'd':
+ 			dflag = 1;
+ 			break;
+@@ -150,7 +154,10 @@
+ 		if ((front = mmap(NULL, (size_t)sb.st_size, PROT_READ, MAP_SHARED, fd, (off_t)0)) == MAP_FAILED)
+ 			err(2, "%s", file);
+ 		back = front + sb.st_size;
+-		match *= (look(key, front, back));
++		if (bflag)
++                        match *= (look(key, front, back));
++                else
++                        match *= (grep(key, front, back));
+ 		close(fd);
+ 	} while (argc-- > 2 && (file = *argv++));
+ 
+@@ -294,6 +301,32 @@
+ }
+ 
+ /*
++ * Look at every string in the wordlist for a match. Since wordlists are often
++ * not reliably sorted, or are sorted in locale-dependent ways, we use this
++ * method by default.
++ */
++int
++grep(wchar_t *string, unsigned char *front, unsigned char *back)
++{
++	int ret = 1;
++
++	for (; front < back; ++front) {
++		if (compare(string, front, back) == EQUAL) {
++			for (; front < back && *front != '\n'; ++front)
++				if (putchar(*front) == EOF)
++					err(2, "stdout");
++			if (putchar('\n') == EOF)
++				err(2, "stdout");
++			ret = 0;
++		}
++
++		/* Move to the next word in the list. */
++                while (front < back && *front != '\n')
++                        front++;
++	}
++	return(ret);
++}
++/*
+  * Print as many lines as match string, starting at front.
+  */
+ void
+@@ -350,6 +383,6 @@
+ static void
+ usage(void)
+ {
+-	(void)fprintf(stderr, "usage: look [-df] [-t char] string [file ...]\n");
++	(void)fprintf(stderr, "usage: look [-bdf] [-t char] string [file ...]\n");
+ 	exit(2);
+ }

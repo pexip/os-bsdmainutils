@@ -1,0 +1,14 @@
+Description: Fix segfault on empty lines.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/col/col.c	2009-11-01 17:49:17.000000000 +0100
++++ bsdmainutils/usr.bin/col/col.c	2009-11-01 17:48:41.000000000 +0100
+@@ -314,7 +314,7 @@
+ 	}
+ 	if (ferror(stdin))
+ 		err(1, NULL);
+-	if (max_line == 0)
++	if (max_line == 0 && l->l_line_len == 0)
+ 		exit(0);	/* no lines, so just exit */
+ 
+ 	/* goto the last line that had a character on it */

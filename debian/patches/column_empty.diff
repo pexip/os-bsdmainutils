@@ -1,0 +1,17 @@
+Description: Fix sewgfault on empty lines.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c.orig	2009-10-17 17:40:27.000000000 +0200
++++ bsdmainutils/usr.bin/column/column.c	2009-10-17 17:43:07.000000000 +0200
+@@ -268,9 +268,9 @@
+ 	}
+ 	for (cnt = 0, t = tbl; cnt < entries; ++cnt, ++t) {
+ 		for (coloff = 0; coloff < t->cols  - 1; ++coloff)
+-			(void)wprintf(L"%ls%*ls", t->list[coloff],
++			(void)wprintf(L"%ls%*ls", t->list[coloff] ? t->list[coloff] : L"",
+ 			    lens[coloff] - t->len[coloff] + 2, L" ");
+-		(void)wprintf(L"%ls\n", t->list[coloff]);
++		(void)wprintf(L"%ls\n", t->list[coloff] ? t->list[coloff] : L"");
+ 	}
+ }
+ 

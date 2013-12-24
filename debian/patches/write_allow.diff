@@ -1,0 +1,23 @@
+Description: Allow root to write even without write permissions.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/write/write.c	2009-10-29 14:24:50.000000000 +0100
++++ bsdmainutils/usr.bin/write/write.c	2009-10-29 14:28:06.000000000 +0100
+@@ -93,7 +93,7 @@
+ 	time_t atime;
+ 	uid_t myuid;
+ 	int msgsok, myttyfd;
+-	char tty[MAXPATHLEN], *mytty;
++	char tty[MAXPATHLEN], *mytty = NULL;
+ 
+ 	(void)setlocale(LC_CTYPE, "");
+ 
+@@ -124,7 +124,7 @@
+ 	}
+ 
+ 	if (!msgsok)
+-		errx(1, "you have write permission turned off");
++		warnx("write: you have write permission turned off.\n");
+ 
+ 	myuid = getuid();
+ 

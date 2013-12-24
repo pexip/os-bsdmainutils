@@ -1,0 +1,14 @@
+Description: Document that ul changes some special characters.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/ul/ul.1.orig	2011-06-06 07:34:49.000000000 +0200
++++ bsdmainutils/usr.bin/ul/ul.1	2011-06-06 07:37:56.000000000 +0200
+@@ -62,6 +62,8 @@
+ degenerates to
+ .Xr cat 1 .
+ If the terminal cannot underline, underlining is ignored.
++During the translation some other special characters also get translated.
++E.g. TAB gets expanded to spaces.
+ .Pp
+ The following options are available:
+ .Bl -tag -width indent

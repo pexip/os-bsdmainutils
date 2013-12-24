@@ -1,0 +1,13 @@
+Description: Make program compile on Debian.
+Author: Michael Meskes <meskes@debian.org>
+
+--- freebsd/usr-bin/col/col.c		2009-09-23 12:51:50.000000000 +0200
++++ bsdmainutils/usr.bin/col/col.c	2009-09-23 12:51:58.000000000 +0200
+@@ -47,7 +47,6 @@
+ #endif
+ 
+ #include <sys/cdefs.h>
+-__FBSDID("$FreeBSD$");
+ 
+ #include <err.h>
+ #include <locale.h>

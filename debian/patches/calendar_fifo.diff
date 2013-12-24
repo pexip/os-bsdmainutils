@@ -1,0 +1,16 @@
+Description: Correctly handle FIFOs.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/calendar/io.c	2010-04-06 14:40:43.000000000 +0200
++++ bsdmainutils/usr.bin/calendar/io.c	2010-04-06 14:42:29.000000000 +0200
+@@ -364,8 +364,8 @@
+ 	struct stat st;
+ 
+ 	/* open up calendar file as stdin */
+-	if ((fdin = open(calendarFile, O_RDONLY)) == -1 ||
+-	    fstat(fdin, &st) == -1 || !S_ISREG(st.st_mode)) {
++	if (stat(calendarFile, &st) == -1 || !S_ISREG(st.st_mode) ||
++	       (fdin = open(calendarFile, O_RDONLY)) == -1) {
+ 		if (!doall) {
+ 			char *home = getenv("HOME");
+ 			if (home == NULL || *home == '\0')

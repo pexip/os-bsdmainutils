@@ -1,0 +1,64 @@
+#!/usr/bin/make -f
+
+SHELL+= -e
+#export DH_VERBOSE=1
+
+include /usr/share/quilt/quilt.make
+
+# support noopt; nostrip is handled dh_strip
+CFLAGS = -g
+ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O2
+endif
+export CFLAGS
+
+DEB_HOST_GNU_TYPE=$(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE=$(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+ifneq ($(DEB_HOST_GNU_TYPE),$(DEB_BUILD_GNU_TYPE))
+	CROSS += "CC=$(DEB_HOST_GNU_TYPE)-gcc"
+else
+	CROSS +=
+endif
+
+build: patch build-stamp
+build-stamp:
+	dh_testdir
+	$(MAKE) $(CROSS)
+	python $(CURDIR)/debian/calendarJudaic.py > $(CURDIR)/debian/calendars/calendar.judaic
+	touch build-stamp
+
+clean: unpatch
+	dh_testdir
+	$(MAKE) clean
+	-rm -f $(CURDIR)/debian/calendars/calendar.judaic
+	-rm -f build-stamp
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/bsdmainutils
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installchangelogs
+	dh_installcron
+	dh_install
+	dh_strip
+	dh_compress
+	dh_fixperms -Xbsd-write
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_installdeb
+	dh_builddeb
+
+binary-indep:
+
+binary: binary-arch
+
+.PHONY: binary binary-arch binary-indep clean build install

@@ -1,0 +1,175 @@
+Description: Make program compile on Debian.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsd/freebsd/write/write.c	2009-10-29 14:01:40.000000000 +0100
++++ bsdmainutils/usr.bin/write/write.c	2009-10-29 14:11:53.000000000 +0100
+@@ -47,7 +47,6 @@
+ #endif
+ 
+ #include <sys/cdefs.h>
+-__FBSDID("$FreeBSD$");
+ 
+ #include <sys/param.h>
+ #include <sys/signal.h>
+@@ -65,6 +64,21 @@
+ #include <unistd.h>
+ #include <utmp.h>
+ 
++#include <errno.h>
++#include <time.h>
++#define HAVE_GETUTENT
++/* for Hurd */
++#ifndef MAXPATHLEN
++#  define MAXPATHLEN 4096
++#endif
++#ifndef MAXHOSTNAMELEN
++#  define MAXHOSTNAMELEN 255
++#endif
++#ifdef __GLIBC__
++#  undef __unused
++#  define __unused __attribute__((__unused__))
++#endif
++
+ void done(int);
+ void do_write(char *, char *, uid_t);
+ static void usage(void);
+@@ -95,14 +109,20 @@
+ 		myttyfd = fileno(stdout);
+ 	else if (isatty(fileno(stderr)))
+ 		myttyfd = fileno(stderr);
+-	else
+-		errx(1, "can't find your tty");
+-	if (!(mytty = ttyname(myttyfd)))
+-		errx(1, "can't find your tty's name");
+-	if (!strncmp(mytty, _PATH_DEV, strlen(_PATH_DEV)))
+-		mytty += strlen(_PATH_DEV);
+-	if (term_chk(mytty, &msgsok, &atime, 1))
+-		exit(1);
++	else {
++		mytty = "(none)";
++                msgsok = 1;
++	}
++
++	if (!mytty) {
++		if (!(mytty = ttyname(myttyfd)))
++			errx(1, "can't find your tty's name");
++		if (!strncmp(mytty, _PATH_DEV, strlen(_PATH_DEV)))
++			mytty += strlen(_PATH_DEV);
++		if (term_chk(mytty, &msgsok, &atime, 1))
++			exit(1);
++	}
++
+ 	if (!msgsok)
+ 		errx(1, "you have write permission turned off");
+ 
+@@ -146,6 +166,15 @@
+ int
+ utmp_chk(char *user, char *tty)
+ {
++#ifdef HAVE_GETUTENT
++        struct utmp *u;
++
++        while ((u = getutent()) != (struct utmp*) 0)
++                if (u->ut_type == USER_PROCESS &&
++                    strncmp(user, u->ut_name, sizeof(u->ut_name)) == 0 &&
++                    strncmp(tty, u->ut_line, sizeof(u->ut_line)) == 0)
++                        return(0);
++#else
+ 	struct utmp u;
+ 	int ufd;
+ 
+@@ -160,6 +189,7 @@
+ 		}
+ 
+ 	(void)close(ufd);
++#endif
+ 	return(1);
+ }
+ 
+@@ -177,21 +207,37 @@
+ void
+ search_utmp(char *user, char *tty, char *mytty, uid_t myuid)
+ {
++#ifdef HAVE_GETUTENT
++        struct utmp *u;
++#else
+ 	struct utmp u;
++#endif
+ 	time_t bestatime, atime;
+ 	int ufd, nloggedttys, nttys, msgsok, user_is_me;
+ 	char atty[UT_LINESIZE + 1];
+ 
++#ifdef HAVE_GETUTENT
++        setutent();
++#else
+ 	if ((ufd = open(_PATH_UTMP, O_RDONLY)) < 0)
+ 		err(1, "utmp");
++#endif
+ 
+ 	nloggedttys = nttys = 0;
+ 	bestatime = 0;
+ 	user_is_me = 0;
++#ifdef HAVE_GETUTENT
++        while ((u = getutent()) != (struct utmp*) 0)
++                if (strncmp(user, u->ut_name, sizeof(u->ut_name)) == 0
++                    && u->ut_type == USER_PROCESS) {
++                        ++nloggedttys;
++                        (void)strncpy(atty, u->ut_line, UT_LINESIZE);
++#else
+ 	while (read(ufd, (char *) &u, sizeof(u)) == sizeof(u))
+ 		if (strncmp(user, u.ut_name, sizeof(u.ut_name)) == 0) {
+ 			++nloggedttys;
+ 			(void)strncpy(atty, u.ut_line, UT_LINESIZE);
++#endif
+ 			atty[UT_LINESIZE] = '\0';
+ 			if (term_chk(atty, &msgsok, &atime, 0))
+ 				continue;	/* bad term? skip */
+@@ -202,13 +248,27 @@
+ 				continue;	/* don't write to yourself */
+ 			}
+ 			++nttys;
++#ifdef HAVE_GETUTENT
++/*
++ * If this is a newly created tty (eg fresh xterm), then user will not have
++ * typed at it, and the atime will be way in the past.
++ * So, if the atime is < utmp creation time, use the utmp time.
++ */
++                        if (atime < u->ut_time)
++                                atime = u->ut_time;
++#endif
++
+ 			if (atime > bestatime) {
+ 				bestatime = atime;
+ 				(void)strcpy(tty, atty);
+ 			}
+ 		}
+ 
++#ifdef HAVE_GETUTENT
++        endutent();
++#else
+ 	(void)close(ufd);
++#endif
+ 	if (nloggedttys == 0)
+ 		errx(1, "%s is not logged in", user);
+ 	if (nttys == 0) {
+@@ -263,6 +323,20 @@
+ 			login = "???";
+ 	}
+ 
++	/* got the utmp entry: ensure it matches the uid */
++	if ((pwd = getpwnam(login)) == NULL)
++		/* claimed utmp entry isn't in the password file */
++		errx(1, "you're %s, eh? Never heard of you.", login);
++	if (myuid != pwd->pw_uid) {
++		/* uid of logname in utmp is different from our uid,
++		   eg su'ed in someone else's login */
++		if (myuid != 0)
++			errx(1, "you are uid %d, but your login is as uid %d",
++			    myuid, pwd->pw_uid);
++		else
++		    warnx("warning: write will appear from %s", login);
++	}
++
+ 	(void)snprintf(path, sizeof(path), "%s%s", _PATH_DEV, tty);
+ 	if ((freopen(path, "w", stdout)) == NULL)
+ 		err(1, "%s", path);

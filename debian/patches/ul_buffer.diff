@@ -1,0 +1,75 @@
+Description: Make buffer expandable.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/ul/ul.c	2009-10-16 14:53:16.000000000 +0200
++++ bsdmainutils/usr.bin/ul/ul.c	2009-10-16 14:56:59.000000000 +0200
+@@ -82,7 +82,8 @@
+ 	int	c_width;	/* width or -1 if multi-column char. filler */
+ } ;
+ 
+-struct	CHAR	obuf[MAXBUF];
++struct	CHAR	*obuf = NULL;
++int     obuf_size = MAXBUF;
+ int	col, maxcol;
+ int	mode;
+ int	halfpos;
+@@ -163,6 +164,19 @@
+ }
+ 
+ static void
++expand_obuf()
++{
++        int newsize = obuf_size + MAXBUF;
++        struct CHAR *newbuf = (struct CHAR *)
++                realloc(obuf, newsize*sizeof (struct CHAR));
++        if (newbuf == NULL)
++                err(1, "Expanding output buffer");
++        bzero(&(newbuf[obuf_size]), (newsize-obuf_size) * sizeof(struct CHAR));
++        obuf_size = newsize;
++        obuf = newbuf;
++}
++
++static void
+ usage(void)
+ {
+ 	fprintf(stderr, "usage: ul [-i] [-t terminal] [file ...]\n");
+@@ -186,6 +200,8 @@
+ 		col = (col+8) & ~07;
+ 		if (col > maxcol)
+ 			maxcol = col;
++		if (col >= obuf_size)
++			expand_obuf();
+ 		continue;
+ 
+ 	case '\r':
+@@ -247,6 +263,8 @@
+ 				obuf[col++].c_mode |= UNDERL | mode;
+ 			if (col > maxcol)
+ 				maxcol = col;
++			if (col >= obuf_size)
++                        	expand_obuf();
+ 			continue;
+ 		}
+ 		obuf[col].c_char = '_';
+@@ -295,6 +313,8 @@
+ 		col += w;
+ 		if (col > maxcol)
+ 			maxcol = col;
++		if (col >= obuf_size)
++			expand_obuf();
+ 		continue;
+ 	}
+ 	if (ferror(f))
+@@ -413,7 +433,11 @@
+ initbuf(void)
+ {
+ 
+-	bzero((char *)obuf, sizeof (obuf));	/* depends on NORMAL == 0 */
++	if (obuf == NULL)
++		obuf = (struct CHAR *)malloc(obuf_size * sizeof(struct CHAR));
++	if (obuf == NULL)
++		err(1, "Allocating output buffer");
++	bzero((char *)obuf, obuf_size * sizeof (struct CHAR));	/* depends on NORMAL == 0 */
+ 	col = 0;
+ 	maxcol = 0;
+ 	mode &= ALTSET;

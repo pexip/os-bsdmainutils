@@ -1,0 +1,4375 @@
+Description: Lots of corrections to calendar files.
+Author: Michael Meskes <meskes@debian.org>
+
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.australia bsdmainutils//usr.bin/calendar/calendars/calendar.australia
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.australia	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.australia	2011-06-06 16:16:44.000000000 +0200
+@@ -7,12 +7,12 @@
+ #ifndef _calendar_australia_
+ #define _calendar_australia_
+ 
+-LANG=en_AU.ISO8859-1
++LANG=UTF-8
+ 
+ /* Australia */
+-Jan 26		Australia Day
++Jan 26		Australia Day Holiday (Australia, except NSW, Vic)
+ Apr/SunFirst	Daylight Savings Time ends in ACT, NSW, SA, TAS and VIC.
+-Apr 25		Anzac Day
++Apr 25		Anzac Day Australian and New Zealand Army Corps) Day (Australia)
+ Jun/MonSecond	Queen's Birthday Holiday (Australia, except WA)
+ Oct/SunFirst	Daylight Savings Time starts in ACT, NSW, SA and VIC.
+ 
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.birthday bsdmainutils//usr.bin/calendar/calendars/calendar.birthday
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.birthday	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.birthday	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_birthday_
+ #define _calendar_birthday_
+ 
++LANG=UTF-8
++
+ 01/01	J.D. Salinger born, 1919
+ 01/01	Paul Revere born in Boston, 1735
+ 01/02	Isaac Asimov born in Petrovichi, Russian SFSR, 1920
+@@ -14,6 +16,7 @@
+ 01/04	Jakob Grimm born, 1785
+ 01/04	Wilhelm Beer born, 1797, first astronomer to map Mars
+ 01/05	DeWitt B. Brace born, 1859, inventor of spectrophotometer
++01/07	Nikola Tesla died, 1943, supergenius, inventor AC Motor 
+ 01/10	Ethan Allen born, 1738
+ 01/11	Alexander Hamilton born in Nevis, British West Indies, 1757?
+ 01/12	"Long" John Baldry is born in London, 1941
+@@ -117,12 +120,13 @@
+ 04/10	William Booth born, 1829, founder of the Salvation Army
+ 04/13	Thomas Jefferson, 3rd President of the United States, born Shadwell
+ 		Plantation, Albemarle County, Virginia, 1743
+-04/14	Christian Huygen born, 1629, physicist & astronomer;
++04/14	Christian Huygens born, 1629, physicist & astronomer;
+ 		discovered Saturn's rings
+ 04/15	Leonardo da Vinci born, 1452
+ 04/16	Charles (Charlie) Chaplin (Sir) born in London, 1889
+ 04/22	Kant born, 1724
+ 04/27	Louis Victor de Broglie born, 1774, physicist
++04/27	Samuel Morse born, 1791, the inventor of the single wire telegraph
+ 04/28	James Monroe, 5th President of the United States, born in Westmoreland
+ 		County, Viriginia, 1758
+ 04/29	Jules Henri Poincare born, 1854, founder of topology
+@@ -176,6 +180,7 @@
+ 07/07	P.T. Barnum dies, 1891
+ 07/08	Count Ferdinand von Zeppelin born, 1838
+ 07/10	John Calvin born, 1509
++07/10	Nikola Tesla, born, 1856, supergenius, inventor AC Motor 
+ 07/11	John Quincy Adams, 6th President of the United States, born in
+ 		Braintree, Massachusetts, 1767
+ 07/12	Henry David Thoreau born, 1817
+@@ -239,6 +244,7 @@
+ 10/02	Mohandas K. Gandhi born at Porbandar, Kathiawad, India, 1869
+ 10/04	John V. Atanasoff born, 1903
+ 10/05	Ray Kroc (founder of McDonald's) born, 1902
++10/05	Pablo Picasso born in Malaga, Spain, 1881 
+ 10/13	Lenny Bruce is born in New York City, 1925
+ 10/13	Virgil (Publius Vergilius Maro) born near Mantua, Italy, 70 BC
+ 10/14	Dwight David Eisenhower, 34th President of the United States, born in
+@@ -260,6 +266,7 @@
+ 10/31	Chiang Kai-Shek born, 1887
+ 10/31	Dale Evans born, 1912
+ 11/02	Daniel Boone born near Reading, PA, 1734
++11/03	John Montague, 4th Earl of Sandwich, born 1718
+ 11/04	King William III of Orange born, 1650
+ 11/05	Roy Rogers born, 1912
+ 11/09	Carl Sagan born, 1934
+@@ -283,11 +290,11 @@
+ 12/05	Walt (Walter Elias) Disney born in Chicago, 1901
+ 12/08	Horace (Quintus Horatius Flaccus) born in Venosa (Italy), 65BC
+ 12/08	James (Grover) Thurber born in Columbus, Ohio, 1894
+-12/10	Emily Dickenson born, 1830
++12/10	Emily Dickinson born, 1830
+ 12/12	E.G. Robinson born, 1893
+ 12/14	George Washington dies, 1799
+ 12/17	William Safire (Safir) born, 1929
+-12/18	Konrad Zuse died in Hünfeld, 1995
++12/18	Konrad Zuse died in HÃ¼nfeld, 1995
+ 12/20	Carl Sagan died, 1996
+ 12/21	Benjamin Disraeli born, 1804
+ 12/22	Giacomo Puccini born, 1858
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.christian bsdmainutils//usr.bin/calendar/calendars/calendar.christian
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.christian	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.christian	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_christian_
+ #define _calendar_christian_
+ 
++LANG=UTF-8
++
+ 01/05	Last (twelfth) day of Christmastide
+ 01/06	Epiphany
+ Easter-47	Shrove Tuesday / Mardi Gras (day before Ash Wednesday)
+@@ -21,7 +23,7 @@
+ Easter+56	Trinity Sunday (7 days after Pentecost)
+ Easter+60	Corpus Christi (11 days after Pentecost)
+ 05/28*	Rogation Sunday
+-10/18	Feast Day of St. Luke
++/* 10/18	Feast Day of St. Luke */
+ 11/SunLast	First Sunday of Advent (4th Sunday before Christmas)
+ 12/SunFirst	First Sunday of Advent (4th Sunday before Christmas)
+ 12/06	St. Nicholas' Day
+@@ -29,4 +31,30 @@
+ 12/25	Christmastide begins: First day of Christmas
+ 12/26	Second day of Christmas (Boxing Day)
+ 
++Easter+1       Easter Monday
++
++Jan 01	Circumcision of Christ
++Jan 25	Conversion of St Paul
++Feb 02	Purification of the Virgin Mary
++Feb 24	St Matthias
++Mar 25	Annunciation of the Virgin Mary
++Apr 25	St Mark
++May 01	St Philip and St James
++Jun 11	St Barnabas
++Jun 24	St John the Baptist
++Jun 29	St Peter
++Jul 25	St James
++Aug 24	St Bartholomew
++Sep 21	St Matthew
++Sep 29	St Michael and all angels
++Oct 18	St. Luke
++Oct 28	St Simon and St Jude
++Nov 01	All Saints
++Nov 30	St Andrew
++Dec 21	St Thomas
++Dec 26	St Stephen (Boxing Day)
++Dec 27	St John the Evangelist
++Dec 28	Holy Innocents
++
++
+ #endif /* !_calendar_christian_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.computer bsdmainutils//usr.bin/calendar/calendars/calendar.computer
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.computer	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.computer	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_computer_
+ #define _calendar_computer_
+ 
++LANG=UTF-8
++
+ 01/01	AT&T officially divests its local Bell companies, 1984
+ 01/01	The Epoch (Time 0 for UNIX systems, Midnight GMT, 1970)
+ 01/03	Apple Computer founded, 1977
+@@ -24,7 +26,7 @@
+ 02/14	First micro-on-a-chip patented (TI), 1978
+ 02/15	ENIAC demonstrated, 1946
+ 03/01	First NPL (later PL/I) report published, 1964
+-03/04	First Cray-1 shipped to Los Alamos
++03/04	First Cray-1 shipped to Los Alamos, 1976
+ 03/09	"GOTO considered harmful" (E.J. Dijkstra) published in CACM, 1968
+ 03/14	LISP introduced, 1960
+ 03/28	DEC announces PDP-11, 1970
+@@ -73,4 +75,20 @@
+ 11/04	UNIVAC I program predicts Eisenhower victory based on 7% of votes, 1952
+ 12/08	First Ph.D. awarded by Computer Science Dept, Univ. of Penna, 1965
+ 
++/* added in the debian package, from the Jargon File */
++Jan 01	Macintosh Epoch, Midnight 1904
++Jan 18	Unix clock runs out, 2038
++Feb 08	Black Thursday, The CDA is signed into law, 1996
++Mar 31	Automated Retroactive Minimal Moderation (ARMM) released, 1993
++Apr 01	Usenet site kremvax announced as an April Fool's joke, 1984
++Jun 26	White Thursday, CDA demolished by U.S. Supreme Court, 1997
++Jul 04	First @-party, at the Westercon (California SF convention), 1980
++Sep 09	First bug found, a moth in Harvard Mark II, 1947
++Oct 16	Sanford Wallace's Cyber Promotions Inc. shut down by lawsuit, 1997
++Nov 17	VMS Epoch (base date of U.S. Naval Observatory's ephemerides), 1858
++Oct 20	MIT hacked the Harvard-Yale football game, 1982
++
++Jan 24	Introduction of the first Mac, 1984
++Mar 24	Introduction od Mac OS X, 2001
++
+ #endif /* !_calendar_computer_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.croatian bsdmainutils//usr.bin/calendar/calendars/calendar.croatian
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.croatian	2011-06-06 16:04:39.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.croatian	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_croatian_
+ #define _calendar_croatian_
+ 
+-#include <hr_HR.ISO8859-2/calendar.all>
++#include <hr_HR/calendar.all>
+ 
+ #endif /* !_calendar_croatian_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.dutch bsdmainutils//usr.bin/calendar/calendars/calendar.dutch
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.dutch	2011-06-06 16:04:39.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.dutch	2011-06-06 16:16:44.000000000 +0200
+@@ -4,7 +4,7 @@
+  * Originally submitted by Edwin Groothuis <edwin@FreeBSD.org>
+  */
+ 
+-LANG=nl_NL.ISO8859-15
++LANG=UTF-8
+ Easter=Pasen
+ 
+ /*
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.freebsd bsdmainutils//usr.bin/calendar/calendars/calendar.freebsd
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.freebsd	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.freebsd	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_freebsd_
+ #define _calendar_freebsd_
+ 
++LANG=UTF-8
++
+ 01/01	Alexander Langer <alex@FreeBSD.org> born in Duesseldorf, Nordrhein-Westfalen, Germany, 1981
+ 01/02	Ion-Mihai "IOnut" Tetcu <itetcu@FreeBSD.org> born in Bucharest, Romania, 1980
+ 01/02	Patrick Li <pat@FreeBSD.org> born in Beijing, People's Republic of China, 1985
+@@ -304,7 +306,7 @@
+ 11/28	Stanislav Sedov <stas@FreeBSD.org> born in Chelyabinsk, USSR, 1985
+ 12/01	Hajimu Umemoto <ume@FreeBSD.org> born in Nara, Japan, 1961
+ 12/01	Alexey Dokuchaev <danfe@FreeBSD.org> born in Magadan, USSR, 1980
+-12/02   Ermal Luçi <eri@FreeBSD.org> born in Tirane, Albania, 1980
++12/02   Ermal LuÃ§i <eri@FreeBSD.org> born in Tirane, Albania, 1980
+ 12/03	Diane Bruce <db@FreeBSD.org> born in Ottawa, Ontario, Canada, 1952
+ 12/05	Ivan Voras <ivoras@FreeBSD.org> born in Slavonski Brod, Croatia, 1981
+ 12/06	Stefan Farfeleder <stefanf@FreeBSD.org> born in Wien, Austria, 1980
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.french bsdmainutils//usr.bin/calendar/calendars/calendar.french
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.french	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.french	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_french_
+ #define _calendar_french_
+ 
+-#include <fr_FR.ISO8859-1/calendar.all>
++#include <fr_FR/calendar.all>
+ 
+ #endif /* !_calendar_french_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.german bsdmainutils//usr.bin/calendar/calendars/calendar.german
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.german	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.german	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_german_
+ #define _calendar_german_
+ 
+-#include <de_DE.ISO8859-1/calendar.all>
++#include <de_DE/calendar.all>
+ 
+ #endif /* !_calendar_german_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.history bsdmainutils//usr.bin/calendar/calendars/calendar.history
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.history	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.history	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_history_
+ #define _calendar_history_
+ 
++LANG=UTF-8
++
+ 01/01	Anniversary of the Triumph of the Revolution in Cuba
+ 01/01	Castro expels Cuban President Batista, 1959
+ 01/01	Churchill delivers his "Iron Curtain" speech, 1947
+@@ -16,7 +18,7 @@
+ 01/05	The FCC hears the first demonstration of FM radio, 1940
+ 01/05	Twelfth night
+ 01/06	Millard Fillmore's birthday (let's party!)
+-01/08	Battle of New Orleans
++01/08	Battle of New Orleans, 1815
+ 01/09	Plough Monday
+ 01/10	First meeting of United Nations General Assembly in London, 1946
+ 01/10	Thomas Paine's Common Sense published, 1776
+@@ -154,7 +156,7 @@
+ 05/25	Successful test of the limelight in Purfleet, England, 1830
+ 05/26	Congress sets first immigration quotas, 1924
+ 05/27	Golden Gate Bridge opens, 1937
+-05/29	Edmund Hillary and Tenzing Norkay climb Mt. Everest, 1953
++05/29	Edmund Hillary and Tenzing Norgay climb Mt. Everest, 1953
+ 05/29	First food stamps issued, 1961
+ 05/30	US Marines sent to Nicaragua, 1912
+ 06/02	Native Americans "granted" citizenship, 1924
+@@ -302,7 +304,7 @@
+ 09/11	Terrorists destroy World Trade Center in New York, 2001
+ 09/12	German paratroopers rescue Mussolini from captivity in Rome, 1943
+ 09/12	Germany annexes Sudetenland, 1938
+-09/13	58° C (136.4° F) measured at el Azizia, Libya, 1922
++09/13	58Â° C (136.4Â° F) measured at el Azizia, Libya, 1922
+ 09/13	British defeat the French at the Plains of Abraham, just outside the walls of Quebec City, 1759
+ 09/13	Building of Hadrian's Wall begun, 122
+ 09/13	Chiang Kai-Shek becomes president of China, 1943
+@@ -360,10 +362,9 @@
+ 10/11	The first steam powered ferry ran between New York and Hoboken, 1811
+ 10/11	The second Vatican Ecumenical Council opens in Rome, 1962
+ 10/11	First broadcast of Saturday Night Live, 1975
+-10/12	Bahama Natives discover Columbus of Europe lost on their shores, 1492
+ 10/12	Khrushchev pounds his desk with shoe during a speech to the UN, 1960
+ 10/12	Man O'War's last race, 1920
+-10/12	Native Americans discover Columbus of Europe lost on their shores, 1492
++10/12	Native Americans (Bahama) discover Columbus of Europe lost on their shores, 1492
+ 10/13	Italy declares war on Germany, 1943
+ 10/13	US Navy born, 1775, authorized by the Second Continental Congress
+ 10/14	Battle of Hastings won by William the Conqueror and the Normans, 1066
+@@ -413,6 +414,7 @@
+ 11/10	Cpt. Wirz, commandant of Andersonville Prison hanged, 1865
+ 11/10	Henry Stanley asks David Livingston, "Dr. Livingston, I presume?", 1871
+ 11/11	Washington becomes the 42nd state, 1889
++11/11	Pilgrims come to Plymouth, 1620
+ 11/12	Dr. Sun Yat-sen's Birthday in Taiwan
+ 11/12	USA first exports oil to Europe, 1861
+ 11/14	Quarter Pounder price raised from $0.53 to $0.55 in violation of Nixon
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.holiday bsdmainutils//usr.bin/calendar/calendars/calendar.holiday
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.holiday	2011-06-06 16:04:41.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.holiday	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_holiday_
+ #define _calendar_holiday_
+ 
++LANG=UTF-8
++
+ 01/01	Beginning of the Year in Japan
+ 01/01	Independence Day in Haiti and Sudan
+ 01/01	Universal Fraternity Day in Mozambique
+@@ -37,11 +39,14 @@
+ 01/23	US National Handwriting Day
+ 01/24	Economic Liberation Day in Togo
+ 01/26	Republic Day in India
++01/26	Australia Day in Australia
+ 01/MonSecond	Adults Day in Japan
+ 01/MonThird	Lee-Jackson Day in Virginia (3rd Monday)
+ 01/MonThird	Robert E. Lee's Birthday in Alabama & Mississippi (3rd Monday)
+ 01/MonThird	Martin Luther King Day in New York (3rd Monday)
++/* Chinese New Year is not Gregorian
+ 02/01	Chinese New Year Holiday (3 days) in Taiwan
++*/
+ 02/02	Candlemas
+ 02/04	Independence Commemoration Day in Sri Lanka
+ 02/05	Constitution Day in Mexico
+@@ -51,7 +56,9 @@
+ 02/10	Feast of St. Paul's Shipwreck, AD 60
+ 02/11	National Foundation Day in Japan
+ 02/12	Pyidaungsa Day in Burma
++/* Makha Bucha is not Gregorian
+ 02/16	Makha Bucha Day in Thailand
++*/
+ 02/18	Democracy Day in Nepal
+ 02/18	Independence Day in The Gambia
+ 02/23	Republic Day in Guyana
+@@ -67,7 +74,7 @@
+ 03/03	Independence day (Treaty of San Stefano) in Bulgaria
+ 03/04	Vermont Admission Day (admitted as 14th US state in 1791)
+ 03/05	Independence Day in Equatorial Guinea
+-03/06	Lantern Day, Bejing
++03/06	Lantern Day, Beijing
+ 03/08	First Annual International Women's Day, 1909
+ 03/08	International Women's Day in former USSR
+ 03/08	Syrian National Day in Libyan Arab Republic
+@@ -121,7 +128,7 @@
+ 04/09	Martyrs Day in Tunisia
+ 04/11	National Heroes Day in Costa Rica
+ 04/13	National Day in Chad
+-04/13	Songkron Day in Thailand
++04/13	Songkran Day in Thailand
+ 04/14	Day of the Americas in Honduras
+ 04/15	Bengali New Year in Bangladesh
+ 04/16	De Diego's Birthday celebrated in Puerto Rico
+@@ -162,7 +169,7 @@
+ 05/05	Coronation Day in Thailand
+ 05/05	Liberation Day in the Netherlands
+ 05/06	Bataan Day in Philippines
+-05/06*	Bank Holiday in UK
++05/MonFirst	Bank Holiday in UK
+ 05/07	May Day in United Kingdom
+ 05/08	Buddha's Birthday in South Korea
+ 05/08	Elections for the National Assembly in Philippines
+@@ -177,7 +184,9 @@
+ 05/14	Unification Day in Liberia
+ 05/15	Kamuzu Day in Malawi
+ 05/15	Vesak Day, observed in Singapore and Malaysia
++/* Visakha Bucha is not Gregorian
+ 05/15	Visakha Bucha Day in Thailand
++*/
+ 05/16	Discovery Day in Cayman Islands
+ 05/17	Constitution Day in Nauru and Norway
+ 05/18	Flag Day in Haiti
+@@ -198,7 +207,7 @@
+ 05/25	Memorial Day in New Mexico & Puerto Rico
+ 05/25	Revolution in the Sudan in Libyan Arab Republic
+ 05/27	Afghanistan attains sovereignty, 1921
+-05/27*	Bank Holiday in UK
++05/MonLast	Bank Holiday in UK
+ 05/28	Mothers Day in Central African Republic
+ 05/31	Pya Martyrs Day in Togo
+ 05/MonThird	Memorial Day in Michigan (3rd Monday)
+@@ -246,9 +255,8 @@
+ 06/28	Mothers Day in Central African Republic
+ 06/29	Independence Day in Seychelles
+ 06/30	Day of the Army in Guatemala
+-06/MonFirst	Jefferson Davis's Birthday in Alabama & Mississippi (1st Monday)
+-06/MonFirst	Jefferson Davis's Birthday in Florida, Georgia, & S. Carolina
+-07/01	Dominion Day in Canada
++06/MonFirst	Jefferson Davis's Birthday in Alabamai, Mississippi, Florida, Georgia, & S. Carolina (1st Monday)
++07/01	Canada Day formerly known as Dominion Day in Canada
+ 07/01	Freedom Day in Suriname
+ 07/01	Independence Day in Burundi
+ 07/01	National Day in Rwanda
+@@ -271,7 +279,9 @@
+ 07/10	Independence Day in Bahamas
+ 07/11	National Holiday in the Mongolian People's Republic
+ 07/12	Battle of Boyne celebrated in Northern Ireland
++/* Buddhist Lent is not Gregorian
+ 07/13	Buddhist Lent in Thailand
++*/
+ 07/14	Anniversary of the Revolution in Iraq
+ 07/14	French National Festival
+ 07/14	National Holiday in Monaco
+@@ -285,6 +295,7 @@
+ 07/18	Liberation Day in Nicaragua
+ 07/19	Martyrs Day in Burma
+ 07/20	Independence Day in Colombia
++07/20	Day of Sea in Japan
+ 07/21	National Holiday in Belgium
+ 07/22	King's Birthday in Swaziland
+ 07/22	National Day in Poland
+@@ -345,11 +356,12 @@
+ 08/17	Independence Day in Indonesia
+ 08/19	Independence Day in Afghanistan
+ 08/20	Constitution Day in Hungary
++08/23	Liberation Days (2 days) in Romania
+ 08/24	National Flag Day in Liberia
+ 08/25	Constitution Day in Paraguay
+ 08/25	Independence Day in Uruguay
+ 08/26	Susan B. Anthony Day in Massachusetts
+-08/26*	Bank Holiday in England and Wales
++08/MonLast	Bank Holiday in England and Wales
+ 08/27	Liberation Day in Hong Kong
+ 08/28	Heroes Day in Philippines
+ 08/30	Huey P. Long Day in Louisiana
+@@ -366,6 +378,7 @@
+ 09/07	Independence Day in Brazil
+ 09/09	Admission Day in California
+ 09/09	National Day in North Korea
++09/09	Anniversary of the Socialist Revolution (2 days) in Bulgaria
+ 09/10	Korean Thanksgiving Day (Chusuk) in South Korea
+ 09/10	Moon Festival in Taiwan
+ 09/10	National Day in Belize
+@@ -405,6 +418,8 @@
+ 09/30	Botswana Day in Botswana
+ 09/MonThird	Respect for the Aged Day in Japan
+ 10/01	Armed Forces Day in South Korea
++10/01	Labour Day in Australia (ACT, NSW and SA only)
++10/01	Queen's Birthday in Western Australia
+ 10/01	Independence Day in Nigeria
+ 10/01	National Liberation Day (2 days) in China
+ 10/01	Public Holiday in Botswana
+@@ -420,7 +435,7 @@
+ 10/07	National Heroes Day in Jamaica
+ 10/08	Battle of Agamos in Peru
+ 10/08	Constitution Day in former USSR
+-10/08	Thanksgiving Day in Canada
++10/MonSecond	Thanksgiving Day in Canada
+ 10/08*	Fiji Day
+ 10/09	Independence Day in Uganda
+ 10/09	Independence of Guayaquil in Ecuador
+@@ -435,9 +450,9 @@
+ 10/12	National Day in Equatorial Guinea and Spain
+ 10/12	Our Lady Aparecida Day in Brazil
+ 10/12	Pan American Day in Belize
++10/13	St. Edward's Day - Patron saint of England
+ 10/14	National Day in Yemen Arab Republic
+ 10/14	Young People's Day in Zaire
+-10/14*	Thanksgiving Day in Canada
+ 10/15	Evacuation Day in Tunisia
+ 10/16	National Boss Day, USA
+ 10/17	Dessaline's Death Anniversary in Haiti
+@@ -475,7 +490,10 @@
+ 11/04	Will Rogers Day, USA
+ 11/06	Green March Day in Morocco
+ 11/07	October Revolution Day in Hungary
++11/07	Anniversary of Great October Revolution in Bulgaria
++/* oops ...
+ 11/08	Her Majesty, the Queen's Birthday in Nepal
++*/
+ 11/10	King's Birthday in Bhutan
+ 11/11	Angola gains independence from Portugal, 1975
+ 11/11	Independence Day in Angola
+@@ -554,10 +572,32 @@
+ 12/27	Constitution Day in North Korea
+ 12/27	Public Holiday in Lesotho, Zimbabwe
+ 12/29	Civic Holidays (3 days) in Costa Rica
++/* oops ...
+ 12/29	His Majesty, the King's Birthday in Nepal
++*/
+ 12/30	Anniversary of the Democratic Republic of Madagascar in Madagascar
+ 12/31	Bank Holiday in El Salvador, Honduras, Pakistan
+ 12/31	Feed Yourself Day in Benin
+ 12/31	Proclamation of the Republic in Congo
+ 
++May 08	Victory over Fascism Day in Slovak Republic 
++May 25	International Towel Day, in honour of Douglas N. Adams 
++May 30	Statehood day in Croatia 
++Jun 02	Republic Day in Italy 
++Jun 22	Day of the anti-fascist struggle in Croatia 
++Aug 05	Homeland thankfulness day in Croatia 
++Oct 03	Day of German Unity in Germany 
++ 
++Mar 21	Human Rights Day in South Africa 
++Apr 27	Freedom Day in South Africa 
++May 01	Workers' Day in South Africa 
++Jun 16	Youth Day in South Africa 
++Aug 09	National Women's Day in South Africa 
++Sep 24	Heritage Day in South Africa 
++Dec 16	Day of Reconciliation in South Africa 
++Dec 26	Day of Goodwill in South Africa 
++ 
++Jul 20	Marine Day in Japan 
++May 04	Holiday for a Nation in Japan 
++
+ #endif /* !_calendar_holiday_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.hungarian bsdmainutils//usr.bin/calendar/calendars/calendar.hungarian
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.hungarian	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.hungarian	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_hungarian_
+ #define _calendar_hungarian_
+ 
+-#include <hu_HU.ISO8859-2/calendar.all>
++#include <hu_HU/calendar.all>
+ 
+ #endif /* !_calendar_hungarian_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.lotr bsdmainutils//usr.bin/calendar/calendars/calendar.lotr
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.lotr	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.lotr	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_lotr_
+ #define _calendar_lotr_
+ 
++LANG=UTF-8
++
+ 01/05	Fellowship enters Moria
+ 01/09	Fellowship reaches Lorien
+ 01/17	Passing of Gandalf
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.music bsdmainutils//usr.bin/calendar/calendars/calendar.music
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.music	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.music	2011-06-06 16:17:03.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_music_
+ #define _calendar_music_
+ 
++LANG=UTF-8
++
+ 01/01	Country Joe McDonald is born in El Monte, California, 1942
+ 01/03	Steven Stills is born in Dallas, 1945
+ 01/04	Jazz great Charlie Mingus dies at 57 in Cuernavaca, Mexico, 1979
+@@ -25,6 +27,7 @@
+ 01/25	Bob Dylan plays the second "Hurricane" benefit, in the Astrodome, 1978
+ 01/27	Bobby "Blue" Bland (Robert Calvin Bland) is born in Tennessee, 1930
+ 01/27	Wolfgang Amadeus Mozart is born in Salzburg, Austria, 1756
++01/27	Giuseppe Verdi dies in Milan, Italy, 1901
+ 01/28	Jimi Hendrix headlines Madison Square Garden, 1970
+ 01/30	Lightnin' Hopkins, the most-recorded blues artist ever, dies, 1982
+ 01/31	Franz Schubert is born in Lichtenthal, Vienna, Austria, 1797
+@@ -53,6 +56,7 @@
+ 03/01	Frederic Chopin is born in Zelazowa Wola, Warsaw, Poland, 1810
+ 03/01	Jim Morrison is busted for obscenity in Miami, 1969
+ 03/02	Blues guitarist Rory Gallagher is born in Ballyshannon, Ireland, 1949
++03/02	Bedrich Smetana is born in Litomysl, Czech republic, 1824
+ 03/03	Buffalo Springfield is formed in Los Angeles, 1966
+ 03/04	Antonio Vivaldi born in Venice, Italy, 1678
+ 03/07	Last Gilbert & Sullivan opera produced, 1896
+@@ -94,6 +98,7 @@
+ 05/10	Dave Mason is born in Worcester, England, 1945
+ 05/11	Bob Marley dies in his sleep in Miami, 1981
+ 05/12	Pink Floyd performs the first quadrophonic concert, 1977
++05/12	Bedrich Smetana dies in Prague, Czech republic, 1884
+ 05/18	Gustav Mahler dies in Vienna, Austria, 1911
+ 05/18	Rick Wakeman is born in West London, England, 1949
+ 05/19	Pete Townshend is born in London, 1945
+@@ -125,6 +130,7 @@
+ 06/27	John Entwistle dies in Las Vegas, 2002
+ 07/02	Felix Pappalardi and Leslie West form Mountain, 1969
+ 07/03	Jim Morrison dies in Paris, 1971
++07/03	Leos Janacek is born in Hukvaldy, Czech republic, 1854
+ 07/06	The Jefferson Airplane is formed in San Francisco, 1965
+ 07/07	Gustav Mahler is born in Kalischt, Bohemia, 1860
+ 07/07	Ringo Starr (Richard Starkey) born in Liverpool, England, 1940
+@@ -145,6 +151,7 @@
+ 08/01	The Concert for Bangla Desh takes place at Madison Square Garden, 1971
+ 08/04	John Lennon points out that "the Beatles are more popular than Jesus", 1966
+ 08/10	Ian Anderson (Jethro Tull) is born in Edinburgh, Scotland, 1947
++08/12	Leos Janacek dies in Ostrava, Czech republic, 1928
+ 08/13	Dan Fogelberg is born in Peoria, Illinois, 1951
+ 08/15	Beatles replace drummer Pete Best with Richard Starkey, 1962
+ 08/15	The Beatles play Shea Stadium in New York, 1965
+@@ -153,8 +160,10 @@
+ 08/16	Madonna Louise Ciccone born in Bay City, Michigan, 1958
+ 08/21	Joe Strummer (The Clash), born John Mellor in Ankara, Turkey, 1952
+ 08/23	Keith Moon is born in London, England, 1946
++08/25	Leonard Bernstein is born in Lawrence, Massachusetts, 1918
+ 08/26	Jimi Hendrix gives his last performance at the Isle of Wight, 1970
+ 08/26	Jimi Hendrix's Electric Ladyland Studios opens in New York, 1970
++09/04	Anton Bruckner is born in Ansfelden, Austria, 1824
+ 09/04	Edvard Grieg dies in Bergen, Norway, 1907
+ 09/07	Keith Moon (The Who) dies in London of a drug overdose, 1978
+ 09/07	Warren Zevon dies in Los Angeles of lung cancer (mesothelioma), 2003
+@@ -177,8 +186,12 @@
+ 10/09	John Entwistle is born in London, England, 1944
+ 10/09	John Lennon born in Liverpool, England, 1940
+ 10/10	John Prine is born in Maywood, Illinois, 1946
++10/10	Giuseppe Verdi is born in Le Roncole, Italy, 1813
++10/11	Anton Bruckner dies in Vienna, Austria, 1896
+ 10/12	Ray Conniff dies after falling down and hitting his head, 2002
+ 10/12	The Jimi Hendrix Experience is formed in London, 1966
++10/13	Paul Simon is born in Newark, New Jersey, USA , 1941
++10/14	Leonard Bernstein dies in New York, 1990
+ 10/16	Bob Weir (Grateful Dead) is born in San Francisco, 1947
+ 10/17	"Hair" opens at New York's Public Theater, 1967
+ 10/17	Frederic Chopin dies in Paris, France, 1849
+@@ -216,7 +229,7 @@
+ 11/26	Paul Hindemith is born in Hanau, Germany, 1895
+ 11/27	Jimi Hendrix (Johnny Allen Hendrix) is born in Seattle, 1942
+ 11/29	Pau Casals born in Vendrell, 1876
+-11/30	George Harrison dies at 13:30 in L.A., 2001
++11/29	George Harrison dies at 13:30 in L.A., 2001
+ 12/04	Frank Zappa dies in his Laurel Canyon home shortly before 18:00, 1993
+ 12/05	Wolfgang Amadeus Mozart dies in Vienna, Austria, 1791
+ 12/06	First sound recording made by Thomas Edison, 1877
+@@ -225,7 +238,7 @@
+ 12/08	Jim Morrison is born in Melbourne, Florida, 1943
+ 12/08	John Lennon is shot and killed in New York City, 1980
+ 12/09	The Who's "Tommy" premieres in London, 1973
+-12/11	(Louis) Hector Berlioz born in La-Côte-Saint-André, 1803
++12/11	(Louis) Hector Berlioz born in La-CÃ´te-Saint-AndrÃ©, 1803
+ 12/13	Ted Nugent, the motor city madman, born in Detroit, 1949
+ 12/15	Thomas Edison receives patent on the phonograph, 1877
+ 12/16	Don McLean's "American Pie" is released, 1971
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.newzealand bsdmainutils//usr.bin/calendar/calendars/calendar.newzealand
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.newzealand	2011-06-06 16:04:41.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.newzealand	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_newzealand_
+ #define _calendar_newzealand_
+ 
++LANG=UTF-8
++
+ Jan 02	New Year Holiday (NZ)
+ Jan 14	Anniversary Day (Southland)
+ Jan 21	Anniversary Day (Wellington)
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.russian bsdmainutils//usr.bin/calendar/calendars/calendar.russian
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.russian	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.russian	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_russian_
+ #define _calendar_russian_
+ 
+-#include <ru_RU.KOI8-R/calendar.all>
++#include <ru_RU/calendar.all>
+ 
+ #endif /* !_calendar_russian_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.southafrica bsdmainutils//usr.bin/calendar/calendars/calendar.southafrica
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.southafrica	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.southafrica	2011-06-06 16:16:44.000000000 +0200
+@@ -11,6 +11,8 @@
+ #ifndef _calendar_southafrica_
+ #define _calendar_southafrica_
+ 
++LANG=UTF-8
++
+ 03/01	Human Rights Day in South Africa
+ 04/27	Freedom Day in South Africa
+ 05/01	Workers Day in South Africa
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.ukrainian bsdmainutils//usr.bin/calendar/calendars/calendar.ukrainian
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.ukrainian	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.ukrainian	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_ukrainian_
+ #define _calendar_ukrainian_
+ 
+-#include <uk_UA.KOI8-U/calendar.all>
++#include <uk_UA/calendar.all>
+ 
+ #endif /* !_calendar_ukrainian_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/calendar.usholiday bsdmainutils//usr.bin/calendar/calendars/calendar.usholiday
+--- bsdmainutils.orig/usr.bin/calendar/calendars/calendar.usholiday	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/calendar.usholiday	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,8 @@
+ #ifndef _calendar_usholiday_
+ #define _calendar_usholiday_
+ 
++LANG=UTF-8
++
+ 01/01	New Year's Day
+ 01/14	Julian Calendar New Year's Day
+ 02/02	Groundhog Day
+@@ -30,7 +32,7 @@
+ 09/22*	Autumnal Equinox
+ 10/MonSecond	Columbus Day in USA (2nd Monday of October)
+ 10/31	All Hallows Eve  (Halloween)
+-11/05*	Election Day in USA (1st Tuesday after 1st Monday for even years)
++11/TueFirst	Election Day in USA (1st Tuesday after 1st Monday for even years)
+ 11/SunFirst	Daylight Savings Time ends in USA; clocks move back (1st Sunday of November)
+ 11/11	Veterans' Day
+ 11/ThuFourth	Thanksgiving Day (4th Thursday in November)
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag bsdmainutils//usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag	2011-06-06 16:16:44.000000000 +0200
+@@ -4,10 +4,10 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_AT_ISO8859_15_feiertag_
+-#define _de_AT_ISO8859_15_feiertag_
++#ifndef _de_AT_feiertag_
++#define _de_AT_feiertag_
+ 
+-LANG=de_AT.ISO8859-15
++LANG=UTF-8
+ 
+ /* arbeitsfreie staatliche Feiertage */
+ 01/01	Neujahr
+@@ -15,7 +15,7 @@
+ 10/26	Nationalfeiertag
+ 
+ /*  christliche Feiertage, meist irgendwo arbeitsfrei */
+-01/06		Heilige 3 Könige
++01/06		Heilige 3 KÃ¶nige
+ Easter-2	Karfreitag
+ Easter		Ostersonntag
+ Easter+1 	Ostermontag
+@@ -24,12 +24,12 @@
+ Easter+39	Christi Himmelfahrt
+ Easter+60	Fronleichnam
+ 
+-08/15		Mariä Himmelfahrt
++08/15		MariÃ¤ Himmelfahrt
+ 
+ 11/01		Allerheiligen
+ 11/02		Allerseelen
+ 
+-12/08		Mariä Empfängnis
++12/08		MariÃ¤ EmpfÃ¤ngnis
+ 12/24		Heiligabend
+ 12/25		Weihnachten
+ 12/26		Stephanstag
+@@ -47,7 +47,7 @@
+ Dec Sun+3		4. Advent
+ 
+ /* Jahreszeiten */
+-03/20*	Frühlingsanfang
++03/20*	FrÃ¼hlingsanfang
+ 06/21*	Sommeranfang
+ 09/23*	Herbstanfang
+ 12/21*	Winteranfang	
+@@ -56,7 +56,7 @@
+ 03/SundayLast	Anfang der Sommerzeit
+ 10/SundayLast	Ende der Sommerzeit
+ 
+-/* Blumenverkäufer */
++/* BlumenverkÃ¤ufer */
+ May Sun+2 	Muttertag
+ 
+-#endif /*! _de_AT_ISO8859_15_feiertag_ */
++#endif /*! _de_AT_feiertag_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -4,14 +4,14 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_all_
+-#define _de_DE_ISO8859_1_all_
++#ifndef _de_DE_all_
++#define _de_DE_all_
+ 
+-#include <de_DE.ISO8859-1/calendar.feiertag>
+-#include <de_DE.ISO8859-1/calendar.geschichte>
+-#include <de_DE.ISO8859-1/calendar.kirche>
+-#include <de_DE.ISO8859-1/calendar.literatur>
+-#include <de_DE.ISO8859-1/calendar.musik>
+-#include <de_DE.ISO8859-1/calendar.wissenschaft>
++#include <de_DE/calendar.feiertag>
++#include <de_DE/calendar.geschichte>
++#include <de_DE/calendar.kirche>
++#include <de_DE/calendar.literatur>
++#include <de_DE/calendar.musik>
++#include <de_DE/calendar.wissenschaft>
+ 
+-#endif /* !_de_DE.ISO8859-1_all_ */
++#endif /* !_de_DE_all_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag	2011-06-06 16:16:44.000000000 +0200
+@@ -4,10 +4,10 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_feiertag_
+-#define _de_DE_ISO8859_1_feiertag_
++#ifndef _de_DE_feiertag_
++#define _de_DE_feiertag_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ /* arbeitsfreie staatliche Feiertage */
+ 01/01	Neujahr
+@@ -24,12 +24,12 @@
+ Easter+60	Fronleichnam
+ 
+ 08/08   	Friedensfest (Augsburg)
+-08/15   	Mariä Himmelfahrt
++08/15   	MariÃ¤ Himmelfahrt
+ 
+ 10/31   	Reformationstag
+ 11/01   	Allerheiligen
+ 11/02   	Allerseelen
+-11/Wed+4 	Buß- und Bettag
++11/Wed+4 	BuÃŸ- und Bettag
+ 
+ 12/24   	Heiligabend
+ 12/25   	Erster Weihnachtstag
+@@ -38,10 +38,10 @@
+ 
+ /*  Gedenktage - nicht arbeitsfreie Feiertage :-( */
+ 06/17	Arbeiteraufstand am 17. Juni 1953
+-01/27	Gedenktag für die Opfer des Nationalsozialismus
++01/27	Gedenktag fÃ¼r die Opfer des Nationalsozialismus
+ 
+ /* Jahreszeiten */
+-03/20*	Frühlingsanfang
++03/20*	FrÃ¼hlingsanfang
+ 06/21*	Sommeranfang
+ 09/23*	Herbstanfang
+ 12/21*	Winteranfang
+@@ -50,7 +50,7 @@
+ 03/SundayLast	Anfang der Sommerzeit
+ 10/SundayLast	Ende der Sommerzeit
+ 
+-/* Blumenverkäufer */
++/* BlumenverkÃ¤ufer */
+ May Sun+2 	Muttertag
+ 
+-#endif /*! _de_DE_ISO8859_1_feiertag_ */
++#endif /*! _de_DE_feiertag_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte	2011-06-06 16:16:44.000000000 +0200
+@@ -2,12 +2,12 @@
+  * deutsche Geschichte
+  *
+  * 
+- * Die Angaben wurden überwiegend entnommen aus dem Buch:
++ * Die Angaben wurden Ã¼berwiegend entnommen aus dem Buch:
+  * 
+- * Fragen an die deutsche Geschichte, Ideen, Kräfte, Entscheidungen von
+- * 1800 bis zur Gegenwart; historische Ausstellung im Reichstagsgebäude
++ * Fragen an die deutsche Geschichte, Ideen, KrÃ¤fte, Entscheidungen von
++ * 1800 bis zur Gegenwart; historische Ausstellung im ReichstagsgebÃ¤ude
+  * in Berlin; Katalog, 16. Auflage, Sonderausgabe - Bonn: Deutscher
+- * Bundestag, Referat Öffentlichkeitsarbeit, 1990
++ * Bundestag, Referat Ã–ffentlichkeitsarbeit, 1990
+  * 
+  * English Title: Questions on German history
+  * 
+@@ -16,80 +16,80 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_geschichte_
+-#define _de_DE_ISO8859_1_geschichte_
++#ifndef _de_DE_geschichte_
++#define _de_DE_geschichte_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ /* 1800-1933 */
+-07/11 	Gründung des Rheinbundes, 1806
++07/11 	GrÃ¼ndung des Rheinbundes, 1806
+ 10/14	Doppelschlacht bei Jena und Auerstedt, 1806
+-10/16	Völkerschlacht bei Leipzig, 1813
++10/16	VÃ¶lkerschlacht bei Leipzig, 1813
+ 06/18	Niederlage Napoleons bei Waterloo, 1815
+ 10/18	Wartburgfest der Deutschen Burschenschaften, 1817
+-01/01	Inkrafttreten des Vertrages über den deutschen Zollverein, 1834
+-12/07	Erste deutsche Eisenbahn zwischen Nürnberg und Fürth, 1835
++01/01	Inkrafttreten des Vertrages Ã¼ber den deutschen Zollverein, 1834
++12/07	Erste deutsche Eisenbahn zwischen NÃ¼rnberg und FÃ¼rth, 1835
+ 06	Aufstand der schlesischen Weber, 1844
+-12/21	Verabschiedung des Gesetzes über die Grundrechte des deutschen
++12/21	Verabschiedung des Gesetzes Ã¼ber die Grundrechte des deutschen
+ 	Volkes durch die Frankfurter Nationalversammlung, 1848
+ 03/27	Annahme der deutschen Reichsverfassung in der Frankfurter
+-	Paulskirche, Wahl von Friedrich Wilhelm IV von Preußen zum
++	Paulskirche, Wahl von Friedrich Wilhelm IV von PreuÃŸen zum
+ 	deutschen Kaiser, 1849
+-04/28	Ablehnung der deutschen Kaiserkrone durch den preußischen König, 1849
+-07/03	Schlacht von Königgrätz
++04/28	Ablehnung der deutschen Kaiserkrone durch den preuÃŸischen KÃ¶nig, 1849
++07/03	Schlacht von KÃ¶niggrÃ¤tz
+ 07/13	Emser Depesche, 1870
+-07/18	Verkündung des Dogmas von der päpstlichen Unfehlbarkeit
++07/18	VerkÃ¼ndung des Dogmas von der pÃ¤pstlichen Unfehlbarkeit
+ 	durch das I. Vatikanische Konzil
+ 01/18	Proklamation des deutschen Kaiserreiches in Versailles, 1871
+ 10/18	Verabschiedung des Sozialistengesetzes durch den Reichstag, 1878
+ 03/20	Entlassung von Bismarck als Reichskanzler und
+-	preußischer Ministerpräsident, 1890
+-06/21	Eröffnung des Nord-Ostsee-Kanals, 1895
+-01/07	Billigung des Bürgerlichen Gesetzbuches (BGB) durch den Reichstag, 1896
+-01/01	Bürgerliches Gesetzbuch tritt in Kraft, 1900
+-06/28	Ermordung des österreichischen Thronfolgers Erzherzog Franz
++	preuÃŸischer MinisterprÃ¤sident, 1890
++06/21	ErÃ¶ffnung des Nord-Ostsee-Kanals, 1895
++01/07	Billigung des BÃ¼rgerlichen Gesetzbuches (BGB) durch den Reichstag, 1896
++01/01	BÃ¼rgerliches Gesetzbuch tritt in Kraft, 1900
++06/28	Ermordung des Ã¶sterreichischen Thronfolgers Erzherzog Franz
+ 	Ferdinand durch serbische Nationalisten in Sarajewo, 1914
+-07/28	Kriegserklärung Österreich-Ungarns an Serbien, 1914
+-08/01	Deutsche Mobilmachung und Kriegserklärung an Rußland, 1914
+-08/03	Deutsche Kriegserklärung an Frankreich, 1914
+-08/04	Kriegserklärung Großbritanniens an Deutschland, 1914
++07/28	KriegserklÃ¤rung Ã–sterreich-Ungarns an Serbien, 1914
++08/01	Deutsche Mobilmachung und KriegserklÃ¤rung an RuÃŸland, 1914
++08/03	Deutsche KriegserklÃ¤rung an Frankreich, 1914
++08/04	KriegserklÃ¤rung GroÃŸbritanniens an Deutschland, 1914
+ 08/04	Bewilligung der Kriegskredite im Reichstag, 1914
+ 08/26	Schlacht bei Tannenberg, 1914
+ 02/21	Schlacht um Verdun, 1916
+-03/08	Ausbruch der Revolution in Rußland, Abdankung von Zar Nikolaus II, 1917
+-04/06	Kriegserklärung der USA an Deutschland, 1917
+-12/15	Waffenstillstand zwisch Rußland und Deutschland, 1917
++03/08	Ausbruch der Revolution in RuÃŸland, Abdankung von Zar Nikolaus II, 1917
++04/06	KriegserklÃ¤rung der USA an Deutschland, 1917
++12/15	Waffenstillstand zwisch RuÃŸland und Deutschland, 1917
+ 03/03	Frieden von Brest-Litowsk, 1918
+ 11/03	Matrosenaufstand in Kiel, 1918
+ 11/09	Ausrufung der Republik durch Scheidemann (SPD), 1918
+-02/11	Friedrich Ebert wird Reichspräsident, Weimar 1919
++02/11	Friedrich Ebert wird ReichsprÃ¤sident, Weimar 1919
+ 06/28	Unterzeichnung des Versailler Vertrages, 1919
+ 03/21	Volksabstimmung in Oberschlesien, 1921
+ 04/16	Vertrag von Rapallo, 1922
+-06/24	Ermordung von Reichsaußenminister Rathenau, 1922
++06/24	Ermordung von ReichsauÃŸenminister Rathenau, 1922
+ 01/11	Besetzung des Ruhrgebietes durch Frankreich und Belgien, 1923
+-09/10	Eintritt Deutschlands in den Völkerbund, 1926
++09/10	Eintritt Deutschlands in den VÃ¶lkerbund, 1926
+ 10/25	Schwarzer Freitag in New York, Beginn der Weltwirtschaftskrise, 1929
+ 
+ 
+ /* II. Weltkrieg */
+-10/14	Austritt Deutschlands aus dem Völkerbund, 1933
+-03/16	Wiedereinführung der allgemeinen Wehrpflicht in Deutschland, 1935
++10/14	Austritt Deutschlands aus dem VÃ¶lkerbund, 1933
++03/16	WiedereinfÃ¼hrung der allgemeinen Wehrpflicht in Deutschland, 1935
+ 10/25	Deutsch-italienischer Vertrag, Achse Berlin-Rom, 1936
+ 11/25	Antikominternpakt zwischen Deutschland und Japan, 1936
+-01/13	Volksabstimmung im Saargebiet über die Rückführung 
++01/13	Volksabstimmung im Saargebiet Ã¼ber die RÃ¼ckfÃ¼hrung 
+ 	ins deutsche Reich, 1935
+-03/12	Einmarsch deutscher Truppen in Österreich, 1938
+-09/29	Münchner Abkommen, 1938
++03/12	Einmarsch deutscher Truppen in Ã–sterreich, 1938
++09/29	MÃ¼nchner Abkommen, 1938
+ 03/15	Einmarsch deutscher Truppen in die Tschechoslowakei, 1939
+-03/23	Rückgabe des Memelgebietes an Deutschland, 1939
+-08/23	Abschluß des Hitler-Stalin-Paktes, 1939
+-09/03	Kriegserklärung Großbritaniens und Frankreichs an Deutschland, 1939
+-04/09	Deutsche Besetzung Dänemarks, Invasion in Norwegen, 1940
++03/23	RÃ¼ckgabe des Memelgebietes an Deutschland, 1939
++08/23	AbschluÃŸ des Hitler-Stalin-Paktes, 1939
++09/03	KriegserklÃ¤rung GroÃŸbritaniens und Frankreichs an Deutschland, 1939
++04/09	Deutsche Besetzung DÃ¤nemarks, Invasion in Norwegen, 1940
+ 05/10	Deutscher Angriff auf Belgien, die Niederlande, Luxemburg
+ 	und Frankreich, 1940
+ 06/22	Deutscher Angriff gegen die Sowjetunion, 1941
+-12/11	Kriegserklärung Deutschlands an die USA, 1941
++12/11	KriegserklÃ¤rung Deutschlands an die USA, 1941
+ 01/14	Konferenz von Casablanca, 1943
+ 01/31	Kapitulation der 6. deutschen Armee in Stalingrad, 1943
+ 06/06	Alliierte Landung in Nordwestfrankreich, 1944
+@@ -97,12 +97,12 @@
+ 04/25	Zusammentreffen von amerikanischen und sowjetischen Truppen
+ 	bei Torgau an der Elbe, 1945
+ 05/08	Bedingungslose Kapitulation von Deutschland, 1945
+-07/01	Rückzug britischer und amerikanischer Truppen aus Sachsen, Thüringen und
++07/01	RÃ¼ckzug britischer und amerikanischer Truppen aus Sachsen, ThÃ¼ringen und
+ 	Mecklenburg, Einmarsch westlicher Truppen in Berlin, 1945
+ 07/17	Potsdamer Konferenz, 1945
+-09/01	Deutscher Überfall auf Polen, Beginn des 2. Weltkrieges, 1939
+-10/01	Verkündigung der Urteile im Nürnberger Hauptkriegsverbrecherprozeß, 1946
+-02/25	Auflösung der Landes Preußen durch den Kontrollrat, 1947
++09/01	Deutscher Ãœberfall auf Polen, Beginn des 2. Weltkrieges, 1939
++10/01	VerkÃ¼ndigung der Urteile im NÃ¼rnberger HauptkriegsverbrecherprozeÃŸ, 1946
++02/25	AuflÃ¶sung der Landes PreuÃŸen durch den Kontrollrat, 1947
+ 08/06	Erster Atombombenabwurf auf Hiroshima, 1945
+ 08/08	Atombombenabwurf auf Nagasaki, 1945
+ 04/19	Aufstand im Warschauer Ghetto, 1943
+@@ -111,88 +111,88 @@
+ /* Deutschland nach dem 2. Weltkrieg */
+ 04/11	Attentat auf Dutschke, Studentenunruhen, 1968
+ 04/26	GAU in Tschernobyl, 1986
+-05/05	Natobeitritt, Wiederbewaffnung, Souveränität der Bundesrepublik, 1955
+-05/06	Rücktritt von Brandt, 1974
++05/05	Natobeitritt, Wiederbewaffnung, SouverÃ¤nitÃ¤t der Bundesrepublik, 1955
++05/06	RÃ¼cktritt von Brandt, 1974
+ 05/16	Wahl von Schmidt (SPD) zum Bundeskanzler, 1974
+-05/23	Verkündung des Grundgesetzes, 1949
+-05/23	Wahl von Richard von Weizsäcker zum Bundespräsidenten, 1984
++05/23	VerkÃ¼ndung des Grundgesetzes, 1949
++05/23	Wahl von Richard von WeizsÃ¤cker zum BundesprÃ¤sidenten, 1984
+ 06/05	Marshallplan, 1947
+-06/20	Währungsreform in den Westzonen, 1948
++06/20	WÃ¤hrungsreform in den Westzonen, 1948
+ 06/24	Beginn der Berliner Blockade, 1948
+-07/01	Wahl von Heinrich Lübke zum Bundespräsidenten, 1959
+-07/01	Wirtschafts- und Währungsunion, 1990
++07/01	Wahl von Heinrich LÃ¼bke zum BundesprÃ¤sidenten, 1959
++07/01	Wirtschafts- und WÃ¤hrungsunion, 1990
+ 08/12	Deutsch-sowjetischer Gewaltverzichtsvertrag, Moskau 1970
+ 08/14	Wahl zum ersten deutschen Bundestag, 1949
+-09/03	Vier-Mächte-Abkommen über Berlin, 1971
+-09/05	Entführung und Ermordung von Arbeitgeberpräsident Schleyer, 
+-	Entführung einer Lufthansa-Maschine nach Mogadischu, 1977
++09/03	Vier-MÃ¤chte-Abkommen Ã¼ber Berlin, 1971
++09/05	EntfÃ¼hrung und Ermordung von ArbeitgeberprÃ¤sident Schleyer, 
++	EntfÃ¼hrung einer Lufthansa-Maschine nach Mogadischu, 1977
+ 09/07	DDR-Staatsratsvorsitzender Honecker in der Bundesrepublik, 1987
+-09/12	Wahl von Theodor Heuss (FDP) zum Bundespräsidenten, 1949
++09/12	Wahl von Theodor Heuss (FDP) zum BundesprÃ¤sidenten, 1949
+ 09/15	Wahl von Konrad Adenauer (CDU) zum Bundeskanzler, 1949
+ 09/17	Bruch der Sozialliberalen Koalition, 1982
+ 09/18	Aufnahme von Bundesrepublik und DDR in die UNO, 1973
+-10/01	Ablösung von Bundeskanzler Schmidt durch Kohl, 1982
++10/01	AblÃ¶sung von Bundeskanzler Schmidt durch Kohl, 1982
+ 10/23	Volksabstimmung im Saargebiet, 1955
+-12/02	Washingtoner Abkommen über Bi-Zone, 1946
++12/02	Washingtoner Abkommen Ã¼ber Bi-Zone, 1946
+ 12/07	Deutsch-polnischer Vertrag, Warschau 1970
+-12/10	Friedensnobelpreis für Brandt, 1971
+-12/12	Nachrüstungsbeschluß des NATO-Ministerates, 1979
++12/10	Friedensnobelpreis fÃ¼r Brandt, 1971
++12/12	NachrÃ¼stungsbeschluÃŸ des NATO-Ministerates, 1979
+ 12/21	Grundlagenvertrag zwischen DDR und Bundesrepublik, 1972
+ 
+ 
+ /* Nationalsozialismus */
+-11/09	Hitler-Putsch in München/Marsch auf die Feldherrenhalle, 1923
++11/09	Hitler-Putsch in MÃ¼nchen/Marsch auf die Feldherrenhalle, 1923
+ 11/09	Reichskristallnacht, 1938
+ 09/14	Reichstagswahl: Erdrutsch zugunsten der NSDAP, 1930
+-07/31	Reichstagswahl: NSDAP wird stärkste Fraktion, 1932
+-11/06	Reichstagswahl: Rückgang der NSDAP, 1932
++07/31	Reichstagswahl: NSDAP wird stÃ¤rkste Fraktion, 1932
++11/06	Reichstagswahl: RÃ¼ckgang der NSDAP, 1932
+ 01/30	Ernennung von Hitler zum Reichskanzler, 1933
+ 02/27	Reichstagsbrand, 1933
+-03/05	Reichstagswahl: Mehrheit für NSDAP+DNVP, 1933
+-03/23	Annahme des Ermächtigungsgesetzes, 1933
+-03/31	Erstes Gesetz zur Gleichschaltung der Länder, 1933
+-04/01	Organisierter Boykott jüdischer Geschäfte, 1933
+-04/07	Zweites Gesetz zur Gleichschaltung der Länder, 1933
+-05/02	Auflösung der Gewerkschaften, 1933
+-06	Auflösung aller Parteien außer NSDAP, 1933
++03/05	Reichstagswahl: Mehrheit fÃ¼r NSDAP+DNVP, 1933
++03/23	Annahme des ErmÃ¤chtigungsgesetzes, 1933
++03/31	Erstes Gesetz zur Gleichschaltung der LÃ¤nder, 1933
++04/01	Organisierter Boykott jÃ¼discher GeschÃ¤fte, 1933
++04/07	Zweites Gesetz zur Gleichschaltung der LÃ¤nder, 1933
++05/02	AuflÃ¶sung der Gewerkschaften, 1933
++06	AuflÃ¶sung aller Parteien auÃŸer NSDAP, 1933
+ 07/20	Konkordat zwischen Deutschland und dem Vatikan, 1933
+-06/30	Röhm-Putsch, Ausschaltung der SA-Führung, 1934
+-09/15	Nürnberger Gesetze, 1935
+-01/08	Eröffnung der olympischen Spiele in Berlin, 1936
++06/30	RÃ¶hm-Putsch, Ausschaltung der SA-FÃ¼hrung, 1934
++09/15	NÃ¼rnberger Gesetze, 1935
++01/08	ErÃ¶ffnung der olympischen Spiele in Berlin, 1936
+ 01/20	Wannseekonferenz, 1942
+ 04/30	Selbstmord Hitlers, 1945
+ 07/29	Mussolini geboren, 1883
+ 
+ /* Sozialismus */
+ 01/21	Lenin gestorben, 1924
+-06	Gründung des Bundes der Kommunisten in London
++06	GrÃ¼ndung des Bundes der Kommunisten in London
+ 	durch Marx und Engels, 1847
+-05/23	Gründung des Allgemeinen Deutschen Arbeitervereins in Leipzig
+-	unter Führung von Ferdinand Lassalles, 1863
+-08/07	Gründung der Sozialdemokratischen Arbeiterpartei in Eisenach
+-	unter der Führung von August Bebel und Wilhelm Liebknecht, 1869
+-04/06	Gründung der Unabhängigen Sozialdemokratischen Partei, Gotha 1917
+-11/07	Oktoberrevolution in Rußland, Putsch der Bolschewisten, 1917
+-12/31	Gründung der KPD, 1918
++05/23	GrÃ¼ndung des Allgemeinen Deutschen Arbeitervereins in Leipzig
++	unter FÃ¼hrung von Ferdinand Lassalles, 1863
++08/07	GrÃ¼ndung der Sozialdemokratischen Arbeiterpartei in Eisenach
++	unter der FÃ¼hrung von August Bebel und Wilhelm Liebknecht, 1869
++04/06	GrÃ¼ndung der UnabhÃ¤ngigen Sozialdemokratischen Partei, Gotha 1917
++11/07	Oktoberrevolution in RuÃŸland, Putsch der Bolschewisten, 1917
++12/31	GrÃ¼ndung der KPD, 1918
+ 01/15	Ermordung von Rosa Luxemburg und Karl Liebknecht, 1919
+ 03/05	Tod Stalins, 1953
+ 03/18	Erste demokratische Volkskammerwahl, 1990
+ 04/21	Zwangsvereinigung von KPD und SPD zur SED, 1946
+-05/14	Gründung der Warschauer Paktes, 1955
++05/14	GrÃ¼ndung der Warschauer Paktes, 1955
+ 06/17	Arbeiteraufstand am 17. Juni 1953
+ 06/25	Begin der Korea-Krieges, 1950
+ 08/13	Bau der Berliner Mauer, 1961
+ 08/21	Einmarsch des Warschauer Pakts in die Tschechoslowakei, 1968
+ 10/03	Offizielles Ende der DDR :-), 1990
+-10/07	Gründung der DDR, 1949
++10/07	GrÃ¼ndung der DDR, 1949
+ 10/09	Massendemonstration in Leipzig, 1989
+ 10/14	Kuba-Krise, 1962
+-10/18	Ablösung von Erich Honecker als SED-Generalsekretär, 1989
++10/18	AblÃ¶sung von Erich Honecker als SED-GeneralsekretÃ¤r, 1989
+ 11/09	Fall der Berliner Mauer, 1989
+ 09/09	Mao Tse-Tung gestorben im Alter von 82 Jahren, 1976
+-11/10	Sowjetischer Präsident Leonid Breschnew gestorben, Alter 75, 1982
+-03/27	Chruschtschow wird sowjetischer Präsident, 1958
+-10/12	Chruschtschow schlägt während einer Rede in der UNO mit den
++11/10	Sowjetischer PrÃ¤sident Leonid Breschnew gestorben, Alter 75, 1982
++03/27	Chruschtschow wird sowjetischer PrÃ¤sident, 1958
++10/12	Chruschtschow schlÃ¤gt wÃ¤hrend einer Rede in der UNO mit den
+ 	Schuhen auf den Tisch, 1960
+ 
+-#endif /* _de_DE_ISO8859_1_geschichte_ */
++#endif /* _de_DE_geschichte_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche	2011-06-06 16:16:44.000000000 +0200
+@@ -4,10 +4,10 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_kirche_
+-#define _de_DE_ISO8859_1_kirche_
++#ifndef _de_DE_kirche_
++#define _de_DE_kirche_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ Easter-46	Aschermittwoch
+ Easter-48	Rosenmontag
+@@ -29,4 +29,4 @@
+ 11/10   Martin Luther geboren in Eisleben, 1483
+ 10/31   95 Thesen von Luther, Wittenberg, 1517
+ 
+-#endif /* !_de_DE_ISO8859_1_kirche_ */
++#endif /* !_de_DE_kirche_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur	2011-06-06 16:16:44.000000000 +0200
+@@ -4,10 +4,10 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_literatur_
+-#define _de_DE_ISO8859_1_literatur_
++#ifndef _de_DE_literatur_
++#define _de_DE_literatur_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ /* Schriftsteller 
+ 
+@@ -22,7 +22,7 @@
+ 01/04   Jakob Grimm geboren, 1785
+ 01/18   Arno Schmidt in Hamburg geboren, 1914
+ 02/09   Thomas Bernhard in Heerlen geboren, 1931
+-02/12   Immanuel Kant in Königsberg gestorben, 1804
++02/12   Immanuel Kant in KÃ¶nigsberg gestorben, 1804
+ 02/12   Thomas Bernhard in Gmunden gestorben, 1989
+ 02/17   Heinrich Heine in Paris gestorben, 1856
+ 03/22   Johann Wolfgang von Goethe in Weimar gestorben, 1832
+@@ -30,25 +30,25 @@
+ 05/09   Friedrich von Schiller in Weimar gestorben, 1805
+ 06/03   Arno Schmidt in Celle gestorben, 1979
+ 06/03   Franz Kafka in Prag gestorben, 1924
+-06/06   Thomas Mann in Lübeck geboren, 1875
++06/06   Thomas Mann in LÃ¼beck geboren, 1875
+ 07/03   Franz Kafka geboren, 1883
+ 08/12   Thomas Mann gestorben, 1955
+ 08/27   Georg Wilhelm Friedrich Hegel in Stuttgart geboren, 1770
+ 08/28   Johann Wolfgang von Goethe in Frankfurt am Main geboren, 1749
+ 09/20   Theodor Fontane in Berlin gestorben, 1898
+-10/16   Günter Grass in Danzig geboren, 1927
++10/16   GÃ¼nter Grass in Danzig geboren, 1927
+ 11/10   Friedrich von Schiller in Marbach geboren, 1759
+ 11/14   Georg Wilhelm Friedrich Hegel in Berlin gestorben, 1831
+-12/13   Heinrich Heine in Düsseldorf geboren, 1797
++12/13   Heinrich Heine in DÃ¼sseldorf geboren, 1797
+ 12/30   Theodor Fontane in Neuruppin geboren, 1819
+ 
+ 
+ /* Verlage */
+-03/09	"die tageszeitung" als erste täglich aktualisierte deutsche 
+-	Tageszeitung im WWW, 1995, Betatest, vollständige Ausgabe
++03/09	"die tageszeitung" als erste tÃ¤glich aktualisierte deutsche 
++	Tageszeitung im WWW, 1995, Betatest, vollstÃ¤ndige Ausgabe
+ 05/05	Schweriner Volkszeitung als erste deutsche Tageszeitung im WWW, 1995
+ 05/12	"die tageszeitung" offiziell im WWW, 1995
+ 08/31	Hitler stellt Frankfurter Zeitung ein, 1943
+ 11/01	Frankfurter Allgemeine Zeitung in Leben gerufen, 1949
+ 
+-#endif /* !_de_DE_ISO8859_1_literatur_ */
++#endif /* !_de_DE_literatur_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik	2011-06-06 16:16:44.000000000 +0200
+@@ -4,18 +4,18 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_musik_
+-#define _de_DE_ISO8859_1_musik_
++#ifndef _de_DE_musik_
++#define _de_DE_musik_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ /* Barock */
+-02/23	Georg Friedrich Händel in Halle an der Saale geboren, 1685
++02/23	Georg Friedrich HÃ¤ndel in Halle an der Saale geboren, 1685
+ 03/14	Georg Philipp Telemann in Magdeburg geboren, 1681
+ 03/21	Johann Sebastian Bach in Eisenach geboren, 1685
+-04/14	Georg Friedrich Händel in London gestorben, 1759
++04/14	Georg Friedrich HÃ¤ndel in London gestorben, 1759
+ 06/25	Georg Philipp Telemann in Hamburg gestorben, 1767
+-07/17	Diderich Buxtehude in Lübeck gestorben, 1707
++07/17	Diderich Buxtehude in LÃ¼beck gestorben, 1707
+ 07/28	Johann Sebastian Bach in Leipzig gestorben, 1750
+ 
+ /* Klassik */
+@@ -28,7 +28,7 @@
+ 03/25	Bela Bartok in Nagyszentmiklos geboren, 1881
+ 03/26	Ludwig van Beethoven in Wien gestorben, 1827
+ 03/28	Sergej Rachmaninow in Beverley Hills gestorben, 1943
+-03/29	Carl Orff in München gestorben, 1982
++03/29	Carl Orff in MÃ¼nchen gestorben, 1982
+ 03/31	Joseph Haydn in Rohrau geboren, 1732
+ 04/01	Sergej Rachmaninow in Oneg geboren, 1873
+ 04/03	Johannes Brahms in Wien gestorben, 1897
+@@ -39,10 +39,10 @@
+ 06/03	Georges Bizet in Bougival bei Paris gestorben, 1875
+ 06/05	Carl Maria von Weber in London gestorben, 1826
+ 06/08	Robert Schumann in Zwickau geboren, 1810
+-06/11	Richard Strauss in München geboren, 1864
++06/11	Richard Strauss in MÃ¼nchen geboren, 1864
+ 06/15	Edvard Grieg in Bergen geboren, 1843
+ 07/07	Gustav Mahler in Kalischt geboren, 1860
+-07/10	Carl Orff in München geboren, 1895
++07/10	Carl Orff in MÃ¼nchen geboren, 1895
+ 07/29	Robert Schumann in Endenich bei Bonn gestorben, 1856
+ 07/31	Franz Liszt in Bayreuth gestorben, 1886
+ 09/04	Edvard Grieg in Bergen gestorben, 1907
+@@ -56,11 +56,11 @@
+ 11/19	Franz Schubert in Wien gestorben, 1828
+ 11/26	Paul Hindemith in Hanau geboren, 1895
+ 12/05	Wolfgang Amadeus Mozart in Wien gestorben, 1791
+-12/11	(Louis) Hector Berlioz in La-Côte-Saint-André geboren, 1803
++12/11	(Louis) Hector Berlioz in La-CÃ´te-Saint-AndrÃ© geboren, 1803
+ 12/17	Ludwig van Beethoven in Bonn getauft, 1770
+ 12/28	Paul Hindemith in Frankfurt am Main gestorben, 1963
+ 
+ /* Pop */
+ 09/18	Jimi Hendrix in Paris gestorben, 1970
+ 
+-#endif /* !_de_DE_ISO8859_1_musik_ */
++#endif /* !_de_DE_musik_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft
+--- bsdmainutils.orig/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft	2011-06-06 16:16:44.000000000 +0200
+@@ -4,16 +4,16 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _de_DE_ISO8859_1_wissenschaft_
+-#define _de_DE_ISO8859_1_wissenschaft_
++#ifndef _de_DE_wissenschaft_
++#define _de_DE_wissenschaft_
+ 
+-LANG=de_DE.ISO8859-1
++LANG=UTF-8
+ 
+ 04/12   Erster Mann im All, Juri Gagarin, 1961
+ 04/18   Einstein gestorben, 1955
+ 06/22	Konrad Zuse geboren in Berlin, 1919
+ 10/04   Sputnik 1, erster Satellit im Weltraum, 1957
+-12/18	Konrad Zuse gestorben in Hünfeld,  1995
++12/18	Konrad Zuse gestorben in HÃ¼nfeld,  1995
+ 
+ 
+-#endif /* ! _de_DE_ISO8859_1_wissenschaft_ */
++#endif /* ! _de_DE_wissenschaft_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -1,14 +1,14 @@
+ /*
+- * Calendrier français
++ * Calendrier franÃ§ais
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _fr_FR_ISO8859_1_all_
+-#define _fr_FR_ISO8859_1_all_
++#ifndef _fr_FR_all_
++#define _fr_FR_all_
+ 
+-#include <fr_FR.ISO8859-1/calendar.jferies>
+-#include <fr_FR.ISO8859-1/calendar.fetes>
+-#include <fr_FR.ISO8859-1/calendar.proverbes>
++#include <fr_FR/calendar.jferies>
++#include <fr_FR/calendar.fetes>
++#include <fr_FR/calendar.proverbes>
+ 
+-#endif /* !_fr_FR.ISO8859-1_all_ */
++#endif /* !_fr_FR_all_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes
+--- bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes	2011-06-06 16:16:44.000000000 +0200
+@@ -1,630 +1,630 @@
+ /*
+- * Fêtes à souhaiter
++ * FÃªtes Ã  souhaiter
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _fr_FR_ISO8859_1_fetes_
+-#define _fr_FR_ISO8859_1_fetes_
++#ifndef _fr_FR_fetes_
++#define _fr_FR_fetes_
+ 
+-LANG=fr_FR.ISO8859-1
++LANG=UTF-8
+ 
+ /*
+- * N.B.: ceci n'est pas un calendrier liturgique !
+- *	 Il a seulement été réalisé pour me faire payer à boire
+- *	 par mes collègues de travail ; on n'y trouve donc que
+- *	 des prénoms seuls.
++ * N.B.: ceci n'est pas un calendrier liturgiqueÂ !
++ *	 Il a seulement Ã©tÃ© rÃ©alisÃ© pour me faire payer Ã  boire
++ *	 par mes collÃ¨gues de travailÂ ; on n'y trouve donc que
++ *	 des prÃ©noms seuls.
+  *
+- *	 Par ex. « St Antoine de Padoue » se retrouve abrégé en
+- *	 Antoine, et si Antoine est fêté plusieurs jours par an,
++ *	 Par ex. Â«Â St Antoine de PadoueÂ Â» se retrouve abrÃ©gÃ© en
++ *	 Antoine, et si Antoine est fÃªtÃ© plusieurs jours par an,
+  *	 tant mieux pour lui, c'est voulu.
+  */
+ 
+ 01/01	Aujourd'hui, c'est la St(e) Almaque.
+-01/01	N'oubliez pas les Télémaque !
+-01/02	Bonne fête aux Basile !
++01/01	N'oubliez pas les TÃ©lÃ©maque !
++01/02	Bonne fÃªte aux Basile !
+ 01/02	Aujourd'hui, c'est la St(e) Vassili.
+-01/02	N'oubliez pas les Grégoire !
+-01/03	Bonne fête aux Geneviève !
++01/02	N'oubliez pas les GrÃ©goire !
++01/03	Bonne fÃªte aux GeneviÃ¨ve !
+ 01/03	Aujourd'hui, c'est la St(e) Ginette.
+ 01/04	N'oubliez pas les Odilon !
+-01/04	Bonne fête aux Angèle !
++01/04	Bonne fÃªte aux AngÃ¨le !
+ 01/04	Aujourd'hui, c'est la St(e) Robert.
+-01/05	N'oubliez pas les Édouard !
+-01/05	Bonne fête aux Gerlac !
+-01/06	Aujourd'hui, c'est la St(e) Mélaine.
+-01/06	N'oubliez pas les André !
++01/05	N'oubliez pas les Ã‰douard !
++01/05	Bonne fÃªte aux Gerlac !
++01/06	Aujourd'hui, c'est la St(e) MÃ©laine.
++01/06	N'oubliez pas les AndrÃ© !
+ 01/07	Galette des rois
+ 01/07	Aujourd'hui, c'est la St(e) Raymond.
+ 01/07	N'oubliez pas les Raymonde !
+-01/07	Bonne fête aux Virginie !
++01/07	Bonne fÃªte aux Virginie !
+ 01/08	Aujourd'hui, c'est la St(e) Lucien.
+ 01/08	N'oubliez pas les Lucienne !
+-01/08	Bonne fête aux Peggy !
++01/08	Bonne fÃªte aux Peggy !
+ 01/08	Aujourd'hui, c'est la St(e) Gudule.
+ 01/09	N'oubliez pas les Adrien !
+-01/09	Bonne fête aux Alix !
++01/09	Bonne fÃªte aux Alix !
+ 01/10	Aujourd'hui, c'est la St(e) Guillaume.
+ 01/10	N'oubliez pas les Guillemette !
+-01/11	Bonne fête aux Paulin !
++01/11	Bonne fÃªte aux Paulin !
+ 01/11	Aujourd'hui, c'est la St(e) Pauline.
+ 01/12	N'oubliez pas les Tatiana !
+-01/12	Bonne fête aux Alfred !
++01/12	Bonne fÃªte aux Alfred !
+ 01/12	Aujourd'hui, c'est la St(e) Ailred (Aelred, Eilred, Elred).
+ 01/13	N'oubliez pas les Vivant !
+-01/13	Bonne fête aux Vivence !
++01/13	Bonne fÃªte aux Vivence !
+ 01/13	Aujourd'hui, c'est la St(e) Hilaire.
+ 01/13	N'oubliez pas les Yvette !
+-01/14	Bonne fête aux Nina !
+-01/14	Aujourd'hui, c'est la St(e) Séraphin.
+-01/15	N'oubliez pas les Rémi !
+-01/16	Bonne fête aux Marcel !
++01/14	Bonne fÃªte aux Nina !
++01/14	Aujourd'hui, c'est la St(e) SÃ©raphin.
++01/15	N'oubliez pas les RÃ©mi !
++01/16	Bonne fÃªte aux Marcel !
+ 01/16	Aujourd'hui, c'est la St(e) Marcelle.
+ 01/16	N'oubliez pas les Marceau !
+-01/16	Bonne fête aux Honorat !
++01/16	Bonne fÃªte aux Honorat !
+ 01/17	Aujourd'hui, c'est la St(e) Roseline.
+ 01/17	N'oubliez pas les Antoine !
+-01/17	Bonne fête aux Anthony !
++01/17	Bonne fÃªte aux Anthony !
+ 01/18	Aujourd'hui, c'est la St(e) Prisca.
+ 01/18	N'oubliez pas les Libert !
+-01/19	Bonne fête aux Marius !
++01/19	Bonne fÃªte aux Marius !
+ 01/19	Aujourd'hui, c'est la St(e) Canut.
+ 01/20	N'oubliez pas les Fabienne !
+-01/20	Bonne fête aux Sébastien !
++01/20	Bonne fÃªte aux SÃ©bastien !
+ 01/20	Aujourd'hui, c'est la St(e) Bastien.
+-01/21	N'oubliez pas les Agnès !
+-01/21	Bonne fête aux Fructueux !
++01/21	N'oubliez pas les AgnÃ¨s !
++01/21	Bonne fÃªte aux Fructueux !
+ 01/21	Aujourd'hui, c'est la St(e) Augure.
+ 01/21	N'oubliez pas les Euloge !
+-01/21	Bonne fête aux Avit !
++01/21	Bonne fÃªte aux Avit !
+ 01/22	Aujourd'hui, c'est la St(e) Vincent.
+-01/22	N'oubliez pas les Blésille !
+-01/23	Bonne fête aux Barnard !
+-01/24	Aujourd'hui, c'est la St(e) François.
++01/22	N'oubliez pas les BlÃ©sille !
++01/23	Bonne fÃªte aux Barnard !
++01/24	Aujourd'hui, c'est la St(e) FranÃ§ois.
+ 01/25	N'oubliez pas les Morgane !
+-01/26	Bonne fête aux Paule !
+-01/26	Aujourd'hui, c'est la St(e) Timothée.
++01/26	Bonne fÃªte aux Paule !
++01/26	Aujourd'hui, c'est la St(e) TimothÃ©e.
+ 01/26	N'oubliez pas les Tite !
+-01/27	Bonne fête aux Angèle !
++01/27	Bonne fÃªte aux AngÃ¨le !
+ 01/28	Aujourd'hui, c'est la St(e) Thomas.
+ 01/29	N'oubliez pas les Gildas !
+-01/29	Bonne fête aux Sulpice !
++01/29	Bonne fÃªte aux Sulpice !
+ 01/30	Aujourd'hui, c'est la St(e) Martine.
+ 01/31	N'oubliez pas les Marcelle !
+-01/31	Bonne fête aux Jean !
++01/31	Bonne fÃªte aux Jean !
+ 02/01	Aujourd'hui, c'est la St(e) Ella.
+ 02/01	N'oubliez pas les Viridiane !
+-02/02	Bonne fête aux Théophane !
++02/02	Bonne fÃªte aux ThÃ©ophane !
+ 02/03	Aujourd'hui, c'est la St(e) Blaise.
+ 02/03	N'oubliez pas les Anschaire !
+-02/04	Bonne fête aux Véronique !
++02/04	Bonne fÃªte aux VÃ©ronique !
+ 02/04	Aujourd'hui, c'est la St(e) Jeanne.
+ 02/04	N'oubliez pas les Gilbert !
+-02/05	Bonne fête aux Agathe !
++02/05	Bonne fÃªte aux Agathe !
+ 02/06	Aujourd'hui, c'est la St(e) Gaston.
+ 02/06	N'oubliez pas les Armand !
+-02/07	Bonne fête aux Eugénie !
+-02/07	Aujourd'hui, c'est la St(e) Partène.
++02/07	Bonne fÃªte aux EugÃ©nie !
++02/07	Aujourd'hui, c'est la St(e) PartÃ¨ne.
+ 02/08	N'oubliez pas les Jacqueline !
+-02/08	Bonne fête aux Jérôme !
++02/08	Bonne fÃªte aux JÃ©rÃ´me !
+ 02/09	Aujourd'hui, c'est la St(e) Apolline.
+ 02/09	N'oubliez pas les Appollonie !
+-02/10	Bonne fête aux Arnaud !
++02/10	Bonne fÃªte aux Arnaud !
+ 02/10	Aujourd'hui, c'est la St(e) Scholastique.
+-02/11	N'oubliez pas les Séverin !
+-02/11	Bonne fête aux Séverine !
+-02/12	Aujourd'hui, c'est la St(e) Félix.
++02/11	N'oubliez pas les SÃ©verin !
++02/11	Bonne fÃªte aux SÃ©verine !
++02/12	Aujourd'hui, c'est la St(e) FÃ©lix.
+ 02/12	N'oubliez pas les Eulalie !
+-02/13	Bonne fête aux Béatrice !
++02/13	Bonne fÃªte aux BÃ©atrice !
+ 02/13	Aujourd'hui, c'est la St(e) Polyeucte.
+ 02/14	N'oubliez pas les Valentin !
+-02/14	Bonne fête aux Méthode !
++02/14	Bonne fÃªte aux MÃ©thode !
+ 02/14	Aujourd'hui, c'est la St(e) Cyrille.
+ 02/15	N'oubliez pas les Claude !
+-02/15	Bonne fête aux Georgette !
++02/15	Bonne fÃªte aux Georgette !
+ 02/16	Aujourd'hui, c'est la St(e) Julienne.
+ 02/17	N'oubliez pas les Alexis !
+-02/18	Bonne fête aux Bernadette et aux Nadine !
++02/18	Bonne fÃªte aux Bernadette et aux Nadine !
+ 02/19	Aujourd'hui, c'est la St(e) Gabin.
+-02/20	N'oubliez pas les Aimée !
+-02/20	Bonne fête aux Aimé !
++02/20	N'oubliez pas les AimÃ©e !
++02/20	Bonne fÃªte aux AimÃ© !
+ 02/20	Aujourd'hui, c'est la St(e) Amata.
+ 02/21	N'oubliez pas les Pierre-Damien !
+-02/22	Bonne fête aux Isabelle !
++02/22	Bonne fÃªte aux Isabelle !
+ 02/23	Aujourd'hui, c'est la St(e) Lazare.
+ 02/23	N'oubliez pas les Polycarpe !
+-02/24	Bonne fête aux Modeste !
+-02/25	Aujourd'hui, c'est la St(e) Roméo.
++02/24	Bonne fÃªte aux Modeste !
++02/25	Aujourd'hui, c'est la St(e) RomÃ©o.
+ 02/25	N'oubliez pas les Avertan !
+-02/26	Bonne fête aux Nestor !
++02/26	Bonne fÃªte aux Nestor !
+ 02/27	Aujourd'hui, c'est la St(e) Honorine.
+ 02/27	N'oubliez pas les Gabriel !
+-02/28	Bonne fête aux Romain !
++02/28	Bonne fÃªte aux Romain !
+ 02/28	Aujourd'hui, c'est la St(e) Lupicin.
+ 02/29	N'oubliez pas les Auguste !
+-03/01	Bonne fête aux Aubin !
++03/01	Bonne fÃªte aux Aubin !
+ 03/01	Aujourd'hui, c'est la St(e) Albin.
+ 03/02	N'oubliez pas les Charles !
+-03/03	Bonne fête aux Guénolé (Gwénolé) !
++03/03	Bonne fÃªte aux GuÃ©nolÃ© (GwÃ©nolÃ©) !
+ 03/04	Aujourd'hui, c'est la St(e) Casimir.
+ 03/05	N'oubliez pas les Olive !
+-03/05	Bonne fête aux Olivia !
++03/05	Bonne fÃªte aux Olivia !
+ 03/06	Aujourd'hui, c'est la St(e) Colette.
+ 03/06	N'oubliez pas les Nicole !
+-03/07	Bonne fête aux Félicité !
+-03/07	Aujourd'hui, c'est la St(e) Félicie.
+-03/07	N'oubliez pas les Perpétue !
+-03/08	Bonne fête aux Jean !
+-03/09	Aujourd'hui, c'est la St(e) Françoise.
++03/07	Bonne fÃªte aux FÃ©licitÃ© !
++03/07	Aujourd'hui, c'est la St(e) FÃ©licie.
++03/07	N'oubliez pas les PerpÃ©tue !
++03/08	Bonne fÃªte aux Jean !
++03/09	Aujourd'hui, c'est la St(e) FranÃ§oise.
+ 03/10	N'oubliez pas les Vivien !
+-03/10	Bonne fête aux Dominique !
++03/10	Bonne fÃªte aux Dominique !
+ 03/11	Aujourd'hui, c'est la St(e) Rosine.
+ 03/12	N'oubliez pas les Justine !
+-03/12	Bonne fête aux Maximilien !
++03/12	Bonne fÃªte aux Maximilien !
+ 03/13	Aujourd'hui, c'est la St(e) Rodrigue.
+ 03/13	N'oubliez pas les Salomon !
+-03/13	Bonne fête aux Euphrasie !
++03/13	Bonne fÃªte aux Euphrasie !
+ 03/14	Aujourd'hui, c'est la St(e) Mathilde.
+ 03/15	N'oubliez pas les Louise !
+-03/16	Bonne fête aux Bénédicte !
+-03/16	Aujourd'hui, c'est la St(e) Benoîte.
++03/16	Bonne fÃªte aux BÃ©nÃ©dicte !
++03/16	Aujourd'hui, c'est la St(e) BenoÃ®te.
+ 03/16	N'oubliez pas les Julien !
+ 03/17	C'est la St Patrick !
+ 03/17	Aujourd'hui, c'est la St(e) Patrice.
+ 03/18	N'oubliez pas les Cyrille !
+-03/19	Bonne fête aux Joseph !
++03/19	Bonne fÃªte aux Joseph !
+ 03/20	Aujourd'hui, c'est la St(e) Herbert.
+ 03/20	N'oubliez pas les Wulfran !
+-03/21	Bonne fête aux Clémence !
+-03/22	Aujourd'hui, c'est la St(e) Léa.
++03/21	Bonne fÃªte aux ClÃ©mence !
++03/22	Aujourd'hui, c'est la St(e) LÃ©a.
+ 03/23	N'oubliez pas les Victorien !
+-03/23	Bonne fête aux Turibio !
++03/23	Bonne fÃªte aux Turibio !
+ 03/24	Aujourd'hui, c'est la St(e) Catherine.
+ 03/24	N'oubliez pas les Karine !
+-03/26	Bonne fête aux Lara !
++03/26	Bonne fÃªte aux Lara !
+ 03/26	Aujourd'hui, c'est la St(e) Ludger.
+ 03/26	N'oubliez pas les Larissa !
+-03/27	Bonne fête aux Habib !
++03/27	Bonne fÃªte aux Habib !
+ 03/28	Aujourd'hui, c'est la St(e) Gontran.
+ 03/29	N'oubliez pas les Gwladys !
+-03/29	Bonne fête aux Eustase !
+-03/30	Aujourd'hui, c'est la St(e) Amédée.
++03/29	Bonne fÃªte aux Eustase !
++03/30	Aujourd'hui, c'est la St(e) AmÃ©dÃ©e.
+ 03/31	N'oubliez pas les Benjamin !
+-03/31	Bonne fête aux Benjamine !
++03/31	Bonne fÃªte aux Benjamine !
+ 04/01	Votre fichier calendar est corrompu.
+ 04/01	N'oubliez pas les Hugues !
+-04/02	Bonne fête aux Sandrine !
++04/02	Bonne fÃªte aux Sandrine !
+ 04/03	Aujourd'hui, c'est la St(e) Richard.
+ 04/04	N'oubliez pas les Isidore !
+-04/04	Bonne fête aux Benoît !
+-04/05	Aujourd'hui, c'est la St(e) Irène.
++04/04	Bonne fÃªte aux BenoÃ®t !
++04/05	Aujourd'hui, c'est la St(e) IrÃ¨ne.
+ 04/05	N'oubliez pas les Vincent !
+-04/06	Bonne fête aux Marcellin !
+-04/06	Aujourd'hui, c'est la St(e) Célestin.
++04/06	Bonne fÃªte aux Marcellin !
++04/06	Aujourd'hui, c'est la St(e) CÃ©lestin.
+ 04/06	N'oubliez pas les Guillaume !
+-04/07	Bonne fête aux Jean-Baptiste !
++04/07	Bonne fÃªte aux Jean-Baptiste !
+ 04/07	Aujourd'hui, c'est la St(e) Julienne.
+ 04/08	N'oubliez pas les Perpet !
+-04/08	Bonne fête aux Perpetuus !
++04/08	Bonne fÃªte aux Perpetuus !
+ 04/09	Aujourd'hui, c'est la St(e) Gautier.
+ 04/09	N'oubliez pas les Jean !
+-04/10	Bonne fête aux Fulbert !
++04/10	Bonne fÃªte aux Fulbert !
+ 04/10	Aujourd'hui, c'est la St(e) Michel.
+ 04/11	N'oubliez pas les Stanislas !
+-04/11	Bonne fête aux Gemma !
+-04/11	Aujourd'hui, c'est la St(e) Léon.
++04/11	Bonne fÃªte aux Gemma !
++04/11	Aujourd'hui, c'est la St(e) LÃ©on.
+ 04/12	N'oubliez pas les Jules !
+-04/12	Bonne fête aux Sabas !
++04/12	Bonne fÃªte aux Sabas !
+ 04/13	Aujourd'hui, c'est la St(e) Ida.
+-04/13	N'oubliez pas les Herménégilde !
+-04/14	Bonne fête aux Maxime !
++04/13	N'oubliez pas les HermÃ©nÃ©gilde !
++04/14	Bonne fÃªte aux Maxime !
+ 04/14	Aujourd'hui, c'est la St(e) Lydwine.
+-04/14	N'oubliez pas les Bénézet !
+-04/15	Bonne fête aux Pierre !
+-04/16	Aujourd'hui, c'est la St(e) Benoît.
++04/14	N'oubliez pas les BÃ©nÃ©zet !
++04/15	Bonne fÃªte aux Pierre !
++04/16	Aujourd'hui, c'est la St(e) BenoÃ®t.
+ 04/17	N'oubliez pas les Anicet !
+-04/17	Bonne fête aux Kateri !
++04/17	Bonne fÃªte aux Kateri !
+ 04/18	Aujourd'hui, c'est la St(e) Parfait.
+ 04/19	N'oubliez pas les Emma !
+-04/19	Bonne fête aux Elphège !
++04/19	Bonne fÃªte aux ElphÃ¨ge !
+ 04/20	Aujourd'hui, c'est la St(e) Odette.
+-04/20	N'oubliez pas les Agnès !
+-04/21	Bonne fête aux Anselme !
++04/20	N'oubliez pas les AgnÃ¨s !
++04/21	Bonne fÃªte aux Anselme !
+ 04/22	Aujourd'hui, c'est la St(e) Alexandre.
+ 04/22	N'oubliez pas les Soter !
+-04/22	Bonne fête aux Caïus !
+-04/22	Aujourd'hui, c'est la St(e) Léonide.
++04/22	Bonne fÃªte aux CaÃ¯us !
++04/22	Aujourd'hui, c'est la St(e) LÃ©onide.
+ 04/23	N'oubliez pas les Georges !
+-04/23	Bonne fête aux Pierre !
+-04/24	Aujourd'hui, c'est la St(e) Fidèle.
++04/23	Bonne fÃªte aux Pierre !
++04/24	Aujourd'hui, c'est la St(e) FidÃ¨le.
+ 04/24	N'oubliez pas les Marie-Euphrasie !
+-04/25	Bonne fête aux Marc !
++04/25	Bonne fÃªte aux Marc !
+ 04/26	Aujourd'hui, c'est la St(e) Alida.
+ 04/27	N'oubliez pas les Zita !
+-04/27	Bonne fête aux Pierre !
+-04/28	Aujourd'hui, c'est la St(e) Valérie.
++04/27	Bonne fÃªte aux Pierre !
++04/28	Aujourd'hui, c'est la St(e) ValÃ©rie.
+ 04/28	N'oubliez pas les Louis-Marie !
+-04/28	Bonne fête aux Paul !
+-04/29	Aujourd'hui, c'est la St(e) Joseph-Benoît.
++04/28	Bonne fÃªte aux Paul !
++04/29	Aujourd'hui, c'est la St(e) Joseph-BenoÃ®t.
+ 04/29	N'oubliez pas les Hugues !
+-04/30	Bonne fête aux Robert !
++04/30	Bonne fÃªte aux Robert !
+ 04/30	Aujourd'hui, c'est la St(e) Catherine.
+ 05/02	N'oubliez pas les Boris !
+-05/03	Bonne fête aux Jacques !
++05/03	Bonne fÃªte aux Jacques !
+ 05/03	Aujourd'hui, c'est la St(e) Philippe.
+ 05/04	N'oubliez pas les Sylvain !
+-05/05	Bonne fête aux Judith !
++05/05	Bonne fÃªte aux Judith !
+ 05/06	Aujourd'hui, c'est la St(e) Prudence.
+-05/07	N'oubliez pas les Gisèle !
+-05/09	Bonne fête aux Pacôme !
++05/07	N'oubliez pas les GisÃ¨le !
++05/09	Bonne fÃªte aux PacÃ´me !
+ 05/10	Aujourd'hui, c'est la St(e) Solange.
+ 05/11	N'oubliez pas les Estelle !
+-05/12	Bonne fête aux Achille !
++05/12	Bonne fÃªte aux Achille !
+ 05/14	Aujourd'hui, c'est la St(e) Matthias.
+ 05/15	N'oubliez pas les Denise !
+-05/16	Bonne fête aux Honoré !
++05/16	Bonne fÃªte aux HonorÃ© !
+ 05/17	Aujourd'hui, c'est la St(e) Pascal.
+-05/18	N'oubliez pas les Éric !
+-05/19	Bonne fête aux Yves !
++05/18	N'oubliez pas les Ã‰ric !
++05/19	Bonne fÃªte aux Yves !
+ 05/19	Aujourd'hui, c'est la St(e) Yvonne.
+ 05/20	N'oubliez pas les Bernardin !
+-05/21	Bonne fête aux Constantin !
+-05/22	Aujourd'hui, c'est la St(e) Émile.
++05/21	Bonne fÃªte aux Constantin !
++05/22	Aujourd'hui, c'est la St(e) Ã‰mile.
+ 05/23	N'oubliez pas les Didier !
+-05/24	Bonne fête aux Donatien !
++05/24	Bonne fÃªte aux Donatien !
+ 05/25	Aujourd'hui, c'est la St(e) Sophie.
+-05/26	N'oubliez pas les Bérenger !
+-05/28	Bonne fête aux Germain !
++05/26	N'oubliez pas les BÃ©renger !
++05/28	Bonne fÃªte aux Germain !
+ 05/29	Aujourd'hui, c'est la St(e) Aymard.
+ 05/30	N'oubliez pas les Ferdinand !
+-06/01	Bonne fête aux Justin !
++06/01	Bonne fÃªte aux Justin !
+ 06/02	Aujourd'hui, c'est la St(e) Blandine.
+-06/03	N'oubliez pas les Kévin !
+-06/04	Bonne fête aux Clotilde !
++06/03	N'oubliez pas les KÃ©vin !
++06/04	Bonne fÃªte aux Clotilde !
+ 06/05	Aujourd'hui, c'est la St(e) Igor.
+ 06/06	N'oubliez pas les Norbert !
+-06/07	Bonne fête aux Gilbert !
+-06/08	Aujourd'hui, c'est la St(e) Médard.
++06/07	Bonne fÃªte aux Gilbert !
++06/08	Aujourd'hui, c'est la St(e) MÃ©dard.
+ 06/09	N'oubliez pas les Diane !
+-06/11	Bonne fête aux Barnabé !
++06/11	Bonne fÃªte aux BarnabÃ© !
+ 06/11	Aujourd'hui, c'est la St(e) Yolande.
+ 06/12	N'oubliez pas les Guy !
+-06/13	Bonne fête aux Antoine !
+-06/14	Aujourd'hui, c'est la St(e) Élisée.
++06/13	Bonne fÃªte aux Antoine !
++06/14	Aujourd'hui, c'est la St(e) Ã‰lisÃ©e.
+ 06/15	N'oubliez pas les Germaine !
+-06/16	Bonne fête aux Jean-François !
+-06/17	Aujourd'hui, c'est la St(e) Hervé.
+-06/18	N'oubliez pas les Léonce !
+-06/19	Bonne fête aux Romuald !
+-06/20	Aujourd'hui, c'est la St(e) Silvère.
++06/16	Bonne fÃªte aux Jean-FranÃ§ois !
++06/17	Aujourd'hui, c'est la St(e) HervÃ©.
++06/18	N'oubliez pas les LÃ©once !
++06/19	Bonne fÃªte aux Romuald !
++06/20	Aujourd'hui, c'est la St(e) SilvÃ¨re.
+ 06/21	N'oubliez pas les Rodolphe !
+-06/22	Bonne fête aux Alban !
++06/22	Bonne fÃªte aux Alban !
+ 06/23	Aujourd'hui, c'est la St(e) Audrey.
+ 06/24	N'oubliez pas les Jean-Baptiste !
+-06/25	Bonne fête aux Prosper !
++06/25	Bonne fÃªte aux Prosper !
+ 06/26	Aujourd'hui, c'est la St(e) Anthelme.
+ 06/27	N'oubliez pas les Fernand !
+-06/28	Bonne fête aux Irénée !
++06/28	Bonne fÃªte aux IrÃ©nÃ©e !
+ 06/29	Aujourd'hui, c'est la St(e) Paul.
+ 06/29	N'oubliez pas les Pierre !
+-06/30	Bonne fête aux Martial !
++06/30	Bonne fÃªte aux Martial !
+ 07/01	Aujourd'hui, c'est la St(e) Thierry.
+ 07/02	N'oubliez pas les Martinien !
+-07/03	Bonne fête aux Thomas !
++07/03	Bonne fÃªte aux Thomas !
+ 07/04	Aujourd'hui, c'est la St(e) Florent.
+ 07/05	N'oubliez pas les Antoine !
+-07/06	Bonne fête aux Mariette !
++07/06	Bonne fÃªte aux Mariette !
+ 07/07	Aujourd'hui, c'est la St(e) Raoul.
+ 07/08	N'oubliez pas les Thibaut !
+-07/09	Bonne fête aux Amandine !
++07/09	Bonne fÃªte aux Amandine !
+ 07/10	Aujourd'hui, c'est la St(e) Ulrich.
+-07/11	N'oubliez pas les Benoît !
+-07/12	Bonne fête aux Olivier !
++07/11	N'oubliez pas les BenoÃ®t !
++07/12	Bonne fÃªte aux Olivier !
+ 07/13	Aujourd'hui, c'est la St(e) Henri.
+-07/13	N'oubliez pas les Joël !
+-07/14	Bonne fête aux Camille !
++07/13	N'oubliez pas les JoÃ«l !
++07/14	Bonne fÃªte aux Camille !
+ 07/15	Aujourd'hui, c'est la St(e) Donald.
+ 07/17	N'oubliez pas les Caroline !
+-07/17	Bonne fête aux Charlotte !
+-07/18	Aujourd'hui, c'est la St(e) Frédéric.
+-07/19	N'oubliez pas les Arsène !
+-07/20	Bonne fête aux Marina !
++07/17	Bonne fÃªte aux Charlotte !
++07/18	Aujourd'hui, c'est la St(e) FrÃ©dÃ©ric.
++07/19	N'oubliez pas les ArsÃ¨ne !
++07/20	Bonne fÃªte aux Marina !
+ 07/21	Aujourd'hui, c'est la St(e) Victor.
+ 07/22	N'oubliez pas les Marie-Madeleine !
+-07/23	Bonne fête aux Brigitte !
++07/23	Bonne fÃªte aux Brigitte !
+ 07/24	Aujourd'hui, c'est la St(e) Christine.
+ 07/25	N'oubliez pas les Jacques !
+-07/26	Bonne fête aux Anne !
++07/26	Bonne fÃªte aux Anne !
+ 07/26	Aujourd'hui, c'est la St(e) Joachim.
+ 07/27	N'oubliez pas les Nathalie !
+-07/28	Bonne fête aux Samson !
++07/28	Bonne fÃªte aux Samson !
+ 07/29	Aujourd'hui, c'est la St(e) Marthe.
+ 07/30	N'oubliez pas les Juliette !
+-07/31	Bonne fête aux Ignace !
++07/31	Bonne fÃªte aux Ignace !
+ 08/01	Aujourd'hui, c'est la St(e) Alphonse.
+ 08/01	N'oubliez pas les Pierre !
+-08/02	Bonne fête aux Julien !
++08/02	Bonne fÃªte aux Julien !
+ 08/03	Aujourd'hui, c'est la St(e) Lydie.
+ 08/03	N'oubliez pas les Pierre-Julien !
+-08/04	Bonne fête aux Jean-Marie !
++08/04	Bonne fÃªte aux Jean-Marie !
+ 08/04	Aujourd'hui, c'est la St(e) Dominique.
+ 08/05	N'oubliez pas les Abel !
+-08/05	Bonne fête aux Oswald !
+-08/07	Aujourd'hui, c'est la St(e) Gaëtan.
++08/05	Bonne fÃªte aux Oswald !
++08/07	Aujourd'hui, c'est la St(e) GaÃ«tan.
+ 08/08	N'oubliez pas les Dominique !
+-08/08	Bonne fête aux Cyriaque !
++08/08	Bonne fÃªte aux Cyriaque !
+ 08/09	Aujourd'hui, c'est la St(e) Amour.
+ 08/10	N'oubliez pas les Laurent !
+-08/11	Bonne fête aux Claire !
+-08/11	Aujourd'hui, c'est la St(e) Philomène.
++08/11	Bonne fÃªte aux Claire !
++08/11	Aujourd'hui, c'est la St(e) PhilomÃ¨ne.
+ 08/12	N'oubliez pas les Clarisse !
+-08/13	Bonne fête aux Hyppolite !
++08/13	Bonne fÃªte aux Hyppolite !
+ 08/13	Aujourd'hui, c'est la St(e) Radegonde.
+-08/14	N'oubliez pas les Évrard !
+-08/14	Bonne fête aux Maximilien !
++08/14	N'oubliez pas les Ã‰vrard !
++08/14	Bonne fÃªte aux Maximilien !
+ 08/15	Aujourd'hui, c'est la St(e) Marie.
+ 08/16	N'oubliez pas les Armel !
+-08/16	Bonne fête aux Roch !
++08/16	Bonne fÃªte aux Roch !
+ 08/17	Aujourd'hui, c'est la St(e) Hyacinthe.
+-08/18	N'oubliez pas les Hélène !
+-08/19	Bonne fête aux Jean-Eudes !
++08/18	N'oubliez pas les HÃ©lÃ¨ne !
++08/19	Bonne fÃªte aux Jean-Eudes !
+ 08/19	Aujourd'hui, c'est la St(e) Louis.
+ 08/20	N'oubliez pas les Bernard !
+-08/21	Bonne fête aux Christophe !
++08/21	Bonne fÃªte aux Christophe !
+ 08/21	Aujourd'hui, c'est la St(e) Jeanne.
+ 08/22	N'oubliez pas les Fabrice !
+-08/22	Bonne fête aux Symphorien !
++08/22	Bonne fÃªte aux Symphorien !
+ 08/23	Aujourd'hui, c'est la St(e) Rose.
+ 08/23	N'oubliez pas les Philippe !
+-08/24	Bonne fête aux Barthélémy !
++08/24	Bonne fÃªte aux BarthÃ©lÃ©my !
+ 08/25	Aujourd'hui, c'est la St(e) Louis.
+ 08/26	N'oubliez pas les Natacha !
+-08/26	Bonne fête aux Zéphirin !
++08/26	Bonne fÃªte aux ZÃ©phirin !
+ 08/26	Aujourd'hui, c'est la St(e) Eulade.
+ 08/27	N'oubliez pas les Edwige !
+-08/27	Bonne fête aux Monique et aux Joseph !
++08/27	Bonne fÃªte aux Monique et aux Joseph !
+ 08/28	Aujourd'hui, c'est la St(e) Augustin.
+ 08/29	N'oubliez pas les Sabine !
+-08/30	Bonne fête aux Fiacre !
++08/30	Bonne fÃªte aux Fiacre !
+ 08/30	Aujourd'hui, c'est la St(e) Rose.
+ 08/31	N'oubliez pas les Aristide !
+-08/31	Bonne fête aux Raymond !
++08/31	Bonne fÃªte aux Raymond !
+ 09/01	Aujourd'hui, c'est la St(e) Gilles.
+ 09/02	N'oubliez pas les Ingrid !
+-09/03	Bonne fête aux Grégoire !
++09/03	Bonne fÃªte aux GrÃ©goire !
+ 09/04	Aujourd'hui, c'est la St(e) Rosalie.
+-09/05	N'oubliez pas les Raïssa !
+-09/06	Bonne fête aux Bertrand !
++09/05	N'oubliez pas les RaÃ¯ssa !
++09/06	Bonne fÃªte aux Bertrand !
+ 09/07	Aujourd'hui, c'est la St(e) Reine.
+ 09/09	N'oubliez pas les Alain !
+-09/10	Bonne fête aux Inès !
++09/10	Bonne fÃªte aux InÃ¨s !
+ 09/11	Aujourd'hui, c'est la St(e) Adelphe.
+ 09/12	N'oubliez pas les Apollinaire !
+-09/13	Bonne fête aux Aimé !
++09/13	Bonne fÃªte aux AimÃ© !
+ 09/15	Aujourd'hui, c'est la St(e) Roland.
+-09/16	N'oubliez pas les Édith !
+-09/17	Bonne fête aux Renaud !
+-09/18	Aujourd'hui, c'est la St(e) Nadège.
+-09/19	N'oubliez pas les Émilie !
+-09/20	Bonne fête aux Davy !
++09/16	N'oubliez pas les Ã‰dith !
++09/17	Bonne fÃªte aux Renaud !
++09/18	Aujourd'hui, c'est la St(e) NadÃ¨ge.
++09/19	N'oubliez pas les Ã‰milie !
++09/20	Bonne fÃªte aux Davy !
+ 09/21	Aujourd'hui, c'est la St(e) Matthieu.
+ 09/22	N'oubliez pas les Maurice !
+-09/23	Bonne fête aux Constant !
+-09/24	Aujourd'hui, c'est la St(e) Thècle.
++09/23	Bonne fÃªte aux Constant !
++09/24	Aujourd'hui, c'est la St(e) ThÃ¨cle.
+ 09/25	N'oubliez pas les Hermann !
+-09/26	Bonne fête aux Côme !
++09/26	Bonne fÃªte aux CÃ´me !
+ 09/26	Aujourd'hui, c'est la St(e) Damien.
+ 09/27	N'oubliez pas les Vincent !
+-09/28	Bonne fête aux Venceslas !
++09/28	Bonne fÃªte aux Venceslas !
+ 09/29	Aujourd'hui, c'est la St(e) Michel.
+-09/29	N'oubliez pas les Raphaël !
+-09/30	Bonne fête aux Jérôme !
+-10/01	Aujourd'hui, c'est la St(e) Thérèse.
+-10/02	N'oubliez pas les Léger !
+-10/03	Bonne fête aux Gérard !
+-10/04	Aujourd'hui, c'est la St(e) François.
++09/29	N'oubliez pas les RaphaÃ«l !
++09/30	Bonne fÃªte aux JÃ©rÃ´me !
++10/01	Aujourd'hui, c'est la St(e) ThÃ©rÃ¨se.
++10/02	N'oubliez pas les LÃ©ger !
++10/03	Bonne fÃªte aux GÃ©rard !
++10/04	Aujourd'hui, c'est la St(e) FranÃ§ois.
+ 10/05	N'oubliez pas les Placide !
+-10/05	Bonne fête aux Fleur !
++10/05	Bonne fÃªte aux Fleur !
+ 10/05	Aujourd'hui, c'est la St(e) Flore.
+-10/05	N'oubliez pas les Pâquerette !
+-10/05	Bonne fête aux Violette !
++10/05	N'oubliez pas les PÃ¢querette !
++10/05	Bonne fÃªte aux Violette !
+ 10/05	Aujourd'hui, c'est la St(e) Pervenche.
+-10/05	N'oubliez pas les Anémone !
+-10/05	Bonne fête aux Bluette !
++10/05	N'oubliez pas les AnÃ©mone !
++10/05	Bonne fÃªte aux Bluette !
+ 10/05	Aujourd'hui, c'est la St(e) Capucine.
+ 10/05	N'oubliez pas les Dahlia !
+-10/05	Bonne fête aux Myrtille !
++10/05	Bonne fÃªte aux Myrtille !
+ 10/05	Aujourd'hui, c'est la St(e) Hortense.
+ 10/05	N'oubliez pas les Violaine !
+-10/05	Bonne fête aux Anne-Aymone !
++10/05	Bonne fÃªte aux Anne-Aymone !
+ 10/05	Aujourd'hui, c'est la St(e) Dalie.
+ 10/06	N'oubliez pas les Bruno !
+-10/06	Bonne fête aux Foy !
++10/06	Bonne fÃªte aux Foy !
+ 10/07	Aujourd'hui, c'est la St(e) Serge.
+-10/08	N'oubliez pas les Pélagie !
+-10/26	Bonne fête aux Démétrius !
++10/08	N'oubliez pas les PÃ©lagie !
++10/26	Bonne fÃªte aux DÃ©mÃ©trius !
+ 10/09	Aujourd'hui, c'est la St(e) Denis.
+ 10/09	N'oubliez pas les Denys !
+-10/10	Bonne fête aux Ghislain !
++10/10	Bonne fÃªte aux Ghislain !
+ 10/10	Aujourd'hui, c'est la St(e) Ghislaine.
+ 10/10	N'oubliez pas les Guislain !
+-10/10	Bonne fête aux Guislaine !
++10/10	Bonne fÃªte aux Guislaine !
+ 10/11	Aujourd'hui, c'est la St(e) Firmin.
+ 10/11	N'oubliez pas les Gausbert !
+-10/12	Bonne fête aux Wilfried !
+-10/12	Aujourd'hui, c'est la St(e) Séraphin.
+-10/13	N'oubliez pas les Géraud !
+-10/14	Bonne fête aux Juste !
++10/12	Bonne fÃªte aux Wilfried !
++10/12	Aujourd'hui, c'est la St(e) SÃ©raphin.
++10/13	N'oubliez pas les GÃ©raud !
++10/14	Bonne fÃªte aux Juste !
+ 10/14	Aujourd'hui, c'est la St(e) Calliste.
+-10/15	N'oubliez pas les Thérèse !
+-10/16	Bonne fête aux Edwige !
++10/15	N'oubliez pas les ThÃ©rÃ¨se !
++10/16	Bonne fÃªte aux Edwige !
+ 10/16	Aujourd'hui, c'est la St(e) Marie-Marguerite.
+ 10/17	N'oubliez pas les Baudoin !
+-10/17	Bonne fête aux Ignace !
++10/17	Bonne fÃªte aux Ignace !
+ 10/18	Aujourd'hui, c'est la St(e) Luc.
+-10/19	N'oubliez pas les René !
+-10/20	Bonne fête aux Adeline !
++10/19	N'oubliez pas les RenÃ© !
++10/20	Bonne fÃªte aux Adeline !
+ 10/20	Aujourd'hui, c'est la St(e) Aline.
+ 10/20	N'oubliez pas les Line !
+-10/21	Bonne fête aux Céline !
++10/21	Bonne fÃªte aux CÃ©line !
+ 10/21	Aujourd'hui, c'est la St(e) Hilarion.
+-10/22	N'oubliez pas les Élodie !
+-10/22	Bonne fête aux Nunillon !
+-10/22	Aujourd'hui, c'est la St(e) Salomé.
++10/22	N'oubliez pas les Ã‰lodie !
++10/22	Bonne fÃªte aux Nunillon !
++10/22	Aujourd'hui, c'est la St(e) SalomÃ©.
+ 10/23	N'oubliez pas les Jean !
+-10/24	Bonne fête aux Florentin !
+-10/25	Aujourd'hui, c'est la St(e) Crépin.
+-10/25	N'oubliez pas les Crépinien !
+-10/25	Bonne fête aux Chrysanthe !
++10/24	Bonne fÃªte aux Florentin !
++10/25	Aujourd'hui, c'est la St(e) CrÃ©pin.
++10/25	N'oubliez pas les CrÃ©pinien !
++10/25	Bonne fÃªte aux Chrysanthe !
+ 10/25	Aujourd'hui, c'est la St(e) Darie.
+ 10/25	N'oubliez pas les Enguerran !
+-10/26	Bonne fête aux Dimitri !
+-10/26	Aujourd'hui, c'est la St(e) Évariste.
+-10/27	N'oubliez pas les Émeline !
+-10/27	Bonne fête aux Didier !
++10/26	Bonne fÃªte aux Dimitri !
++10/26	Aujourd'hui, c'est la St(e) Ã‰variste.
++10/27	N'oubliez pas les Ã‰meline !
++10/27	Bonne fÃªte aux Didier !
+ 10/27	Aujourd'hui, c'est la St(e) Frumence.
+ 10/28	N'oubliez pas les Jude !
+-10/28	Bonne fête aux Judas !
+-10/28	Aujourd'hui, c'est la St(e) Thaddée.
++10/28	Bonne fÃªte aux Judas !
++10/28	Aujourd'hui, c'est la St(e) ThaddÃ©e.
+ 10/28	N'oubliez pas les Simon !
+-10/28	Bonne fête aux Simone (Simonne) !
++10/28	Bonne fÃªte aux Simone (Simonne) !
+ 10/29	Aujourd'hui, c'est la St(e) Narcisse.
+ 10/30	N'oubliez pas les Bienvenue !
+-10/30	Bonne fête aux Dorothée !
++10/30	Bonne fÃªte aux DorothÃ©e !
+ 10/31	Aujourd'hui, c'est la St(e) Quentin.
+ 10/31	N'oubliez pas les Alphonse !
+-10/31	Bonne fête aux Wolfgang !
++10/31	Bonne fÃªte aux Wolfgang !
+ 11/03	Aujourd'hui, c'est la St(e) Hubert.
+ 11/04	N'oubliez pas les Charles !
+-11/04	Bonne fête aux Amans !
++11/04	Bonne fÃªte aux Amans !
+ 11/05	Aujourd'hui, c'est la St(e) Sylvie.
+ 11/05	N'oubliez pas les Sylvette !
+-11/05	Bonne fête aux Sylviane !
++11/05	Bonne fÃªte aux Sylviane !
+ 11/05	Aujourd'hui, c'est la St(e) Zacharie.
+-11/05	N'oubliez pas les Élisabeth !
+-11/06	Bonne fête aux Bertille !
+-11/06	Aujourd'hui, c'est la St(e) Léonard.
++11/05	N'oubliez pas les Ã‰lisabeth !
++11/06	Bonne fÃªte aux Bertille !
++11/06	Aujourd'hui, c'est la St(e) LÃ©onard.
+ 11/06	N'oubliez pas les Winnoc !
+-11/07	Bonne fête aux Carine !
++11/07	Bonne fÃªte aux Carine !
+ 11/07	Aujourd'hui, c'est la St(e) Karine.
+ 11/07	N'oubliez pas les Ernest !
+-11/07	Bonne fête aux Ernst !
++11/07	Bonne fÃªte aux Ernst !
+ 11/07	Aujourd'hui, c'est la St(e) Willibrord.
+ 11/08	N'oubliez pas les Geoffroy !
+-11/09	Bonne fête aux Théodore !
+-11/10	Aujourd'hui, c'est la St(e) Léon.
+-11/10	N'oubliez pas les Léontine !
+-11/10	Bonne fête aux Lionel !
++11/09	Bonne fÃªte aux ThÃ©odore !
++11/10	Aujourd'hui, c'est la St(e) LÃ©on.
++11/10	N'oubliez pas les LÃ©ontine !
++11/10	Bonne fÃªte aux Lionel !
+ 11/11	Aujourd'hui, c'est la St(e) Martin.
+ 11/12	N'oubliez pas les Christian !
+-11/12	Bonne fête aux Josaphat !
++11/12	Bonne fÃªte aux Josaphat !
+ 11/13	Aujourd'hui, c'est la St(e) Brice.
+-11/13	N'oubliez pas les Diégo !
+-11/13	Bonne fête aux Didace !
++11/13	N'oubliez pas les DiÃ©go !
++11/13	Bonne fÃªte aux Didace !
+ 11/14	Aujourd'hui, c'est la St(e) Sidoine.
+ 11/14	N'oubliez pas les Sidonie !
+-11/14	Bonne fête aux Sérapion !
++11/14	Bonne fÃªte aux SÃ©rapion !
+ 11/15	Aujourd'hui, c'est la St(e) Albert.
+ 11/16	N'oubliez pas les Marguerite !
+-11/16	Bonne fête aux Gertrude !
+-11/17	Aujourd'hui, c'est la St(e) Élisabeth.
+-11/17	N'oubliez pas les Élise !
+-11/17	Bonne fête aux Lise !
++11/16	Bonne fÃªte aux Gertrude !
++11/17	Aujourd'hui, c'est la St(e) Ã‰lisabeth.
++11/17	N'oubliez pas les Ã‰lise !
++11/17	Bonne fÃªte aux Lise !
+ 11/18	Aujourd'hui, c'est la St(e) Aude.
+ 11/19	N'oubliez pas les Tanguy !
+-11/19	Bonne fête aux Tanneguy !
++11/19	Bonne fÃªte aux Tanneguy !
+ 11/19	Aujourd'hui, c'est la St(e) Mechtilde.
+ 11/19	N'oubliez pas les Mathilde !
+-11/19	Bonne fête aux Patrocle !
++11/19	Bonne fÃªte aux Patrocle !
+ 11/20	Aujourd'hui, c'est la St(e) Edmond.
+ 11/20	N'oubliez pas les Octave !
+-11/20	Bonne fête aux Adventor !
++11/20	Bonne fÃªte aux Adventor !
+ 11/20	Aujourd'hui, c'est la St(e) Solutor.
+ 11/20	N'oubliez pas les Ambroise !
+-11/20	Bonne fête aux Rutus !
+-11/22	Aujourd'hui, c'est la St(e) Cécile.
+-11/22	N'oubliez pas les Célia !
+-11/23	Bonne fête aux Clément !
+-11/23	Aujourd'hui, c'est la St(e) Clémentine.
++11/20	Bonne fÃªte aux Rutus !
++11/22	Aujourd'hui, c'est la St(e) CÃ©cile.
++11/22	N'oubliez pas les CÃ©lia !
++11/23	Bonne fÃªte aux ClÃ©ment !
++11/23	Aujourd'hui, c'est la St(e) ClÃ©mentine.
+ 11/23	N'oubliez pas les Colomban !
+-11/24	Bonne fête aux Augusta !
++11/24	Bonne fÃªte aux Augusta !
+ 11/24	Aujourd'hui, c'est la St(e) Flora.
+ 11/25	N'oubliez pas les Catherine !
+-11/24	Bonne fête aux Maria !
++11/24	Bonne fÃªte aux Maria !
+ 11/26	Aujourd'hui, c'est la St(e) Delphine.
+-11/26	N'oubliez pas les Elzéar !
+-11/27	Bonne fête aux Séverin !
+-11/27	Aujourd'hui, c'est la St(e) Séverine.
++11/26	N'oubliez pas les ElzÃ©ar !
++11/27	Bonne fÃªte aux SÃ©verin !
++11/27	Aujourd'hui, c'est la St(e) SÃ©verine.
+ 11/27	N'oubliez pas les Maxime !
+-11/28	Bonne fête aux Jacques !
++11/28	Bonne fÃªte aux Jacques !
+ 11/29	Aujourd'hui, c'est la St(e) Saturnin.
+ 11/29	N'oubliez pas les Sernin (Cernin) !
+-11/29	Bonne fête aux Savourin !
++11/29	Bonne fÃªte aux Savourin !
+ 11/29	Aujourd'hui, c'est la St(e) Sornin.
+-11/30	N'oubliez pas les André !
+-11/30	Bonne fête aux Andréa !
++11/30	N'oubliez pas les AndrÃ© !
++11/30	Bonne fÃªte aux AndrÃ©a !
+ 12/01	Aujourd'hui, c'est la St(e) Florence.
+-12/01	N'oubliez pas les Éloi !
+-12/01	Bonne fête aux Airy !
++12/01	N'oubliez pas les Ã‰loi !
++12/01	Bonne fÃªte aux Airy !
+ 12/02	Aujourd'hui, c'est la St(e) Viviane.
+-12/03	N'oubliez pas les François-Xavier !
+-12/03	Bonne fête aux Xavier !
+-12/03	Aujourd'hui, c'est la St(e) Eugène.
++12/03	N'oubliez pas les FranÃ§ois-Xavier !
++12/03	Bonne fÃªte aux Xavier !
++12/03	Aujourd'hui, c'est la St(e) EugÃ¨ne.
+ 12/04	N'oubliez pas les Barbara !
+-12/04	Bonne fête aux Barbe !
+-12/05	Aujourd'hui, c'est la St(e) Gérald.
+-12/05	N'oubliez pas les Géraldine !
+-12/05	Bonne fête aux Géraud !
++12/04	Bonne fÃªte aux Barbe !
++12/05	Aujourd'hui, c'est la St(e) GÃ©rald.
++12/05	N'oubliez pas les GÃ©raldine !
++12/05	Bonne fÃªte aux GÃ©raud !
+ 12/05	Aujourd'hui, c'est la St(e) Sabas.
+ 12/06	N'oubliez pas les Nicolas !
+-12/07	Bonne fête aux Ambroise !
++12/07	Bonne fÃªte aux Ambroise !
+ 12/09	Aujourd'hui, c'est la St(e) Pierre.
+ 12/10	N'oubliez pas les Romaric !
+-12/10	Bonne fête aux Eulalie !
++12/10	Bonne fÃªte aux Eulalie !
+ 12/10	Aujourd'hui, c'est la St(e) Melchaide.
+ 12/10	N'oubliez pas les Miltiade !
+-12/11	Bonne fête aux Daniel !
++12/11	Bonne fÃªte aux Daniel !
+ 12/11	Aujourd'hui, c'est la St(e) Damase.
+ 12/12	N'oubliez pas les Chantal !
+-12/13	Bonne fête aux Lucie !
++12/13	Bonne fÃªte aux Lucie !
+ 12/13	Aujourd'hui, c'est la St(e) Rolande.
+ 12/13	N'oubliez pas les Aurore !
+-12/14	Bonne fête aux Odile !
++12/14	Bonne fÃªte aux Odile !
+ 12/15	Aujourd'hui, c'est la St(e) Ninon.
+ 12/15	N'oubliez pas les Nina !
+-12/15	Bonne fête aux Christiane !
++12/15	Bonne fÃªte aux Christiane !
+ 12/15	Aujourd'hui, c'est la St(e) Christina.
+ 12/16	N'oubliez pas les Alice !
+-12/16	Bonne fête aux Adélaïde !
+-12/16	Aujourd'hui, c'est la St(e) Évrard.
+-12/16	N'oubliez pas les Éberhard !
+-12/17	Bonne fête aux Gaël !
++12/16	Bonne fÃªte aux AdÃ©laÃ¯de !
++12/16	Aujourd'hui, c'est la St(e) Ã‰vrard.
++12/16	N'oubliez pas les Ã‰berhard !
++12/17	Bonne fÃªte aux GaÃ«l !
+ 12/17	Aujourd'hui, c'est la St(e) Lazare.
+ 12/17	N'oubliez pas les Olympe !
+-12/17	Bonne fête aux Olympias !
+-12/17	Aujourd'hui, c'est la St(e) Judicaël.
++12/17	Bonne fÃªte aux Olympias !
++12/17	Aujourd'hui, c'est la St(e) JudicaÃ«l.
+ 12/18	N'oubliez pas les Gatien !
+-12/18	Bonne fête aux Winebald !
++12/18	Bonne fÃªte aux Winebald !
+ 12/19	Aujourd'hui, c'est la St(e) Urbain.
+ 12/20	N'oubliez pas les Abraham !
+-12/20	Bonne fête aux Théophile !
++12/20	Bonne fÃªte aux ThÃ©ophile !
+ 12/21	Aujourd'hui, c'est la St(e) Pierre.
+-12/22	N'oubliez pas les Françoise-Xavière !
+-12/22	Bonne fête aux Flavien !
++12/22	N'oubliez pas les FranÃ§oise-XaviÃ¨re !
++12/22	Bonne fÃªte aux Flavien !
+ 12/23	Aujourd'hui, c'est la St(e) Armand.
+-12/24	N'oubliez pas les Adèle !
+-12/24	Bonne fête aux Charbel !
++12/24	N'oubliez pas les AdÃ¨le !
++12/24	Bonne fÃªte aux Charbel !
+ 12/25	Aujourd'hui, c'est la St(e) Emmanuel.
+ 12/25	N'oubliez pas les Emmanuelle !
+-12/25	Bonne fête aux Noël !
+-12/26	Aujourd'hui, c'est la St(e) Étienne.
+-12/26	N'oubliez pas les Stéphane !
+-12/26	Bonne fête aux Stéphanie !
++12/25	Bonne fÃªte aux NoÃ«l !
++12/26	Aujourd'hui, c'est la St(e) Ã‰tienne.
++12/26	N'oubliez pas les StÃ©phane !
++12/26	Bonne fÃªte aux StÃ©phanie !
+ 12/27	Aujourd'hui, c'est la St(e) Jean.
+ 12/27	N'oubliez pas les Yann !
+-12/28	Bonne fête aux Innocents !
++12/28	Bonne fÃªte aux Innocents !
+ 12/29	Aujourd'hui, c'est la St(e) David.
+ 12/30	N'oubliez pas les Roger !
+-12/31	Bonne fête aux Sylvestre !
++12/31	Bonne fÃªte aux Sylvestre !
+ 
+-#endif /*! _fr_FR_ISO8859_1_fetes */
++#endif /*! _fr_FR_fetes */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french
+--- bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french	2011-06-06 16:16:44.000000000 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_french_
+ #define _calendar_french_
+ 
+-#include <fr_FR.ISO8859-1/calendar.all>
++#include <fr_FR/calendar.all>
+ 
+ #endif /* !_calendar_french_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies
+--- bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies	2011-06-06 16:16:44.000000000 +0200
+@@ -1,46 +1,46 @@
+ /*
+- * Jours fériés
++ * Jours fÃ©riÃ©s
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _fr_FR_ISO8859_1_jferies_
+-#define _fr_FR_ISO8859_1_jferies_
++#ifndef _fr_FR_jferies_
++#define _fr_FR_jferies_
+ 
+-LANG=fr_FR.ISO8859-1
++LANG=UTF-8
+ 
+-/* Jours chômés */
++/* Jours chÃ´mÃ©s */
+ 01/01	Nouvel an
+-05/01	Fête du travail
++05/01	FÃªte du travail
+ 05/08	Armistice 1945
+-07/14	Fête nationale française
++07/14	FÃªte nationale franÃ§aise
+ 11/11	Armistice 1918
+ 
+-/* Jours fériés religieux */
+-Easter		Pâques
+-Easter+1 	Lundi de Pâques
++/* Jours fÃ©riÃ©s religieux */
++Easter		PÃ¢ques
++Easter+1 	Lundi de PÃ¢ques
+ Easter+39	Ascension
+-Easter+49	Pentecôte
+-Easter+50	Lundi de Pentecôte
++Easter+49	PentecÃ´te
++Easter+50	Lundi de PentecÃ´te
+ 08/15		Assomption
+ 11/01		Toussaint
+-12/25		Noël
++12/25		NoÃ«l
+ 
+-/* Les dates suivantes ne sont malheureusement pas fériées... */
++/* Les dates suivantes ne sont malheureusement pas fÃ©riÃ©es... */
+ 
+ /* Saisons */
+ 03/21*	Printemps
+-06/21*	Été
++06/21*	Ã‰tÃ©
+ 09/21*	Automne
+ 12/21*	Hiver
+ 
+ /* Changements d'heure */
+-03/SundayLast	Passage à l'heure d'été
+-10/SundayLast	Passage à l'heure d'hiver
++03/SundayLast	Passage Ã  l'heure d'Ã©tÃ©
++10/SundayLast	Passage Ã  l'heure d'hiver
+ 
+ /* Divers */
+ /* BUG : si Penteco^te = 05/SunLast, fe^te des me`res repousse'e d'une semaine */
+-05/SundayLast	Fêtes des mères
+-June Sun+3	Fêtes des pères
++05/SundayLast	FÃªtes des mÃ¨res
++June Sun+3	FÃªtes des pÃ¨res
+ 
+-#endif /*! _fr_FR_ISO8859_1_jferies_ */
++#endif /*! _fr_FR_jferies_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes
+--- bsdmainutils.orig/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes	2011-06-06 16:16:44.000000000 +0200
+@@ -1,38 +1,38 @@
+ /*
+- * Proverbes liés au calendrier
++ * Proverbes liÃ©s au calendrier
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _fr_FR_ISO8859_1_proverbes_
+-#define _fr_FR_ISO8859_1_proverbes_
++#ifndef _fr_FR_proverbes_
++#define _fr_FR_proverbes_
+ 
+-LANG=fr_FR.ISO8859-1
++LANG=UTF-8
+ 
+ /* Janvier */
+ 01/01	Calme et claire nuit de l'an
+-	À bonne année donne l'élan.
++	Ã€ bonne annÃ©e donne l'Ã©lan.
+ 01/02	Janvier d'eau chiche
+ 	Fait le paysan riche.
+-01/04	Un mois de janvier sans gelée
+-	N'amène jamais une bonne année.
++01/04	Un mois de janvier sans gelÃ©e
++	N'amÃ¨ne jamais une bonne annÃ©e.
+ 01/06	Pluie aux Rois,
+-	Blé jusqu'au toit.
++	BlÃ© jusqu'au toit.
+ 01/08	Janvier sec et sage
+-	Est un bon présage.
+-01/09	Saint Julien brise la glace ;
++	Est un bon prÃ©sage.
++01/09	Saint Julien brise la glaceÂ ;
+ 	S'il ne la brise, c'est qu'il l'embrasse.
+-01/10	Beau temps à la saint Guillaume
+-	Donne plus de blé que de chaume.
++01/10	Beau temps Ã  la saint Guillaume
++	Donne plus de blÃ© que de chaume.
+ 01/13	Soleil au jour de saint Hilaire,
+ 	Fends du bois pour ton hiver.
+ 01/14	Pingouin dans les champs,
+-	Hiver méchant.
+-01/15	S'il gèle à la saint Maur,
+-	La moitié de l'hiver est dehors.
+-01/18	À la saint Pierre,
++	Hiver mÃ©chant.
++01/15	S'il gÃ¨le Ã  la saint Maur,
++	La moitiÃ© de l'hiver est dehors.
++01/18	Ã€ la saint Pierre,
+ 	L'hiver s'en va ou se resserre.
+-01/20	S'il gèle à la saint Sébastien,
++01/20	S'il gÃ¨le Ã  la saint SÃ©bastien,
+ 	L'hiver s'en va ou revient.
+ 01/22	Pour saint Vincent,
+ 	L'hiver perd ses dents
+@@ -41,100 +41,100 @@
+ 	Monte les barriques au grenier.
+ 01/25	Le jour de saint Paul,
+ 	L'hiver se rompt le col.
+-01/31	Janvier fait le péché,
+-	Mars en est accusé.
++01/31	Janvier fait le pÃ©chÃ©,
++	Mars en est accusÃ©.
+ 
+-/* Février */
+-02/01	À la saint Ignace,
++/* FÃ©vrier */
++02/01	Ã€ la saint Ignace,
+ 	L'eau est de glace.
+-02/02	Chandeleur claire, hiver derrière ;
++02/02	Chandeleur claire, hiver derriÃ¨reÂ ;
+ 	Chandeleur trouble, hiver redouble.
+-02/03	À la saint Blaise,
++02/03	Ã€ la saint Blaise,
+ 	L'hiver s'apaise,
+ 	Mais s'il redouble et s'il reprend,
+-	Longtemps après on s'en ressent.
+-02/05	Pour la sainte Agathe, sème ton oignon,
+-	Fût-il dans la glace, il deviendra bon.
+-02/09	À la sainte Apolline
++	Longtemps aprÃ¨s on s'en ressent.
++02/05	Pour la sainte Agathe, sÃ¨me ton oignon,
++	FÃ»t-il dans la glace, il deviendra bon.
++02/09	Ã€ la sainte Apolline
+ 	Bien souvent l'hiver nous quitte.
+-02/12	Si le soleil rit à la sainte Eulalie,
+-	Pommes et cidre à la folie.
+-02/14	À la saint Valentin,
++02/12	Si le soleil rit Ã  la sainte Eulalie,
++	Pommes et cidre Ã  la folie.
++02/14	Ã€ la saint Valentin,
+ 	Tous les vents sont marins.
+-02/16	Pluie de février
+-	À la terre vaut du fumier.
+-02/18	Février trop doux,
++02/16	Pluie de fÃ©vrier
++	Ã€ la terre vaut du fumier.
++02/18	FÃ©vrier trop doux,
+ 	Printemps en courroux.
+-02/20	La neige de février
+-	Brûle le blé.
+-02/22	Neige à la sainte Isabelle
++02/20	La neige de fÃ©vrier
++	BrÃ»le le blÃ©.
++02/22	Neige Ã  la sainte Isabelle
+ 	Fait la fleur plus belle.
+ 02/24	Saint Mathias
+-	Casse la glace ;
++	Casse la glaceÂ ;
+ 	S'il n'y en a pas,
+ 	Il en fera.
+-02/27	Gelée de la sainte Honorine
+-	Rend toute la vallée chagrine.
+-02/28	Fleur de février
++02/27	GelÃ©e de la sainte Honorine
++	Rend toute la vallÃ©e chagrine.
++02/28	Fleur de fÃ©vrier
+ 	Va mal au pommier.
+ 
+ /* Mars */
+-03/01	Taille à la saint Aubin
++03/01	Taille Ã  la saint Aubin
+ 	Donnera de gros raisins.
+ 03/02	Quand mars mouillera,
+ 	Bien du vin tu auras.
+-03/03	Soit au début, soit à la fin,
++03/03	Soit au dÃ©but, soit Ã  la fin,
+ 	Mars nous montre son venin.
+-03/06	À la sainte Colette
+-	Commence à chanter l'alouette.
++03/06	Ã€ la sainte Colette
++	Commence Ã  chanter l'alouette.
+ 03/08	Quand en mars il tonne,
+-	L'année sera bonne.
++	L'annÃ©e sera bonne.
+ 03/10	Mars venteux,
+ 	Vergers pommeux.
+-03/12	À la saint Grégoire,
++03/12	Ã€ la saint GrÃ©goire,
+ 	Il faut tailler la vigne pour boire.
+-03/13	Poussière de mars
+-	Est poussière d'or...
++03/13	PoussiÃ¨re de mars
++	Est poussiÃ¨re d'or...
+ 03/15	Pluie de mars grandit l'herbette
+ 	Et souvent annonce disette.
+-03/17	S'il fait doux à la saint Patrice,
+-	De leurs trous sortent les écrevisses.
++03/17	S'il fait doux Ã  la saint Patrice,
++	De leurs trous sortent les Ã©crevisses.
+ 03/19	Pour saint Joseph,
+ 	L'hirondelle va et vient.
+-03/21	S'il pleut à la saint Benoît,
++03/21	S'il pleut Ã  la saint BenoÃ®t,
+ 	Il pleut trente-sept jours plus trois.
+-03/23	Quand à glace il gèle à la saint Victorien,
+-	En pêches et en abricots il n'y a rien.
++03/23	Quand Ã  glace il gÃ¨le Ã  la saint Victorien,
++	En pÃªches et en abricots il n'y a rien.
+ 03/25	Quand fleurs en mars il y aura,
+-	Guère de fruits ne mangeras.
+-03/28	À la saint Gontran, si la température est belle,
+-	Arrivent les premières hirondelles.
+-03/30	Quand mars se déguise en été,
+-	Avril prend ses habits fourrés.
+-03/31	À la saint Benjamin,
++	GuÃ¨re de fruits ne mangeras.
++03/28	Ã€ la saint Gontran, si la tempÃ©rature est belle,
++	Arrivent les premiÃ¨res hirondelles.
++03/30	Quand mars se dÃ©guise en Ã©tÃ©,
++	Avril prend ses habits fourrÃ©s.
++03/31	Ã€ la saint Benjamin,
+ 	Le mauvais temps prend fin.
+ 
+ /* Mobiles */
+ Easter-7	Le propre jour des Rameaux
+-	Sème oignons et poireaux.
+-Easter-3	La gelée du jeudi saint
+-	Gèle le sarrasin.
+-Easter-2	Gelée du vendredi saint
+-	Gèle le pain et le vin.
+-Easter	S'il pleut à Pâques,
++	SÃ¨me oignons et poireaux.
++Easter-3	La gelÃ©e du jeudi saint
++	GÃ¨le le sarrasin.
++Easter-2	GelÃ©e du vendredi saint
++	GÃ¨le le pain et le vin.
++Easter	S'il pleut Ã  PÃ¢ques,
+ 	Il pleut pendant quarante jours.
+-Easter	Pâques en mars,
++Easter	PÃ¢ques en mars,
+ 	Pestes, guerres ou famines.
+ Easter+36	Haricots de rogations
+-	Rendent à foison.
++	Rendent Ã  foison.
+ Easter+37	Belles rogations,
+ 	Belles moissons.
+-Easter+39	S'il pleut à l'Ascension,
++Easter+39	S'il pleut Ã  l'Ascension,
+ 	Tout va en perdition.
+-Easter+49	La Pentecôte
+-	Donne les fruits, ou les ôte.
+-Easter+56	S'il pleut à la Trinité,
+-	Il pleut tous les jours de l'année.
++Easter+49	La PentecÃ´te
++	Donne les fruits, ou les Ã´te.
++Easter+56	S'il pleut Ã  la TrinitÃ©,
++	Il pleut tous les jours de l'annÃ©e.
+ 
+ /* Avril */
+ 04/01	Avril entrant,
+@@ -143,117 +143,117 @@
+ 04/05	Avril fait la fleur,
+ 	Mai en a l'honneur.
+ 04/10	Il n'est point d'avril si beau
+-	Qu'il n'ait de neige à son chapeau.
+-04/15	En avril, ne te découvre pas d'un fil ;
+-	En mai, fais ce qu'il te plaît ;
++	Qu'il n'ait de neige Ã  son chapeau.
++04/15	En avril, ne te dÃ©couvre pas d'un filÂ ;
++	En mai, fais ce qu'il te plaÃ®tÂ ;
+ 	En juin, de trois habits n'en garde qu'un.
+ 04/17	Orage en avril,
+-	Prépare tes barrils.
+-04/19	À la sainte Léonide
+-	Chaque blé pousse rapide.
+-04/22	Pluie à la sainte Opportune,
++	PrÃ©pare tes barrils.
++04/19	Ã€ la sainte LÃ©onide
++	Chaque blÃ© pousse rapide.
++04/22	Pluie Ã  la sainte Opportune,
+ 	Ni cerises ni prunes.
+-04/23	À la saint Georges,
+-	Sème ton orge,
+-	À la saint Marc,
++04/23	Ã€ la saint Georges,
++	SÃ¨me ton orge,
++	Ã€ la saint Marc,
+ 	Il est trop tard.
+-04/25	À la saint Marc, s'il tombe de l'eau,
+-	Il n'y aura pas de fruits à couteau.
++04/25	Ã€ la saint Marc, s'il tombe de l'eau,
++	Il n'y aura pas de fruits Ã  couteau.
+ 04/28	Avril pluvieux et mai venteux
+ 	Ne rendent pas le paysan disetteux.
+-04/30	La pluie à la saint Robert
++04/30	La pluie Ã  la saint Robert
+ 	De bon vin emplira ton verre.
+ 
+ /* Mai */
+ 05/03	Les trois saints au sang de navet,
+ 	Pancrace, Mamert et Servais,
+-	Sont bien nommés les saints de glace,
++	Sont bien nommÃ©s les saints de glace,
+ 	Mamert, Servais et Pancrace.
+-05/15	À la sainte Denise,
+-	Le froid n'en fait plus à sa guise.
+-05/16	À la saint Honoré,
+-	S'il fait gelée,
+-	Le vin diminue de moitié.
+-05/18	Bon fermier à sainte Juliette
++05/15	Ã€ la sainte Denise,
++	Le froid n'en fait plus Ã  sa guise.
++05/16	Ã€ la saint HonorÃ©,
++	S'il fait gelÃ©e,
++	Le vin diminue de moitiÃ©.
++05/18	Bon fermier Ã  sainte Juliette
+ 	Doit vendre ses poulettes.
+-05/22	Beau temps à la sainte Émilie
+-	Donne du fruit à la folie.
+-05/23	Qui sème haricots à la saint Didier
+-	Les arrachera à poignées.
++05/22	Beau temps Ã  la sainte Ã‰milie
++	Donne du fruit Ã  la folie.
++05/23	Qui sÃ¨me haricots Ã  la saint Didier
++	Les arrachera Ã  poignÃ©es.
+ 
+ /* Juin */
+-06/08	S'il pleut à la saint Médard,
++06/08	S'il pleut Ã  la saint MÃ©dard,
+ 	Il pleut quarante jours plus tard,
+-	À moins que saint Barnabé
+-	Ne vienne l'arrêter.
+-06/11	À la saint Barnabé,
+-	Fauche ton pré.
++	Ã€ moins que saint BarnabÃ©
++	Ne vienne l'arrÃªter.
++06/11	Ã€ la saint BarnabÃ©,
++	Fauche ton prÃ©.
+ 06/16	Si le jour de saint Fargeau
+ 	La lune se fait dans l'eau,
+ 	Le reste du mois est beau.
+-06/19	S'il pleut à la saint Gervais,
+-	Il pleut quarante jours après.
+-06/20	Pluie d'orage à la saint Sylvère,
++06/19	S'il pleut Ã  la saint Gervais,
++	Il pleut quarante jours aprÃ¨s.
++06/20	Pluie d'orage Ã  la saint SylvÃ¨re,
+ 	C'est beaucoup de vin dans le verre.
+-06/24	S'il pleut à la saint Jean,
+-	Guère de vin ni de pain.
+-06/25	Après la saint Jean, si le coucou chante,
+-	L'année sera rude et méchante.
++06/24	S'il pleut Ã  la saint Jean,
++	GuÃ¨re de vin ni de pain.
++06/25	AprÃ¨s la saint Jean, si le coucou chante,
++	L'annÃ©e sera rude et mÃ©chante.
+ 06/29	S'il pleut la veille de la saint Pierre,
+-	La vigne est réduite du tiers.
++	La vigne est rÃ©duite du tiers.
+ 
+ /* Juillet */
+-07/02	S'il pleut à la Visitation,
+-	Pluie à discrétion.
+-07/03	À la saint Anatole,
++07/02	S'il pleut Ã  la Visitation,
++	Pluie Ã  discrÃ©tion.
++07/03	Ã€ la saint Anatole,
+ 	Confiture dans la casserole.
+ 07/06	Juillet sans orage,
+ 	Famine au village.
+-07/10	Petite pluie de juillet ensoleillé
++07/10	Petite pluie de juillet ensoleillÃ©
+ 	Emplit caves et greniers.
+ 07/13	Quand reviendra la saint Henri,
+-	Tu planteras ton céleri.
++	Tu planteras ton cÃ©leri.
+ 07/16	Qui veut des beaux navets
+-	Les sème en juillet.
+-07/20	À la sainte Marguerite, pluie
+-	Jamais au paysan ne souris ;
+-	Mais pluie à la sainte Anne,
++	Les sÃ¨me en juillet.
++07/20	Ã€ la sainte Marguerite, pluie
++	Jamais au paysan ne sourisÂ ;
++	Mais pluie Ã  la sainte Anne,
+ 	Pour lui c'est de la manne.
+-07/21	S'il pleut à la saint Victor,
+-	La récolte n'est pas d'or.
+-07/22	S'il pleut à la sainte Madeleine,
++07/21	S'il pleut Ã  la saint Victor,
++	La rÃ©colte n'est pas d'or.
++07/22	S'il pleut Ã  la sainte Madeleine,
+ 	Il pleuvra durant six semaines.
+ 07/25	Si saint jacques est serein,
+-	L'hiver sera dû et serein.
++	L'hiver sera dÃ» et serein.
+ 07/26	Pour la sainte Anne, s'il pleut,
+ 	Trente jours seront pluvieux.
+ 
+-/* Août */
+-August Sun+2	En août et vendanges, il n'y a ni fêtes ni dimanches.
+-08/02	S'il pleut au mois d'août,
++/* AoÃ»t */
++August Sun+2	En aoÃ»t et vendanges, il n'y a ni fÃªtes ni dimanches.
++08/02	S'il pleut au mois d'aoÃ»t,
+ 	Les truffes sont au bout.
+-08/04	Août donne goût.
+-08/06	Soleil rouge en août,
++08/04	AoÃ»t donne goÃ»t.
++08/06	Soleil rouge en aoÃ»t,
+ 	C'est de la pluie partout.
+-08/10	Qui sème à la saint Laurent
++08/10	Qui sÃ¨me Ã  la saint Laurent
+ 	Y perd la graine et puis le temps.
+-08/13	S'il pleut à la sainte Radegonde,
+-	Misère abonde sur le monde.
++08/13	S'il pleut Ã  la sainte Radegonde,
++	MisÃ¨re abonde sur le monde.
+ 08/15	Pluie de l'Assomption,
+ 	Huit jours de mouillon.
+ 08/16	De saint Roch la grande chaleur
+-	Prépare du vin la couleur.
+-08/18	Temps trop beau en août
++	PrÃ©pare du vin la couleur.
++08/18	Temps trop beau en aoÃ»t
+ 	Annonce hiver en courroux.
+-08/20	Brumes d'août font passer les châtaignes.
+-08/22	Jamais d'août la sécheresse
+-	N'amènera la richesse.
+-08/24	À la saint Barthélémy,
+-	Paie to dû.
+-08/28	Fine pluie à la saint Augustin,
++08/20	Brumes d'aoÃ»t font passer les chÃ¢taignes.
++08/22	Jamais d'aoÃ»t la sÃ©cheresse
++	N'amÃ¨nera la richesse.
++08/24	Ã€ la saint BarthÃ©lÃ©my,
++	Paie to dÃ».
++08/28	Fine pluie Ã  la saint Augustin,
+ 	C'est comme s'il pleuvait du vin.
+ 08/29	Quand les hirondelles voient la saint Michel,
+-	L'hiver ne vient qu'à Noël.
++	L'hiver ne vient qu'Ã  NoÃ«l.
+ 
+ /* Septembre */
+ 09/01	Pluie de la saint Gilles ruine les glands.
+@@ -261,94 +261,94 @@
+ 	Pas de tonneau vide.
+ 09/11	Tu peux semer sans crainte
+ 	Quand arrive la saint Hyacinthe.
+-09/15	La rosée de saint Albin
+-	est, dit-on, rosée de vin.
+-09/19	Qui sème à la saint Janvier
+-	De l'an récolte le premier.
++09/15	La rosÃ©e de saint Albin
++	est, dit-on, rosÃ©e de vin.
++09/19	Qui sÃ¨me Ã  la saint Janvier
++	De l'an rÃ©colte le premier.
+ 09/21	Si Matthieu pleure au lieu de rire,
+ 	Le vin en vinaigre vire.
+ 09/22	Semis de saint Maurice,
+-	Récolte à ton caprice.
++	RÃ©colte Ã  ton caprice.
+ 09/23	Septembre se nomme
+ 	Le mai de l'automne.
+-09/25	À la saint Firmin
++09/25	Ã€ la saint Firmin
+ 	L'hiver est en chemin.
+ 09/29	Pluie de saint Michel sans orage
+-	D'un hiver doux est le présage.
+-09/30	À la saint Jérôme,
++	D'un hiver doux est le prÃ©sage.
++09/30	Ã€ la saint JÃ©rÃ´me,
+ 	Hoche tes pommes.
+ 
+ /* Octobre */
+-10/02	À la saint Léger,
+-	Faut s'purger !
+-10/04	Sème à la saint François,
+-	Ton blé aura plus de poids.
+-10/09	Beau temps à la saint Denis,
++10/02	Ã€ la saint LÃ©ger,
++	Faut s'purgerÂ !
++10/04	SÃ¨me Ã  la saint FranÃ§ois,
++	Ton blÃ© aura plus de poids.
++10/09	Beau temps Ã  la saint Denis,
+ 	Hiver pourri.
+ 10/13	En octobre, qui ne fume rien
+-	Ne récolte rien.
+-10/16	Coupe ton chou à la saint Gall,
+-	En hiver c'est un régal.
+-10/18	À la saint Luc, sème dru,
+-	Ou ne sème plus.
+-10/23	Gelée d'octobre
++	Ne rÃ©colte rien.
++10/16	Coupe ton chou Ã  la saint Gall,
++	En hiver c'est un rÃ©gal.
++10/18	Ã€ la saint Luc, sÃ¨me dru,
++	Ou ne sÃ¨me plus.
++10/23	GelÃ©e d'octobre
+ 	Rend le vigneron sobre.
+-10/25	Pour saint Crépin, mort aux mouches.
+-10/28	À la sainte Simone,
+-	Il faut avoir rentré ses pommes.
++10/25	Pour saint CrÃ©pin, mort aux mouches.
++10/28	Ã€ la sainte Simone,
++	Il faut avoir rentrÃ© ses pommes.
+ 10/31	Quand octobre prend sa fin,
+ 	Dans la cave est le vin.
+ 
+ /* Novembre */
+-11/01	À la Toussaint commence l'été de la saint Martin.
+-11/02	Telle Toussaint, tel Noël,
+-	Et Pâques pareil.
+-11/04	À la saint Charles,
+-	La gelée parle.
++11/01	Ã€ la Toussaint commence l'Ã©tÃ© de la saint Martin.
++11/02	Telle Toussaint, tel NoÃ«l,
++	Et PÃ¢ques pareil.
++11/04	Ã€ la saint Charles,
++	La gelÃ©e parle.
+ 11/08	En novembre, s'il tonne,
+-	L'année sera bonne.
++	L'annÃ©e sera bonne.
+ 11/11	Si l'hiver va droit son chemin,
+-	Vous l'aurez à la saint Martin,
+-	Mais s'il trouve quelque encombrée,
+-	Vous l'aurez à la saint André.
+-11/11	Tue ton cochon à la saint Martin
++	Vous l'aurez Ã  la saint Martin,
++	Mais s'il trouve quelque encombrÃ©e,
++	Vous l'aurez Ã  la saint AndrÃ©.
++11/11	Tue ton cochon Ã  la saint Martin
+ 	Et invite ton voisin.
+-11/19	Sainte Élisabeth nous montre quel bonhomme sera l'hiver.
+-11/22	Pour sainte Cécile,
++11/19	Sainte Ã‰lisabeth nous montre quel bonhomme sera l'hiver.
++11/22	Pour sainte CÃ©cile,
+ 	Chaque haricot en fait mille.
+ 11/23	Quand l'hiver vient doucement,
+-	Il est là à la saint Clément.
+-11/25	Sainte Catherine, toute fille veut la fêter,
++	Il est lÃ  Ã  la saint ClÃ©ment.
++11/25	Sainte Catherine, toute fille veut la fÃªter,
+ 	Mais aucune ne veut la coiffer.
+ 11/25	Quand sainte Catherine au ciel fait la moue,
+ 	Il faut patauger longtemps dans la boue.
+-11/30	Quand l'hiver n'est pas pressé,
+-	Il arrive à la saint André.
++11/30	Quand l'hiver n'est pas pressÃ©,
++	Il arrive Ã  la saint AndrÃ©.
+ 
+-/* Décembre */
++/* DÃ©cembre */
+ 12/SundayFirst	Tel avent,
+ 	Tel printemps.
+ 12/06	Neige de saint Nicolas
+ 	Donne froid pour trois mois.
+-12/07	À la saint Ambroise,
++12/07	Ã€ la saint Ambroise,
+ 	Du froid pour huit jours.
+-12/10	À la sainte Julie,
++12/10	Ã€ la sainte Julie,
+ 	Le soleil ne quitte pas son lit.
+-12/13	À la sainte Luce,
+-	Le jour croît du saut d'une puce.
+-12/16	Décembre de froid trop chiche
++12/13	Ã€ la sainte Luce,
++	Le jour croÃ®t du saut d'une puce.
++12/16	DÃ©cembre de froid trop chiche
+ 	Ne fait pas le paysan riche.
+-12/21	S'il gèle à la saint Thomas,
+-	Il gèlera encore trois mois.
+-12/23	Le tonnerre en décembre
++12/21	S'il gÃ¨le Ã  la saint Thomas,
++	Il gÃ¨lera encore trois mois.
++12/23	Le tonnerre en dÃ©cembre
+ 	Annonce pour l'an qui vient
+-	Aux bêtes et aux gens
++	Aux bÃªtes et aux gens
+ 	Abondance de biens.
+-12/25	Noël au balcon,
+-	Pâques au tison.
+-12/26	À la saint Étienne,
++12/25	NoÃ«l au balcon,
++	PÃ¢ques au tison.
++12/26	Ã€ la saint Ã‰tienne,
+ 	Chacun trouve la sienne.
+-12/28	Les jours entre Noël et les Rois
++12/28	Les jours entre NoÃ«l et les Rois
+ 	Indiquent le temps des douze mois.
+ 
+-#endif /*! _fr_FR_ISO8859_1_proverbes_ */
++#endif /*! _fr_FR_proverbes_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all bsdmainutils//usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -4,9 +4,9 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _hr_HR_ISO8859_2_all
+-#define _hr_HR_ISO8859_2_all
++#ifndef _hr_HR_all
++#define _hr_HR_all
+ 
+-#include <hr_HR.ISO8859-2/calendar.praznici>
++#include <hr_HR/calendar.praznici>
+ 
+-#endif /* !_hr_HR_ISO8859_2_all */
++#endif /* !_hr_HR_all */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici bsdmainutils//usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici
+--- bsdmainutils.orig/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici	2011-06-06 16:16:44.000000000 +0200
+@@ -4,41 +4,41 @@
+  * $FreeBSD$
+  */
+ 
+-#ifndef _hr_HR_ISO8859_2_praznici
+-#define _hr_HR_ISO8859_2_praznici
++#ifndef _hr_HR_praznici
++#define _hr_HR_praznici
+ 
+-LANG=hr_HR.ISO8859-2
++LANG=UTF-8
+ 
+-/* dr¾avni praznici */
++/* drÅ¸avni praznici */
+ 01/01	Nova godina
+ 05/01	Praznik rada
+ 05/30	Tjelovo
+-06/22	Dan antifa¹istièke borbe
+-06/25	Dan dr¾avnosti
++06/22	Dan antifaÂ¹istiÃ¨ke borbe
++06/25	Dan drÅ¸avnosti
+ 08/05	Dan domovinske zahvalnosti
+ 10/08	Dan neovisnosti
+  
+-/* katolièki blagdani */
++/* katoliÃ¨ki blagdani */
+ 01/06		Sveta tri kralja
+ Easter-2	Veliki petak
+ Easter		Uskrs
+ Easter+1	Uskrsni ponedjeljak
+ Easter+49	Duhovi
+ Easter+50	Duhovni ponedjeljak
+-Easter+39	Uza¹a¹æe
++Easter+39	UzaÂ¹aÂ¹Ã¦e
+ 08/15		Velika Gospa
+ 11/01		Svi sveti
+-12/25		Bo¾iæ
++12/25		BoÅ¸iÃ¦
+ 12/26		Stjepandan
+ 
+-/* godi¹nja doba */
+-03/21*	Poèetak proljeæa
+-06/21*	Poèetak ljeta
+-09/21*	Poèetak jesena
+-12/21*	Poèetak zime
++/* godiÂ¹nja doba */
++03/21*	PoÃ¨etak proljeÃ¦a
++06/21*	PoÃ¨etak ljeta
++09/21*	PoÃ¨etak jesena
++12/21*	PoÃ¨etak zime
+  
+ /* ljetno vrijeme */
+-03/NedjeljaLast	Poèetak ljetnog vremena
++03/NedjeljaLast	PoÃ¨etak ljetnog vremena
+ 10/NedjeljaLast	Kraj ljetnog vremena
+ 
+-#endif /* !_hr_HR_ISO8859_2_praznici */
++#endif /* !_hr_HR_praznici */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -1,13 +1,13 @@
+ /*
+- * Magyar kalendárium
++ * Magyar kalendÃ¡rium
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _hu_HU_ISO8859_2_all_
+-#define _hu_HU_ISO8859_2_all_
++#ifndef _hu_HU_all_
++#define _hu_HU_all_
+ 
+-#include <hu_HU.ISO8859-2/calendar.unnepek>
+-#include <hu_HU.ISO8859-2/calendar.nevnapok>
++#include <hu_HU/calendar.unnepek>
++#include <hu_HU/calendar.nevnapok>
+ 
+-#endif /* !_hu_HU.ISO8859-2_all_ */
++#endif /* !_hu_HU_all_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok
+--- bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok	2011-06-06 16:16:44.000000000 +0200
+@@ -1,386 +1,386 @@
+ /*
+- * Névnapok
++ * NÃ©vnapok
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _hu_HU_ISO8859_2_nevnapok_
+-#define _hu_HU_ISO8859_2_nevnapok_
++#ifndef _hu_HU_nevnapok_
++#define _hu_HU_nevnapok_
+ 
+-LANG=hu_HU.ISO8859-2
++LANG=UTF-8
+ 
+ /*
+- * N.B.: A névnapok Magyarországon a szentek napjai alapján szerepelnek
+- *	 a naptárban. Néhány név többször is szerepel, de mindenki
+- *	 csak egyszer tart névnapot egy évben. A választott nap
+- *	 ebben az esetben a hagyományokon és az illetõn múlik.
++ * N.B.: A nÃ©vnapok MagyarorszÃ¡gon a szentek napjai alapjÃ¡n szerepelnek
++ *	 a naptÃ¡rban. NÃ©hÃ¡ny nÃ©v tÃ¶bbszÃ¶r is szerepel, de mindenki
++ *	 csak egyszer tart nÃ©vnapot egy Ã©vben. A vÃ¡lasztott nap
++ *	 ebben az esetben a hagyomÃ¡nyokon Ã©s az illetÃµn mÃºlik.
+  *
+  */
+ 
+ 01/01	Fruzsina
+-01/02	Ábel, Gergely
+-01/03	Genovéva, Benjámin
++01/02	Ãbel, Gergely
++01/03	GenovÃ©va, BenjÃ¡min
+ 01/04	Titusz,	Leona
+ 01/05	Simon
+-01/06	Boldizsár, Menyhárt
+-01/07	Attila, Ramóna
+-01/08	Gyöngyvér
++01/06	BoldizsÃ¡r, MenyhÃ¡rt
++01/07	Attila, RamÃ³na
++01/08	GyÃ¶ngyvÃ©r
+ 01/09	Marcell
+-01/10	Melánia
+-01/11	Ágota, Baltazár
+-01/12	Ernõ, Cézár
++01/10	MelÃ¡nia
++01/11	Ãgota, BaltazÃ¡r
++01/12	ErnÃµ, CÃ©zÃ¡r
+ 01/13	Veronika
+-01/14	Bódog, Félix
+-01/15	Lóránt, Loránd
+-01/16	Gusztáv
+-01/17	Antal, Antónia
++01/14	BÃ³dog, FÃ©lix
++01/15	LÃ³rÃ¡nt, LorÃ¡nd
++01/16	GusztÃ¡v
++01/17	Antal, AntÃ³nia
+ 01/18	Piroska
+-01/19	Sára, Márió
+-01/20	Fábián, Sebestyén
+-01/21	Ágnes
+-01/22	Vince, Artúr
++01/19	SÃ¡ra, MÃ¡riÃ³
++01/20	FÃ¡biÃ¡n, SebestyÃ©n
++01/21	Ãgnes
++01/22	Vince, ArtÃºr
+ 01/23	Zelma, Rajmund
+-01/24	Timót, Xénia
+-01/25	Pál
++01/24	TimÃ³t, XÃ©nia
++01/25	PÃ¡l
+ 01/26	Vanda, Paula
+-01/27	Angelika, Angéla
+-01/28	Károly, Karola
+-01/29	Adél
++01/27	Angelika, AngÃ©la
++01/28	KÃ¡roly, Karola
++01/29	AdÃ©l
+ 01/30	Gerda, Martina
+ 01/31	Marcella
+-02/01	Ignác
++02/01	IgnÃ¡c
+ 02/02	Karolina, Aida
+-02/03	Balázs
+-02/04	Ráhel, Csenge
+-02/05	Ágota, Ingrid
+-02/06	Dóra, Dorottya
+-02/07	Rómeó, Tódor
++02/03	BalÃ¡zs
++02/04	RÃ¡hel, Csenge
++02/05	Ãgota, Ingrid
++02/06	DÃ³ra, Dorottya
++02/07	RÃ³meÃ³, TÃ³dor
+ 02/08	Aranka
+-02/09	Abigél, Alex
++02/09	AbigÃ©l, Alex
+ 02/10	Elvira
+ 02/11	Bertold, Marietta
+-02/12	Lívia, Lídia
++02/12	LÃ­via, LÃ­dia
+ 02/13	Ella, Linda
+-02/14	Bálint,	Valentin
++02/14	BÃ¡lint,	Valentin
+ 02/15	Kolos
+ 02/16	Julianna, Lilla
+-02/17	Donát
++02/17	DonÃ¡t
+ 02/18	Bernadett
+ 02/19	Zsuzsanna
+-02/20	Aladár, Álmos
+-02/21	Eleonóra
++02/20	AladÃ¡r, Ãlmos
++02/21	EleonÃ³ra
+ 02/22	Gerzson
+-02/23	Alfréd
+-02/24	Mátyás
+-02/25	Géza
++02/23	AlfrÃ©d
++02/24	MÃ¡tyÃ¡s
++02/25	GÃ©za
+ 02/26	Edina
+-02/27	Ákos, Bátor
+-02/28	Elemér
++02/27	Ãkos, BÃ¡tor
++02/28	ElemÃ©r
+ 03/01	Albin
+ 03/02	Lujza
+-03/03	Kornélia
+-03/04	Kázmér
+-03/05	Adorján, Adrián
+-03/06	Leonóra, Inez
+-03/07	Tamás
+-03/08	Zoltán
++03/03	KornÃ©lia
++03/04	KÃ¡zmÃ©r
++03/05	AdorjÃ¡n, AdriÃ¡n
++03/06	LeonÃ³ra, Inez
++03/07	TamÃ¡s
++03/08	ZoltÃ¡n
+ 03/09	Franciska, Fanni
+-03/10	Ildikó
+-03/11	Szilárd
++03/10	IldikÃ³
++03/11	SzilÃ¡rd
+ 03/12	Gergely
+-03/13	Krisztián, Ajtony
++03/13	KrisztiÃ¡n, Ajtony
+ 03/14	Matild
+-03/15	Kristóf
++03/15	KristÃ³f
+ 03/16	Henrietta
+-03/17	Gertrúd, Patrik
+-03/18	Sándor, Ede
+-03/19	József, Bánk
++03/17	GertrÃºd, Patrik
++03/18	SÃ¡ndor, Ede
++03/19	JÃ³zsef, BÃ¡nk
+ 03/20	Klaudia
+ 03/21	Benedek
+-03/22	Beáta, Izolda
+-03/23	Emõke
+-03/24	Gábor, Karina
+-03/25	Irén, Irisz
+-03/26	Emánuel
++03/22	BeÃ¡ta, Izolda
++03/23	EmÃµke
++03/24	GÃ¡bor, Karina
++03/25	IrÃ©n, Irisz
++03/26	EmÃ¡nuel
+ 03/27	Hajnalka
+ 03/28	Gedeon, Johanna
+ 03/29	Aguszta
+-03/30	Zalán
+-03/31	Árpád
+-04/01	Hugó
+-04/02	Áron
+-04/03	Buda, Richárd
++03/30	ZalÃ¡n
++03/31	ÃrpÃ¡d
++04/01	HugÃ³
++04/02	Ãron
++04/03	Buda, RichÃ¡rd
+ 04/04	Izidor
+ 04/05	Vince
+-04/06	Vilmos, Bíborka
++04/06	Vilmos, BÃ­borka
+ 04/07	Herman
+-04/08	Dénes
++04/08	DÃ©nes
+ 04/09	Erhard
+ 04/10	Zsolt
+-04/11	Leó, Szaniszló
++04/11	LeÃ³, SzaniszlÃ³
+ 04/12	Gyula
+ 04/13	Ida
+ 04/14	Tibor
+-04/15	Anasztázia, Tas
++04/15	AnasztÃ¡zia, Tas
+ 04/16	Csongor
+ 04/17	Rudolf
+ 04/18	Andrea, Ilma
+ 04/19	Emma
+ 04/20	Tivadar
+-04/21	Konrád
+-04/22	Csilla, Noémi
+-04/23	Béla
+-04/24	György
+-04/25	Márk
++04/21	KonrÃ¡d
++04/22	Csilla, NoÃ©mi
++04/23	BÃ©la
++04/24	GyÃ¶rgy
++04/25	MÃ¡rk
+ 04/26	Ervin
+ 04/27	Zita
+-04/28	Valéria
+-04/29	Péter
++04/28	ValÃ©ria
++04/29	PÃ©ter
+ 04/30	Katalin, Kitti
+-05/01	Fülöp, Jakab
++05/01	FÃ¼lÃ¶p, Jakab
+ 05/02	Zsigmond
+-05/03	Tímea, Irma
+-05/04	Mónika,	Flórián
+-05/05	Györgyi
++05/03	TÃ­mea, Irma
++05/04	MÃ³nika,	FlÃ³riÃ¡n
++05/05	GyÃ¶rgyi
+ 05/06	Ivett, Frida
+ 05/07	Gizella
+-05/08	Mihály
++05/08	MihÃ¡ly
+ 05/09	Gergely
+-05/10	Ármin, Pálma
++05/10	Ãrmin, PÃ¡lma
+ 05/11	Ferenc
+-05/12	Pongrác
+-05/13	Szervác, Imola
+-05/14	Bonifác
+-05/15	Zsófia, Szonja
+-05/16	Mózes, Botond
+-05/17	Paszkál
++05/12	PongrÃ¡c
++05/13	SzervÃ¡c, Imola
++05/14	BonifÃ¡c
++05/15	ZsÃ³fia, Szonja
++05/16	MÃ³zes, Botond
++05/17	PaszkÃ¡l
+ 05/18	Erik, Alexandra
+-05/19	Ivó, Milán
+-05/20	Bernát, Felícia
++05/19	IvÃ³, MilÃ¡n
++05/20	BernÃ¡t, FelÃ­cia
+ 05/21	Konstantin
+-05/22	Júlia, Rita
+-05/23	Dezsõ
++05/22	JÃºlia, Rita
++05/23	DezsÃµ
+ 05/24	Eszter, Eliza
+-05/25	Orbán
+-05/26	Fülöp, Evelin
++05/25	OrbÃ¡n
++05/26	FÃ¼lÃ¶p, Evelin
+ 05/27	Hella
+-05/28	Emil, Csanád
++05/28	Emil, CsanÃ¡d
+ 05/29	Magdolna
+ 05/30	Janka, Zsanett
+-05/31	Angéla, Petronella
+-06/01	Tünde
+-06/02	Kármen, Anita
++05/31	AngÃ©la, Petronella
++06/01	TÃ¼nde
++06/02	KÃ¡rmen, Anita
+ 06/03	Klotild
+-06/04	Bulcsú
++06/04	BulcsÃº
+ 06/05	Fatime
+ 06/06	Norbert, Cintia
+-06/07	Róbert
+-06/08	Medárd
+-06/09	Félix
+-06/10	Margit, Gitta, Gréta
+-06/11	Barnabás
+-06/12	Villõ
++06/07	RÃ³bert
++06/08	MedÃ¡rd
++06/09	FÃ©lix
++06/10	Margit, Gitta, GrÃ©ta
++06/11	BarnabÃ¡s
++06/12	VillÃµ
+ 06/13	Antal, Anett
+ 06/14	Vazul
+-06/15	Jolán, Vid
++06/15	JolÃ¡n, Vid
+ 06/16	Jusztin
+ 06/17	Laura, Alida
+ 06/18	Arnold,	Levente
+-06/19	Gyárfás
++06/19	GyÃ¡rfÃ¡s
+ 06/20	Rafael
+ 06/21	Alajos, Leila
+ 06/22	Paulina
+-06/23	Zoltán, Szidonia
+-06/24	Iván
++06/23	ZoltÃ¡n, Szidonia
++06/24	IvÃ¡n
+ 06/25	Vilmos, Viola
+-06/26	János, Pál
+-06/27	László
+-06/28	Levente, Irén
+-06/29	Péter, Pál
+-06/30	Pál
+-07/01	Annamária, Tihamér
+-07/02	Ottó
+-07/03	Kornél, Soma
++06/26	JÃ¡nos, PÃ¡l
++06/27	LÃ¡szlÃ³
++06/28	Levente, IrÃ©n
++06/29	PÃ©ter, PÃ¡l
++06/30	PÃ¡l
++07/01	AnnamÃ¡ria, TihamÃ©r
++07/02	OttÃ³
++07/03	KornÃ©l, Soma
+ 07/04	Ulrik
+ 07/05	Emese, Sarolta
+ 07/06	Csaba
+-07/07	Apollónia
+-07/08	Ellák
+-07/09	Lukrécia
+-07/10	Amália
+-07/11	Nóra, Lili
++07/07	ApollÃ³nia
++07/08	EllÃ¡k
++07/09	LukrÃ©cia
++07/10	AmÃ¡lia
++07/11	NÃ³ra, Lili
+ 07/12	Izabella, Dalma
+-07/13	Jenõ
+-07/14	Örs, Stella
++07/13	JenÃµ
++07/14	Ã–rs, Stella
+ 07/15	Henrik,	Roland
+ 07/16	Valter
+ 07/17	Endre, Elek
+ 07/18	Frigyes
+-07/19	Emília
+-07/20	Illés
+-07/21	Daniella, Dániel
++07/19	EmÃ­lia
++07/20	IllÃ©s
++07/21	Daniella, DÃ¡niel
+ 07/22	Magdolna
+ 07/23	Lenke
+-07/24	Kinga, Kincsõ
+-07/25	Kristóf, Jakab
+-07/26	Anna, Anikó
+-07/27	Olga, Liliána
++07/24	Kinga, KincsÃµ
++07/25	KristÃ³f, Jakab
++07/26	Anna, AnikÃ³
++07/27	Olga, LiliÃ¡na
+ 07/28	Szabolcs
+-07/29	Márta, Flóra
+-07/30	Judit, Xénia
+-07/31	Oszkár
+-08/01	Boglárka
++07/29	MÃ¡rta, FlÃ³ra
++07/30	Judit, XÃ©nia
++07/31	OszkÃ¡r
++08/01	BoglÃ¡rka
+ 08/02	Lehel
+ 08/03	Hermina
+ 08/04	Domonkos, Dominika
+ 08/05	Krisztina
+ 08/06	Berta, Bettina
+ 08/07	Ibolya
+-08/08	László
+-08/09	Emõd
+-08/10	Lõrinc
++08/08	LÃ¡szlÃ³
++08/09	EmÃµd
++08/10	LÃµrinc
+ 08/11	Zsuzsanna, Tiborc
+-08/12	Klára
++08/12	KlÃ¡ra
+ 08/13	Ipoly
+ 08/14	Marcell
+-08/15	Mária
+-08/16	Ábrahám
+-08/17	Jácint
++08/15	MÃ¡ria
++08/16	ÃbrahÃ¡m
++08/17	JÃ¡cint
+ 08/18	Ilona
+ 08/19	Huba
+-08/20	István
+-08/21	Sámuel, Hajna
+-08/22	Menyhért, Mirjam
++08/20	IstvÃ¡n
++08/21	SÃ¡muel, Hajna
++08/22	MenyhÃ©rt, Mirjam
+ 08/23	Bence
+ 08/24	Bertalan
+-08/25	Lajos, Patrícia
+-08/26	Izsó
+-08/27	Gáspár
+-08/28	Ágoston
++08/25	Lajos, PatrÃ­cia
++08/26	IzsÃ³
++08/27	GÃ¡spÃ¡r
++08/28	Ãgoston
+ 08/29	Beatrix, Erna
+-08/30	Rózsa
++08/30	RÃ³zsa
+ 08/31	Erika, Bella
+ 09/01	Egyed, Egon
+ 09/02	Rebeka, Dorina
+ 09/03	Hilda
+-09/04	Rozália
+-09/05	Viktor, Lõrinc
+-09/06	Zakariás
++09/04	RozÃ¡lia
++09/05	Viktor, LÃµrinc
++09/06	ZakariÃ¡s
+ 09/07	Regina
+-09/08	Mária, Adrienn
+-09/09	Ádám
++09/08	MÃ¡ria, Adrienn
++09/09	ÃdÃ¡m
+ 09/10	Nikolett, Hunor
+-09/11	Teodóra
+-09/12	Mária
+-09/13	Kornél
+-09/14	Szeréna, Roxána
+-09/15	Enikõ, Melitta
++09/11	TeodÃ³ra
++09/12	MÃ¡ria
++09/13	KornÃ©l
++09/14	SzerÃ©na, RoxÃ¡na
++09/15	EnikÃµ, Melitta
+ 09/16	Edit
+-09/17	Zsófia
+-09/18	Diána
++09/17	ZsÃ³fia
++09/18	DiÃ¡na
+ 09/19	Vilhelmina
+ 09/20	Friderika
+-09/21	Máté, Mirella
+-09/22	Móric
++09/21	MÃ¡tÃ©, Mirella
++09/22	MÃ³ric
+ 09/23	Tekla
+-09/24	Gellért, Mercédesz
++09/24	GellÃ©rt, MercÃ©desz
+ 09/25	Eufrozina, Kende
+ 09/26	Jusztina
+ 09/27	Adalbert
+ 09/28	Vencel
+-09/29	Mihály
++09/29	MihÃ¡ly
+ 09/30	Jeromos
+ 10/01	Malvin
+ 10/02	Petra
+ 10/03	Helga
+ 10/04	Ferenc
+-10/05	Aurél
+-10/06	Brúnó, Renáta
+-10/07	Amália
+-10/08	Koppány
+-10/09	Dénes
++10/05	AurÃ©l
++10/06	BrÃºnÃ³, RenÃ¡ta
++10/07	AmÃ¡lia
++10/08	KoppÃ¡ny
++10/09	DÃ©nes
+ 10/10	Gedeon
+ 10/11	Brigitta
+ 10/12	Miksa
+-10/13	Kálmán, Ede
+-10/14	Helén
+-10/15	Teréz
+-10/16	Gál
++10/13	KÃ¡lmÃ¡n, Ede
++10/14	HelÃ©n
++10/15	TerÃ©z
++10/16	GÃ¡l
+ 10/17	Hedvig
+-10/18	Lukács
+-10/19	Nándor
++10/18	LukÃ¡cs
++10/19	NÃ¡ndor
+ 10/20	Vendel
+ 10/21	Orsolya
+-10/22	Elõd
+-10/23	Gyöngyi
++10/22	ElÃµd
++10/23	GyÃ¶ngyi
+ 10/24	Salamon
+ 10/25	Blanka, Bianka
+-10/26	Dömötör
++10/26	DÃ¶mÃ¶tÃ¶r
+ 10/27	Szabina
+ 10/28	Simon, Szimonetta
+-10/29	Nárcisz
++10/29	NÃ¡rcisz
+ 10/30	Alfonz
+ 10/31	Farkas
+ 11/01	Marianna
+ 11/02	Achilles
+-11/03	Gyõzõ
+-11/04	Károly
++11/03	GyÃµzÃµ
++11/04	KÃ¡roly
+ 11/05	Imre
+-11/06	Lénárd
+-11/07	Rezsõ
++11/06	LÃ©nÃ¡rd
++11/07	RezsÃµ
+ 11/08	Zsombor
+ 11/09	Tivadar
+-11/10	Réka
+-11/11	Márton
+-11/12	Jónás, Renátó
++11/10	RÃ©ka
++11/11	MÃ¡rton
++11/12	JÃ³nÃ¡s, RenÃ¡tÃ³
+ 11/13	Szilvia
+ 11/14	Aliz
+-11/15	Albert, Lipót
+-11/16	Ödön
+-11/17	Hortenzia, Gergõ
+-11/18	Jenõ
+-11/19	Erzsébet
+-11/20	Jolán
+-11/21	Olivér
+-11/22	Cecília
++11/15	Albert, LipÃ³t
++11/16	Ã–dÃ¶n
++11/17	Hortenzia, GergÃµ
++11/18	JenÃµ
++11/19	ErzsÃ©bet
++11/20	JolÃ¡n
++11/21	OlivÃ©r
++11/22	CecÃ­lia
+ 11/23	Kelemen, Klementina
+ 11/24	Emma
+ 11/25	Katalin
+-11/26	Virág
++11/26	VirÃ¡g
+ 11/27	Virgil
+-11/28	Stefánia
++11/28	StefÃ¡nia
+ 11/29	Taksony
+-11/30	András, Andor
++11/30	AndrÃ¡s, Andor
+ 12/01	Elza	
+ 12/02	Melinda, Vivien
+-12/03	Ferenc, Olívia
+-12/04	Borbála, Barbara
++12/03	Ferenc, OlÃ­via
++12/04	BorbÃ¡la, Barbara
+ 12/05	Vilma
+-12/06	Miklós
++12/06	MiklÃ³s
+ 12/07	Ambrus
+-12/08	Mária
+-12/09	Natália
++12/08	MÃ¡ria
++12/09	NatÃ¡lia
+ 12/10	Judit
+-12/11	Árpád
++12/11	ÃrpÃ¡d
+ 12/12	Gabriella
+-12/13	Luca, Otília
+-12/14	Szilárda
+-12/15	Valér
++12/13	Luca, OtÃ­lia
++12/14	SzilÃ¡rda
++12/15	ValÃ©r
+ 12/16	Etelka, Aletta
+-12/17	Lázár, Olimpia
++12/17	LÃ¡zÃ¡r, Olimpia
+ 12/18	Auguszta
+ 12/19	Viola
+ 12/20	Teofil
+-12/21	Tamás
+-12/22	Zénó
+-12/23	Viktória
+-12/24	Ádám, Éva
+-12/25	Eugénia
+-12/26	István
+-12/27	János
++12/21	TamÃ¡s
++12/22	ZÃ©nÃ³
++12/23	ViktÃ³ria
++12/24	ÃdÃ¡m, Ã‰va
++12/25	EugÃ©nia
++12/26	IstvÃ¡n
++12/27	JÃ¡nos
+ 12/28	Kamilla
+-12/29	Tamás, Tamara
+-12/30	Dávid
++12/29	TamÃ¡s, Tamara
++12/30	DÃ¡vid
+ 12/31	Szilveszter	
+ 
+-#endif /*! _hu_HU_ISO8859_2_nevnapok_ */
++#endif /*! _hu_HU_nevnapok_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek
+--- bsdmainutils.orig/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek	2011-06-06 16:16:44.000000000 +0200
+@@ -1,53 +1,53 @@
+ /*
+- * Ünnepnapok
++ * Ãœnnepnapok
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _hu_HU_ISO8859_2_unnepek_
+-#define _hu_HU_ISO8859_2_unnepek_
++#ifndef _hu_HU_unnepek_
++#define _hu_HU_unnepek_
+ 
+-LANG=hu_HU.ISO8859-2
++LANG=UTF-8
+ 
+-/* Munkaszüneti napok */
+-01/01	Újév
+-03/15	1848-as szabadságharc és forradalom ünnepe
+-05/01	Munka ünnepe
+-10/23	1956-os forradalom ünnepe
+-
+-/* Vallási munkaszüneti napok */
+-Easter		Húsvét
+-Easter+1 	Húsvét hétfõ
+-Easter+42	Virágvasárnap
+-Easter+49	Pünkösd
+-Easter+50	Pünkösd hétfõ
+-08/20		Szent István nap, Államalapítás ünnepe
++/* MunkaszÃ¼neti napok */
++01/01	ÃšjÃ©v
++03/15	1848-as szabadsÃ¡gharc Ã©s forradalom Ã¼nnepe
++05/01	Munka Ã¼nnepe
++10/23	1956-os forradalom Ã¼nnepe
++
++/* VallÃ¡si munkaszÃ¼neti napok */
++Easter		HÃºsvÃ©t
++Easter+1 	HÃºsvÃ©t hÃ©tfÃµ
++Easter+42	VirÃ¡gvasÃ¡rnap
++Easter+49	PÃ¼nkÃ¶sd
++Easter+50	PÃ¼nkÃ¶sd hÃ©tfÃµ
++08/20		Szent IstvÃ¡n nap, ÃllamalapÃ­tÃ¡s Ã¼nnepe
+ 11/01		Halottak napja
+-12/25		Karácsony elsõ napja
+-12/26		Karácsony második napja
++12/25		KarÃ¡csony elsÃµ napja
++12/26		KarÃ¡csony mÃ¡sodik napja
+ 
+-/* Az itt következõ dátumok nem munkaszüneti napok csak ünnepnapok */
++/* Az itt kÃ¶vetkezÃµ dÃ¡tumok nem munkaszÃ¼neti napok csak Ã¼nnepnapok */
+ 
+-/* Csillagászati évszakok */
+-03/21*	Tavaszi napéjegyenlõség
+-06/21*	Nyári napforduló
+-09/21*	Õszi napéjegyenlõség
+-12/21*	Téli napforduló
+-
+-/* Téli és nyári idõszámítás közötti váltás */
+-03/SundayLast	Váltás a nyári idõszámításra
+-10/SundayLast	Váltás a téli idõszámításra
+-
+-/* Egyéb vallási ünnepek amelyek nem munkaszüneti napok */
+-Easter-2	Nagy péntek ("a harangok Romába mennek")
+-
+-/* Egyéb ünnepnapok és emléknapok*/
+-02/14		Valentin nap - a szerelmesek ünnepe
+-03/08		Nõ nap - egy-egy szál virág a nõknek
+-May Sun+2 	Anyák napja
+-10/06		Az 1848-as aradi vértanuk napja 
+-12/06		Mikulás napja - gyerekek csokit kapnak
+-12/24		Karácsony elõestéje
++/* CsillagÃ¡szati Ã©vszakok */
++03/21*	Tavaszi napÃ©jegyenlÃµsÃ©g
++06/21*	NyÃ¡ri napfordulÃ³
++09/21*	Ã•szi napÃ©jegyenlÃµsÃ©g
++12/21*	TÃ©li napfordulÃ³
++
++/* TÃ©li Ã©s nyÃ¡ri idÃµszÃ¡mÃ­tÃ¡s kÃ¶zÃ¶tti vÃ¡ltÃ¡s */
++03/SundayLast	VÃ¡ltÃ¡s a nyÃ¡ri idÃµszÃ¡mÃ­tÃ¡sra
++10/SundayLast	VÃ¡ltÃ¡s a tÃ©li idÃµszÃ¡mÃ­tÃ¡sra
++
++/* EgyÃ©b vallÃ¡si Ã¼nnepek amelyek nem munkaszÃ¼neti napok */
++Easter-2	Nagy pÃ©ntek ("a harangok RomÃ¡ba mennek")
++
++/* EgyÃ©b Ã¼nnepnapok Ã©s emlÃ©knapok*/
++02/14		Valentin nap - a szerelmesek Ã¼nnepe
++03/08		NÃµ nap - egy-egy szÃ¡l virÃ¡g a nÃµknek
++May Sun+2 	AnyÃ¡k napja
++10/06		Az 1848-as aradi vÃ©rtanuk napja 
++12/06		MikulÃ¡s napja - gyerekek csokit kapnak
++12/24		KarÃ¡csony elÃµestÃ©je
+ 12/31		Szilveszter napja
+ 
+-#endif /*! _hu_HU_ISO8859_2_unnepek_ */
++#endif /*! _hu_HU_unnepek_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.all bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -1,17 +1,17 @@
+ /*
+- * òÕÓÓËÉÊ ËÁÌÅÎÄÁÒØ
++ * Ğ ÑƒÑÑĞºĞ¸Ğ¹ ĞºĞ°Ğ»ĞµĞ½Ğ´Ğ°Ñ€ÑŒ
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_all
+-#define _ru_RU_KOI8_R_all
++#ifndef _ru_RU_all
++#define _ru_RU_all
+ 
+-#include <ru_RU.KOI8-R/calendar.common>
+-#include <ru_RU.KOI8-R/calendar.holiday>
+-#include <ru_RU.KOI8-R/calendar.military>
+-#include <ru_RU.KOI8-R/calendar.msk>
+-#include <ru_RU.KOI8-R/calendar.orthodox>
+-#include <ru_RU.KOI8-R/calendar.pagan>
++#include <ru_RU/calendar.common>
++#include <ru_RU/calendar.holiday>
++#include <ru_RU/calendar.military>
++#include <ru_RU/calendar.msk>
++#include <ru_RU/calendar.orthodox>
++#include <ru_RU/calendar.pagan>
+ 
+-#endif /* !_ru_RU_KOI8_R_all */
++#endif /* !_ru_RU_all */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.common bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.common
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.common	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.common	2011-06-06 16:16:44.000000000 +0200
+@@ -1,5 +1,5 @@
+ /*
+- * òÏÓÓÉÊÓËÉÅ ĞÒÁÚÄÎÉËÉ
++ * Ğ Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¸Ğµ Ğ¿Ñ€Ğ°Ğ·Ğ´Ğ½Ğ¸ĞºĞ¸
+  *
+  * $FreeBSD$
+  */
+@@ -7,99 +7,99 @@
+ #ifndef _ru_RU_KOI8_R_common_
+ #define _ru_RU_KOI8_R_common_
+ 
+-LANG=ru_RU.KOI8-R
++LANG=UTF-8
+ 
+-12 ÑÎ×	äÅÎØ ÒÁÂÏÔÎÉËÁ ĞÒÏËÕÒÁÔÕÒÙ
+-13 ÑÎ×	äÅÎØ ÒÏÓÓÉÊÓËÏÊ ĞÅŞÁÔÉ
+-14 ÑÎ×	óÔÁÒÙÊ îÏ×ÙÊ ÇÏÄ
+-21 ÑÎ×	äÅÎØ ÉÎÖÅÎÅÒÎÙÈ ×ÏÊÓË
+-25 ÑÎ×	ôÁÔØÑÎÉÎ ÄÅÎØ. óÔÕÄÅÎŞÅÓËÉÊ ĞÒÁÚÄÎÉË
+- 8 ÆÅ×	äÅÎØ ÒÏÓÓÉÊÓËÏÊ ÎÁÕËÉ
+-10 ÆÅ×	äÅÎØ ÄÉĞÌÏÍÁÔÉŞÅÓËÏÇÏ ÒÁÂÏÔÎÉËÁ
+- 1 ÍÁÒ	÷ÓÅÍÉÒÎÙÊ ÄÅÎØ ÇÒÁÖÄÁÎÓËÏÊ ÏÂÏÒÏÎÙ
+-03/SunSecond	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÇÅÏÄÅÚÉÉ É ËÁÒÔÏÇÒÁÆÉÉ
+-11 ÍÁÒ	äÅÎØ ÒÁÂÏÔÎÉËÁ ÏÒÇÁÎÏ× ÎÁÒËÏËÏÎÔÒÏÌÑ
+-18 ÍÁÒ	äÅÎØ ÎÁÌÏÇÏ×ÏÊ ĞÏÌÉÃÉÉ
+-03/SunThird	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÔÏÒÇÏ×ÌÉ, ÂÙÔÏ×ÏÇÏ ÏÂÓÌÕÖÉ×ÁÎÉÑ ÎÁÓÅÌÅÎÉÑ É ÖÉÌÉİÎÏ-ËÏÍÍÕÎÁÌØÎÏÇÏ ÈÏÚÑÊÓÔ×Á
+-27 ÍÁÒ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ÔÅÁÔÒÁ
+-27 ÍÁÒ	äÅÎØ ×ÎÕÔÒÅÎÎÉÈ ×ÏÊÓË
+- 1 ÁĞÒ	äÅÎØ ÓÍÅÈÁ
+- 2 ÁĞÒ	äÅÎØ ÅÄÉÎÅÎÉÑ ÎÁÒÏÄÏ×
+-04/SunFirst	äÅÎØ ÇÅÏÌÏÇÁ
+-12 ÁĞÒ	äÅÎØ ËÏÓÍÏÎÁ×ÔÉËÉ
+-04/SunSecond	äÅÎØ ×ÏÊÓË ĞÒÏÔÉ×Ï×ÏÚÄÕÛÎÏÊ ÏÂÏÒÏÎÙ
+-26 ÁĞÒ	äÅÎØ ĞÁÍÑÔÉ ĞÏÇÉÂÛÉÈ × ÒÁÄÉÁÃÉÏÎÎÙÈ Á×ÁÒÉÑÈ É ËÁÔÁÓÔÒÏÆÁÈ
+-30 ÁĞÒ	äÅÎØ ĞÏÖÁÒÎÏÊ ÏÈÒÁÎÙ
+- 7 ÍÁÊ	äÅÎØ ÒÁÄÉÏ
+-17 ÍÁÊ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ÔÅÌÅËÏÍÍÕÎÉËÁÃÉÊ
+-18 ÍÁÊ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ÍÕÚÅÅ×
+-24 ÍÁÊ	äÅÎØ ÓÌÁ×ÑÎÓËÏÊ ĞÉÓØÍÅÎÎÏÓÔÉ É ËÕÌØÔÕÒÙ
+-26 ÍÁÊ	äÅÎØ ÒÏÓÓÉÊÓËÏÇÏ ĞÒÅÄĞÒÉÎÉÍÁÔÅÌØÓÔ×Á
+-27 ÍÁÊ	ïÂİÅÒÏÓÓÉÊÓËÉÊ ÄÅÎØ ÂÉÂÌÉÏÔÅË
+-28 ÍÁÊ	äÅÎØ ĞÏÇÒÁÎÉŞÎÉËÁ
+-30 ÍÁÊ	äÅÎØ ĞÏÖÁÒÎÏÊ ÏÈÒÁÎÙ
+-31 ÍÁÊ	äÅÎØ òÏÓÓÉÊÓËÏÊ áÄ×ÏËÁÔÕÒÙ
+-05/SunLast	äÅÎØ ÈÉÍÉËÁ
+- 1 ÉÀÎ	äÅÎØ ÚÁİÉÔÙ ÄÅÔÅÊ
+- 5 ÉÀÎ	äÅÎØ ÜËÏÌÏÇÁ
+- 6 ÉÀÎ	ğÕÛËÉÎÓËÉÊ ÄÅÎØ
+- 8 ÉÀÎ	äÅÎØ ÓÏÃÉÁÌØÎÏÇÏ ÒÁÂÏÔÎÉËÁ
+-06/SunSecond	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÌÅÇËÏÊ ĞÒÏÍÙÛÌÅÎÎÏÓÔÉ
+-06/SunThird	äÅÎØ ÍÅÄÉÃÉÎÓËÏÇÏ ÒÁÂÏÔÎÉËÁ
+-22 ÉÀÎ	äÅÎØ ĞÁÍÑÔÉ É ÓËÏÒÂÉ (îÁŞÁÌÏ ÷ÅÌÉËÏÊ ïÔÅŞÅÓÔ×ÅÎÎÏÊ ÷ÏÊÎÙ, 1941 ÇÏÄ)
+-27 ÉÀÎ	äÅÎØ ÍÏÌÏÄÅÖÉ
+-29 ÉÀÎ	äÅÎØ ĞÁÒÔÉÚÁÎ É ĞÏÄĞÏÌØİÉËÏ×
+-06/SatLast	äÅÎØ ÉÚÏÂÒÅÔÁÔÅÌÑ É ÒÁÃÉÏÎÁÌÉÚÁÔÏÒÁ
+-07/SunFirst	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÍÏÒÓËÏÇÏ É ÒÅŞÎÏÇÏ ÆÌÏÔÁ
+-07/SunSecond	äÅÎØ ÒÙÂÁËÁ
+-07/SunSecond	äÅÎØ ÒÏÓÓÉÊÓËÏÊ ĞÏŞÔÙ
+-07/SunThird	äÅÎØ ÍÅÔÁÌÌÕÒÇÁ
+-07/SunLast	äÅÎØ ÷ÏÅÎÎÏ-íÏÒÓËÏÇÏ æÌÏÔÁ
+-28 ÉÀÌ	äÅÎØ ËÒÅİÅÎÉÑ òÕÓÉ
+- 6 Á×Ç	äÅÎØ ÖÅÌÅÚÎÏÄÏÒÏÖÎÙÈ ×ÏÊÓË
+-08/SunFirst	äÅÎØ ÖÅÌÅÚÎÏÄÏÒÏÖÎÉËÁ
+-12 Á×Ç	äÅÎØ ×ÏÅÎÎÏ-×ÏÚÄÕÛÎÙÈ ÓÉÌ
+-08/SunSecond	äÅÎØ ÓÔÒÏÉÔÅÌÑ
+-08/SunThird	äÅÎØ ÷ÏÚÄÕÛÎÏÇÏ æÌÏÔÁ
+-22 Á×Ç	äÅÎØ ÇÏÓÕÄÁÒÓÔ×ÅÎÎÏÇÏ ÆÌÁÇÁ
+-27 Á×Ç	äÅÎØ ËÉÎÏ
+-08/SunLast	äÅÎØ ÛÁÈÔÅÒÁ
+- 1 ÓÅÎ	äÅÎØ ÚÎÁÎÉÊ
+- 2 ÓÅÎ	äÅÎØ ÒÏÓÓÉÊÓËÏÊ Ç×ÁÒÄÉÉ
+- 3 ÓÅÎ	äÅÎØ ÓÏÌÉÄÁÒÎÏÓÔÉ × ÂÏÒØÂÅ Ó ÔÅÒÒÏÒÉÚÍÏÍ
+- 4 ÓÅÎ	äÅÎØ ÓĞÅÃÉÁÌÉÓÔÁ ĞÏ ÑÄÅÒÎÏÍÕ ÏÂÅÓĞÅŞÅÎÉÀ
+-09/SunFirst	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÎÅÆÔÑÎÏÊ É ÇÁÚÏ×ÏÊ ĞÒÏÍÙÛÌÅÎÎÏÓÔÉ
+-09/SunSecond	äÅÎØ ÔÁÎËÉÓÔÁ
+-09/SunThird	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÌÅÓÁ
+-28 ÓÅÎ	äÅÎØ ÒÁÂÏÔÎÉËÁ ÁÔÏÍÎÏÊ ĞÒÏÍÙÛÌÅÎÎÏÓÔÉ
+-09/SunLast	äÅÎØ ÍÁÛÉÎÏÓÔÒÏÉÔÅÌÑ
+- 1 ÏËÔ	äÅÎØ ĞÏÖÉÌÙÈ ÌÀÄÅÊ
+- 1 ÏËÔ	äÅÎØ ÓÕÈÏĞÕÔÎÙÈ ×ÏÊÓË
+- 4 ÏËÔ	äÅÎØ ËÏÓÍÉŞÅÓËÉÈ ×ÏÊÓË
+- 5 ÏËÔ	äÅÎØ ÕŞÉÔÅÌÑ
+-14 ÏËÔ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ÓÔÁÎÄÁÒÔÉÚÁÃÉÉ
+-10/SunSecond	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÓÅÌØÓËÏÇÏ ÈÏÚÑÊÓÔ×Á É ĞÅÒÅÒÁÂÁÔÙ×ÁÀİÅÊ ĞÒÏÍÙÛÌÅÎÎÏÓÔÉ
+-10/SunThird	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÄÏÒÏÖÎÏÇÏ ÈÏÚÑÊÓÔ×Á
+-24 ÏËÔ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ïïî
+-25 ÏËÔ	äÅÎØ ÔÁÍÏÖÅÎÎÉËÁ
+-30 ÏËÔ	äÅÎØ ĞÁÍÑÔÉ ÖÅÒÔ× ĞÏÌÉÔÉŞÅÓËÉÈ ÒÅĞÒÅÓÓÉÊ
+-10/SunLast	äÅÎØ ÒÁÂÏÔÎÉËÏ× Á×ÔÏÍÏÂÉÌØÎÏÇÏ ÔÒÁÎÓĞÏÒÔÁ
+- 7 ÎÏÑ	äÅÎØ ÏËÔÑÂÒØÓËÏÊ ÒÅ×ÏÌÀÃÉÉ 1917 ÇÏÄÁ
+- 9 ÎÏÑ	÷ÓÅÍÉÒÎÙÊ ÄÅÎØ ËÁŞÅÓÔ×Á
+-10 ÎÏÑ	äÅÎØ ÍÉÌÉÃÉÉ
+-16 ÎÏÑ	äÅÎØ ÍÏÒÓËÏÊ ĞÅÈÏÔÙ
+-17 ÎÏÑ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÄÅÎØ ÓÔÕÄÅÎÔÏ×
+-19 ÎÏÑ	äÅÎØ ÒÁËÅÔÎÙÈ ×ÏÊÓË É ÁÒÔÉÌÌÅÒÉÉ
+-21 ÎÏÑ	äÅÎØ ÒÁÂÏÔÎÉËÏ× ÎÁÌÏÇÏ×ÙÈ ÏÒÇÁÎÏ×
+-26 ÎÏÑ	÷ÓÅÍÉÒÎÙÊ ÄÅÎØ ÉÎÆÏÒÍÁÃÉÉ
+-11/SunLast	äÅÎØ ÍÁÔÅÒÉ
+- 1 ÄÅË	÷ÓÅÍÉÒÎÙÊ ÄÅÎØ ÂÏÒØÂÙ ÓÏ óğéäÏÍ
+- 3 ÄÅË	äÅÎØ ÀÒÉÓÔÁ
+- 9 ÄÅË	äÅÎØ çÅÒÏÅ× ïÔÅŞÅÓÔ×Á
+-12 ÄÅË	äÅÎØ ëÏÎÓÔÉÔÕÃÉÉ
+-17 ÄÅË	äÅÎØ ÒÁËÅÔÎÙÈ ×ÏÊÓË ÓÔÒÁÔÅÇÉŞÅÓËÏÇÏ ÎÁÚÎÁŞÅÎÉÑ
+-20 ÄÅË	äÅÎØ ÒÁÂÏÔÎÉËÁ ÏÒÇÁÎÏ× ÂÅÚÏĞÁÓÎÏÓÔÉ
+-22 ÄÅË	äÅÎØ ÜÎÅÒÇÅÔÉËÁ
+-27 ÄÅË	äÅÎØ ÓĞÁÓÁÔÅÌÑ
++12 ÑĞ½Ğ²	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ° Ğ¿Ñ€Ğ¾ĞºÑƒÑ€Ğ°Ñ‚ÑƒÑ€Ñ‹
++13 ÑĞ½Ğ²	Ğ”ĞµĞ½ÑŒ Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ Ğ¿ĞµÑ‡Ğ°Ñ‚Ğ¸
++14 ÑĞ½Ğ²	Ğ¡Ñ‚Ğ°Ñ€Ñ‹Ğ¹ ĞĞ¾Ğ²Ñ‹Ğ¹ Ğ³Ğ¾Ğ´
++21 ÑĞ½Ğ²	Ğ”ĞµĞ½ÑŒ Ğ¸Ğ½Ğ¶ĞµĞ½ĞµÑ€Ğ½Ñ‹Ñ… Ğ²Ğ¾Ğ¹ÑĞº
++25 ÑĞ½Ğ²	Ğ¢Ğ°Ñ‚ÑŒÑĞ½Ğ¸Ğ½ Ğ´ĞµĞ½ÑŒ. Ğ¡Ñ‚ÑƒĞ´ĞµĞ½Ñ‡ĞµÑĞºĞ¸Ğ¹ Ğ¿Ñ€Ğ°Ğ·Ğ´Ğ½Ğ¸Ğº
++ 8 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ Ğ½Ğ°ÑƒĞºĞ¸
++10 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ğ´Ğ¸Ğ¿Ğ»Ğ¾Ğ¼Ğ°Ñ‚Ğ¸Ñ‡ĞµÑĞºĞ¾Ğ³Ğ¾ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ°
++ 1 Ğ¼Ğ°Ñ€	Ğ’ÑĞµĞ¼Ğ¸Ñ€Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ğ³Ñ€Ğ°Ğ¶Ğ´Ğ°Ğ½ÑĞºĞ¾Ğ¹ Ğ¾Ğ±Ğ¾Ñ€Ğ¾Ğ½Ñ‹
++03/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ³ĞµĞ¾Ğ´ĞµĞ·Ğ¸Ğ¸ Ğ¸ ĞºĞ°Ñ€Ñ‚Ğ¾Ğ³Ñ€Ğ°Ñ„Ğ¸Ğ¸
++11 Ğ¼Ğ°Ñ€	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ° Ğ¾Ñ€Ğ³Ğ°Ğ½Ğ¾Ğ² Ğ½Ğ°Ñ€ĞºĞ¾ĞºĞ¾Ğ½Ñ‚Ñ€Ğ¾Ğ»Ñ
++18 Ğ¼Ğ°Ñ€	Ğ”ĞµĞ½ÑŒ Ğ½Ğ°Ğ»Ğ¾Ğ³Ğ¾Ğ²Ğ¾Ğ¹ Ğ¿Ğ¾Ğ»Ğ¸Ñ†Ğ¸Ğ¸
++03/SunThird	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ñ‚Ğ¾Ñ€Ğ³Ğ¾Ğ²Ğ»Ğ¸, Ğ±Ñ‹Ñ‚Ğ¾Ğ²Ğ¾Ğ³Ğ¾ Ğ¾Ğ±ÑĞ»ÑƒĞ¶Ğ¸Ğ²Ğ°Ğ½Ğ¸Ñ Ğ½Ğ°ÑĞµĞ»ĞµĞ½Ğ¸Ñ Ğ¸ Ğ¶Ğ¸Ğ»Ğ¸Ñ‰Ğ½Ğ¾-ĞºĞ¾Ğ¼Ğ¼ÑƒĞ½Ğ°Ğ»ÑŒĞ½Ğ¾Ğ³Ğ¾ Ñ…Ğ¾Ğ·ÑĞ¹ÑÑ‚Ğ²Ğ°
++27 Ğ¼Ğ°Ñ€	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ñ‚ĞµĞ°Ñ‚Ñ€Ğ°
++27 Ğ¼Ğ°Ñ€	Ğ”ĞµĞ½ÑŒ Ğ²Ğ½ÑƒÑ‚Ñ€ĞµĞ½Ğ½Ğ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº
++ 1 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ ÑĞ¼ĞµÑ…Ğ°
++ 2 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ ĞµĞ´Ğ¸Ğ½ĞµĞ½Ğ¸Ñ Ğ½Ğ°Ñ€Ğ¾Ğ´Ğ¾Ğ²
++04/SunFirst	Ğ”ĞµĞ½ÑŒ Ğ³ĞµĞ¾Ğ»Ğ¾Ğ³Ğ°
++12 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ ĞºĞ¾ÑĞ¼Ğ¾Ğ½Ğ°Ğ²Ñ‚Ğ¸ĞºĞ¸
++04/SunSecond	Ğ”ĞµĞ½ÑŒ Ğ²Ğ¾Ğ¹ÑĞº Ğ¿Ñ€Ğ¾Ñ‚Ğ¸Ğ²Ğ¾Ğ²Ğ¾Ğ·Ğ´ÑƒÑˆĞ½Ğ¾Ğ¹ Ğ¾Ğ±Ğ¾Ñ€Ğ¾Ğ½Ñ‹
++26 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ°Ğ¼ÑÑ‚Ğ¸ Ğ¿Ğ¾Ğ³Ğ¸Ğ±ÑˆĞ¸Ñ… Ğ² Ñ€Ğ°Ğ´Ğ¸Ğ°Ñ†Ğ¸Ğ¾Ğ½Ğ½Ñ‹Ñ… Ğ°Ğ²Ğ°Ñ€Ğ¸ÑÑ… Ğ¸ ĞºĞ°Ñ‚Ğ°ÑÑ‚Ñ€Ğ¾Ñ„Ğ°Ñ…
++30 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ¶Ğ°Ñ€Ğ½Ğ¾Ğ¹ Ğ¾Ñ…Ñ€Ğ°Ğ½Ñ‹
++ 7 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ´Ğ¸Ğ¾
++17 Ğ¼Ğ°Ğ¹	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ñ‚ĞµĞ»ĞµĞºĞ¾Ğ¼Ğ¼ÑƒĞ½Ğ¸ĞºĞ°Ñ†Ğ¸Ğ¹
++18 Ğ¼Ğ°Ğ¹	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ğ¼ÑƒĞ·ĞµĞµĞ²
++24 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ ÑĞ»Ğ°Ğ²ÑĞ½ÑĞºĞ¾Ğ¹ Ğ¿Ğ¸ÑÑŒĞ¼ĞµĞ½Ğ½Ğ¾ÑÑ‚Ğ¸ Ğ¸ ĞºÑƒĞ»ÑŒÑ‚ÑƒÑ€Ñ‹
++26 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ³Ğ¾ Ğ¿Ñ€ĞµĞ´Ğ¿Ñ€Ğ¸Ğ½Ğ¸Ğ¼Ğ°Ñ‚ĞµĞ»ÑŒÑÑ‚Ğ²Ğ°
++27 Ğ¼Ğ°Ğ¹	ĞĞ±Ñ‰ĞµÑ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¸Ğ¹ Ğ´ĞµĞ½ÑŒ Ğ±Ğ¸Ğ±Ğ»Ğ¸Ğ¾Ñ‚ĞµĞº
++28 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ³Ñ€Ğ°Ğ½Ğ¸Ñ‡Ğ½Ğ¸ĞºĞ°
++30 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ¶Ğ°Ñ€Ğ½Ğ¾Ğ¹ Ğ¾Ñ…Ñ€Ğ°Ğ½Ñ‹
++31 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ğ Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ ĞĞ´Ğ²Ğ¾ĞºĞ°Ñ‚ÑƒÑ€Ñ‹
++05/SunLast	Ğ”ĞµĞ½ÑŒ Ñ…Ğ¸Ğ¼Ğ¸ĞºĞ°
++ 1 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ·Ğ°Ñ‰Ğ¸Ñ‚Ñ‹ Ğ´ĞµÑ‚ĞµĞ¹
++ 5 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ ÑĞºĞ¾Ğ»Ğ¾Ğ³Ğ°
++ 6 Ğ¸ÑĞ½	ĞŸÑƒÑˆĞºĞ¸Ğ½ÑĞºĞ¸Ğ¹ Ğ´ĞµĞ½ÑŒ
++ 8 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ ÑĞ¾Ñ†Ğ¸Ğ°Ğ»ÑŒĞ½Ğ¾Ğ³Ğ¾ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ°
++06/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ»ĞµĞ³ĞºĞ¾Ğ¹ Ğ¿Ñ€Ğ¾Ğ¼Ñ‹ÑˆĞ»ĞµĞ½Ğ½Ğ¾ÑÑ‚Ğ¸
++06/SunThird	Ğ”ĞµĞ½ÑŒ Ğ¼ĞµĞ´Ğ¸Ñ†Ğ¸Ğ½ÑĞºĞ¾Ğ³Ğ¾ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ°
++22 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ°Ğ¼ÑÑ‚Ğ¸ Ğ¸ ÑĞºĞ¾Ñ€Ğ±Ğ¸ (ĞĞ°Ñ‡Ğ°Ğ»Ğ¾ Ğ’ĞµĞ»Ğ¸ĞºĞ¾Ğ¹ ĞÑ‚ĞµÑ‡ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ğ¾Ğ¹ Ğ’Ğ¾Ğ¹Ğ½Ñ‹, 1941 Ğ³Ğ¾Ğ´)
++27 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ¼Ğ¾Ğ»Ğ¾Ğ´ĞµĞ¶Ğ¸
++29 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ°Ñ€Ñ‚Ğ¸Ğ·Ğ°Ğ½ Ğ¸ Ğ¿Ğ¾Ğ´Ğ¿Ğ¾Ğ»ÑŒÑ‰Ğ¸ĞºĞ¾Ğ²
++06/SatLast	Ğ”ĞµĞ½ÑŒ Ğ¸Ğ·Ğ¾Ğ±Ñ€ĞµÑ‚Ğ°Ñ‚ĞµĞ»Ñ Ğ¸ Ñ€Ğ°Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ‚Ğ¾Ñ€Ğ°
++07/SunFirst	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ¼Ğ¾Ñ€ÑĞºĞ¾Ğ³Ğ¾ Ğ¸ Ñ€ĞµÑ‡Ğ½Ğ¾Ğ³Ğ¾ Ñ„Ğ»Ğ¾Ñ‚Ğ°
++07/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ€Ñ‹Ğ±Ğ°ĞºĞ°
++07/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ Ğ¿Ğ¾Ñ‡Ñ‚Ñ‹
++07/SunThird	Ğ”ĞµĞ½ÑŒ Ğ¼ĞµÑ‚Ğ°Ğ»Ğ»ÑƒÑ€Ğ³Ğ°
++07/SunLast	Ğ”ĞµĞ½ÑŒ Ğ’Ğ¾ĞµĞ½Ğ½Ğ¾-ĞœĞ¾Ñ€ÑĞºĞ¾Ğ³Ğ¾ Ğ¤Ğ»Ğ¾Ñ‚Ğ°
++28 Ğ¸ÑĞ»	Ğ”ĞµĞ½ÑŒ ĞºÑ€ĞµÑ‰ĞµĞ½Ğ¸Ñ Ğ ÑƒÑĞ¸
++ 6 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ğ¶ĞµĞ»ĞµĞ·Ğ½Ğ¾Ğ´Ğ¾Ñ€Ğ¾Ğ¶Ğ½Ñ‹Ñ… Ğ²Ğ¾Ğ¹ÑĞº
++08/SunFirst	Ğ”ĞµĞ½ÑŒ Ğ¶ĞµĞ»ĞµĞ·Ğ½Ğ¾Ğ´Ğ¾Ñ€Ğ¾Ğ¶Ğ½Ğ¸ĞºĞ°
++12 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ğ²Ğ¾ĞµĞ½Ğ½Ğ¾-Ğ²Ğ¾Ğ·Ğ´ÑƒÑˆĞ½Ñ‹Ñ… ÑĞ¸Ğ»
++08/SunSecond	Ğ”ĞµĞ½ÑŒ ÑÑ‚Ñ€Ğ¾Ğ¸Ñ‚ĞµĞ»Ñ
++08/SunThird	Ğ”ĞµĞ½ÑŒ Ğ’Ğ¾Ğ·Ğ´ÑƒÑˆĞ½Ğ¾Ğ³Ğ¾ Ğ¤Ğ»Ğ¾Ñ‚Ğ°
++22 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ğ³Ğ¾ÑÑƒĞ´Ğ°Ñ€ÑÑ‚Ğ²ĞµĞ½Ğ½Ğ¾Ğ³Ğ¾ Ñ„Ğ»Ğ°Ğ³Ğ°
++27 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ ĞºĞ¸Ğ½Ğ¾
++08/SunLast	Ğ”ĞµĞ½ÑŒ ÑˆĞ°Ñ…Ñ‚ĞµÑ€Ğ°
++ 1 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ğ·Ğ½Ğ°Ğ½Ğ¸Ğ¹
++ 2 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ Ğ³Ğ²Ğ°Ñ€Ğ´Ğ¸Ğ¸
++ 3 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ ÑĞ¾Ğ»Ğ¸Ğ´Ğ°Ñ€Ğ½Ğ¾ÑÑ‚Ğ¸ Ğ² Ğ±Ğ¾Ñ€ÑŒĞ±Ğµ Ñ Ñ‚ĞµÑ€Ñ€Ğ¾Ñ€Ğ¸Ğ·Ğ¼Ğ¾Ğ¼
++ 4 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ ÑĞ¿ĞµÑ†Ğ¸Ğ°Ğ»Ğ¸ÑÑ‚Ğ° Ğ¿Ğ¾ ÑĞ´ĞµÑ€Ğ½Ğ¾Ğ¼Ñƒ Ğ¾Ğ±ĞµÑĞ¿ĞµÑ‡ĞµĞ½Ğ¸Ñ
++09/SunFirst	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ½ĞµÑ„Ñ‚ÑĞ½Ğ¾Ğ¹ Ğ¸ Ğ³Ğ°Ğ·Ğ¾Ğ²Ğ¾Ğ¹ Ğ¿Ñ€Ğ¾Ğ¼Ñ‹ÑˆĞ»ĞµĞ½Ğ½Ğ¾ÑÑ‚Ğ¸
++09/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ‚Ğ°Ğ½ĞºĞ¸ÑÑ‚Ğ°
++09/SunThird	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ»ĞµÑĞ°
++28 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ° Ğ°Ñ‚Ğ¾Ğ¼Ğ½Ğ¾Ğ¹ Ğ¿Ñ€Ğ¾Ğ¼Ñ‹ÑˆĞ»ĞµĞ½Ğ½Ğ¾ÑÑ‚Ğ¸
++09/SunLast	Ğ”ĞµĞ½ÑŒ Ğ¼Ğ°ÑˆĞ¸Ğ½Ğ¾ÑÑ‚Ñ€Ğ¾Ğ¸Ñ‚ĞµĞ»Ñ
++ 1 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ¶Ğ¸Ğ»Ñ‹Ñ… Ğ»ÑĞ´ĞµĞ¹
++ 1 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ ÑÑƒÑ…Ğ¾Ğ¿ÑƒÑ‚Ğ½Ñ‹Ñ… Ğ²Ğ¾Ğ¹ÑĞº
++ 4 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ ĞºĞ¾ÑĞ¼Ğ¸Ñ‡ĞµÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº
++ 5 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ ÑƒÑ‡Ğ¸Ñ‚ĞµĞ»Ñ
++14 Ğ¾ĞºÑ‚	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ ÑÑ‚Ğ°Ğ½Ğ´Ğ°Ñ€Ñ‚Ğ¸Ğ·Ğ°Ñ†Ğ¸Ğ¸
++10/SunSecond	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² ÑĞµĞ»ÑŒÑĞºĞ¾Ğ³Ğ¾ Ñ…Ğ¾Ğ·ÑĞ¹ÑÑ‚Ğ²Ğ° Ğ¸ Ğ¿ĞµÑ€ĞµÑ€Ğ°Ğ±Ğ°Ñ‚Ñ‹Ğ²Ğ°ÑÑ‰ĞµĞ¹ Ğ¿Ñ€Ğ¾Ğ¼Ñ‹ÑˆĞ»ĞµĞ½Ğ½Ğ¾ÑÑ‚Ğ¸
++10/SunThird	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ´Ğ¾Ñ€Ğ¾Ğ¶Ğ½Ğ¾Ğ³Ğ¾ Ñ…Ğ¾Ğ·ÑĞ¹ÑÑ‚Ğ²Ğ°
++24 Ğ¾ĞºÑ‚	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ ĞĞĞ
++25 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ Ñ‚Ğ°Ğ¼Ğ¾Ğ¶ĞµĞ½Ğ½Ğ¸ĞºĞ°
++30 Ğ¾ĞºÑ‚	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ°Ğ¼ÑÑ‚Ğ¸ Ğ¶ĞµÑ€Ñ‚Ğ² Ğ¿Ğ¾Ğ»Ğ¸Ñ‚Ğ¸Ñ‡ĞµÑĞºĞ¸Ñ… Ñ€ĞµĞ¿Ñ€ĞµÑÑĞ¸Ğ¹
++10/SunLast	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ°Ğ²Ñ‚Ğ¾Ğ¼Ğ¾Ğ±Ğ¸Ğ»ÑŒĞ½Ğ¾Ğ³Ğ¾ Ñ‚Ñ€Ğ°Ğ½ÑĞ¿Ğ¾Ñ€Ñ‚Ğ°
++ 7 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ¾ĞºÑ‚ÑĞ±Ñ€ÑŒÑĞºĞ¾Ğ¹ Ñ€ĞµĞ²Ğ¾Ğ»ÑÑ†Ğ¸Ğ¸ 1917 Ğ³Ğ¾Ğ´Ğ°
++ 9 Ğ½Ğ¾Ñ	Ğ’ÑĞµĞ¼Ğ¸Ñ€Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ ĞºĞ°Ñ‡ĞµÑÑ‚Ğ²Ğ°
++10 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ¼Ğ¸Ğ»Ğ¸Ñ†Ğ¸Ğ¸
++16 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ¼Ğ¾Ñ€ÑĞºĞ¾Ğ¹ Ğ¿ĞµÑ…Ğ¾Ñ‚Ñ‹
++17 Ğ½Ğ¾Ñ	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ ÑÑ‚ÑƒĞ´ĞµĞ½Ñ‚Ğ¾Ğ²
++19 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°ĞºĞµÑ‚Ğ½Ñ‹Ñ… Ğ²Ğ¾Ğ¹ÑĞº Ğ¸ Ğ°Ñ€Ñ‚Ğ¸Ğ»Ğ»ĞµÑ€Ğ¸Ğ¸
++21 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ¾Ğ² Ğ½Ğ°Ğ»Ğ¾Ğ³Ğ¾Ğ²Ñ‹Ñ… Ğ¾Ñ€Ğ³Ğ°Ğ½Ğ¾Ğ²
++26 Ğ½Ğ¾Ñ	Ğ’ÑĞµĞ¼Ğ¸Ñ€Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ğ¸
++11/SunLast	Ğ”ĞµĞ½ÑŒ Ğ¼Ğ°Ñ‚ĞµÑ€Ğ¸
++ 1 Ğ´ĞµĞº	Ğ’ÑĞµĞ¼Ğ¸Ñ€Ğ½Ñ‹Ğ¹ Ğ´ĞµĞ½ÑŒ Ğ±Ğ¾Ñ€ÑŒĞ±Ñ‹ ÑĞ¾ Ğ¡ĞŸĞ˜Ğ”Ğ¾Ğ¼
++ 3 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ ÑÑ€Ğ¸ÑÑ‚Ğ°
++ 9 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ğ“ĞµÑ€Ğ¾ĞµĞ² ĞÑ‚ĞµÑ‡ĞµÑÑ‚Ğ²Ğ°
++12 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ ĞšĞ¾Ğ½ÑÑ‚Ğ¸Ñ‚ÑƒÑ†Ğ¸Ğ¸
++17 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°ĞºĞµÑ‚Ğ½Ñ‹Ñ… Ğ²Ğ¾Ğ¹ÑĞº ÑÑ‚Ñ€Ğ°Ñ‚ĞµĞ³Ğ¸Ñ‡ĞµÑĞºĞ¾Ğ³Ğ¾ Ğ½Ğ°Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ñ
++20 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸ĞºĞ° Ğ¾Ñ€Ğ³Ğ°Ğ½Ğ¾Ğ² Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚Ğ¸
++22 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ ÑĞ½ĞµÑ€Ğ³ĞµÑ‚Ğ¸ĞºĞ°
++27 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ ÑĞ¿Ğ°ÑĞ°Ñ‚ĞµĞ»Ñ
+ 
+ #endif /* !_ru_RU_KOI8_R_common_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.holiday bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.holiday
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.holiday	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.holiday	2011-06-06 16:16:44.000000000 +0200
+@@ -1,25 +1,25 @@
+ /*
+- * òÏÓÓÉÊÓËÉÅ ĞÒÁÚÄÎÉËÉ (ÎÅÒÁÂÏŞÉÅ "ËÒÁÓÎÙÅ" ÄÎÉ)
++ * Ğ Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¸Ğµ Ğ¿Ñ€Ğ°Ğ·Ğ´Ğ½Ğ¸ĞºĞ¸ (Ğ½ĞµÑ€Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğµ "ĞºÑ€Ğ°ÑĞ½Ñ‹Ğµ" Ğ´Ğ½Ğ¸)
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_holiday_
+-#define _ru_RU_KOI8_R_holiday_
++#ifndef _ru_RU_holiday_
++#define _ru_RU_holiday_
+ 
+-LANG=ru_RU.KOI8-R
++LANG=UTF-8
+ 
+- 1 ÑÎ×	îÏ×ÙÊ ÇÏÄ
+- 2 ÑÎ×	îÏ×ÏÇÏÄÎÉÅ ËÁÎÉËÕÌÙ
+- 3 ÑÎ×	îÏ×ÏÇÏÄÎÉÅ ËÁÎÉËÕÌÙ
+- 4 ÑÎ×	îÏ×ÏÇÏÄÎÉÅ ËÁÎÉËÕÌÙ
+- 5 ÑÎ×	îÏ×ÏÇÏÄÎÉÅ ËÁÎÉËÕÌÙ
+- 7 ÑÎ×	òÏÖÄÅÓÔ×Ï èÒÉÓÔÏ×Ï
+-23 ÆÅ×	äÅÎØ ÚÁİÉÔÎÉËÁ ïÔÅŞÅÓÔ×Á
+- 8 ÍÁÒ	íÅÖÄÕÎÁÒÏÄÎÙÊ ÖÅÎÓËÉÊ ÄÅÎØ
+- 1 ÍÁÊ	ğÒÁÚÄÎÉË ÷ÅÓÎÙ É ôÒÕÄÁ
+- 9 ÍÁÊ	äÅÎØ ğÏÂÅÄÙ
+-12 ÉÀÎ	äÅÎØ òÏÓÓÉÉ
+- 4 ÎÏÑ	äÅÎØ ÎÁÒÏÄÎÏÇÏ ÅÄÉÎÓÔ×Á
++ 1 ÑĞ½Ğ²	ĞĞ¾Ğ²Ñ‹Ğ¹ Ğ³Ğ¾Ğ´
++ 2 ÑĞ½Ğ²	ĞĞ¾Ğ²Ğ¾Ğ³Ğ¾Ğ´Ğ½Ğ¸Ğµ ĞºĞ°Ğ½Ğ¸ĞºÑƒĞ»Ñ‹
++ 3 ÑĞ½Ğ²	ĞĞ¾Ğ²Ğ¾Ğ³Ğ¾Ğ´Ğ½Ğ¸Ğµ ĞºĞ°Ğ½Ğ¸ĞºÑƒĞ»Ñ‹
++ 4 ÑĞ½Ğ²	ĞĞ¾Ğ²Ğ¾Ğ³Ğ¾Ğ´Ğ½Ğ¸Ğµ ĞºĞ°Ğ½Ğ¸ĞºÑƒĞ»Ñ‹
++ 5 ÑĞ½Ğ²	ĞĞ¾Ğ²Ğ¾Ğ³Ğ¾Ğ´Ğ½Ğ¸Ğµ ĞºĞ°Ğ½Ğ¸ĞºÑƒĞ»Ñ‹
++ 7 ÑĞ½Ğ²	Ğ Ğ¾Ğ¶Ğ´ĞµÑÑ‚Ğ²Ğ¾ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğ¾
++23 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ğ·Ğ°Ñ‰Ğ¸Ñ‚Ğ½Ğ¸ĞºĞ° ĞÑ‚ĞµÑ‡ĞµÑÑ‚Ğ²Ğ°
++ 8 Ğ¼Ğ°Ñ€	ĞœĞµĞ¶Ğ´ÑƒĞ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ñ‹Ğ¹ Ğ¶ĞµĞ½ÑĞºĞ¸Ğ¹ Ğ´ĞµĞ½ÑŒ
++ 1 Ğ¼Ğ°Ğ¹	ĞŸÑ€Ğ°Ğ·Ğ´Ğ½Ğ¸Ğº Ğ’ĞµÑĞ½Ñ‹ Ğ¸ Ğ¢Ñ€ÑƒĞ´Ğ°
++ 9 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ ĞŸĞ¾Ğ±ĞµĞ´Ñ‹
++12 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ Ğ¾ÑÑĞ¸Ğ¸
++ 4 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ğ¾Ğ³Ğ¾ ĞµĞ´Ğ¸Ğ½ÑÑ‚Ğ²Ğ°
+ 
+-#endif /* !_ru_RU_KOI8_R_holiday_ */
++#endif /* !_ru_RU_holiday_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.military bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.military
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.military	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.military	2011-06-06 16:16:44.000000000 +0200
+@@ -1,27 +1,27 @@
+ /*
+- * äÎÉ ×ÏÉÎÓËÏÊ ÓÌÁ×Ù òÏÓÓÉÉ
++ * Ğ”Ğ½Ğ¸ Ğ²Ğ¾Ğ¸Ğ½ÑĞºĞ¾Ğ¹ ÑĞ»Ğ°Ğ²Ñ‹ Ğ Ğ¾ÑÑĞ¸Ğ¸
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_military_
+-#define _ru_RU_KOI8_R_military_
++#ifndef _ru_RU_military_
++#define _ru_RU_military_
+ 
+-LANG=ru_RU.KOI8-R
++LANG=UTF-8
+ 
+-27 ÑÎ×	äÅÎØ ÓÎÑÔÉÑ ÂÌÏËÁÄÙ ÇÏÒÏÄÁ ìÅÎÉÎÇÒÁÄÁ (1944 ÇÏÄ)
+- 2 ÆÅ×	äÅÎØ ÒÁÚÇÒÏÍÁ ÓÏ×ÅÔÓËÉÍÉ ×ÏÊÓËÁÍÉ ÎÅÍÅÃËÏ-ÆÁÛÉÓÔÓËÉÈ ×ÏÊÓË × óÔÁÌÉÎÇÒÁÄÓËÏÊ ÂÉÔ×Å (1943 ÇÏÄ)
+-23 ÆÅ×	äÅÎØ ĞÏÂÅÄÙ ëÒÁÓÎÏÊ áÒÍÉÉ ÎÁÄ ËÁÊÚÅÒÏ×ÓËÉÍÉ ×ÏÊÓËÁÍÉ çÅÒÍÁÎÉÉ (1918 ÇÏÄ)
+-18 ÁĞÒ	äÅÎØ ĞÏÂÅÄÙ ÒÕÓÓËÉÈ ×ÏÉÎÏ× ËÎÑÚÑ áÌÅËÓÁÎÄÒÁ îÅ×ÓËÏÇÏ ÎÁÄ ÎÅÍÅÃËÉÍÉ ÒÙÃÁÒÑÍÉ ÎÁ şÕÄÓËÏÍ ÏÚÅÒÅ (ìÅÄÏ×ÏÅ ĞÏÂÏÉİÅ, 1242 ÇÏÄ)
+-10 ÉÀÌ	äÅÎØ ĞÏÂÅÄÙ ÒÕÓÓËÏÊ ÁÒÍÉÉ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ ğÅÔÒÁ ğÅÒ×ÏÇÏ ÎÁÄ Û×ÅÄÁÍÉ × ğÏÌÔÁ×ÓËÏÍ ÓÒÁÖÅÎÉÉ (1709 ÇÏÄ)
+- 9 Á×Ç	äÅÎØ ĞÅÒ×ÏÊ × ÒÏÓÓÉÊÓËÏÊ ÉÓÔÏÒÉÉ ÍÏÒÓËÏÊ ĞÏÂÅÄÙ ÒÕÓÓËÏÇÏ ÆÌÏÔÁ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ ğÅÔÒÁ ğÅÒ×ÏÇÏ ÎÁÄ Û×ÅÄÁÍÉ Õ ÍÙÓÁ çÁÎÇÕÔ (1714 ÇÏÄ)
+-23 Á×Ç	äÅÎØ ÒÁÚÇÒÏÍÁ ÓÏ×ÅÔÓËÉÍÉ ×ÏÊÓËÁÍÉ ÎÅÍÅÃËÏ-ÆÁÛÉÓÔÓËÉÈ ×ÏÊÓË × ëÕÒÓËÏÊ ÂÉÔ×Å (1943 ÇÏÄ)
+- 8 ÓÅÎ	äÅÎØ âÏÒÏÄÉÎÓËÏÇÏ ÓÒÁÖÅÎÉÑ ÒÕÓÓËÏÊ ÁÒÍÉÉ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ í.é. ëÕÔÕÚÏ×Á Ó ÆÒÁÎÃÕÚÓËÏÊ ÁÒÍÉÅÊ (1812 ÇÏÄ)
+-11 ÓÅÎ	äÅÎØ ĞÏÂÅÄÙ ÒÕÓÓËÏÊ ÜÓËÁÄÒÙ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ æ.æ. õÛÁËÏ×Á ÎÁÄ ÔÕÒÅÃËÏÊ ÜÓËÁÄÒÏÊ Õ ÍÙÓÁ ôÅÎÄÒÁ (1790 ÇÏÄ)
+-21 ÓÅÎ	äÅÎØ ĞÏÂÅÄÙ ÒÕÓÓËÉÈ ĞÏÌËÏ× ×Ï ÇÌÁ×Å Ó ×ÅÌÉËÉÍ ËÎÑÚÅÍ äÍÉÔÒÉÅÍ äÏÎÓËÉÍ ÎÁÄ ÍÏÎÇÏÌÏ-ÔÁÔÁÒÓËÉÍÉ ×ÏÊÓËÁÍÉ × ëÕÌÉËÏ×ÓËÏÊ ÂÉÔ×Å (1380 ÇÏÄ)
+- 7 ÎÏÑ	äÅÎØ ÏÓ×ÏÂÏÖÄÅÎÉÑ íÏÓË×Ù ÓÉÌÁÍÉ ÎÁÒÏÄÎÏÇÏ ÏĞÏÌŞÅÎÉÑ ĞÏÄ ÒÕËÏ×ÏÄÓÔ×ÏÍ ëÕÚØÍÙ íÉÎÉÎÁ É äÍÉÔÒÉÑ ğÏÖÁÒÓËÏÇÏ ÏÔ ĞÏÌØÓËÉÈ ÉÎÔÅÒ×ÅÎÔÏ× (1612 ÇÏÄ)
+- 1 ÄÅË	äÅÎØ ĞÏÂÅÄÙ ÒÕÓÓËÏÊ ÜÓËÁÄÒÙ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ ğ.ó. îÁÈÉÍÏ×Á ÎÁÄ ÔÕÒÅÃËÏÊ ÜÓËÁÄÒÏÊ Õ ÍÙÓÁ óÉÎÏĞ (1853 ÇÏÄ)
+- 5 ÄÅË	äÅÎØ ÎÁŞÁÌÁ ËÏÎÔÒÎÁÓÔÕĞÌÅÎÉÑ ÓÏ×ÅÔÓËÉÈ ×ÏÊÓË ĞÒÏÔÉ× ÎÅÍÅÃËÏ-ÆÁÛÉÓÔÓËÉÈ ×ÏÊÓË × ÂÉÔ×Å ĞÏÄ íÏÓË×ÏÊ (1941 ÇÏÄ)
+-24 ÄÅË	äÅÎØ ×ÚÑÔÉÑ ÔÕÒÅÃËÏÊ ËÒÅĞÏÓÔÉ éÚÍÁÉÌ ÒÕÓÓËÉÍÉ ×ÏÊÓËÁÍÉ ĞÏÄ ËÏÍÁÎÄÏ×ÁÎÉÅÍ á.÷. óÕ×ÏÒÏ×Á (1790 ÇÏÄ)
++27 ÑĞ½Ğ²	Ğ”ĞµĞ½ÑŒ ÑĞ½ÑÑ‚Ğ¸Ñ Ğ±Ğ»Ğ¾ĞºĞ°Ğ´Ñ‹ Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ° Ğ›ĞµĞ½Ğ¸Ğ½Ğ³Ñ€Ğ°Ğ´Ğ° (1944 Ğ³Ğ¾Ğ´)
++ 2 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ·Ğ³Ñ€Ğ¾Ğ¼Ğ° ÑĞ¾Ğ²ĞµÑ‚ÑĞºĞ¸Ğ¼Ğ¸ Ğ²Ğ¾Ğ¹ÑĞºĞ°Ğ¼Ğ¸ Ğ½ĞµĞ¼ĞµÑ†ĞºĞ¾-Ñ„Ğ°ÑˆĞ¸ÑÑ‚ÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº Ğ² Ğ¡Ñ‚Ğ°Ğ»Ğ¸Ğ½Ğ³Ñ€Ğ°Ğ´ÑĞºĞ¾Ğ¹ Ğ±Ğ¸Ñ‚Ğ²Ğµ (1943 Ğ³Ğ¾Ğ´)
++23 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ ĞšÑ€Ğ°ÑĞ½Ğ¾Ğ¹ ĞÑ€Ğ¼Ğ¸Ğ¸ Ğ½Ğ°Ğ´ ĞºĞ°Ğ¹Ğ·ĞµÑ€Ğ¾Ğ²ÑĞºĞ¸Ğ¼Ğ¸ Ğ²Ğ¾Ğ¹ÑĞºĞ°Ğ¼Ğ¸ Ğ“ĞµÑ€Ğ¼Ğ°Ğ½Ğ¸Ğ¸ (1918 Ğ³Ğ¾Ğ´)
++18 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¸Ğ½Ğ¾Ğ² ĞºĞ½ÑĞ·Ñ ĞĞ»ĞµĞºÑĞ°Ğ½Ğ´Ñ€Ğ° ĞĞµĞ²ÑĞºĞ¾Ğ³Ğ¾ Ğ½Ğ°Ğ´ Ğ½ĞµĞ¼ĞµÑ†ĞºĞ¸Ğ¼Ğ¸ Ñ€Ñ‹Ñ†Ğ°Ñ€ÑĞ¼Ğ¸ Ğ½Ğ° Ğ§ÑƒĞ´ÑĞºĞ¾Ğ¼ Ğ¾Ğ·ĞµÑ€Ğµ (Ğ›ĞµĞ´Ğ¾Ğ²Ğ¾Ğµ Ğ¿Ğ¾Ğ±Ğ¾Ğ¸Ñ‰Ğµ, 1242 Ğ³Ğ¾Ğ´)
++10 Ğ¸ÑĞ»	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¾Ğ¹ Ğ°Ñ€Ğ¼Ğ¸Ğ¸ Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ ĞŸĞµÑ‚Ñ€Ğ° ĞŸĞµÑ€Ğ²Ğ¾Ğ³Ğ¾ Ğ½Ğ°Ğ´ ÑˆĞ²ĞµĞ´Ğ°Ğ¼Ğ¸ Ğ² ĞŸĞ¾Ğ»Ñ‚Ğ°Ğ²ÑĞºĞ¾Ğ¼ ÑÑ€Ğ°Ğ¶ĞµĞ½Ğ¸Ğ¸ (1709 Ğ³Ğ¾Ğ´)
++ 9 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ğ¿ĞµÑ€Ğ²Ğ¾Ğ¹ Ğ² Ñ€Ğ¾ÑÑĞ¸Ğ¹ÑĞºĞ¾Ğ¹ Ğ¸ÑÑ‚Ğ¾Ñ€Ğ¸Ğ¸ Ğ¼Ğ¾Ñ€ÑĞºĞ¾Ğ¹ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¾Ğ³Ğ¾ Ñ„Ğ»Ğ¾Ñ‚Ğ° Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ ĞŸĞµÑ‚Ñ€Ğ° ĞŸĞµÑ€Ğ²Ğ¾Ğ³Ğ¾ Ğ½Ğ°Ğ´ ÑˆĞ²ĞµĞ´Ğ°Ğ¼Ğ¸ Ñƒ Ğ¼Ñ‹ÑĞ° Ğ“Ğ°Ğ½Ğ³ÑƒÑ‚ (1714 Ğ³Ğ¾Ğ´)
++23 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ñ€Ğ°Ğ·Ğ³Ñ€Ğ¾Ğ¼Ğ° ÑĞ¾Ğ²ĞµÑ‚ÑĞºĞ¸Ğ¼Ğ¸ Ğ²Ğ¾Ğ¹ÑĞºĞ°Ğ¼Ğ¸ Ğ½ĞµĞ¼ĞµÑ†ĞºĞ¾-Ñ„Ğ°ÑˆĞ¸ÑÑ‚ÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº Ğ² ĞšÑƒÑ€ÑĞºĞ¾Ğ¹ Ğ±Ğ¸Ñ‚Ğ²Ğµ (1943 Ğ³Ğ¾Ğ´)
++ 8 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ğ‘Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ğ½ÑĞºĞ¾Ğ³Ğ¾ ÑÑ€Ğ°Ğ¶ĞµĞ½Ğ¸Ñ Ñ€ÑƒÑÑĞºĞ¾Ğ¹ Ğ°Ñ€Ğ¼Ğ¸Ğ¸ Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Ğœ.Ğ˜. ĞšÑƒÑ‚ÑƒĞ·Ğ¾Ğ²Ğ° Ñ Ñ„Ñ€Ğ°Ğ½Ñ†ÑƒĞ·ÑĞºĞ¾Ğ¹ Ğ°Ñ€Ğ¼Ğ¸ĞµĞ¹ (1812 Ğ³Ğ¾Ğ´)
++11 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¾Ğ¹ ÑÑĞºĞ°Ğ´Ñ€Ñ‹ Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Ğ¤.Ğ¤. Ğ£ÑˆĞ°ĞºĞ¾Ğ²Ğ° Ğ½Ğ°Ğ´ Ñ‚ÑƒÑ€ĞµÑ†ĞºĞ¾Ğ¹ ÑÑĞºĞ°Ğ´Ñ€Ğ¾Ğ¹ Ñƒ Ğ¼Ñ‹ÑĞ° Ğ¢ĞµĞ½Ğ´Ñ€Ğ° (1790 Ğ³Ğ¾Ğ´)
++21 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¸Ñ… Ğ¿Ğ¾Ğ»ĞºĞ¾Ğ² Ğ²Ğ¾ Ğ³Ğ»Ğ°Ğ²Ğµ Ñ Ğ²ĞµĞ»Ğ¸ĞºĞ¸Ğ¼ ĞºĞ½ÑĞ·ĞµĞ¼ Ğ”Ğ¼Ğ¸Ñ‚Ñ€Ğ¸ĞµĞ¼ Ğ”Ğ¾Ğ½ÑĞºĞ¸Ğ¼ Ğ½Ğ°Ğ´ Ğ¼Ğ¾Ğ½Ğ³Ğ¾Ğ»Ğ¾-Ñ‚Ğ°Ñ‚Ğ°Ñ€ÑĞºĞ¸Ğ¼Ğ¸ Ğ²Ğ¾Ğ¹ÑĞºĞ°Ğ¼Ğ¸ Ğ² ĞšÑƒĞ»Ğ¸ĞºĞ¾Ğ²ÑĞºĞ¾Ğ¹ Ğ±Ğ¸Ñ‚Ğ²Ğµ (1380 Ğ³Ğ¾Ğ´)
++ 7 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ¾ÑĞ²Ğ¾Ğ±Ğ¾Ğ¶Ğ´ĞµĞ½Ğ¸Ñ ĞœĞ¾ÑĞºĞ²Ñ‹ ÑĞ¸Ğ»Ğ°Ğ¼Ğ¸ Ğ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ğ¾Ğ³Ğ¾ Ğ¾Ğ¿Ğ¾Ğ»Ñ‡ĞµĞ½Ğ¸Ñ Ğ¿Ğ¾Ğ´ Ñ€ÑƒĞºĞ¾Ğ²Ğ¾Ğ´ÑÑ‚Ğ²Ğ¾Ğ¼ ĞšÑƒĞ·ÑŒĞ¼Ñ‹ ĞœĞ¸Ğ½Ğ¸Ğ½Ğ° Ğ¸ Ğ”Ğ¼Ğ¸Ñ‚Ñ€Ğ¸Ñ ĞŸĞ¾Ğ¶Ğ°Ñ€ÑĞºĞ¾Ğ³Ğ¾ Ğ¾Ñ‚ Ğ¿Ğ¾Ğ»ÑŒÑĞºĞ¸Ñ… Ğ¸Ğ½Ñ‚ĞµÑ€Ğ²ĞµĞ½Ñ‚Ğ¾Ğ² (1612 Ğ³Ğ¾Ğ´)
++ 1 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ğ¿Ğ¾Ğ±ĞµĞ´Ñ‹ Ñ€ÑƒÑÑĞºĞ¾Ğ¹ ÑÑĞºĞ°Ğ´Ñ€Ñ‹ Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ ĞŸ.Ğ¡. ĞĞ°Ñ…Ğ¸Ğ¼Ğ¾Ğ²Ğ° Ğ½Ğ°Ğ´ Ñ‚ÑƒÑ€ĞµÑ†ĞºĞ¾Ğ¹ ÑÑĞºĞ°Ğ´Ñ€Ğ¾Ğ¹ Ñƒ Ğ¼Ñ‹ÑĞ° Ğ¡Ğ¸Ğ½Ğ¾Ğ¿ (1853 Ğ³Ğ¾Ğ´)
++ 5 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ğ½Ğ°Ñ‡Ğ°Ğ»Ğ° ĞºĞ¾Ğ½Ñ‚Ñ€Ğ½Ğ°ÑÑ‚ÑƒĞ¿Ğ»ĞµĞ½Ğ¸Ñ ÑĞ¾Ğ²ĞµÑ‚ÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº Ğ¿Ñ€Ğ¾Ñ‚Ğ¸Ğ² Ğ½ĞµĞ¼ĞµÑ†ĞºĞ¾-Ñ„Ğ°ÑˆĞ¸ÑÑ‚ÑĞºĞ¸Ñ… Ğ²Ğ¾Ğ¹ÑĞº Ğ² Ğ±Ğ¸Ñ‚Ğ²Ğµ Ğ¿Ğ¾Ğ´ ĞœĞ¾ÑĞºĞ²Ğ¾Ğ¹ (1941 Ğ³Ğ¾Ğ´)
++24 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ğ²Ğ·ÑÑ‚Ğ¸Ñ Ñ‚ÑƒÑ€ĞµÑ†ĞºĞ¾Ğ¹ ĞºÑ€ĞµĞ¿Ğ¾ÑÑ‚Ğ¸ Ğ˜Ğ·Ğ¼Ğ°Ğ¸Ğ» Ñ€ÑƒÑÑĞºĞ¸Ğ¼Ğ¸ Ğ²Ğ¾Ğ¹ÑĞºĞ°Ğ¼Ğ¸ Ğ¿Ğ¾Ğ´ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Ğ.Ğ’. Ğ¡ÑƒĞ²Ğ¾Ñ€Ğ¾Ğ²Ğ° (1790 Ğ³Ğ¾Ğ´)
+ 
+-#endif /* !_ru_RU_KOI8_R_military_ */
++#endif /* !_ru_RU_military_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.msk bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.msk
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.msk	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.msk	2011-06-06 16:16:44.000000000 +0200
+@@ -1,16 +1,16 @@
+ /*
+- * ğÅÒÅ×ÏÄ ŞÁÓÏ× ÄÌÑ ÍÏÓËÏ×ÓËÏÊ ×ÒÅÍÅÎÎÏÊ ÚÏÎÙ
++ * ĞŸĞµÑ€ĞµĞ²Ğ¾Ğ´ Ñ‡Ğ°ÑĞ¾Ğ² Ğ´Ğ»Ñ Ğ¼Ğ¾ÑĞºĞ¾Ğ²ÑĞºĞ¾Ğ¹ Ğ²Ñ€ĞµĞ¼ĞµĞ½Ğ½Ğ¾Ğ¹ Ğ·Ğ¾Ğ½Ñ‹
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_msk_
+-#define _ru_RU_KOI8_R_msk_
++#ifndef _ru_RU_msk_
++#define _ru_RU_msk_
+ 
+-LANG=ru_RU.KOI8-R
++LANG=UTF-8
+ 
+-03/SunLast	îÁŞÁÌÏ ÍÏÓËÏ×ÓËÏÇÏ ÌÅÔÎÅÇÏ ×ÒÅÍÅÎÉ; ŞÁÓÙ ĞÅÒÅ×ÏÄÑÔÓÑ ×ĞÅÒÅÄ
+-10/SunLast	ëÏÎÅÃ ÍÏÓËÏ×ÓËÏÇÏ ÌÅÔÎÅÇÏ ×ÒÅÍÅÎÉ; ŞÁÓÙ ĞÅÒÅ×ÏÄÑÔÓÑ ÎÁÚÁÄ
++03/SunLast	ĞĞ°Ñ‡Ğ°Ğ»Ğ¾ Ğ¼Ğ¾ÑĞºĞ¾Ğ²ÑĞºĞ¾Ğ³Ğ¾ Ğ»ĞµÑ‚Ğ½ĞµĞ³Ğ¾ Ğ²Ñ€ĞµĞ¼ĞµĞ½Ğ¸; Ñ‡Ğ°ÑÑ‹ Ğ¿ĞµÑ€ĞµĞ²Ğ¾Ğ´ÑÑ‚ÑÑ Ğ²Ğ¿ĞµÑ€ĞµĞ´
++10/SunLast	ĞšĞ¾Ğ½ĞµÑ† Ğ¼Ğ¾ÑĞºĞ¾Ğ²ÑĞºĞ¾Ğ³Ğ¾ Ğ»ĞµÑ‚Ğ½ĞµĞ³Ğ¾ Ğ²Ñ€ĞµĞ¼ĞµĞ½Ğ¸; Ñ‡Ğ°ÑÑ‹ Ğ¿ĞµÑ€ĞµĞ²Ğ¾Ğ´ÑÑ‚ÑÑ Ğ½Ğ°Ğ·Ğ°Ğ´
+ 
+-#endif /* !_ru_RU_KOI8_R_msk_ */
++#endif /* !_ru_RU_msk_ */
+ 
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.orthodox bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.orthodox
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.orthodox	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.orthodox	2011-06-06 16:16:44.000000000 +0200
+@@ -1,34 +1,33 @@
+ /*
+- * ğÒÁ×ÏÓÌÁ×ÎÙÅ ĞÒÁÚÄÎÉËÉ
++ * ĞŸÑ€Ğ°Ğ²Ğ¾ÑĞ»Ğ°Ğ²Ğ½Ñ‹Ğµ Ğ¿Ñ€Ğ°Ğ·Ğ´Ğ½Ğ¸ĞºĞ¸
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_orthodox_
+-#define _ru_RU_KOI8_R_orthodox_
++#ifndef _ru_RU_orthodox_
++#define _ru_RU_orthodox_
+ 
+-LANG=ru_RU.KOI8-R
+-Paskha=ğÁÓÈÁ
++LANG=UTF-8
++Paskha=ĞŸĞ°ÑÑ…Ğ°
+ 
+-21 ÓÅÎ	òÏÖÄÅÓÔ×Ï ğÒÅÓ×ÑÔÏÊ âÏÇÏÒÏÄÉÃÙ
+-28 ÓÅÎ	÷ÏÚÄ×ÉÖÅÎÉÅ ëÒÅÓÔÁ çÏÓĞÏÄÎÑ
+-14 ÏËÔ	ğÏËÒÏ× ğÒÅÓ×ÑÔÏÊ âÏÇÏÒÏÄÉÃÙ
+- 4 ÄÅË	÷×ÅÄÅÎÉÅ ×Ï ÈÒÁÍ ğÒÅÓ×ÑÔÏÊ âÏÇÏÒÏÄÉÃÙ
+- 7 ÑÎ×	òÏÖÄÅÓÔ×Ï èÒÉÓÔÏ×Ï
+-19 ÑÎ×	âÏÇÏÑ×ÌÅÎÉÅ ÉÌÉ ëÒÅİÅÎÉÅ çÏÓĞÏÄÎÅ
+-15 ÆÅ×	óÒÅÔÅÎÉÅ çÏÓĞÏÄÎÅ
+-ğÁÓÈÁ-46	÷ÅÌÉËÉÊ ğÏÓÔ
+-ğÁÓÈÁ-7	÷ÅÒÂÎÏÅ ÷ÏÓËÒÅÓÅÎØÅ
+-ğÁÓÈÁ-3	÷ÅÌÉËÉÊ şÅÔ×ÅÒÇ
+-ğÁÓÈÁ-2	óÔÒÁÓÔÎÁÑ ğÑÔÎÉÃÁ
+-ğÁÓÈÁ	÷ÏÓËÒÅÓÅÎÉÅ èÒÉÓÔÏ×Ï
+-ğÁÓÈÁ+39	÷ÏÚÎÅÓÅÎÉÅ
+-ğÁÓÈÁ+49	ğÑÔÉÄÅÓÑÔÎÉÃÁ
+-ğÁÓÈÁ+56	ôÒÏÉÃÉÎ äÅÎØ
+-ğÁÓÈÁ+60	ğÒÁÚÄÎÉË ôÅÌÁ èÒÉÓÔÏ×Á
+- 7 ÁĞÒ	âÌÁÇÏ×ÅİÅÎÉÅ ğÒÅÓ×ÑÔÏÊ âÏÇÏÒÏÄÉÃÙ
+-19 Á×Ç	ğÒÅÏÂÒÁÖÅÎÉÅ çÏÓĞÏÄÎÅ
+-28 Á×Ç	õÓĞÅÎÉÅ ğÒÅÓ×ÑÔÏÊ âÏÇÏÒÏÄÉÃÙ
++21 ÑĞµĞ½	Ğ Ğ¾Ğ¶Ğ´ĞµÑÑ‚Ğ²Ğ¾ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ğ¹ Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ‹
++28 ÑĞµĞ½	Ğ’Ğ¾Ğ·Ğ´Ğ²Ğ¸Ğ¶ĞµĞ½Ğ¸Ğµ ĞšÑ€ĞµÑÑ‚Ğ° Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ñ
++14 Ğ¾ĞºÑ‚	ĞŸĞ¾ĞºÑ€Ğ¾Ğ² ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ğ¹ Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ‹
++ 4 Ğ´ĞµĞº	Ğ’Ğ²ĞµĞ´ĞµĞ½Ğ¸Ğµ Ğ²Ğ¾ Ñ…Ñ€Ğ°Ğ¼ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ğ¹ Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ‹
++ 7 ÑĞ½Ğ²	Ğ Ğ¾Ğ¶Ğ´ĞµÑÑ‚Ğ²Ğ¾ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğ¾
++19 ÑĞ½Ğ²	Ğ‘Ğ¾Ğ³Ğ¾ÑĞ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ¸Ğ»Ğ¸ ĞšÑ€ĞµÑ‰ĞµĞ½Ğ¸Ğµ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ğµ
++15 Ñ„ĞµĞ²	Ğ¡Ñ€ĞµÑ‚ĞµĞ½Ğ¸Ğµ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ğµ
++ĞŸĞ°ÑÑ…Ğ°-46	Ğ’ĞµĞ»Ğ¸ĞºĞ¸Ğ¹ ĞŸĞ¾ÑÑ‚
++ĞŸĞ°ÑÑ…Ğ°-7	Ğ’ĞµÑ€Ğ±Ğ½Ğ¾Ğµ Ğ’Ğ¾ÑĞºÑ€ĞµÑĞµĞ½ÑŒĞµ
++ĞŸĞ°ÑÑ…Ğ°-3	Ğ’ĞµĞ»Ğ¸ĞºĞ¸Ğ¹ Ğ§ĞµÑ‚Ğ²ĞµÑ€Ğ³
++ĞŸĞ°ÑÑ…Ğ°-2	Ğ¡Ñ‚Ñ€Ğ°ÑÑ‚Ğ½Ğ°Ñ ĞŸÑÑ‚Ğ½Ğ¸Ñ†Ğ°
++ĞŸĞ°ÑÑ…Ğ°	Ğ’Ğ¾ÑĞºÑ€ĞµÑĞµĞ½Ğ¸Ğµ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğ¾
++ĞŸĞ°ÑÑ…Ğ°+39	Ğ’Ğ¾Ğ·Ğ½ĞµÑĞµĞ½Ğ¸Ğµ
++ĞŸĞ°ÑÑ…Ğ°+49	ĞŸÑÑ‚Ğ¸Ğ´ĞµÑÑÑ‚Ğ½Ğ¸Ñ†Ğ°. Ğ”ĞµĞ½ÑŒ Ğ¡Ğ²ÑÑ‚Ğ¾Ğ¹ Ğ¢Ñ€Ğ¾Ğ¸Ñ†Ñ‹.
++ĞŸĞ°ÑÑ…Ğ°+56	Ğ”ĞµĞ½ÑŒ Ğ’ÑĞµÑ… Ğ¡Ğ²ÑÑ‚Ñ‹Ñ…
++ 7 Ğ°Ğ¿Ñ€	Ğ‘Ğ»Ğ°Ğ³Ğ¾Ğ²ĞµÑ‰ĞµĞ½Ğ¸Ğµ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ğ¹ Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ‹
++19 Ğ°Ğ²Ğ³	ĞŸÑ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ¶ĞµĞ½Ğ¸Ğµ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ğµ
++28 Ğ°Ğ²Ğ³	Ğ£ÑĞ¿ĞµĞ½Ğ¸Ğµ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ğ¹ Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ‹
+ 
+-#endif /* !_ru_RU_KOI8_R_orthodox_ */
++#endif /* !_ru_RU_orthodox_ */
+ 
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.pagan bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.pagan
+--- bsdmainutils.orig/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.pagan	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.pagan	2011-06-06 16:16:44.000000000 +0200
+@@ -1,42 +1,42 @@
+ /*
+- * ñÚÙŞÅÓËÉÅ ĞÒÁÚÄÎÉËÉ
++ * Ğ¯Ğ·Ñ‹Ñ‡ĞµÑĞºĞ¸Ğµ Ğ¿Ñ€Ğ°Ğ·Ğ´Ğ½Ğ¸ĞºĞ¸
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _ru_RU_KOI8_R_pagan_
+-#define _ru_RU_KOI8_R_pagan_
++#ifndef _ru_RU_pagan_
++#define _ru_RU_pagan_
+ 
+-LANG=ru_RU.KOI8-R
+-Paskha=ğÁÓÈÁ
++LANG=UTF-8
++Paskha=ĞŸĞ°ÑÑ…Ğ°
+ 
+-21 ÄÅË*	úÉÍÎÅÅ ÓÏÌÎÃÅÓÔÏÑÎÉÅ
+-25 ÄÅË	ëÏÌÑÄÁ (ÓÄ×ÉÎÕÔÏÅ ÚÉÍÎÅÅ ÓÏÌÎÃÅÓÔÏÑÎÉÅ)
+- 6 ÑÎ×	äÅÎØ ëÁİÅÑ É ÷ÅÌÅÓÁ
+-24 ÆÅ×	äÅÎØ ÷ÅÌÅÓÁ
+-29 ÆÅ×	äÅÎØ ëÁİÅÑ
+- 1 ÍÁÒ	äÅÎØ íÁÒÅÎÙ
+-14 ÍÁÒ	îÏ×ÙÊ çÏÄ, ï×ÓÅÎØ ÍÁÌÙÊ
+-ğÁÓÈÁ-47	íÁÓÌÅÎÉÃÁ
+-ğÁÓÈÁ+7	ëÒÁÓÎÁÑ çÏÒËÁ
+-ğÁÓÈÁ+16	òÁÄÕÎÉÃÁ
+-20 ÍÁÒ*	÷ÅÓÅÎÎÉÅ ÒÁ×ÎÏÄÅÎÓÔ×ÉÅ
+- 7 ÁĞÒ	äÅÎØ íÁÒÅÎÙ (ÓÄ×ÉÎÕÔÏÅ ×ÅÓÅÎÎÅÅ ÒÁ×ÎÏÄÅÎÓÔ×ÉÅ)
+- 6 ÍÁÊ	äÅÎØ äÁÖØÂÏÇÁ, ï×ÓÅÎØ ÂÏÌØÛÏÊ
+-22 ÍÁÊ	ñÒÉÌÉÎ äÅÎØ
+-15 ÉÀÎ	äÅÎØ ôÒÉÇÌÁ×Á
+-21 ÉÀÎ*	ìÅÔÎÅÅ ÓÏÌÎÃÅÓÔÏÑÎÉÅ
+- 1 ÉÀÌ	òÕÓÁÌØÎÁÑ îÅÄÅÌÑ
+- 7 ÉÀÌ	ëÕĞÁÌÁ (ÓÄ×ÉÎÕÔÏÅ ÌÅÔÎÅÅ ÓÏÌÎÃÅÓÔÏÑÎÉÅ)
+-27 ÉÀÌ	ïÔÂÏÒ ÖÅÒÔ× ğÅÒÕÎÕ, ÒÕÓÁÌÉÉ
+- 2 Á×Ç	ğÅÒÕÎÏ× äÅÎØ
+-21 Á×Ç	äÅÎØ óÔÒÉÂÏÇÁ
+-28 Á×Ç	õÓĞÅÎÉÅ úÌÁÔÏÇÏÒËÉ
+-14 ÓÅÎ	äÅÎØ ÷ÏÌÈÁ úÍÅÅ×ÉŞÁ
+-22 ÓÅÎ*	ğÏ×ÏÒÏÔ Ë ÚÉÍÅ (ÏÓÅÎÎÅÅ ÒÁ×ÎÏÄÅÎÓÔ×ÉÅ)
+-10 ÎÏÑ	äÅÎØ íÁËÏÛÉ
+-21 ÎÏÑ	äÅÎØ ó×ÁÒÏÇÁ É óÅÍÁÒÇÌÁ
+- 9 ÄÅË	äÅÎØ äÁÖØÂÏÇÁ É íÁÒÅÎÙ
++21 Ğ´ĞµĞº*	Ğ—Ğ¸Ğ¼Ğ½ĞµĞµ ÑĞ¾Ğ»Ğ½Ñ†ĞµÑÑ‚Ğ¾ÑĞ½Ğ¸Ğµ
++25 Ğ´ĞµĞº	ĞšĞ¾Ğ»ÑĞ´Ğ° (ÑĞ´Ğ²Ğ¸Ğ½ÑƒÑ‚Ğ¾Ğµ Ğ·Ğ¸Ğ¼Ğ½ĞµĞµ ÑĞ¾Ğ»Ğ½Ñ†ĞµÑÑ‚Ğ¾ÑĞ½Ğ¸Ğµ)
++ 6 ÑĞ½Ğ²	Ğ”ĞµĞ½ÑŒ ĞšĞ°Ñ‰ĞµÑ Ğ¸ Ğ’ĞµĞ»ĞµÑĞ°
++24 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ Ğ’ĞµĞ»ĞµÑĞ°
++29 Ñ„ĞµĞ²	Ğ”ĞµĞ½ÑŒ ĞšĞ°Ñ‰ĞµÑ
++ 1 Ğ¼Ğ°Ñ€	Ğ”ĞµĞ½ÑŒ ĞœĞ°Ñ€ĞµĞ½Ñ‹
++14 Ğ¼Ğ°Ñ€	ĞĞ¾Ğ²Ñ‹Ğ¹ Ğ“Ğ¾Ğ´, ĞĞ²ÑĞµĞ½ÑŒ Ğ¼Ğ°Ğ»Ñ‹Ğ¹
++ĞŸĞ°ÑÑ…Ğ°-47	ĞœĞ°ÑĞ»ĞµĞ½Ğ¸Ñ†Ğ°
++ĞŸĞ°ÑÑ…Ğ°+7	ĞšÑ€Ğ°ÑĞ½Ğ°Ñ Ğ“Ğ¾Ñ€ĞºĞ°
++ĞŸĞ°ÑÑ…Ğ°+16	Ğ Ğ°Ğ´ÑƒĞ½Ğ¸Ñ†Ğ°
++20 Ğ¼Ğ°Ñ€*	Ğ’ĞµÑĞµĞ½Ğ½Ğ¸Ğµ Ñ€Ğ°Ğ²Ğ½Ğ¾Ğ´ĞµĞ½ÑÑ‚Ğ²Ğ¸Ğµ
++ 7 Ğ°Ğ¿Ñ€	Ğ”ĞµĞ½ÑŒ ĞœĞ°Ñ€ĞµĞ½Ñ‹ (ÑĞ´Ğ²Ğ¸Ğ½ÑƒÑ‚Ğ¾Ğµ Ğ²ĞµÑĞµĞ½Ğ½ĞµĞµ Ñ€Ğ°Ğ²Ğ½Ğ¾Ğ´ĞµĞ½ÑÑ‚Ğ²Ğ¸Ğµ)
++ 6 Ğ¼Ğ°Ğ¹	Ğ”ĞµĞ½ÑŒ Ğ”Ğ°Ğ¶ÑŒĞ±Ğ¾Ğ³Ğ°, ĞĞ²ÑĞµĞ½ÑŒ Ğ±Ğ¾Ğ»ÑŒÑˆĞ¾Ğ¹
++22 Ğ¼Ğ°Ğ¹	Ğ¯Ñ€Ğ¸Ğ»Ğ¸Ğ½ Ğ”ĞµĞ½ÑŒ
++15 Ğ¸ÑĞ½	Ğ”ĞµĞ½ÑŒ Ğ¢Ñ€Ğ¸Ğ³Ğ»Ğ°Ğ²Ğ°
++21 Ğ¸ÑĞ½*	Ğ›ĞµÑ‚Ğ½ĞµĞµ ÑĞ¾Ğ»Ğ½Ñ†ĞµÑÑ‚Ğ¾ÑĞ½Ğ¸Ğµ
++ 1 Ğ¸ÑĞ»	Ğ ÑƒÑĞ°Ğ»ÑŒĞ½Ğ°Ñ ĞĞµĞ´ĞµĞ»Ñ
++ 7 Ğ¸ÑĞ»	ĞšÑƒĞ¿Ğ°Ğ»Ğ° (ÑĞ´Ğ²Ğ¸Ğ½ÑƒÑ‚Ğ¾Ğµ Ğ»ĞµÑ‚Ğ½ĞµĞµ ÑĞ¾Ğ»Ğ½Ñ†ĞµÑÑ‚Ğ¾ÑĞ½Ğ¸Ğµ)
++27 Ğ¸ÑĞ»	ĞÑ‚Ğ±Ğ¾Ñ€ Ğ¶ĞµÑ€Ñ‚Ğ² ĞŸĞµÑ€ÑƒĞ½Ñƒ, Ñ€ÑƒÑĞ°Ğ»Ğ¸Ğ¸
++ 2 Ğ°Ğ²Ğ³	ĞŸĞµÑ€ÑƒĞ½Ğ¾Ğ² Ğ”ĞµĞ½ÑŒ
++21 Ğ°Ğ²Ğ³	Ğ”ĞµĞ½ÑŒ Ğ¡Ñ‚Ñ€Ğ¸Ğ±Ğ¾Ğ³Ğ°
++28 Ğ°Ğ²Ğ³	Ğ£ÑĞ¿ĞµĞ½Ğ¸Ğµ Ğ—Ğ»Ğ°Ñ‚Ğ¾Ğ³Ğ¾Ñ€ĞºĞ¸
++14 ÑĞµĞ½	Ğ”ĞµĞ½ÑŒ Ğ’Ğ¾Ğ»Ñ…Ğ° Ğ—Ğ¼ĞµĞµĞ²Ğ¸Ñ‡Ğ°
++22 ÑĞµĞ½*	ĞŸĞ¾Ğ²Ğ¾Ñ€Ğ¾Ñ‚ Ğº Ğ·Ğ¸Ğ¼Ğµ (Ğ¾ÑĞµĞ½Ğ½ĞµĞµ Ñ€Ğ°Ğ²Ğ½Ğ¾Ğ´ĞµĞ½ÑÑ‚Ğ²Ğ¸Ğµ)
++10 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ ĞœĞ°ĞºĞ¾ÑˆĞ¸
++21 Ğ½Ğ¾Ñ	Ğ”ĞµĞ½ÑŒ Ğ¡Ğ²Ğ°Ñ€Ğ¾Ğ³Ğ° Ğ¸ Ğ¡ĞµĞ¼Ğ°Ñ€Ğ³Ğ»Ğ°
++ 9 Ğ´ĞµĞº	Ğ”ĞµĞ½ÑŒ Ğ”Ğ°Ğ¶ÑŒĞ±Ğ¾Ğ³Ğ° Ğ¸ ĞœĞ°Ñ€ĞµĞ½Ñ‹
+ 
+-#endif /* !_ru_RU_KOI8_R_pagan_ */
++#endif /* !_ru_RU_pagan_ */
+ 
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all
+--- bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all	2011-06-06 16:16:44.000000000 +0200
+@@ -1,14 +1,14 @@
+ /*
+- * õËÒÁ§ÎÓØËÉÊ ËÁÌÅÎÄÁÒ
++ * Ğ£ĞºÑ€Ğ°Ñ—Ğ½ÑÑŒĞºĞ¸Ğ¹ ĞºĞ°Ğ»ĞµĞ½Ğ´Ğ°Ñ€
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _uk_UA_KOI8_U_all_
+-#define _uk_UA_KOI8_U_all_
++#ifndef _uk_UA_all_
++#define _uk_UA_all_
+ 
+-#include <uk_UA.KOI8-U/calendar.holiday>
+-#include <uk_UA.KOI8-U/calendar.orthodox>
+-#include <uk_UA.KOI8-U/calendar.misc>
++#include <uk_UA/calendar.holiday>
++#include <uk_UA/calendar.orthodox>
++#include <uk_UA/calendar.misc>
+ 
+-#endif /* !_uk_UA_KOI8_U_all_ */
++#endif /* !_uk_UA_all_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday
+--- bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday	2011-06-06 16:04:40.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday	2011-06-06 16:16:44.000000000 +0200
+@@ -1,22 +1,22 @@
+ /*
+- * õËÒÁ§ÎÓØË¦ ÄÅÒÖÁ×Î¦ Ó×ÑÔÁ
++ * Ğ£ĞºÑ€Ğ°Ñ—Ğ½ÑÑŒĞºÑ– Ğ´ĞµÑ€Ğ¶Ğ°Ğ²Ğ½Ñ– ÑĞ²ÑÑ‚Ğ°
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _uk_UA_KOI8_U_holiday_
+-#define _uk_UA_KOI8_U_holiday_
++#ifndef _uk_UA_holiday_
++#define _uk_UA_holiday_
+ 
+-LANG=uk_UA.KOI8-U
+-Paskha=÷ÅÌÉËÄÅÎØ
++LANG=UTF-8
++Paskha=Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ
+ 
+-ó¦Ş 01	îÏ×ÉÊ ò¦Ë
+-ó¦Ş 07	ò¦ÚÄ×Ï èÒÉÓÔÏ×Å
+-âÅÒ 08	8 âÅÒÅÚÎÑ - í¦ÖÎÁÒÏÄÎÉÊ ö¦ÎÏŞÉÊ äÅÎØ
+-ôÒÁ 01	1 ôÒÁ×ÎÑ - äÅÎØ ğÒÁÃ¦
+-ôÒÁ 09	äÅÎØ ğÅÒÅÍÏÇÉ
+-÷ÅÌÉËÄÅÎØ+49	ôÒ¦ÊÃÑ
+-şÅÒ 28	äÅÎØ ëÏÎÓÔÉÔÕÃ¦§ õËÒÁ§ÎÉ
+-óÅÒ 24	äÅÎØ îÅÚÁÌÅÖÎÏÓÔ¦ õËÒÁ§ÎÉ
++Ğ¡Ñ–Ñ‡ 01	ĞĞ¾Ğ²Ğ¸Ğ¹ Ğ Ñ–Ğº
++Ğ¡Ñ–Ñ‡ 07	Ğ Ñ–Ğ·Ğ´Ğ²Ğ¾ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğµ
++Ğ‘ĞµÑ€ 08	8 Ğ‘ĞµÑ€ĞµĞ·Ğ½Ñ - ĞœÑ–Ğ¶Ğ½Ğ°Ñ€Ğ¾Ğ´Ğ½Ğ¸Ğ¹ Ğ–Ñ–Ğ½Ğ¾Ñ‡Ğ¸Ğ¹ Ğ”ĞµĞ½ÑŒ
++Ğ¢Ñ€Ğ° 01	1 Ğ¢Ñ€Ğ°Ğ²Ğ½Ñ - Ğ”ĞµĞ½ÑŒ ĞŸÑ€Ğ°Ñ†Ñ–
++Ğ¢Ñ€Ğ° 09	Ğ”ĞµĞ½ÑŒ ĞŸĞµÑ€ĞµĞ¼Ğ¾Ğ³Ğ¸
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ+49	Ğ¢Ñ€Ñ–Ğ¹Ñ†Ñ
++Ğ§ĞµÑ€ 28	Ğ”ĞµĞ½ÑŒ ĞšĞ¾Ğ½ÑÑ‚Ğ¸Ñ‚ÑƒÑ†Ñ–Ñ— Ğ£ĞºÑ€Ğ°Ñ—Ğ½Ğ¸
++Ğ¡ĞµÑ€ 24	Ğ”ĞµĞ½ÑŒ ĞĞµĞ·Ğ°Ğ»ĞµĞ¶Ğ½Ğ¾ÑÑ‚Ñ– Ğ£ĞºÑ€Ğ°Ñ—Ğ½Ğ¸
+ 
+-#endif /* !_uk_UA_KOI8_U_holiday_ */
++#endif /* !_uk_UA_holiday_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc
+--- bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc	2011-06-06 16:04:39.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc	2011-06-06 16:16:44.000000000 +0200
+@@ -1,18 +1,18 @@
+ /*
+- * ¶ÎÛ¦ Ã¦ËÁ×¦ ÄÁÔÉ
++ * Ğ†Ğ½ÑˆÑ– Ñ†Ñ–ĞºĞ°Ğ²Ñ– Ğ´Ğ°Ñ‚Ğ¸
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _uk_UA_KOI8_U_misc_
+-#define _uk_UA_KOI8_U_misc_
++#ifndef _uk_UA_misc_
++#define _uk_UA_misc_
+ 
+-LANG=uk_UA.KOI8-U
++LANG=UTF-8
+ 
+-/* ğÏÓÔÁÎÏ×Á ëÁÂ¦ÎÅÔÕ í¦Î¦ÓÔÒ¦× õËÒÁ§ÎÉ ×¦Ä 13 ÔÒÁ×ÎÑ 1996 Ò. N 509
+- * "ğÒÏ ĞÏÒÑÄÏË ÏÂŞÉÓÌÅÎÎÑ ŞÁÓÕ ÎÁ ÔÅÒÉÔÏÒ¦§ õËÒÁ§ÎÉ"
++/* ĞŸĞ¾ÑÑ‚Ğ°Ğ½Ğ¾Ğ²Ğ° ĞšĞ°Ğ±Ñ–Ğ½ĞµÑ‚Ñƒ ĞœÑ–Ğ½Ñ–ÑÑ‚Ñ€Ñ–Ğ² Ğ£ĞºÑ€Ğ°Ñ—Ğ½Ğ¸ Ğ²Ñ–Ğ´ 13 Ñ‚Ñ€Ğ°Ğ²Ğ½Ñ 1996 Ñ€. N 509
++ * "ĞŸÑ€Ğ¾ Ğ¿Ğ¾Ñ€ÑĞ´Ğ¾Ğº Ğ¾Ğ±Ñ‡Ğ¸ÑĞ»ĞµĞ½Ğ½Ñ Ñ‡Ğ°ÑÑƒ Ğ½Ğ° Ñ‚ĞµÑ€Ğ¸Ñ‚Ğ¾Ñ€Ñ–Ñ— Ğ£ĞºÑ€Ğ°Ñ—Ğ½Ğ¸"
+  */
+-âÅÒ îÄ-1	ğÅÒÅÈ¦Ä ÎÁ Ì¦ÔÎ¦Ê ŞÁÓ (ÏÓÔÁÎÎÑ ÎÅÄ¦ÌÑ ÂÅÒÅÚÎÑ)
+-öÏ× îÄ-1	ğÅÒÅÈ¦Ä ÎÁ ÚÉÍÏ×ÉÊ ŞÁÓ (ÏÓÔÁÎÎÑ ÎÅÄ¦ÌÑ ÖÏ×ÔÎÑ)
++Ğ‘ĞµÑ€ ĞĞ´-1	ĞŸĞµÑ€ĞµÑ…Ñ–Ğ´ Ğ½Ğ° Ğ»Ñ–Ñ‚Ğ½Ñ–Ğ¹ Ñ‡Ğ°Ñ (Ğ¾ÑÑ‚Ğ°Ğ½Ğ½Ñ Ğ½ĞµĞ´Ñ–Ğ»Ñ Ğ±ĞµÑ€ĞµĞ·Ğ½Ñ)
++Ğ–Ğ¾Ğ² ĞĞ´-1	ĞŸĞµÑ€ĞµÑ…Ñ–Ğ´ Ğ½Ğ° Ğ·Ğ¸Ğ¼Ğ¾Ğ²Ğ¸Ğ¹ Ñ‡Ğ°Ñ (Ğ¾ÑÑ‚Ğ°Ğ½Ğ½Ñ Ğ½ĞµĞ´Ñ–Ğ»Ñ Ğ¶Ğ¾Ğ²Ñ‚Ğ½Ñ)
+ 
+-#endif /* !_uk_UA_KOI8_U_misc_ */
++#endif /* !_uk_UA_misc_ */
+diff -ruN bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox
+--- bsdmainutils.orig/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox	2011-06-06 16:04:39.000000000 +0200
++++ bsdmainutils//usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox	2011-06-06 16:16:44.000000000 +0200
+@@ -1,35 +1,35 @@
+ /*
+- * ğÒÁ×ÏÓÌÁ×Î¦ Ó×ÑÔÁ
++ * ĞŸÑ€Ğ°Ğ²Ğ¾ÑĞ»Ğ°Ğ²Ğ½Ñ– ÑĞ²ÑÑ‚Ğ°
+  *
+  * $FreeBSD$
+  */
+ 
+-#ifndef _uk_UA_KOI8_U_orthodox_
+-#define _uk_UA_KOI8_U_orthodox_
++#ifndef _uk_UA_orthodox_
++#define _uk_UA_orthodox_
+ 
+-LANG=uk_UA.KOI8-U
+-Paskha=÷ÅÌÉËÄÅÎØ
++LANG=UTF-8
++Paskha=Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ
+ 
+- 7 ó¦Ş	ò¦ÚÄ×Ï èÒÉÓÔÏ×Å
+-19 ó¦Ş	âÏÇÏÑ×ÌÅÎÎÑ ÁÂÏ èÒÅİÅÎÎÑ çÏÓĞÏÄÎ¤
+-15 ìÀÔ	óÔÒ¦ÔÅÎÎÑ çÏÓĞÏÄÎ¤
+-÷ÅÌÉËÄÅÎØ-46	÷ÅÌÉËÉÊ ğ¦ÓÔ
+-÷ÅÌÉËÄÅÎØ-7	÷ÅÒÂÎÁ îÅÄ¦ÌÑ
+-÷ÅÌÉËÄÅÎØ-3	÷ÅÌÉËÉÊ şÅÔ×ÅÒ
+-÷ÅÌÉËÄÅÎØ-2	óÔÒÁÓÎÁ ğ'ÑÔÎÉÃÑ
+-÷ÅÌÉËÄÅÎØ	÷ÏÓËÒÅÓ¦ÎÎÑ èÒÉÓÔÏ×Å
+-÷ÅÌÉËÄÅÎØ+39	÷ÏÚÎÅÓ¦ÎÎÑ çÏÓĞÏÄÎ¤
+-÷ÅÌÉËÄÅÎØ+49	äÅÎØ ó×ÑÔÏ§ ôÒ¦ÊÃ¦, ğ'ÑÔÉÄÅÓÑÔÎÉÃÑ
+-÷ÅÌÉËÄÅÎØ+60	ó×ÑÔÏ Ô¦ÌÁ èÒÉÓÔÏ×ÏÇÏ
+- 7 ë×¦	âÌÁÇÏ×¦İÅÎÎÑ ğÒÅÓ×ÑÔÏ§ ä¦×É íÁÒ¦§
+- 7 ìÉĞ	ò¦ÚÄ×Ï Ó×ÑÔÏÇÏ ¶×ÁÎÁ èÒÅÓÔÉÔÅÌÑ
+-12 ìÉĞ	ó×ÑÔÉÈ ÷ÅÒÈÏ×ÎÉÈ ÁĞÏÓÔÏÌ¦× ğÅÔÒÁ ¦ ğÁ×ÌÁ
+-19 óÅÒ	ğÒÅÏÂÒÁÖÅÎÎÑ çÏÓĞÏÄÎ¤
+-28 óÅÒ	õÓĞÅÎÎÑ ğÒÅÓ×ÑÔÏ§ âÏÇÏÒÏÄÉÃ¦
+-11 ÷ÅÒ	õÓ¦ËÎÏ×ÅÎÎÑ ŞÅÓÎÏ§ ÇÏÌÏ×É Ó×ÑÔÏÇÏ ¶×ÁÎÁ èÒÅÓÔÉÔÅÌÑ
+-21 ÷ÅÒ	ò¦ÚÄ×Ï ğÒÅÓ×ÑÔÏ§ âÏÇÏÒÏÄÉÃ¦
+-27 ÷ÅÒ	÷ÏÚÄ×ÉÖÅÎÎÑ şÅÓÎÏÇÏ èÒÅÓÔÁ
+-14 öÏ×	ğÏËÒÏ×Á ğÒÅÓ×ÑÔÏ§ âÏÇÏÒÏÄÉÃ¦
+- 4 çÒÕ	÷×ÅÄÅÎÎÑ ÄÏ ÈÒÁÍÕ ğÒÅÓ×ÑÔÏ§ âÏÇÏÒÏÄÉÃ¦
++ 7 Ğ¡Ñ–Ñ‡	Ğ Ñ–Ğ·Ğ´Ğ²Ğ¾ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğµ
++19 Ğ¡Ñ–Ñ‡	Ğ‘Ğ¾Ğ³Ğ¾ÑĞ²Ğ»ĞµĞ½Ğ½Ñ Ğ°Ğ±Ğ¾ Ğ¥Ñ€ĞµÑ‰ĞµĞ½Ğ½Ñ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ñ”
++15 Ğ›ÑÑ‚	Ğ¡Ñ‚Ñ€Ñ–Ñ‚ĞµĞ½Ğ½Ñ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ñ”
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ-46	Ğ’ĞµĞ»Ğ¸ĞºĞ¸Ğ¹ ĞŸÑ–ÑÑ‚
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ-7	Ğ’ĞµÑ€Ğ±Ğ½Ğ° ĞĞµĞ´Ñ–Ğ»Ñ
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ-3	Ğ’ĞµĞ»Ğ¸ĞºĞ¸Ğ¹ Ğ§ĞµÑ‚Ğ²ĞµÑ€
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ-2	Ğ¡Ñ‚Ñ€Ğ°ÑĞ½Ğ° ĞŸ'ÑÑ‚Ğ½Ğ¸Ñ†Ñ
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ	Ğ’Ğ¾ÑĞºÑ€ĞµÑÑ–Ğ½Ğ½Ñ Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğµ
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ+39	Ğ’Ğ¾Ğ·Ğ½ĞµÑÑ–Ğ½Ğ½Ñ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ñ”
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ+49	Ğ”ĞµĞ½ÑŒ Ğ¡Ğ²ÑÑ‚Ğ¾Ñ— Ğ¢Ñ€Ñ–Ğ¹Ñ†Ñ–, ĞŸ'ÑÑ‚Ğ¸Ğ´ĞµÑÑÑ‚Ğ½Ğ¸Ñ†Ñ
++Ğ’ĞµĞ»Ğ¸ĞºĞ´ĞµĞ½ÑŒ+60	Ğ¡Ğ²ÑÑ‚Ğ¾ Ñ‚Ñ–Ğ»Ğ° Ğ¥Ñ€Ğ¸ÑÑ‚Ğ¾Ğ²Ğ¾Ğ³Ğ¾
++ 7 ĞšĞ²Ñ–	Ğ‘Ğ»Ğ°Ğ³Ğ¾Ğ²Ñ–Ñ‰ĞµĞ½Ğ½Ñ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ñ— Ğ”Ñ–Ğ²Ğ¸ ĞœĞ°Ñ€Ñ–Ñ—
++ 7 Ğ›Ğ¸Ğ¿	Ğ Ñ–Ğ·Ğ´Ğ²Ğ¾ ÑĞ²ÑÑ‚Ğ¾Ğ³Ğ¾ Ğ†Ğ²Ğ°Ğ½Ğ° Ğ¥Ñ€ĞµÑÑ‚Ğ¸Ñ‚ĞµĞ»Ñ
++12 Ğ›Ğ¸Ğ¿	Ğ¡Ğ²ÑÑ‚Ğ¸Ñ… Ğ’ĞµÑ€Ñ…Ğ¾Ğ²Ğ½Ğ¸Ñ… Ğ°Ğ¿Ğ¾ÑÑ‚Ğ¾Ğ»Ñ–Ğ² ĞŸĞµÑ‚Ñ€Ğ° Ñ– ĞŸĞ°Ğ²Ğ»Ğ°
++19 Ğ¡ĞµÑ€	ĞŸÑ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ¶ĞµĞ½Ğ½Ñ Ğ“Ğ¾ÑĞ¿Ğ¾Ğ´Ğ½Ñ”
++28 Ğ¡ĞµÑ€	Ğ£ÑĞ¿ĞµĞ½Ğ½Ñ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ñ— Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ–
++11 Ğ’ĞµÑ€	Ğ£ÑÑ–ĞºĞ½Ğ¾Ğ²ĞµĞ½Ğ½Ñ Ñ‡ĞµÑĞ½Ğ¾Ñ— Ğ³Ğ¾Ğ»Ğ¾Ğ²Ğ¸ ÑĞ²ÑÑ‚Ğ¾Ğ³Ğ¾ Ğ†Ğ²Ğ°Ğ½Ğ° Ğ¥Ñ€ĞµÑÑ‚Ğ¸Ñ‚ĞµĞ»Ñ
++21 Ğ’ĞµÑ€	Ğ Ñ–Ğ·Ğ´Ğ²Ğ¾ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ñ— Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ–
++27 Ğ’ĞµÑ€	Ğ’Ğ¾Ğ·Ğ´Ğ²Ğ¸Ğ¶ĞµĞ½Ğ½Ñ Ğ§ĞµÑĞ½Ğ¾Ğ³Ğ¾ Ğ¥Ñ€ĞµÑÑ‚Ğ°
++14 Ğ–Ğ¾Ğ²	ĞŸĞ¾ĞºÑ€Ğ¾Ğ²Ğ° ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ñ— Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ–
++ 4 Ğ“Ñ€Ñƒ	Ğ’Ğ²ĞµĞ´ĞµĞ½Ğ½Ñ Ğ´Ğ¾ Ñ…Ñ€Ğ°Ğ¼Ñƒ ĞŸÑ€ĞµÑĞ²ÑÑ‚Ğ¾Ñ— Ğ‘Ğ¾Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ¸Ñ†Ñ–
+ 
+-#endif /* !_uk_UA_KOI8_U_orthodox_ */
++#endif /* !_uk_UA_orthodox_ */

@@ -1,0 +1,97 @@
+Description: Add nomerge option.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c.orig	2009-10-26 19:19:42.000000000 +0100
++++ bsdmainutils/usr.bin/column/column.c	2009-10-26 20:02:25.000000000 +0100
+@@ -69,6 +69,8 @@
+ void  usage(void);
+ int   width(const wchar_t *);
+ 
++int nomerge = 0;                /* whether multiple delimiters should be merged */
++
+ int termwidth = 80;		/* default terminal width */
+ 
+ int entries;			/* number of records */
+@@ -97,8 +99,11 @@
+ 		termwidth = win.ws_col;
+ 
+ 	tflag = xflag = 0;
+-	while ((ch = getopt(argc, argv, "c:s:tx")) != -1)
++	while ((ch = getopt(argc, argv, "c:s:txn")) != -1)
+ 		switch(ch) {
++		case 'n':
++			nomerge = 1;
++			break;
+ 		case 'c':
+ 			termwidth = atoi(optarg);
+ 			break;
+@@ -152,6 +157,37 @@
+ 	exit(eval);
+ }
+ 
++/* If we are not merging delimiters (nomerge), use our own code, if we
++ * are, just call wcstok(). */
++wchar_t *
++mwcstok (wchar_t *wcs, const wchar_t *delim, wchar_t **save_ptr)
++{
++	wchar_t *result;
++
++	if (!nomerge)
++		return wcstok(wcs, delim, save_ptr);
++
++	if (wcs == NULL)
++		wcs = *save_ptr;
++
++	if (wcs == NULL)
++		return NULL;
++
++	/* Find the end of the next token.  */
++	result = wcs;
++	wcs = wcspbrk (result, delim);
++	if (wcs == NULL)
++		/* This token finishes the string.  */
++		*save_ptr = NULL;
++	else
++	{
++		/* Terminate the token and make *SAVE_PTR point past it.  */
++		*wcs = L'\0';
++		*save_ptr = wcs + 1;
++    	}
++	return result;
++}
++
+ void
+ c_columnate(void)
+ {
+@@ -243,7 +279,7 @@
+ 		err(1, (char *)NULL);
+ 	for (cnt = 0, lp = list; cnt < entries; ++cnt, ++lp, ++t) {
+ 		for (coloff = 0, p = *lp;
+-		    (cols[coloff] = wcstok(p, separator, &last));
++		    (cols[coloff] = mwcstok(p, separator, &last));
+ 		    p = NULL)
+ 			if (++coloff == maxcols) {
+ 				if (!(cols = realloc(cols, ((u_int)maxcols +
+--- bsdmainutils/usr.bin/column/column.1.orig       2009-10-26 20:09:46.000000000 +0100
++++ bsdmainutils/usr.bin/column/column.1	2009-10-26 20:13:33.000000000 +0100
+@@ -40,7 +40,7 @@
+ .Nd columnate lists
+ .Sh SYNOPSIS
+ .Nm
+-.Op Fl tx
++.Op Fl ntx
+ .Op Fl c Ar columns
+ .Op Fl s Ar sep
+ .Op Ar
+@@ -73,6 +73,11 @@
+ Useful for pretty-printing displays.
+ .It Fl x
+ Fill columns before filling rows.
++.It Fl n
++By default, the column command will merge multiple adjacent delimiters into a
++single delimiter when using the
++.Fl t
++option; this option disables that behavior. This option is a Debian GNU/Linux extension.
+ .El
+ .Sh ENVIRONMENT
+ The

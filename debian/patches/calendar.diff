@@ -1,0 +1,137 @@
+Description: Make program work on Debian.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsd/openbsd/calendar/calendar.c	2009-10-29 16:40:18.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.c	2009-10-29 18:13:38.000000000 +0100
+@@ -35,14 +35,12 @@
+ #include <err.h>
+ #include <errno.h>
+ #include <locale.h>
+-#include <login_cap.h>
+ #include <pwd.h>
+ #include <signal.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
+-#include <tzfile.h>
+ #include <unistd.h>
+ 
+ #include "pathnames.h"
+@@ -170,10 +168,9 @@
+ 				continue;
+ 			case 0:	/* child */
+ 				(void)setlocale(LC_ALL, "");
+-				if (setusercontext(NULL, pw, pw->pw_uid,
+-				    LOGIN_SETALL ^ LOGIN_SETLOGIN))
+-					err(1, "unable to set user context (uid %u)",
+-					    pw->pw_uid);
++                                (void)setegid(pw->pw_gid);
++                                (void)initgroups(pw->pw_name, pw->pw_gid);
++                                (void)seteuid(pw->pw_uid);
+ 				if (acstat) {
+ 					if (chdir(pw->pw_dir) ||
+ 					    stat(calendarFile, &sbuf) != 0 ||
+--- bsd/openbsd/calendar/calendar.h	2009-10-29 16:40:18.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.h	2009-10-29 18:46:55.000000000 +0100
+@@ -29,6 +29,7 @@
+  * SUCH DAMAGE.
+  */
+ 
++#include <sys/uio.h>
+ 
+ extern struct passwd *pw;
+ extern int doall;
+--- bsd/openbsd/calendar/day.c	2009-10-29 17:14:33.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/day.c	2009-10-29 19:37:46.000000000 +0100
+@@ -39,7 +39,6 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
+-#include <tzfile.h>
+ 
+ #include "pathnames.h"
+ #include "calendar.h"
+@@ -289,7 +289,7 @@
+ 
+ 	/* adjust bodun rate */
+ 	if (bodun && !bodun_always)
+-		bodun = !arc4random_uniform(3);
++		bodun = !(rand() % 3);
+ 		
+ 	/* Easter or Easter depending days */
+ 	if (flags & F_SPECIAL)
+--- bsd/openbsd/calendar/io.c	2009-10-29 18:07:37.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/io.c	2009-10-29 19:21:23.000000000 +0100
+@@ -45,7 +45,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <tzfile.h>
+ #include <unistd.h>
+ 
+ #include "pathnames.h"
+@@ -323,9 +323,13 @@
+ 				errx(1, "cannot get home directory");
+ 			if (!(chdir(home) == 0 &&
+ 			    chdir(calendarHome) == 0 &&
+-			    (fdin = open(calendarFile, O_RDONLY)) != -1))
+-				errx(1, "no calendar file: ``%s'' or ``~/%s/%s''",
+-				    calendarFile, calendarHome, calendarFile);
++			    (fdin = open(calendarFile, O_RDONLY)) != -1)) {
++				/* Try the system-wide calendar file. */
++				if ((fdin = open(_PATH_DEFAULT, O_RDONLY)) == -1) {
++					errx(1, "no calendar file: ``%s'' or ``~/%s/%s''",
++					    calendarFile, calendarHome, calendarFile);
++				}
++			}
+ 		}
+ 	}
+ 
+@@ -357,7 +357,7 @@
+ 			(void)close(fderr);
+ 		}
+ 		execl(_PATH_CPP, "cpp", "-traditional", "-undef", "-U__GNUC__",
+-		    "-P", "-I.", _PATH_INCLUDE, (char *)NULL);
++		    "-P", "-I.", _PATH_EINCLUDE, _PATH_INCLUDE, (char *)NULL);
+ 		warn(_PATH_CPP);
+ 		_exit(1);
+ 	}
+--- bsd/openbsd/calendar/ostern.c	2009-10-29 16:40:52.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/ostern.c	2009-10-29 18:46:16.000000000 +0100
+@@ -30,7 +30,6 @@
+ 
+ #include <stdio.h>
+ #include <time.h>
+-#include <tzfile.h>
+ 
+ #include "calendar.h"
+ 
+--- bsd/openbsd/calendar/paskha.c	2009-10-29 16:35:17.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/paskha.c	2009-10-29 19:37:26.000000000 +0100
+@@ -27,7 +27,6 @@
+  */
+
+ #include <stdio.h>
+-#include <tzfile.h>
+ 
+ #include "calendar.h"
+ 
+--- bsd/openbsd/calendar/pathnames.h	2009-10-29 17:14:33.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/pathnames.h	2009-10-29 18:12:17.000000000 +0100
+@@ -37,3 +37,5 @@
+ 
+ 			/* XXX -- fix when cpp parses arguments rationally */
+ #define	_PATH_INCLUDE	"-I/usr/share/calendar"
++#define	_PATH_EINCLUDE	"-I/etc/calendar"
++#define	_PATH_DEFAULT	"/etc/calendar/default"
+--- bsd/openbsd/calendar/pesach.c	2009-10-29 16:35:34.000000000 +0100
++++ bsdmainutils/usr.bin/calendar/pesach.c	2009-10-29 18:48:09.000000000 +0100
+@@ -18,7 +18,6 @@
+  */
+
+ #include <stdio.h>
+-#include <tzfile.h>
+ 
+ #include "calendar.h"
+ 
