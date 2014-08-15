@@ -1,9 +1,63 @@
-Description: Fix segfault on empty lines.
+Description: Fix segfaults
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/col/col.c	2009-11-01 17:49:17.000000000 +0100
-+++ bsdmainutils/usr.bin/col/col.c	2009-11-01 17:48:41.000000000 +0100
-@@ -314,7 +314,7 @@
+--- bsdmainutils/usr.bin/col/col.c	2014-10-17 15:39:56.359532422 +0200
++++ bsdmainutils/usr.bin/col/col.c	2014-10-17 15:35:30.895933386 +0200
+@@ -49,6 +49,7 @@
+ #include <sys/cdefs.h>
+ 
+ #include <err.h>
++#include <limits.h>
+ #include <locale.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -78,7 +79,7 @@
+ typedef struct char_str {
+ #define	CS_NORMAL	1
+ #define	CS_ALTERNATE	2
+-	short		c_column;	/* column character is in */
++	int		c_column;	/* column character is in */
+ 	CSET		c_set;		/* character set (currently only 2) */
+ 	wchar_t		c_char;		/* character in question */
+ 	int		c_width;	/* character width */
+@@ -206,7 +207,8 @@
+ 				cur_col = 0;
+ 				continue;
+ 			case SPACE:
+-				++cur_col;
++				if (cur_col < INT_MAX)
++					++cur_col;
+ 				continue;
+ 			case SI:
+ 				cur_set = CS_NORMAL;
+@@ -215,15 +217,17 @@
+ 				cur_set = CS_ALTERNATE;
+ 				continue;
+ 			case TAB:		/* adjust column */
+-				cur_col |= 7;
+-				++cur_col;
++				if (cur_col < INT_MAX) {
++					cur_col |= 7;
++					++cur_col;
++				}
+ 				continue;
+ 			case VT:
+ 				cur_line -= 2;
+ 				continue;
+ 			}
+ 			if (iswspace(ch)) {
+-				if ((width = wcwidth(ch)) > 0)
++				if ((width = wcwidth(ch)) > 0 && cur_col < INT_MAX)
+ 					cur_col += width;
+ 				continue;
+ 			}
+@@ -309,12 +313,12 @@
+ 			l->l_needs_sort = 1;
+ 		else
+ 			l->l_max_col = cur_col;
+-		if (c->c_width > 0)
++		if (c->c_width > 0 && cur_col < INT_MAX) 
+ 			cur_col += c->c_width;
  	}
  	if (ferror(stdin))
  		err(1, NULL);

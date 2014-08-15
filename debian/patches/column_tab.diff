@@ -1,0 +1,19 @@
+Desription: Process tabs
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c	2014-10-17 14:30:43.249452663 +0200
++++ bsdmainutils/usr.bin/column/column.c	2014-10-17 14:29:54.153556563 +0200
+@@ -367,8 +367,12 @@
+ 	int w, cw;
+ 
+ 	for (w = 0; *wcs != L'\0'; wcs++)
+-		if ((cw = wcwidth(*wcs)) > 0)
++	{
++		if (*wcs == L'\t')
++			w = (w|(TAB-1))+1;
++		else if ((cw = wcwidth(*wcs)) > 0)
+ 			w += cw;
++	}
+ 	return (w);
+ }
+ 

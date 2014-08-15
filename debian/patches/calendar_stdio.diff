@@ -1,0 +1,27 @@
+Description: Allow calendar file input from stdin.
+Author: Michael Meskes <meskes@debian.org>
+
+diff -ru bsdmainutils/usr.bin/calendar/calendar.c bsdmainutils/usr.bin/calendar/calendar.c
+--- bsdmainutils/usr.bin/calendar/calendar.c	2012-01-19 10:07:37.302810662 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.c	2012-01-19 10:05:54.734809800 +0100
+@@ -88,7 +88,7 @@
+ 			break;
+ 
+ 		case 'f': /* other calendar file */
+-		        calendarFile = optarg;
++		        calendarFile = (strcmp(optarg, "-") == 0) ? "/dev/stdin" : optarg;
+ 			break;
+ 
+ 		case 't': /* other date, undocumented, for tests */
+diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
+--- bsdmainutils/usr.bin/calendar/io.c	2012-01-19 10:07:37.314810663 +0100
++++ bsdmainutils/usr.bin/calendar/io.c	2012-01-19 10:03:54.682808794 +0100
+@@ -365,7 +365,7 @@
+ 
+ 	/* open up calendar file as stdin */
+ 	if ((fdin = open(calendarFile, O_RDONLY)) == -1 ||
+-	    fstat(fdin, &st) == -1 || !S_ISREG(st.st_mode)) {
++	    fstat(fdin, &st) == -1 || !(S_ISREG(st.st_mode)||S_ISCHR(st.st_mode))) {
+ 		if (!doall) {
+ 			char *home = getenv("HOME");
+ 			if (home == NULL || *home == '\0')

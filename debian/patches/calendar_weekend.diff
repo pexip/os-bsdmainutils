@@ -10,25 +10,26 @@ Author: Michael Meskes <meskes@debian.org>
 +.Op Fl l Ar num
 +.Op Fl w Ar num
  .Op Fl f Ar calendarfile
- .Op Fl t Ar [[[cc]yy][mm]]dd
- .Sh DESCRIPTION
-@@ -58,7 +60,7 @@
+ .Sm off
+ .Op Fl "t " Oo Oo Oo Ar cc Oc Ar yy Oc Ar mm Oc Ar dd
+@@ -60,7 +62,8 @@
  .It Fl A Ar num
  Print lines from today and next
  .Ar num
 -days (forward, future).
-+days (forward, future). Defaults to one.
++days (forward, future).
++Defaults to one. (same as \-l)
  .It Fl a
  Process the
  .Dq calendar
-@@ -71,6 +73,16 @@
+@@ -73,6 +75,16 @@
  days (backward, past).
  .It Fl b
  Enforce special date calculation mode for KOI8 calendars.
 +.It Fl l Ar num
 +Print lines from today and next
 +.Ar num
-+days (forward, future). Defaults to one.
++days (forward, future). Defaults to one. (same as \-A)
 +.It Fl w Ar num
 +Print lines from today and next
 +.Ar num
@@ -38,7 +39,7 @@ Author: Michael Meskes <meskes@debian.org>
  .It Fl f Pa calendarfile
  Use
  .Pa calendarfile
-@@ -90,6 +102,13 @@
+@@ -97,6 +109,13 @@
  .Dq Paskha=<national_name>
  (for Orthodox Easter) can be used.
  .Pp
@@ -52,7 +53,7 @@ Author: Michael Meskes <meskes@debian.org>
  The
  .Dq CALENDAR
  variable can be used to specify the style.
-@@ -109,6 +128,10 @@
+@@ -116,6 +135,10 @@
  .Dq BODUN=<bodun_prefix>
  where <local_name> can be ru_RU.KOI8-R, uk_UA.KOI8-U or by_BY.KOI8-B.
  .Pp
@@ -63,7 +64,7 @@ Author: Michael Meskes <meskes@debian.org>
  Other lines should begin with a month and day.
  They may be entered in almost any format, either numeric or as character
  strings.
-@@ -150,6 +173,9 @@
+@@ -157,6 +180,9 @@
  .Xr cpp 1
  searches in the current (or home) directory first, and then in the
  directory
@@ -73,7 +74,7 @@ Author: Michael Meskes <meskes@debian.org>
  .Pa /usr/share/calendar .
  Empty lines and lines protected by the C commenting syntax
  .Pq Li /* ... */
-@@ -250,6 +276,34 @@
+@@ -257,6 +283,34 @@
  in the line.
  This is no longer true: the date is only recognized when it occurs
  at the beginning of a line.
@@ -175,7 +176,7 @@ Author: Michael Meskes <meskes@debian.org>
  {
  	(void)fprintf(stderr,
 -	    "usage: calendar [-ab] [-A num] [-B num] [-f calendarfile] "
--	    "[-t [[[cc]yy][mm]]dd]\n");
+-	    "[-t [[[cc]yy]mm]dd]\n");
 +	    "usage: calendar [-ab] [-A num] [-B num] [-l num] [-w num]"
 +	    "[-f calendarfile] [-t [[[cc]yy][mm]]dd]\n");
  	exit(1);

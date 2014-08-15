@@ -5,15 +5,14 @@ SHELL+= -e
 
 include /usr/share/quilt/quilt.make
 
-# support noopt; nostrip is handled dh_strip
-CFLAGS = -g
-ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O2
-endif
-export CFLAGS
-
 DEB_HOST_GNU_TYPE=$(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE=$(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += `dpkg-buildflags --get CPPFLAGS`
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+export CFLAGS
+export LDFLAGS
 
 ifneq ($(DEB_HOST_GNU_TYPE),$(DEB_BUILD_GNU_TYPE))
 	CROSS += "CC=$(DEB_HOST_GNU_TYPE)-gcc"
@@ -21,17 +20,26 @@ else
 	CROSS +=
 endif
 
-build: patch build-stamp
-build-stamp:
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp: debian/stamp-patched
 	dh_testdir
 	$(MAKE) $(CROSS)
-	python $(CURDIR)/debian/calendarJudaic.py > $(CURDIR)/debian/calendars/calendar.judaic
+	currentyear=$(shell date +%Y); \
+	year=`expr $$currentyear + 5`; \
+	while [ $${year} -ne $${currentyear} ] ; do \
+	    year=`expr $$year - 1`; \
+	    python $(CURDIR)/debian/calendarJudaic.py $$year > $(CURDIR)/debian/calendars/calendar.judaic.$$year; \
+	done; \
+	cd $(CURDIR)/debian/calendars; \
+	[ -L calendar.judaic ] || ln -s calendar.judaic.$$year calendar.judaic;
 	touch build-stamp
 
 clean: unpatch
 	dh_testdir
 	$(MAKE) clean
-	-rm -f $(CURDIR)/debian/calendars/calendar.judaic
+	-rm -f $(CURDIR)/debian/calendars/calendar.judaic*
 	-rm -f build-stamp
 	dh_clean
 
@@ -47,6 +55,7 @@ binary-arch: build install
 	dh_installdocs
 	dh_installchangelogs
 	dh_installcron
+	dh_installinit
 	dh_install
 	dh_strip
 	dh_compress

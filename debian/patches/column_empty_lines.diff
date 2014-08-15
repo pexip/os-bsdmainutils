@@ -1,0 +1,73 @@
+Desription: Add option to not ignore empty lines.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c	2012-01-17 13:32:55.653578240 +0100
++++ bsdmainutils/usr.bin/column/column.c	2012-01-17 13:31:46.929577663 +0100
+@@ -79,6 +79,7 @@
+ int maxlength;			/* longest record */
+ wchar_t **list;			/* array of pointers to records */
+ const wchar_t *separator = L"\t ";	/* field separator for table option */
++int eflag;
+ 
+ int
+ main(int argc, char **argv)
+@@ -99,8 +100,8 @@
+ 	} else
+ 		termwidth = win.ws_col;
+ 
+-	tflag = xflag = 0;
+-	while ((ch = getopt(argc, argv, "c:s:txn")) != -1)
++	tflag = xflag = eflag = 0;
++	while ((ch = getopt(argc, argv, "c:s:txne")) != -1)
+ 		switch(ch) {
+ 		case 'n':
+ 			nomerge = 1;
+@@ -125,6 +126,9 @@
+ 		case 'x':
+ 			xflag = 1;
+ 			break;
++		case 'e':
++			eflag = 1;
++			break;
+ 		case '?':
+ 		default:
+ 			usage();
+@@ -327,6 +331,7 @@
+ 			err(1, (char *)NULL);
+ 	while (fgetws(buf, MAXLINELEN, fp)) {
+ 		for (p = buf; *p && iswspace(*p); ++p);
++		if (eflag) p = buf;
+ 		if (!*p)
+ 			continue;
+ 		if (!(p = wcschr(p, L'\n'))) {
+--- bsdmainutils/usr.bin/column/column.1	2012-01-17 13:32:55.633578239 +0100
++++ bsdmainutils/usr.bin/column/column.1	2012-01-17 13:40:16.381581938 +0100
+@@ -40,7 +40,7 @@
+ .Nd columnate lists
+ .Sh SYNOPSIS
+ .Nm
+-.Op Fl ntx
++.Op Fl entx
+ .Op Fl c Ar columns
+ .Op Fl s Ar sep
+ .Op Ar
+@@ -52,7 +52,9 @@
+ Input is taken from
+ .Ar file
+ operands, or, by default, from the standard input.
+-Empty lines are ignored.
++Empty lines are ignored unless the
++.Fl e
++option is used.
+ .Pp
+ The options are as follows:
+ .Bl -tag -width indent
+@@ -78,6 +80,8 @@
+ single delimiter when using the
+ .Fl t
+ option; this option disables that behavior. This option is a Debian GNU/Linux extension.
++.It Fl e
++Do not ignore empty lines.
+ .El
+ .Sh ENVIRONMENT
+ The

@@ -38,7 +38,8 @@ debian/calendars/calendar.pagan				/usr/share/calendar
 debian/calendars/calendar.belgium			/usr/share/calendar
 debian/calendars/calendar.kazakhstan			/usr/share/calendar
 debian/calendars/calendar.thai				/usr/share/calendar
-debian/calendars/calendar.judaic			/usr/share/calendar
+debian/calendars/calendar.judaic*			/usr/share/calendar
+debian/calendars/calendar.unitedkingdom			/usr/share/calendar
 
 debian/calendars/default				/etc/calendar
 

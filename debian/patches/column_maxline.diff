@@ -1,0 +1,14 @@
+Description: Increase maximal line length to 1MB
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c	2014-10-17 13:51:15.898151112 +0200
++++ bsdmainutils/usr.bin/column/column.c	2014-10-17 13:50:11.058265535 +0200
+@@ -316,7 +316,7 @@
+ }
+ 
+ #define	DEFNUM		1000
+-#define	MAXLINELEN	(LINE_MAX + 1)
++#define	MAXLINELEN	(LINE_MAX * 512 + 1)
+ 
+ void
+ input(FILE *fp)
