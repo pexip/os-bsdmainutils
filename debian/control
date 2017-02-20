@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 7), libncurses5-dev, quilt (>= 0.40), python-hdate
 Standards-Version: 3.9.2
 Vcs-Git: git://git.debian.org/git/bsdmainutils/bsdmainutils.git
 Vcs-Browser: http://git.debian.org/?p=bsdmainutils/bsdmainutils.git
-XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
 
 Package: bsdmainutils
 Architecture: any
