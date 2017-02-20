@@ -3,7 +3,7 @@ Description: Incremented address properly, so all lines are shown completely.
 
 --- bsdmainutils.orig/usr.bin/hexdump/display.c	2011-06-06 15:46:30.000000000 +0200
 +++ bsdmainutils/usr.bin/hexdump/display.c	2011-06-06 15:39:43.000000000 +0200
-@@ -264,18 +264,20 @@
+@@ -263,18 +263,20 @@
  			if (need == blocksize)
  				return((u_char *)NULL);
  			/*
@@ -28,7 +28,7 @@ Description: Incremented address properly, so all lines are shown completely.
  			return(curp);
  		}
  		n = fread((char *)curp + nread, sizeof(u_char),
-@@ -290,13 +292,9 @@
+@@ -289,13 +291,9 @@
  		if (length != -1)
  			length -= n;
  		if (!(need -= n)) {

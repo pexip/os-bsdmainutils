@@ -1,0 +1,23 @@
+Description: Check for an error when reading a file. This will catch encodings that do not work in the current setting.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/column/column.c	2012-01-17 12:51:21.473557315 +0100
++++ bsdmainutils/usr.bin/column/column.c	2012-01-17 12:52:02.633557660 +0100
+@@ -58,6 +58,7 @@
+ #include <unistd.h>
+ #include <wchar.h>
+ #include <wctype.h>
++#include <errno.h>
+ 
+ #define	TAB	8
+ 
+@@ -314,6 +349,9 @@
+ 		wcscpy(list[entries], buf);
+ 		entries++;
+ 	}
++
++	if (errno == EILSEQ)
++		perror("column");
+ }
+ 
+ /* Like wcswidth(), but ignores non-printing characters. */
