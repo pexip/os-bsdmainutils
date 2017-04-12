@@ -26,7 +26,7 @@ build-indep: build-stamp
 build-stamp: debian/stamp-patched
 	dh_testdir
 	$(MAKE) $(CROSS)
-	currentyear=$(shell date +%Y); \
+	currentyear=$(shell date --date="`dpkg-parsechangelog -S Date`" +%Y); \
 	year=`expr $$currentyear + 5`; \
 	while [ $${year} -ne $${currentyear} ] ; do \
 	    year=`expr $$year - 1`; \

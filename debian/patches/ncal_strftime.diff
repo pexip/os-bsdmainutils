@@ -1,0 +1,38 @@
+Description: Display Easter date according to locale rules
+ Use the %x strftime format instead of ad-hoc "%e %B %Y" and "%B %e %Y"
+Author: Sergey Romanov <schragge@gmail.com>
+Bug-Debian: https://bugs.debian.org/252166
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/usr.bin/ncal/ncal.c
++++ b/usr.bin/ncal/ncal.c
+@@ -587,20 +587,6 @@ printeaster(int y, int julian, int ortho
+ 	date    dt;
+ 	struct tm tm;
+ 	char    buf[MAX_WIDTH];
+-#ifndef D_MD_ORDER
+-	static int d_first = -1; /* XXX */
+-	char * str = nl_langinfo(D_FMT);
+-
+-	if (d_first < 0) {
+-		for (; *str && *str != 'd' && *str != 'm'; str++);
+-		d_first = (*str == 'm') ? 0 : 1;
+-	}
+-#else
+-	static int d_first = -1;
+-
+-	if (d_first < 0)
+-		d_first = (*nl_langinfo(D_MD_ORDER) == 'd');
+-#endif
+ 	/* force orthodox easter for years before 1583 */
+ 	if (y < 1583)
+ 		orthodox = 1;
+@@ -617,7 +603,7 @@ printeaster(int y, int julian, int ortho
+ 	tm.tm_year = dt.y - 1900;
+ 	tm.tm_mon  = dt.m - 1;
+ 	tm.tm_mday = dt.d;
+-	strftime(buf, sizeof(buf), d_first ? "%e %B %Y" : "%B %e %Y",  &tm);
++	strftime(buf, sizeof(buf), "%x",  &tm);
+ 	wprintf(L"%s\n", buf);
+ }
+ 

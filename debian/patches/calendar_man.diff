@@ -1,0 +1,14 @@
+Description: Document fall back on system-wide default.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/calendar.orig/calendar.1	2016-03-11 12:09:20.754070717 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.1	2016-03-11 12:16:17.115157932 +0100
+@@ -87,7 +87,7 @@
+ .It Fl f Ar calendarfile
+ Use
+ .Ar calendarfile
+-as the default calendar file.
++as the default calendar file. If this file is not accessible, the system-wide default is used.
+ .It Fl t Oo Oo Oo Ar cc Oc Ns Ar yy Oc Ns Ar mm Oc Ns Ar dd
+ Act like the specified value is
+ .Dq today

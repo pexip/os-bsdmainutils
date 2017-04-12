@@ -1,9 +1,9 @@
 Description: Make calendar UTF-8 aware.
 Author: Michael Meskes <meskes@debian.org>
 
-diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/calendar.h
---- bsdmainutils/usr.bin/calendar/calendar.h	2010-04-04 15:05:50.000000000 +0200
-+++ bsdmainutils/usr.bin/calendar/calendar.h	2010-04-04 15:01:30.000000000 +0200
+diff -ruN bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/calendar.h
+--- bsdmainutils/usr.bin/calendar/calendar.h	2016-03-29 19:23:58.239050027 +0200
++++ bsdmainutils/usr.bin/calendar/calendar.h	2016-03-29 19:25:50.617838707 +0200
 @@ -30,6 +30,7 @@
   */
  
@@ -12,7 +12,7 @@ diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/
  
  extern struct passwd *pw;
  extern int doall;
-@@ -41,45 +42,45 @@
+@@ -42,7 +43,7 @@
  extern char *optarg;
  
  struct fixs {
@@ -21,12 +21,14 @@ diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/
  	int len;
  };
  
+@@ -50,39 +51,39 @@
+ 
  struct event {
  	time_t	when;
--	char	print_date[31];
+-	char	print_date[PRINT_DATE_BASE_LEN+1];
 -	char	**desc;
 -	char	*ldesc;
-+	wchar_t	print_date[31];
++	wchar_t	print_date[PRINT_DATE_BASE_LEN+1];
 +	wchar_t	**desc;
 +	wchar_t	*ldesc;
  	struct event	*next;
@@ -34,8 +36,8 @@ diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/
  
  struct match {
  	time_t	when;
--	char	print_date[30];
-+	wchar_t	print_date[30];
+-	char	print_date[PRINT_DATE_BASE_LEN];
++	wchar_t	print_date[PRINT_DATE_BASE_LEN];
  	int	bodun;
  	int	var;
  	struct match	*next;
@@ -70,7 +72,7 @@ diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/
  FILE	*opencal(void);
  void	 settime(time_t *);
  time_t	 Mktime(char *);
-@@ -102,12 +103,12 @@
+@@ -108,12 +109,12 @@
  
  /* Special events; see also setnnames() in day.c */
  /* '=' is not a valid character in a special event name */
@@ -89,9 +91,9 @@ diff -ru bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar/
  
  /* calendars */
  extern enum calendars { GREGORIAN = 0, JULIAN, LUNAR } calendar;
-diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
---- bsdmainutils/usr.bin/calendar/day.c	2010-04-04 15:05:50.000000000 +0200
-+++ bsdmainutils/usr.bin/calendar/day.c	2010-04-04 14:56:03.000000000 +0200
+diff -ruN bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
+--- bsdmainutils/usr.bin/calendar/day.c	2016-03-29 19:23:58.239050027 +0200
++++ bsdmainutils/usr.bin/calendar/day.c	2016-03-29 19:24:12.055793324 +0200
 @@ -62,13 +62,13 @@
  	{ 0, -1, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 },
  };
@@ -111,7 +113,18 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  };
  
  static struct fixs fndays[8];         /* full national days names */
-@@ -81,63 +81,63 @@
+@@ -80,67 +80,67 @@
+ void
+ fill_print_date(struct match *m, struct tm *tm)
+ {
+-	if (strftime(m->print_date, sizeof(m->print_date),
+-	    daynames ? "%a %b %d" : "%b %d", tm) == 0)
+-		m->print_date[sizeof(m->print_date) - 1] = '\0';
++	if (wcsftime(m->print_date, sizeof(m->print_date),
++	    daynames ? L"%a %b %d" : L"%b %d", tm) == 0)
++		m->print_date[sizeof(m->print_date) - 1] = L'\0';
+ }
+ 
  void
  setnnames(void)
  {
@@ -123,13 +136,12 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  	for (i = 0; i < 7; i++) {
  		tm.tm_wday = i;
 -		l = strftime(buf, sizeof(buf), "%a", &tm);
--		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+-		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 +		l = wcsftime(buf, sizeof(buf), L"%a", &tm);
-+		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
++		for (; l > 0 && iswspace((unsigned char)buf[l - 1]); l--)
  			;
  		buf[l] = '\0';
- 		if (ndays[i].name != NULL)
- 			free(ndays[i].name);
+ 		free(ndays[i].name);
 -		if ((ndays[i].name = strdup(buf)) == NULL)
 +		if ((ndays[i].name = wcsdup(buf)) == NULL)
  			err(1, NULL);
@@ -137,13 +149,12 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
 +		ndays[i].len = wcslen(buf);
  
 -		l = strftime(buf, sizeof(buf), "%A", &tm);
--		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+-		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 +		l = wcsftime(buf, sizeof(buf), L"%A", &tm);
-+		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
++		for (; l > 0 && iswspace((unsigned char)buf[l - 1]); l--)
  			;
  		buf[l] = '\0';
- 		if (fndays[i].name != NULL)
- 			free(fndays[i].name);
+ 		free(fndays[i].name);
 -		if ((fndays[i].name = strdup(buf)) == NULL)
 +		if ((fndays[i].name = wcsdup(buf)) == NULL)
  			err(1, NULL);
@@ -154,13 +165,12 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  	for (i = 0; i < 12; i++) {
  		tm.tm_mon = i;
 -		l = strftime(buf, sizeof(buf), "%b", &tm);
--		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+-		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 +		l = wcsftime(buf, sizeof(buf), L"%b", &tm);
-+		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
++		for (; l > 0 && iswspace((unsigned char)buf[l - 1]); l--)
  			;
  		buf[l] = '\0';
- 		if (nmonths[i].name != NULL)
- 			free(nmonths[i].name);
+ 		free(nmonths[i].name);
 -		if ((nmonths[i].name = strdup(buf)) == NULL)
 +		if ((nmonths[i].name = wcsdup(buf)) == NULL)
  			err(1, NULL);
@@ -168,13 +178,12 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
 +		nmonths[i].len = wcslen(buf);
  
 -		l = strftime(buf, sizeof(buf), "%B", &tm);
--		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+-		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 +		l = wcsftime(buf, sizeof(buf), L"%B", &tm);
-+		for (; l > 0 && iswspace((int)buf[l - 1]); l--)
++		for (; l > 0 && iswspace((unsigned char)buf[l - 1]); l--)
  			;
  		buf[l] = '\0';
- 		if (fnmonths[i].name != NULL)
- 			free(fnmonths[i].name);
+ 		free(fnmonths[i].name);
 -		if ((fnmonths[i].name = strdup(buf)) == NULL)
 +		if ((fnmonths[i].name = wcsdup(buf)) == NULL)
  			err(1, NULL);
@@ -195,7 +204,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  	spev[2].nlen = PASKHALEN;
  	spev[2].getev = paskha;
  	for (i = 0; i < NUMEV; i++) {
-@@ -261,7 +261,7 @@
+@@ -262,7 +262,7 @@
   * with \t, is shown along with the matched line.
   */
  struct match *
@@ -204,7 +213,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  {
  	int day = 0, flags = 0, month = 0, v1, v2, i;
  	int monthp, dayp, varp = 0;
-@@ -386,7 +386,7 @@
+@@ -387,7 +387,7 @@
  	 */
  	if (flags & F_ISDAY) {
  #if DEBUG
@@ -213,22 +222,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  #endif
  
  		varp = 1;
-@@ -458,11 +458,11 @@
- 			}
- 
- 			(void)mktime(&tmtmp);
--			if (strftime(tmp->print_date,
-+			if (wcsftime(tmp->print_date,
- 			    sizeof(tmp->print_date),
- 			/*    "%a %b %d", &tm);  Skip weekdays */
--			    "%b %d", &tmtmp) == 0)
--				tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
-+			    L"%b %d", &tmtmp) == 0)
-+				tmp->print_date[sizeof(tmp->print_date) - 1] = L'\0';
- 
- 			tmp->var   = varp;
- 			tmp->next  = NULL;
-@@ -542,7 +542,7 @@
+@@ -538,7 +538,7 @@
  			}
  			/* How many days apart are we */
  			if ((ttmp = mktime(&tmtmp)) == -1)
@@ -237,22 +231,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  			else {
  				tdiff = difftime(ttmp, f_time)/ SECSPERDAY;
  				if (tdiff <= offset + f_dayAfter ||
-@@ -552,11 +552,11 @@
- 					if ((tmp = malloc(sizeof(struct match))) == NULL)
- 						err(1, NULL);
- 					tmp->when = ttmp;
--					if (strftime(tmp->print_date,
-+					if (wcsftime(tmp->print_date,
- 					    sizeof(tmp->print_date),
- 					/*    "%a %b %d", &tm);  Skip weekdays */
--					    "%b %d", &tmtmp) == 0)
--						tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
-+					    L"%b %d", &tmtmp) == 0)
-+						tmp->print_date[sizeof(tmp->print_date) - 1] = L'\0';
- 					tmp->bodun = bodun && tdiff == -1;
- 					tmp->var   = varp;
- 					tmp->next  = NULL;
-@@ -577,38 +577,38 @@
+@@ -569,38 +569,38 @@
  
  
  int
@@ -301,7 +280,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  			return ((p - days) + 1);
  	return (0);
  }
-@@ -619,21 +619,21 @@
+@@ -611,21 +611,21 @@
   * ... etc ...
   */
  int
@@ -328,7 +307,7 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  	    break;
  	}
  
-@@ -642,15 +642,15 @@
+@@ -634,15 +634,15 @@
  	 */
  
  	/* last */
@@ -349,24 +328,19 @@ diff -ru bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
  	    return(+4);
  
  	/* no offset detected */
-diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
---- bsdmainutils/usr.bin/calendar/io.c	2010-04-04 15:05:50.000000000 +0200
-+++ bsdmainutils/usr.bin/calendar/io.c	2010-04-04 14:50:18.000000000 +0200
-@@ -46,11 +46,12 @@
- #include <stdlib.h>
+diff -ruN bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
+--- bsdmainutils/usr.bin/calendar/io.c	2016-03-29 19:23:58.239050027 +0200
++++ bsdmainutils/usr.bin/calendar/io.c	2016-03-29 19:25:00.338662564 +0200
+@@ -46,6 +46,8 @@
  #include <string.h>
  #include <unistd.h>
+ #include <limits.h>
 +#include <wctype.h>
 +#include <iconv.h>
  
  #include "pathnames.h"
  #include "calendar.h"
- 
--
- struct iovec header[] = {
- 	{ "From: ", 6 },
- 	{ NULL, 0 },
-@@ -62,13 +63,37 @@
+@@ -62,13 +64,37 @@
  	{ "Auto-Submitted: auto-generated\n\n", 32 },
  };
  
@@ -406,7 +380,7 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  	struct match *m;
  	FILE *fp;
  
-@@ -76,22 +101,41 @@
+@@ -76,26 +102,45 @@
  	cur_evt = NULL;
  	if ((fp = opencal()) == NULL)
  		return;
@@ -420,8 +394,8 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  			while ((ch = getchar()) != '\n' && ch != EOF);
 -		for (l = strlen(buf); l > 0 && isspace(buf[l - 1]); l--)
 +		/* convert the line */
-+	        if (utf8mode)
-+        	        i = utf8towcs(buf, filebuf, 2048);
++		if (utf8mode)
++			i = utf8towcs(buf, filebuf, 2048);
 +		else
 +			i = mbstowcs(buf, filebuf, 2048);
 +
@@ -450,16 +424,23 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 +					errx(1, "switch to locale ``%s'' cannot be honored", filebuf + 5);
 +			}
  			setnnames();
--			if (!strcmp(buf + 5, "ru_RU.KOI8-R") ||
+ 			/* XXX remove KOI8 lines after 5.9 is out */
+-			if (!strcmp(buf + 5, "ru_RU.UTF-8") ||
+-			    !strcmp(buf + 5, "uk_UA.UTF-8") ||
+-			    !strcmp(buf + 5, "by_BY.UTF-8") ||
+-			    !strcmp(buf + 5, "ru_RU.KOI8-R") ||
 -			    !strcmp(buf + 5, "uk_UA.KOI8-U") ||
 -			    !strcmp(buf + 5, "by_BY.KOI8-B")) {
-+			if (!strcmp(filebuf + 5, "ru_RU.KOI8-R") ||
++			if (!strcmp(filebuf + 5, "ru_RU.UTF-8") ||
++			    !strcmp(filebuf + 5, "uk_UA.UTF-8") ||
++			    !strcmp(filebuf + 5, "by_BY.UTF-8") ||
++			    !strcmp(filebuf + 5, "ru_RU.KOI8-R") ||
 +			    !strcmp(filebuf + 5, "uk_UA.KOI8-U") ||
 +			    !strcmp(filebuf + 5, "by_BY.KOI8-B")) {
  				bodun_maybe++;
  				bodun = 0;
- 				if (prefix)
-@@ -100,60 +144,60 @@
+ 				free(prefix);
+@@ -103,58 +148,58 @@
  			} else
  				bodun_maybe = 0;
  			continue;
@@ -492,8 +473,7 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 -		} else if (bodun_maybe && strncmp(buf, "BODUN=", 6) == 0) {
 +		} else if (bodun_maybe && wcsncmp(buf, L"BODUN=", 6) == 0) {
  			bodun++;
- 			if (prefix)
- 				free(prefix);
+ 			free(prefix);
 -			if ((prefix = strdup(buf + 6)) == NULL)
 +			if ((prefix = wcsdup(buf + 6)) == NULL)
  				err(1, NULL);
@@ -509,8 +489,7 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  				    (p - buf == spev[i].nlen) &&
  				    buf[spev[i].nlen + 1]) {
  					p++;
- 					if (spev[i].uname != NULL)
- 						free(spev[i].uname);
+ 					free(spev[i].uname);
 -					if ((spev[i].uname = strdup(p)) == NULL)
 +					if ((spev[i].uname = wcsdup(p)) == NULL)
  						err(1, NULL);
@@ -537,9 +516,9 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  				var = 1;
  			else
  				var = 0;
-@@ -167,20 +211,22 @@
+@@ -168,20 +213,22 @@
  						err(1, NULL);
- 	
+ 
  					cur_evt->when = m->when;
 -					snprintf(cur_evt->print_date,
 -					    sizeof(cur_evt->print_date), "%s%c",
@@ -555,20 +534,19 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 -							if (asprintf(&cur_evt->ldesc,
 -							    "\t%s %s", prefix,
 -							    p + 1) == -1)
--								err(1, NULL);
 +							nlen = wcslen(prefix) + wcslen(p);
 +							if ((cur_evt->ldesc = malloc(nlen * sizeof (wchar_t))) == NULL)
-+	                                                       	err(1, NULL);
+ 								err(1, NULL);
 +							swprintf(cur_evt->ldesc, nlen,
-+							    L"\t%ls %ls", prefix,
-+							    p + 1);
++								L"\t%ls %ls", prefix,
++								p + 1);
  						} else if ((cur_evt->ldesc =
 -						    strdup(p)) == NULL)
 +						    wcsdup(p)) == NULL)
  							err(1, NULL);
  						cur_evt->desc = &(cur_evt->ldesc);
  						ev1 = cur_evt;
-@@ -192,16 +238,20 @@
+@@ -193,16 +240,19 @@
  				}
  			}
  		} else if (printing) {
@@ -588,12 +566,11 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  	tmp = events;
  	while (tmp) {
 -		(void)fprintf(fp, "%s%s\n", tmp->print_date, *(tmp->desc));
-+		(void)fprintf(fp, "%ls%ls", tmp->print_date, *(tmp->desc));
-+		(void)fprintf(fp, "\n");
++		(void)fprintf(fp, "%ls%ls\n", tmp->print_date, *(tmp->desc));
  		tmp = tmp->next;
  	}
  	tmp = events;
-@@ -216,31 +266,31 @@
+@@ -216,33 +267,33 @@
  }
  
  int
@@ -604,8 +581,10 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 -	char *start, savech;
 +	wchar_t *start, savech;
  
--	for (; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
-+	for (; !iswdigit(*p) && !iswalpha(*p) && *p != L'*' && *p != L'\t'; ++p)
+-	for (; !isdigit((unsigned char)*p) && !isalpha((unsigned char)*p) &&
+-	    *p != '*' && *p != '\t'; ++p)
++	for (; !iswdigit(*p) && !iswalpha(*p) &&
++	    *p != L'*' && *p != L'\t'; ++p)
  		;
 -	if (*p == '*') {			/* `*' is every month */
 +	if (*p == L'*') {			/* `*' is every month */
@@ -613,29 +592,31 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  		*endp = p+1;
  		return (-1);	/* means 'every month' */
  	}
--	if (isdigit(*p)) {
+-	if (isdigit((unsigned char)*p)) {
 -		val = strtol(p, &p, 10);	/* if 0, it's failure */
--		for (; !isdigit(*p) && !isalpha(*p) && *p != '*'; ++p)
+-		for (; !isdigit((unsigned char)*p) &&
+-		    !isalpha((unsigned char)*p) && *p != '*'; ++p)
 +	if (iswdigit(*p)) {
 +		val = wcstol(p, &p, 10);	/* if 0, it's failure */
-+		for (; !iswdigit(*p) && !iswalpha(*p) && *p != L'*'; ++p)
++		for (; !iswdigit(*p) &&
++		    !iswalpha(*p) && *p != L'*'; ++p)
  			;
  		*endp = p;
  		return (val);
  	}
--	for (start = p; isalpha(*++p);)
+-	for (start = p; isalpha((unsigned char)*++p);)
 +	for (start = p; iswalpha(*++p);)
  		;
  
  	/* Sunday-1 */
 -	if (*p == '+' || *p == '-')
--		for(; isdigit(*++p); )
+-		for(; isdigit((unsigned char)*++p); )
 +	if (*p == L'+' || *p == L'-')
 +		for(; iswdigit(*++p); )
  			;
  
  	savech = *p;
-@@ -267,12 +317,12 @@
+@@ -269,12 +320,12 @@
  	/* Try specials (Easter, Paskha, ...) */
  	else {
  		for (i = 0; i < NUMEV; i++) {
@@ -650,25 +631,41 @@ diff -ru bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  				start += spev[i].ulen;
  				val = i + 1;
  				i = NUMEV + 1;
-@@ -280,9 +330,9 @@
- 		}
- 		if (i > NUMEV) {
- 			switch(*start) {
+@@ -284,10 +335,10 @@
+ 			const char *errstr;
+ 
+ 			switch (*start) {
 -			case '-':
 -			case '+':
--				var = atoi(start);
+-				var = strtonum(start + 1, 0, 365, &errstr);
+-				if (errstr)
 +			case L'-':
 +			case L'+':
-+				var = wcstol(start, (wchar_t **) NULL, 10);
- 				if (var > 365 || var < -365)
++				var = wcstol(start + 1, (wchar_t **) NULL, 10);
++				if (var > 365 || var < 0)
  					return (0); /* Someone is just being silly */
- 				val += (NUMEV + 1) * var;
-@@ -300,7 +350,7 @@
+ 				if (*start == '-')
+ 					var = -var;
+@@ -306,8 +357,8 @@
  			return (0);
  		}
  	}
--	for (*p = savech; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
-+	for (*p = savech; !iswdigit(*p) && !iswalpha(*p) && *p != L'*' && *p != L'\t'; ++p)
+-	for (*p = savech; !isdigit((unsigned char)*p) &&
+-	    !isalpha((unsigned char)*p) && *p != '*' && *p != '\t'; ++p)
++	for (*p = savech; !iswdigit(*p) &&
++	    !iswalpha(*p) && *p != L'*' && *p != L'\t'; ++p)
  		;
  	*endp = p;
  	return (val);
+diff -ruN bsdmainutils/usr.bin/calendar/pathnames.h bsdmainutils/usr.bin/calendar/pathnames.h
+--- bsdmainutils/usr.bin/calendar/pathnames.h	2016-03-29 19:23:58.239050027 +0200
++++ bsdmainutils/usr.bin/calendar/pathnames.h	2016-03-29 19:24:12.055793324 +0200
+@@ -33,7 +33,7 @@
+ 
+ #include <paths.h>
+ 
+-#define	_PATH_CPP	"/usr/libexec/tradcpp"
++#define	_PATH_CPP	"/usr/bin/cpp"
+ 
+ 			/* XXX -- fix when cpp parses arguments rationally */
+ #define	_PATH_INCLUDE	"-I/usr/share/calendar"

@@ -127,24 +127,24 @@ LANG=UTF-8
     parasha['diaspora'] = h.get_parasha_string(0)
     if holyday['Israel']:
       if holyday['Israel'] == holyday['diaspora']:
-        print "%02d/%02d*	%s" % (day, month, holyday['Israel'])
+        print "%02d/%02d*	%s" % (month, day, holyday['Israel'])
       else:
         print "%02d/%02d*	%s (Israel only)" % \
-                                (day, month, holyday['Israel'])
+                                (month, day, holyday['Israel'])
     elif holyday['diaspora']:
       print "%02d/%02d*	%s (diaspora only)" % \
-                                (day, month, holyday['diaspora'])
+                                (month, day, holyday['diaspora'])
     if parasha['Israel']  and  parasha['Israel'] != 'none':
       if parasha['Israel'] == parasha['diaspora']:
         print "%02d/%02d*	Parshat %s" % \
-                                (day, month, parasha['Israel'])
+                                (month, day, parasha['Israel'])
       else:
         print "%02d/%02d*	%s (Israel only)" % \
-                                (day, month, parasha['Israel'])
+                                (month, day, parasha['Israel'])
     elif parasha['diaspora']  and  parasha['diaspora'] != 'none':
     # See http://bugs.debian.org/583092 why 'none' is required here.
       print "%02d/%02d*	Parshat %s (diaspora only)" % \
-                                (day, month, parasha['diaspora'])
+                                (month, day, parasha['diaspora'])
 
   print footer
 

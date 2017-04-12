@@ -1,3 +1,71 @@
+bsdmainutils (9.0.12+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix one newline too much in patch. (Closes: #859933)
+
+ -- Thorsten Glaser <tg@mirbsd.de>  Wed, 12 Apr 2017 13:22:14 +0200
+
+bsdmainutils (9.0.12) unstable; urgency=medium
+
+  * Made hexdump work with length arguments greater than 2^31. (Closes: #841454)
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 25 Oct 2016 11:05:53 +0200
+
+bsdmainutils (9.0.11) unstable; urgency=medium
+
+  * Updated ubuntu calendar.
+    Thanks to Dimitri John Ledkov <xnox@ubuntu.com> (Closes: #834128)
+  * Wide characters need more space than normal ones, so allocate more.
+    (Closes: #839113)
+  * Updated lorder to latest SVN snapshot from FreeBSD. (Closes: #830259)
+  * More clarifications about options. (Closes: #826370)
+  * Bumped Standards-Version to 3.9.8, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 29 Sep 2016 14:08:33 +0200
+
+bsdmainutils (9.0.10) unstable; urgency=medium
+
+  * Re-added a few changes that got lost during last update. (Closes: #819067)
+  * Removed check for uid. (Closes: #743215)
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 29 Mar 2016 19:39:31 +0200
+
+bsdmainutils (9.0.9) unstable; urgency=medium
+
+  * Do not document an option that does not exist anymore.
+  * Fix date order in judaic calendar.
+    Thanks to Sergey Romanov <schragge@gmail.com>
+  * Let libc handle correct date output for different locales.
+    Thanks to Sergey Romanov <shruggy@yandex.ru> (Closes: #252166)
+  * Correctly document maximal line length. (Closes: #441048)
+
+ -- Michael Meskes <meskes@debian.org>  Sat, 19 Mar 2016 21:19:31 +0100
+
+bsdmainutils (9.0.8) unstable; urgency=medium
+
+  * Fix first day of week calculation for cal. (Closes: #817916)
+  * Fix escape bug in hexdump.
+    Thanks to Rémi Rampin <remirampin@gmail.com> (Closes: #776096)
+
+ -- Michael Meskes <meskes@debian.org>  Sat, 12 Mar 2016 12:27:26 +0100
+
+bsdmainutils (9.0.7) unstable; urgency=medium
+
+  * Updated calendar and lorder from OpenBSD.
+  * Bumped Standards-Version to 3.9.7, no changes needed.
+  * (Printer)Banner will probably always be ascii only, so let's document it.
+    (Closes: #570036)
+  * Removed entries with unparsable dates from UK calendar. (Closes: #806846)
+  * Ignore escape sequences when calculating length of entry. (Closes: #627481)
+  * Combine patches that handle first day of week.
+  * Dynamically allocate buffer to reduce stack size. (Closes: #784734)
+  * Cleanup usage of conflicting options. (Closes: #688078, #783470)
+  * Updated to delbhelper 9.
+  * Document fall back on system-wide default. (Closes: #739915)
+  * Use changelog date instead of current date when building jewish calendars.
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 11 Mar 2016 13:01:23 +0100
+
 bsdmainutils (9.0.6) unstable; urgency=medium
 
   * Add Ubuntu 13.04 release date to calendar.ubuntu.
@@ -312,7 +380,7 @@ bsdmainutils (8.0.1) unstable; urgency=low
   * Patched new calendar sources to use wide-character functions.
   * Created patch to put Debian specific options back into calendar
     tool. (Closes: #293689)
-  * Updated all calendars from their FreeBSD sources. 
+  * Updated all calendars from their FreeBSD sources.
     (Closes: #388153, #413900, #446547, #542229)
   * Added/Fixed some calendar entries as reported by Debian users.
     (Closes: #554561, #337311, #525925, #493759, #381114, #280176))

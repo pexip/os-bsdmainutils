@@ -1,4 +1,4 @@
-/*	$OpenBSD: calendar.h,v 1.13 2010/04/28 18:20:15 jsg Exp $	*/
+/*	$OpenBSD: calendar.h,v 1.15 2015/12/07 18:46:35 espie Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993, 1994
@@ -32,6 +32,7 @@
 
 extern struct passwd *pw;
 extern int doall;
+extern int daynames;
 extern int bodun_always;
 extern time_t f_time;
 extern struct tm *tp;
@@ -44,9 +45,11 @@ struct fixs {
 	int len;
 };
 
+#define PRINT_DATE_BASE_LEN 35
+
 struct event {
 	time_t	when;
-	char	print_date[31];
+	char	print_date[PRINT_DATE_BASE_LEN+1];
 	char	**desc;
 	char	*ldesc;
 	struct event	*next;
@@ -54,7 +57,7 @@ struct event {
 
 struct match {
 	time_t	when;
-	char	print_date[30];
+	char	print_date[PRINT_DATE_BASE_LEN];
 	int	bodun;
 	int	var;
 	struct match	*next;
@@ -94,6 +97,9 @@ void	 setnnames(void);
 #define	F_SPECIAL	0x08 /* Events that occur once a year but don't track
 			      * calendar time--e.g.  Easter or easter depending
 			      * days */
+
+#define	SECSPERDAY	(24 * 60 * 60)
+#define	isleap(y) (((y) % 4) == 0 && (((y) % 100) != 0 || ((y) % 400) == 0))
 
 extern int f_dayAfter;	/* days after current date */
 extern int f_dayBefore;	/* days before current date */

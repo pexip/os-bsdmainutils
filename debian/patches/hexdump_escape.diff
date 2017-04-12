@@ -1,0 +1,26 @@
+Author: Rémi Rampin <remirampin@gmail.com>
+Description: Fix escape bug in hexdump.
+--- bsdmainutils/usr.bin/hexdump/parse.c	2015-09-04 09:04:57.000000000 -0400
++++ bsdmainutils/usr.bin/hexdump/parse.c	2015-09-04 10:12:27.705336045 -0400
+@@ -454,10 +454,6 @@
+ 
+ 	/* alphabetic escape sequences have to be done in place */
+ 	for (p2 = p1;; ++p1, ++p2) {
+-		if (!*p1) {
+-			*p2 = *p1;
+-			break;
+-		}
+ 		if (*p1 == '\\')
+ 			switch(*++p1) {
+ 			case 'a':
+@@ -486,6 +482,10 @@
+ 				*p2 = *p1;
+ 				break;
+ 			}
++		else
++			*p2 = *p1;
++		if(!*p1)
++			break;
+ 	}
+ }
+ 

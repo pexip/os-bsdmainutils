@@ -152,24 +152,3 @@ Author: Michael Meskes <meskes@debian.org>
  	if (nloggedttys == 0)
  		errx(1, "%s is not logged in", user);
  	if (nttys == 0) {
-@@ -263,6 +323,20 @@
- 			login = "???";
- 	}
- 
-+	/* got the utmp entry: ensure it matches the uid */
-+	if ((pwd = getpwnam(login)) == NULL)
-+		/* claimed utmp entry isn't in the password file */
-+		errx(1, "you're %s, eh? Never heard of you.", login);
-+	if (myuid != pwd->pw_uid) {
-+		/* uid of logname in utmp is different from our uid,
-+		   eg su'ed in someone else's login */
-+		if (myuid != 0)
-+			errx(1, "you are uid %d, but your login is as uid %d",
-+			    myuid, pwd->pw_uid);
-+		else
-+		    warnx("warning: write will appear from %s", login);
-+	}
-+
- 	(void)snprintf(path, sizeof(path), "%s%s", _PATH_DEV, tty);
- 	if ((freopen(path, "w", stdout)) == NULL)
- 		err(1, "%s", path);
