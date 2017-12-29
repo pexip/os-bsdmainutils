@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
  * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -10,11 +12,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. All advertising materials mentioning features or use of this software
- *    must display the following acknowledgement:
- *	This product includes software developed by the University of
- *	California, Berkeley and its contributors.
- * 4. Neither the name of the University nor the names of its contributors
+ * 3. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
@@ -35,7 +33,7 @@
 static const char sccsid[] = "@(#)conv.c	8.1 (Berkeley) 6/6/93";
 #endif /* not lint */
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+__FBSDID("$FreeBSD: head/usr.bin/hexdump/conv.c 326025 2017-11-20 19:49:47Z pfg $");
 
 #include <sys/types.h>
 
@@ -57,7 +55,7 @@ conv_c(PR *pr, u_char *p, size_t bufsize)
 	wchar_t wc;
 	size_t clen, oclen;
 	int converr, pad, width;
-	char peekbuf[MB_LEN_MAX];
+	u_char peekbuf[MB_LEN_MAX];
 
 	if (pr->mbleft > 0) {
 		str = "**";
@@ -107,7 +105,7 @@ retry:
 		if (clen == 0)
 			clen = 1;
 		else if (clen == (size_t)-1 || (clen == (size_t)-2 &&
-		    buf == peekbuf)) {
+		    p == peekbuf)) {
 			memset(&pr->mbstate, 0, sizeof(pr->mbstate));
 			wc = *p;
 			clen = 1;
@@ -155,7 +153,7 @@ conv_u(PR *pr, u_char *p)
 	static char const * list[] = {
 		"nul", "soh", "stx", "etx", "eot", "enq", "ack", "bel",
 		 "bs",  "ht",  "lf",  "vt",  "ff",  "cr",  "so",  "si",
-		"dle", "dcl", "dc2", "dc3", "dc4", "nak", "syn", "etb",
+		"dle", "dc1", "dc2", "dc3", "dc4", "nak", "syn", "etb",
 		"can",  "em", "sub", "esc",  "fs",  "gs",  "rs",  "us",
 	};
 

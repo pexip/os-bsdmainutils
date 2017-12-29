@@ -1,0 +1,37 @@
+--- bsdmainutils/usr.bin/calendar/calendar.c	2016-03-07 15:26:49.186659640 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.c	2016-03-07 15:31:54.285217386 +0100
+@@ -35,7 +35,6 @@
+ #include <err.h>
+ #include <errno.h>
+ #include <locale.h>
+-#include <login_cap.h>
+ #include <pwd.h>
+ #include <signal.h>
+ #include <stdio.h>
+@@ -123,15 +123,6 @@
+ 	if (argc)
+ 		usage();
+ 
+-	if (doall) {
+-		if (pledge("stdio rpath tmppath fattr getpw id proc exec", NULL)
+-		    == -1)
+-			err(1, "pledge");
+-	} else {
+-		if (pledge("stdio rpath proc exec", NULL) == -1)
+-			err(1, "pledge");
+-	}
+-
+ 	/* use current time */
+ 	if (f_time <= 0)
+ 	    (void)time(&f_time);
+@@ -190,10 +181,6 @@
+ 			case 0:	/* child */
+ 				(void)setpgid(getpid(), getpid());
+ 				(void)setlocale(LC_ALL, "");
+-				if (setusercontext(NULL, pw, pw->pw_uid,
+-				    LOGIN_SETALL ^ LOGIN_SETLOGIN))
+-					err(1, "unable to set user context (uid %u)",
+-					    pw->pw_uid);
+ 				if (acstat) {
+ 					if (chdir(pw->pw_dir) ||
+ 					    stat(calendarFile, &sbuf) != 0 ||

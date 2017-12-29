@@ -2,9 +2,9 @@ Source: bsdmainutils
 Section: utils
 Priority: important
 Maintainer: Debian Bsdmainutils Team <pkg-bsdmainutils@teams.debian.net>
-Uploaders: Giacomo Catenazzi <cate@debian.org>, Michael Meskes <meskes@debian.org>
-Build-Depends: debhelper (>= 9), libncurses5-dev, quilt (>= 0.40), python, python-hdate, libbsd-dev
-Standards-Version: 3.9.8
+Uploaders: Michael Meskes <meskes@debian.org>
+Build-Depends: debhelper (>= 9), libncurses-dev, quilt (>= 0.40), python:native, python-hdate:native, libbsd-dev
+Standards-Version: 4.1.2
 Vcs-Git: git://anonscm.debian.org/bsdmainutils/bsdmainutils.git
 Vcs-Browser: https://anonscm.debian.org/gitweb/?p=bsdmainutils/bsdmainutils.git
 

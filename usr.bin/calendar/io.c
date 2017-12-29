@@ -1,4 +1,4 @@
-/*	$OpenBSD: io.c,v 1.43 2015/12/08 19:04:50 mmcc Exp $	*/
+/*	$OpenBSD: io.c,v 1.47 2017/09/25 19:13:56 krw Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993, 1994
@@ -89,13 +89,9 @@ cal(void)
 		if (strncmp(buf, "LANG=", 5) == 0) {
 			(void) setlocale(LC_ALL, buf + 5);
 			setnnames();
-			/* XXX remove KOI8 lines after 5.9 is out */
 			if (!strcmp(buf + 5, "ru_RU.UTF-8") ||
 			    !strcmp(buf + 5, "uk_UA.UTF-8") ||
-			    !strcmp(buf + 5, "by_BY.UTF-8") ||
-			    !strcmp(buf + 5, "ru_RU.KOI8-R") ||
-			    !strcmp(buf + 5, "uk_UA.KOI8-U") ||
-			    !strcmp(buf + 5, "by_BY.KOI8-B")) {
+			    !strcmp(buf + 5, "by_BY.UTF-8")) {
 				bodun_maybe++;
 				bodun = 0;
 				free(prefix);
@@ -335,12 +331,15 @@ opencal(void)
 		}
 	}
 
-	if (pipe(pdes) < 0)
+	if (pipe(pdes) < 0) {
+		close(fdin);
 		return (NULL);
+	}
 	switch (vfork()) {
 	case -1:			/* error */
 		(void)close(pdes[0]);
 		(void)close(pdes[1]);
+		close(fdin);
 		return (NULL);
 	case 0:
 		dup2(fdin, STDIN_FILENO);
@@ -386,6 +385,7 @@ closecal(FILE *fp)
 	struct stat sbuf;
 	int nread, pdes[2], status;
 	char buf[1024];
+	pid_t pid = -1;
 
 	if (!doall)
 		return;
@@ -395,7 +395,7 @@ closecal(FILE *fp)
 		goto done;
 	if (pipe(pdes) < 0)
 		goto done;
-	switch (vfork()) {
+	switch ((pid = vfork())) {
 	case -1:			/* error */
 		(void)close(pdes[0]);
 		(void)close(pdes[1]);
@@ -422,8 +422,12 @@ closecal(FILE *fp)
 		(void)write(pdes[1], buf, nread);
 	(void)close(pdes[1]);
 done:	(void)fclose(fp);
-	while (wait(&status) >= 0)
-		;
+	if (pid != -1) {
+		while (waitpid(pid, &status, 0) == -1) {
+			if (errno != EINTR)
+				break;
+		}
+	}
 }
 
 

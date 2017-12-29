@@ -1,7 +1,8 @@
 PROG   = ncal
 SRC    = ncal.c calendar.c easter.c
+FLAGS  = -D_GNU_SOURCE -include bsd/string.h
 
-LIBS+=-lncurses
+LIBS  += -ltinfo -lbsd
 
 topdir=../..
 include $(topdir)/config.mk

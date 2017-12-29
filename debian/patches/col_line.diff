@@ -1,17 +1,9 @@
 Description: Fix segfaults
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/col/col.c	2014-10-17 15:39:56.359532422 +0200
-+++ bsdmainutils/usr.bin/col/col.c	2014-10-17 15:35:30.895933386 +0200
-@@ -49,6 +49,7 @@
- #include <sys/cdefs.h>
- 
- #include <err.h>
-+#include <limits.h>
- #include <locale.h>
- #include <stdio.h>
- #include <stdlib.h>
-@@ -78,7 +79,7 @@
+--- bsdmainutils/usr.bin/col/col.c	2017-12-19 16:24:54.197178946 +0100
++++ bsdmainutils/usr.bin/col/col.c	2017-12-19 16:28:08.117289280 +0100
+@@ -82,7 +80,7 @@
  typedef struct char_str {
  #define	CS_NORMAL	1
  #define	CS_ALTERNATE	2
@@ -20,7 +12,7 @@ Author: Michael Meskes <meskes@debian.org>
  	CSET		c_set;		/* character set (currently only 2) */
  	wchar_t		c_char;		/* character in question */
  	int		c_width;	/* character width */
-@@ -206,7 +207,8 @@
+@@ -229,7 +221,8 @@
  				cur_col = 0;
  				continue;
  			case SPACE:
@@ -30,7 +22,7 @@ Author: Michael Meskes <meskes@debian.org>
  				continue;
  			case SI:
  				cur_set = CS_NORMAL;
-@@ -215,15 +217,17 @@
+@@ -238,8 +231,10 @@
  				cur_set = CS_ALTERNATE;
  				continue;
  			case TAB:		/* adjust column */
@@ -42,27 +34,13 @@ Author: Michael Meskes <meskes@debian.org>
 +				}
  				continue;
  			case VT:
- 				cur_line -= 2;
- 				continue;
- 			}
- 			if (iswspace(ch)) {
--				if ((width = wcwidth(ch)) > 0)
-+				if ((width = wcwidth(ch)) > 0 && cur_col < INT_MAX)
- 					cur_col += width;
- 				continue;
- 			}
-@@ -309,12 +313,12 @@
+ 				addto_lineno(&cur_line, -2);
+@@ -335,7 +330,7 @@
  			l->l_needs_sort = 1;
  		else
  			l->l_max_col = cur_col;
 -		if (c->c_width > 0)
-+		if (c->c_width > 0 && cur_col < INT_MAX) 
++		if (c->c_width > 0 && cur_col < INT_MAX)
  			cur_col += c->c_width;
  	}
  	if (ferror(stdin))
- 		err(1, NULL);
--	if (max_line == 0)
-+	if (max_line == 0 && l->l_line_len == 0)
- 		exit(0);	/* no lines, so just exit */
- 
- 	/* goto the last line that had a character on it */

@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
  * Copyright (c) 1980, 1988, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -10,11 +12,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. All advertising materials mentioning features or use of this software
- *    must display the following acknowledgement:
- *	This product includes software developed by the University of
- *	California, Berkeley and its contributors.
- * 4. Neither the name of the University nor the names of its contributors
+ * 3. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
@@ -43,7 +41,7 @@ static char sccsid[] = "@(#)from.c	8.1 (Berkeley) 6/6/93";
 #endif
 #endif /* not lint */
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+__FBSDID("$FreeBSD: head/usr.bin/from/from.c 326025 2017-11-20 19:49:47Z pfg $");
 
 #include <sys/types.h>
 #include <ctype.h>
@@ -55,7 +53,7 @@ __FBSDID("$FreeBSD$");
 #include <string.h>
 #include <unistd.h>
 
-int match(const char *, const char *);
+static int match(const char *, const char *);
 static void usage(void);
 
 int
@@ -85,8 +83,7 @@ main(int argc, char **argv)
 		case 's':
 			sender = optarg;
 			for (p = sender; *p; ++p)
-				if (isupper(*p))
-					*p = tolower(*p);
+				*p = tolower(*p);
 			break;
 		case '?':
 		default:
@@ -146,7 +143,7 @@ usage(void)
 	exit(1);
 }
 
-int
+static int
 match(const char *line, const char *sender)
 {
 	char ch, pch, first;
@@ -156,15 +153,14 @@ match(const char *line, const char *sender)
 		if (isspace(ch = *line))
 			return(0);
 		++line;
-		if (isupper(ch))
-			ch = tolower(ch);
+		ch = tolower(ch);
 		if (ch != first)
 			continue;
 		for (p = sender, t = line;;) {
 			if (!(pch = *p++))
 				return(1);
-			if (isupper(ch = *t++))
-				ch = tolower(ch);
+			ch = tolower(*t);
+			t++;
 			if (ch != pch)
 				break;
 		}
