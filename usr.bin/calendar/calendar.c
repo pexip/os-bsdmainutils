@@ -1,4 +1,4 @@
-/*	$OpenBSD: calendar.c,v 1.27 2011/09/12 21:23:00 jmc Exp $	*/
+/*	$OpenBSD: calendar.c,v 1.35 2015/12/07 18:46:35 espie Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993, 1994
@@ -41,8 +41,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include <time.h>
-#include <tzfile.h>
 #include <unistd.h>
 
 #include "pathnames.h"
@@ -54,6 +54,7 @@ char *calendarNoMail = "nomail";  /* don't sent mail if this file exists */
 
 struct passwd *pw;
 int doall = 0;
+int daynames = 0;
 time_t f_time = 0;
 int bodun_always = 0;
 
@@ -69,11 +70,12 @@ int
 main(int argc, char *argv[])
 {
 	int ch;
+	const char *errstr;
 	char *caldir;
 
 	(void)setlocale(LC_ALL, "");
 
-	while ((ch = getopt(argc, argv, "abf:t:A:B:-")) != -1)
+	while ((ch = getopt(argc, argv, "abwf:t:A:B:-")) != -1)
 		switch (ch) {
 		case '-':		/* backward contemptible */
 		case 'a':
@@ -83,7 +85,7 @@ main(int argc, char *argv[])
 			break;
 
 		case 'b':
-			bodun_always++;
+			bodun_always = 1;
 			break;
 
 		case 'f': /* other calendar file */
@@ -96,12 +98,20 @@ main(int argc, char *argv[])
 			break;
 
 		case 'A': /* days after current date */
-			f_dayAfter = atoi(optarg);
+			f_dayAfter = strtonum(optarg, 0, INT_MAX, &errstr);
+			if (errstr)
+				errx(1, "-A %s: %s", optarg, errstr);
 			f_SetdayAfter = 1;
 			break;
 
 		case 'B': /* days before current date */
-			f_dayBefore = atoi(optarg);
+			f_dayBefore = strtonum(optarg, 0, INT_MAX, &errstr);
+			if (errstr)
+				errx(1, "-B %s: %s", optarg, errstr);
+			break;
+
+		case 'w':
+			daynames = 1;
 			break;
 
 		default:
@@ -112,6 +122,15 @@ main(int argc, char *argv[])
 
 	if (argc)
 		usage();
+
+	if (doall) {
+		if (pledge("stdio rpath tmppath fattr getpw id proc exec", NULL)
+		    == -1)
+			err(1, "pledge");
+	} else {
+		if (pledge("stdio rpath proc exec", NULL) == -1)
+			err(1, "pledge");
+	}
 
 	/* use current time */
 	if (f_time <= 0)
@@ -169,6 +188,7 @@ main(int argc, char *argv[])
 				warn("fork");
 				continue;
 			case 0:	/* child */
+				(void)setpgid(getpid(), getpid());
 				(void)setlocale(LC_ALL, "");
 				if (setusercontext(NULL, pw, pw->pw_uid,
 				    LOGIN_SETALL ^ LOGIN_SETLOGIN))
@@ -177,7 +197,7 @@ main(int argc, char *argv[])
 				if (acstat) {
 					if (chdir(pw->pw_dir) ||
 					    stat(calendarFile, &sbuf) != 0 ||
-					    chdir(calendarHome) || 
+					    chdir(calendarHome) ||
 					    stat(calendarNoMail, &sbuf) == 0 ||
 					    stat(calendarFile, &sbuf) != 0)
 						exit(0);
@@ -214,7 +234,10 @@ main(int argc, char *argv[])
 				/* It doesn't _really_ matter if the kill fails, e.g.
 				 * if there's only a zombie now.
 				 */
-				(void)kill(kid, SIGTERM);
+				if (getpgid(kid) != getpgrp())
+					(void)killpg(getpgid(kid), SIGTERM);
+				else
+					(void)kill(kid, SIGTERM);
 				warnx("uid %u did not finish in time", pw->pw_uid);
 			}
 			if (time(NULL) - t >= SECSPERDAY)
@@ -245,7 +268,7 @@ void
 usage(void)
 {
 	(void)fprintf(stderr,
-	    "usage: calendar [-ab] [-A num] [-B num] [-f calendarfile] "
+	    "usage: calendar [-abw] [-A num] [-B num] [-f calendarfile] "
 	    "[-t [[[cc]yy]mm]dd]\n");
 	exit(1);
 }

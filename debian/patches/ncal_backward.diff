@@ -1,78 +1,8 @@
 Description: Add an option to ncal to use the oldstyle output.
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/ncal/ncal.c	2011-01-03 16:03:21.000000000 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.c	2011-01-03 16:06:58.000000000 +0100
-@@ -196,6 +196,7 @@
- 	int     m = 0;			/* month */
- 	int	y = 0;			/* year */
- 	int     flag_backward = 0;	/* user called cal--backward compat. */
-+	int	ncal_backward = 0;	/* make output of ncal backward compat. */
- 	int     flag_wholeyear = 0;	/* user wants the whole year */
- 	int	flag_julian_cal = 0;	/* user wants Julian Calendar */
- 	int     flag_julian_day = 0;	/* user wants the Julian day numbers */
-@@ -273,8 +274,13 @@
- #endif
- 	before = after = -1;
- 
--	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySM")) != -1)
-+	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMb")) != -1)
- 		switch (ch) {
-+		case 'b':
-+			if (flag_backward)
-+				usage();
-+			ncal_backward = 1;
-+			break;
- 		case '3':
- 			flag_3months = 1;
- 			break;
-@@ -378,6 +384,8 @@
- 
- 	argc -= optind;
- 	argv += optind;
-+	if (ncal_backward) 
-+		flag_backward = 1;
- 
- 	switch (argc) {
- 	case 2:
-@@ -538,8 +546,8 @@
- 	fputs(
- "Usage: cal [general options] [-hjy] [[month] year]\n"
- "       cal [general options] [-hj] [-m month] [year]\n"
--"       ncal [general options] [-hJjpwySM] [-s country_code] [[month] year]\n"
--"       ncal [general options] [-hJeoSM] [year]\n"
-+"       ncal [general options] [-bhJjpwySM] [-s country_code] [[month] year]\n"
-+"       ncal [general options] [-bhJeoSM] [year]\n"
- "General options: [-NC3] [-A months] [-B months]\n"
- "For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
- 	    stderr);
-@@ -903,7 +911,7 @@
- 	date    dt;		/* handy date */
- 	int     dw;		/* width of numbers */
- 	int     first;		/* first day of month */
--	int     firsts;		/* sunday of first week of month */
-+	int     firsts;		/* first day of first week of month */
- 	int     i, j, k, l;	/* just indices */
- 	int     jan1 = 0;	/* the first day of this year */
- 	int     last;		/* the first day of next month */
-@@ -954,10 +962,13 @@
- 	}
- 
- 	/*
--	 * Set firsts to the day number of sunday of the first week of
-+	 * Set firsts to the day number of the day starting the first week of
- 	 * this month. (This might be in the last month)
- 	 */
--	firsts = first - (weekday(first)+1) % 7;
-+	if (weekstart == 1)
-+		firsts = first - (weekday(first)+1) % 7;
-+	else
-+		firsts = first - weekday(first);
- 
- 	/*
- 	 * Fill the lines with day of month or day of year (Julian day)
---- bsdmainutils/usr.bin/ncal/ncal.1	2011-01-03 16:08:23.000000000 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.1	2011-01-03 16:08:13.000000000 +0100
+--- bsdmainutils/usr.bin/ncal.orig/ncal.1	2016-03-12 12:14:25.344008991 +0100
++++ bsdmainutils/usr.bin/ncal/ncal.1	2016-03-12 12:13:17.551507263 +0100
 @@ -47,7 +47,7 @@
  .Fl m Ar month
  .Op Ar year
@@ -91,7 +21,7 @@ Author: Michael Meskes <meskes@debian.org>
  .Op Fl A Ar number
  .Op Fl B Ar number
  .Op Ar year
-@@ -151,6 +151,8 @@
+@@ -150,6 +150,8 @@
  Weeks start on Monday.
  .It Fl S
  Weeks start on Sunday.
@@ -100,3 +30,77 @@ Author: Michael Meskes <meskes@debian.org>
  .El
  .Pp
  A single parameter specifies the year (1\(en9999) to be displayed;
+--- bsdmainutils/usr.bin/ncal.orig/ncal.c	2016-03-12 12:14:25.344008991 +0100
++++ bsdmainutils/usr.bin/ncal/ncal.c	2016-03-12 12:17:07.573563144 +0100
+@@ -196,6 +196,7 @@
+ 	int     m = 0;			/* month */
+ 	int	y = 0;			/* year */
+ 	int     flag_backward = 0;	/* user called cal--backward compat. */
++	int	ncal_backward = 0;	/* make output of ncal backward compat. */
+ 	int     flag_wholeyear = 0;	/* user wants the whole year */
+ 	int	flag_julian_cal = 0;	/* user wants Julian Calendar */
+ 	int     flag_julian_day = 0;	/* user wants the Julian day numbers */
+@@ -256,8 +257,13 @@
+ 
+ 	before = after = -1;
+ 
+-	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySM")) != -1)
++	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMb")) != -1)
+ 		switch (ch) {
++		case 'b':
++			if (flag_backward)
++				usage();
++			ncal_backward = 1;
++			break;
+ 		case '3':
+ 			flag_3months = 1;
+ 			break;
+@@ -418,6 +424,12 @@
+ 	}
+ #endif
+ 
++	if (ncal_backward) 
++	{
++		flag_backward = 1;
++		weekstart++;
++	}
++
+ 	if (flag_month != NULL) {
+ 		if (parsemonth(flag_month, &m, &y)) {
+ 			errx(EX_USAGE,
+@@ -538,8 +550,8 @@
+ 	fputs(
+ "Usage: cal [general options] [-hjy] [[month] year]\n"
+ "       cal [general options] [-hj] [-m month] [year]\n"
+-"       ncal [general options] [-hJjpwySM] [-s country_code] [[month] year]\n"
+-"       ncal [general options] [-hJeoSM] [year]\n"
++"       ncal [general options] [-bhJjpwySM] [-s country_code] [[month] year]\n"
++"       ncal [general options] [-bhJeoSM] [year]\n"
+ "General options: [-NC3] [-A months] [-B months]\n"
+ "For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
+ 	    stderr);
+@@ -903,7 +915,7 @@
+ 	date    dt;		/* handy date */
+ 	int     dw;		/* width of numbers */
+ 	int     first;		/* first day of month */
+-	int     firsts;		/* sunday of first week of month */
++	int     firsts;		/* first day of first week of month */
+ 	int     i, j, k, l;	/* just indices */
+ 	int     jan1 = 0;	/* the first day of this year */
+ 	int     last;		/* the first day of next month */
+@@ -954,10 +966,13 @@
+ 	}
+ 
+ 	/*
+-	 * Set firsts to the day number of sunday of the first week of
++	 * Set firsts to the day number of the day starting the first week of
+ 	 * this month. (This might be in the last month)
+ 	 */
+-	firsts = first - (weekday(first)+1) % 7;
++	if (weekstart == 1)
++		firsts = first - (weekday(first)+1) % 7;
++	else
++		firsts = first - weekday(first);
+ 
+ 	/*
+ 	 * Fill the lines with day of month or day of year (Julian day)

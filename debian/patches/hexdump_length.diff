@@ -1,0 +1,48 @@
+diff -ruN bsdmainutils/usr.bin/hexdump.orig/hexsyntax.c bsdmainutils/usr.bin/hexdump/hexsyntax.c
+--- bsdmainutils/usr.bin/hexdump.orig/hexsyntax.c	2016-10-25 10:44:58.000000000 +0200
++++ bsdmainutils/usr.bin/hexdump/hexsyntax.c	2016-10-25 10:49:04.683357536 +0200
+@@ -95,7 +95,7 @@
+ 			addfile(optarg);
+ 			break;
+ 		case 'n':
+-			if ((length = atoi(optarg)) < 0)
++			if ((length = strtoll(optarg, NULL, 10)) < 0)
+ 				errx(1, "%s: bad length value", optarg);
+ 			break;
+ 		case 'o':
+diff -ruN bsdmainutils/usr.bin/hexdump.orig/odsyntax.c bsdmainutils/usr.bin/hexdump/odsyntax.c
+--- bsdmainutils/usr.bin/hexdump.orig/odsyntax.c	2016-10-25 10:44:58.000000000 +0200
++++ bsdmainutils/usr.bin/hexdump/odsyntax.c	2016-10-25 10:49:15.915432158 +0200
+@@ -148,7 +148,7 @@
+ 				errx(1, "%s: invalid skip amount", optarg);
+ 			break;
+ 		case 'N':
+-			if ((length = atoi(optarg)) <= 0)
++			if ((length = strtoll(optarg, NULL, 10)) <= 0)
+ 				errx(1, "%s: invalid length", optarg);
+ 			break;
+ 		case 'O':
+diff -ruN bsdmainutils/usr.bin/hexdump.orig/hexdump.h bsdmainutils/usr.bin/hexdump/hexdump.h
+--- bsdmainutils/usr.bin/hexdump.orig/hexdump.h	2016-10-25 10:48:23.275330157 +0200
++++ bsdmainutils/usr.bin/hexdump/hexdump.h	2016-10-25 10:48:45.679294649 +0200
+@@ -80,7 +80,7 @@
+ extern int blocksize;			/* data block size */
+ extern int exitval;			/* final exit value */
+ extern int odmode;			/* are we acting as od(1)? */
+-extern int length;			/* amount of data to read */
++extern long long int length;			/* amount of data to read */
+ extern off_t skip;			/* amount of data to skip at start */
+ enum _vflag { ALL, DUP, FIRST, WAIT };	/* -v values */
+ extern enum _vflag vflag;
+diff -ruN bsdmainutils/usr.bin/hexdump.orig/hexdump.c bsdmainutils/usr.bin/hexdump/hexdump.c
+--- bsdmainutils/usr.bin/hexdump.orig/hexdump.c	2016-10-25 10:59:09.251454675 +0200
++++ bsdmainutils/usr.bin/hexdump/hexdump.c	2016-10-25 10:59:21.256128231 +0200
+@@ -54,7 +54,7 @@
+ FS *fshead;				/* head of format strings */
+ int blocksize;				/* data block size */
+ int exitval;				/* final exit value */
+-int length = -1;			/* max bytes to read */
++long long int length = -1;		/* max bytes to read */
+ 
+ int
+ main(int argc, char *argv[])

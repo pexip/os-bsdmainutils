@@ -1,4 +1,4 @@
-/*	$OpenBSD: io.c,v 1.35 2009/10/27 23:59:36 deraadt Exp $	*/
+/*	$OpenBSD: io.c,v 1.43 2015/12/08 19:04:50 mmcc Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993, 1994
@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/param.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -45,8 +44,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <tzfile.h>
 #include <unistd.h>
+#include <limits.h>
 
 #include "pathnames.h"
 #include "calendar.h"
@@ -90,13 +89,16 @@ cal(void)
 		if (strncmp(buf, "LANG=", 5) == 0) {
 			(void) setlocale(LC_ALL, buf + 5);
 			setnnames();
-			if (!strcmp(buf + 5, "ru_RU.KOI8-R") ||
+			/* XXX remove KOI8 lines after 5.9 is out */
+			if (!strcmp(buf + 5, "ru_RU.UTF-8") ||
+			    !strcmp(buf + 5, "uk_UA.UTF-8") ||
+			    !strcmp(buf + 5, "by_BY.UTF-8") ||
+			    !strcmp(buf + 5, "ru_RU.KOI8-R") ||
 			    !strcmp(buf + 5, "uk_UA.KOI8-U") ||
 			    !strcmp(buf + 5, "by_BY.KOI8-B")) {
 				bodun_maybe++;
 				bodun = 0;
-				if (prefix)
-					free(prefix);
+				free(prefix);
 				prefix = NULL;
 			} else
 				bodun_maybe = 0;
@@ -121,8 +123,7 @@ cal(void)
 				calendar = LUNAR;
 		} else if (bodun_maybe && strncmp(buf, "BODUN=", 6) == 0) {
 			bodun++;
-			if (prefix)
-				free(prefix);
+			free(prefix);
 			if ((prefix = strdup(buf + 6)) == NULL)
 				err(1, NULL);
 			continue;
@@ -135,8 +136,7 @@ cal(void)
 				    (p - buf == spev[i].nlen) &&
 				    buf[spev[i].nlen + 1]) {
 					p++;
-					if (spev[i].uname != NULL)
-						free(spev[i].uname);
+					free(spev[i].uname);
 					if ((spev[i].uname = strdup(p)) == NULL)
 						err(1, NULL);
 					spev[i].ulen = strlen(p);
@@ -160,13 +160,13 @@ cal(void)
 				var = 0;
 			if (printing) {
 				struct match *foo;
-				
+
 				ev1 = NULL;
 				while (m) {
 					cur_evt = malloc(sizeof(struct event));
 					if (cur_evt == NULL)
 						err(1, NULL);
-	
+
 					cur_evt->when = m->when;
 					snprintf(cur_evt->print_date,
 					    sizeof(cur_evt->print_date), "%s%c",
@@ -208,8 +208,7 @@ cal(void)
 	tmp = events;
 	while (tmp) {
 		events = tmp;
-		if (tmp->ldesc)
-			free(tmp->ldesc);
+		free(tmp->ldesc);
 		tmp = tmp->next;
 		free(events);
 	}
@@ -222,26 +221,28 @@ getfield(char *p, char **endp, int *flags)
 	int val, var, i;
 	char *start, savech;
 
-	for (; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
+	for (; !isdigit((unsigned char)*p) && !isalpha((unsigned char)*p) &&
+	    *p != '*' && *p != '\t'; ++p)
 		;
 	if (*p == '*') {			/* `*' is every month */
 		*flags |= F_ISMONTH;
 		*endp = p+1;
 		return (-1);	/* means 'every month' */
 	}
-	if (isdigit(*p)) {
+	if (isdigit((unsigned char)*p)) {
 		val = strtol(p, &p, 10);	/* if 0, it's failure */
-		for (; !isdigit(*p) && !isalpha(*p) && *p != '*'; ++p)
+		for (; !isdigit((unsigned char)*p) &&
+		    !isalpha((unsigned char)*p) && *p != '*'; ++p)
 			;
 		*endp = p;
 		return (val);
 	}
-	for (start = p; isalpha(*++p);)
+	for (start = p; isalpha((unsigned char)*++p);)
 		;
 
 	/* Sunday-1 */
 	if (*p == '+' || *p == '-')
-		for(; isdigit(*++p); )
+		for(; isdigit((unsigned char)*++p); )
 			;
 
 	savech = *p;
@@ -280,12 +281,16 @@ getfield(char *p, char **endp, int *flags)
 			}
 		}
 		if (i > NUMEV) {
-			switch(*start) {
+			const char *errstr;
+
+			switch (*start) {
 			case '-':
 			case '+':
-				var = atoi(start);
-				if (var > 365 || var < -365)
+				var = strtonum(start + 1, 0, 365, &errstr);
+				if (errstr)
 					return (0); /* Someone is just being silly */
+				if (*start == '-')
+					var = -var;
 				val += (NUMEV + 1) * var;
 				/* We add one to the matching event and multiply by
 				 * (NUMEV + 1) so as not to return 0 if there's a match.
@@ -293,7 +298,7 @@ getfield(char *p, char **endp, int *flags)
 				 * number of special events. */
 				break;
 			}
-			*flags |= F_SPECIAL;	
+			*flags |= F_SPECIAL;
 		}
 		if (!(*flags & F_SPECIAL)) {
 			/* undefined rest */
@@ -301,7 +306,8 @@ getfield(char *p, char **endp, int *flags)
 			return (0);
 		}
 	}
-	for (*p = savech; !isdigit(*p) && !isalpha(*p) && *p != '*' && *p != '\t'; ++p)
+	for (*p = savech; !isdigit((unsigned char)*p) &&
+	    !isalpha((unsigned char)*p) && *p != '*' && *p != '\t'; ++p)
 		;
 	*endp = p;
 	return (val);
@@ -344,7 +350,7 @@ opencal(void)
 			(void)close(pdes[1]);
 		}
 		(void)close(pdes[0]);
-		/* 
+		/*
 		 * Set stderr to /dev/null.  Necessary so that cron does not
 		 * wait for cpp to finish if it's running calendar -a.
 		 */

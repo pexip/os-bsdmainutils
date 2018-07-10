@@ -1,4 +1,4 @@
-/*	$OpenBSD: day.c,v 1.23 2010/04/28 18:20:15 jsg Exp $	*/
+/*	$OpenBSD: day.c,v 1.32 2015/12/08 19:04:50 mmcc Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993, 1994
@@ -39,7 +39,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <tzfile.h>
 
 #include "pathnames.h"
 #include "calendar.h"
@@ -78,6 +77,13 @@ static struct fixs ndays[8];          /* short national days names */
 static struct fixs fnmonths[13];      /* full national months names */
 static struct fixs nmonths[13];       /* short national month names */
 
+void
+fill_print_date(struct match *m, struct tm *tm)
+{
+	if (strftime(m->print_date, sizeof(m->print_date),
+	    daynames ? "%a %b %d" : "%b %d", tm) == 0)
+		m->print_date[sizeof(m->print_date) - 1] = '\0';
+}
 
 void
 setnnames(void)
@@ -89,21 +95,19 @@ setnnames(void)
 	for (i = 0; i < 7; i++) {
 		tm.tm_wday = i;
 		l = strftime(buf, sizeof(buf), "%a", &tm);
-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 			;
 		buf[l] = '\0';
-		if (ndays[i].name != NULL)
-			free(ndays[i].name);
+		free(ndays[i].name);
 		if ((ndays[i].name = strdup(buf)) == NULL)
 			err(1, NULL);
 		ndays[i].len = strlen(buf);
 
 		l = strftime(buf, sizeof(buf), "%A", &tm);
-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 			;
 		buf[l] = '\0';
-		if (fndays[i].name != NULL)
-			free(fndays[i].name);
+		free(fndays[i].name);
 		if ((fndays[i].name = strdup(buf)) == NULL)
 			err(1, NULL);
 		fndays[i].len = strlen(buf);
@@ -112,21 +116,19 @@ setnnames(void)
 	for (i = 0; i < 12; i++) {
 		tm.tm_mon = i;
 		l = strftime(buf, sizeof(buf), "%b", &tm);
-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 			;
 		buf[l] = '\0';
-		if (nmonths[i].name != NULL)
-			free(nmonths[i].name);
+		free(nmonths[i].name);
 		if ((nmonths[i].name = strdup(buf)) == NULL)
 			err(1, NULL);
 		nmonths[i].len = strlen(buf);
 
 		l = strftime(buf, sizeof(buf), "%B", &tm);
-		for (; l > 0 && isspace((int)buf[l - 1]); l--)
+		for (; l > 0 && isspace((unsigned char)buf[l - 1]); l--)
 			;
 		buf[l] = '\0';
-		if (fnmonths[i].name != NULL)
-			free(fnmonths[i].name);
+		free(fnmonths[i].name);
 		if ((fnmonths[i].name = strdup(buf)) == NULL)
 			err(1, NULL);
 		fnmonths[i].len = strlen(buf);
@@ -158,7 +160,7 @@ settime(time_t *now)
 	tp->tm_isdst = 0;
 	tp->tm_hour = 12;
 	*now = mktime(tp);
-	if (isleap(tp->tm_year + TM_YEAR_BASE))
+	if (isleap(tp->tm_year + 1900))
 		cumdays = daytab[1];
 	else
 		cumdays = daytab[0];
@@ -191,6 +193,7 @@ Mktime(char *date)
 	len = strlen(date);
 	if (len < 2)
 		return((time_t)-1);
+	bzero(&tm, sizeof tm);
 	tm.tm_sec = 0;
 	tm.tm_min = 0;
 	/* Avoid getting caught by a timezone shift; set time to noon */
@@ -215,23 +218,20 @@ Mktime(char *date)
 		*(date + len - 4) = '\0';
 		tm.tm_year = atoi(date);
 
-		/* tm_year up TM_YEAR_BASE ... */
 		if (tm.tm_year < 69)		/* Y2K */
-			tm.tm_year += 2000 - TM_YEAR_BASE;
-		else if (tm.tm_year < 100)
-			tm.tm_year += 1900 - TM_YEAR_BASE;
-		else if (tm.tm_year > TM_YEAR_BASE)
-			tm.tm_year -= TM_YEAR_BASE;
+			tm.tm_year += 100;
+		else if (tm.tm_year > 1900)
+			tm.tm_year -= 1900;
 	}
 
 #if DEBUG
-	printf("Mktime: %d %d %d %s\n", (int)mktime(&tm), (int)t, len,
+	printf("Mktime: %d %lld %d %s\n", (int)mktime(&tm), (long long)t, len,
 	    asctime(&tm));
 #endif
 	return(mktime(&tm));
 }
 
-void
+static void
 adjust_calendar(int *day, int *month)
 {
 	switch (calendar) {
@@ -290,7 +290,7 @@ isnow(char *endp, int bodun)
 	/* adjust bodun rate */
 	if (bodun && !bodun_always)
 		bodun = !arc4random_uniform(3);
-		
+
 	/* Easter or Easter depending days */
 	if (flags & F_SPECIAL)
 		vwd = v1;
@@ -431,16 +431,16 @@ isnow(char *endp, int bodun)
 			 */
 				if (tp->tm_yday > 300 && tmtmp.tm_mon <= 1)
 					variable_weekday(&vwd, tmtmp.tm_mon + 1,
-					    tmtmp.tm_year + TM_YEAR_BASE + 1);
+					    tmtmp.tm_year + 1900 + 1);
 				else
 					variable_weekday(&vwd, tmtmp.tm_mon + 1,
-					    tmtmp.tm_year + TM_YEAR_BASE);
+					    tmtmp.tm_year + 1900);
 				day = cumdays[tmtmp.tm_mon + 1] + vwd;
 				tmtmp.tm_mday = vwd;
 			}
 			v2 = day - tp->tm_yday;
 			if ((v2 > v1) || (v2 < 0)) {
-				if ((v2 += isleap(tp->tm_year + TM_YEAR_BASE) ? 366 : 365)
+				if ((v2 += isleap(tp->tm_year + 1900) ? 366 : 365)
 				    <= v1)
 					tmtmp.tm_year++;
 				else if(!bodun || (day - tp->tm_yday) != -1)
@@ -459,12 +459,7 @@ isnow(char *endp, int bodun)
 			}
 
 			(void)mktime(&tmtmp);
-			if (strftime(tmp->print_date,
-			    sizeof(tmp->print_date),
-			/*    "%a %b %d", &tm);  Skip weekdays */
-			    "%b %d", &tmtmp) == 0)
-				tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
-
+			fill_print_date(tmp, &tmtmp);
 			tmp->var   = varp;
 			tmp->next  = NULL;
 			return(tmp);
@@ -516,7 +511,7 @@ isnow(char *endp, int bodun)
 				if (vwd) {
 					v1 = vwd;
 					variable_weekday(&v1, tmtmp.tm_mon + 1,
-					    tmtmp.tm_year + TM_YEAR_BASE);
+					    tmtmp.tm_year + 1900);
 					tmtmp.tm_mday = v1;
 				} else
 					tmtmp.tm_mday = dayp;
@@ -527,11 +522,11 @@ isnow(char *endp, int bodun)
 				if (flags & F_SPECIAL) {
 					tmtmp.tm_mon = 0;	/* Gee, mktime() is nice */
 					tmtmp.tm_mday = spev[v1].getev(tmtmp.tm_year +
-					    TM_YEAR_BASE) + vwd;
+					    1900) + vwd;
 				} else if (vwd) {
 					v1 = vwd;
 					variable_weekday(&v1, tmtmp.tm_mon + 1,
-					    tmtmp.tm_year + TM_YEAR_BASE);
+					    tmtmp.tm_year + 1900);
 					tmtmp.tm_mday = v1;
 				} else {
 				/* Need the following to keep Feb 29 from
@@ -553,11 +548,7 @@ isnow(char *endp, int bodun)
 					if ((tmp = malloc(sizeof(struct match))) == NULL)
 						err(1, NULL);
 					tmp->when = ttmp;
-					if (strftime(tmp->print_date,
-					    sizeof(tmp->print_date),
-					/*    "%a %b %d", &tm);  Skip weekdays */
-					    "%b %d", &tmtmp) == 0)
-						tmp->print_date[sizeof(tmp->print_date) - 1] = '\0';
+					fill_print_date(tmp, &tmtmp);
 					tmp->bodun = bodun && tdiff == -1;
 					tmp->var   = varp;
 					tmp->next  = NULL;

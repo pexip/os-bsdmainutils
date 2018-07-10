@@ -1,45 +1,44 @@
 Description: Add options '-l' and '-w'.
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/calendar/calendar.1	2009-10-29 22:59:13.000000000 +0100
-+++ bsdmainutils/usr.bin/calendar/calendar.1	2009-10-29 23:22:07.000000000 +0100
+diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/calendar/calendar.1
+--- bsdmainutils/usr.bin/calendar.orig/calendar.1	2016-03-08 16:25:58.340534841 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.1	2016-03-08 16:26:02.236572294 +0100
 @@ -40,6 +40,8 @@
- .Op Fl ab
+ .Op Fl abw
  .Op Fl A Ar num
  .Op Fl B Ar num
 +.Op Fl l Ar num
-+.Op Fl w Ar num
++.Op Fl e Ar num
  .Op Fl f Ar calendarfile
- .Sm off
- .Op Fl "t " Oo Oo Oo Ar cc Oc Ar yy Oc Ar mm Oc Ar dd
-@@ -60,7 +62,8 @@
- .It Fl A Ar num
+ .Op Fl t Oo Oo Oo Ar cc Oc Ns Ar yy Oc Ns Ar mm Oc Ns Ar dd
+ .Sh DESCRIPTION
+@@ -59,6 +61,7 @@
  Print lines from today and next
  .Ar num
--days (forward, future).
-+days (forward, future).
+ days (forward, future).
 +Defaults to one. (same as \-l)
  .It Fl a
  Process the
  .Dq calendar
-@@ -73,6 +75,16 @@
+@@ -71,6 +74,16 @@
  days (backward, past).
  .It Fl b
- Enforce special date calculation mode for KOI8 calendars.
+ Enforce special date calculation mode for Cyrillic calendars.
 +.It Fl l Ar num
 +Print lines from today and next
 +.Ar num
 +days (forward, future). Defaults to one. (same as \-A)
-+.It Fl w Ar num
++.It Fl e Ar num
 +Print lines from today and next
 +.Ar num
 +days, only if today is Friday (forward, future). Defaults to two, which causes
 +.Nm
 +to print entries through the weekend on Fridays.
- .It Fl f Pa calendarfile
+ .It Fl f Ar calendarfile
  Use
- .Pa calendarfile
-@@ -97,6 +109,13 @@
+ .Ar calendarfile
+@@ -95,6 +108,13 @@
  .Dq Paskha=<national_name>
  (for Orthodox Easter) can be used.
  .Pp
@@ -53,9 +52,9 @@ Author: Michael Meskes <meskes@debian.org>
  The
  .Dq CALENDAR
  variable can be used to specify the style.
-@@ -116,6 +135,10 @@
+@@ -114,6 +134,10 @@
  .Dq BODUN=<bodun_prefix>
- where <local_name> can be ru_RU.KOI8-R, uk_UA.KOI8-U or by_BY.KOI8-B.
+ where <local_name> can be ru_RU.UTF-8, uk_UA.UTF-8 or by_BY.UTF-8.
  .Pp
 +Note that the locale is reset to the user's default for each new file that is
 +read. This is so that locales from one file do not accidentally carry over into
@@ -64,17 +63,16 @@ Author: Michael Meskes <meskes@debian.org>
  Other lines should begin with a month and day.
  They may be entered in almost any format, either numeric or as character
  strings.
-@@ -157,6 +180,9 @@
+@@ -155,6 +179,8 @@
  .Xr cpp 1
  searches in the current (or home) directory first, and then in the
  directory
-+directory
 +.Pa /etc/calendar ,
 +and finally in
  .Pa /usr/share/calendar .
  Empty lines and lines protected by the C commenting syntax
  .Pq Li /* ... */
-@@ -257,6 +283,34 @@
+@@ -261,6 +287,38 @@
  in the line.
  This is no longer true: the date is only recognized when it occurs
  at the beginning of a line.
@@ -86,7 +84,7 @@ Author: Michael Meskes <meskes@debian.org>
 +releases.
 +.Pp
 +The
-+.Fl t
++Fl t
 +flag argument syntax is from the original FreeBSD
 +.Nm
 +program.
@@ -94,8 +92,12 @@ Author: Michael Meskes <meskes@debian.org>
 +The
 +.Fl l
 +and
-+.Fl w
-+flags are Debian-specific enhancements. Also, the original
++.Fl e
++flags are Debian-specific enhancements. Option
++.Fl e
++used to be called
++.FL w
++in Debian, but this option is now used differently by upstream. Also, the original
 +.Nm
 +program did not accept
 +.Li 0
@@ -109,18 +111,10 @@ Author: Michael Meskes <meskes@debian.org>
  .Sh HISTORY
  A
  .Nm
---- bsdmainutils/usr.bin/calendar/calendar.c	2009-10-29 22:59:13.000000000 +0100
-+++ bsdmainutils/usr.bin/calendar/calendar.c	2009-10-29 23:07:14.000000000 +0100
-@@ -46,6 +46,8 @@
- #include "pathnames.h"
- #include "calendar.h"
- 
-+void atodays(char, char *, int *);
-+
- char *calendarFile = "calendar";  /* default calendar file */
- char *calendarHome = ".calendar"; /* HOME */
- char *calendarNoMail = "nomail";  /* don't sent mail if this file exists */
-@@ -55,6 +57,7 @@
+diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.c bsdmainutils/usr.bin/calendar/calendar.c
+--- bsdmainutils/usr.bin/calendar.orig/calendar.c	2016-03-08 16:25:58.352534957 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.c	2016-03-08 16:32:52.468490287 +0100
+@@ -58,6 +58,7 @@
  time_t f_time = 0;
  int bodun_always = 0;
  
@@ -128,73 +122,62 @@ Author: Michael Meskes <meskes@debian.org>
  int f_dayAfter = 0; /* days after current date */
  int f_dayBefore = 0; /* days before current date */
  int f_SetdayAfter = 0; /* calendar invoked with -A */
-@@ -71,7 +74,7 @@
+@@ -75,7 +76,7 @@
  
  	(void)setlocale(LC_ALL, "");
  
--	while ((ch = getopt(argc, argv, "abf:t:A:B:-")) != -1)
-+	while ((ch = getopt(argc, argv, "abf:l:t:w:A:B:-")) != -1)
+-	while ((ch = getopt(argc, argv, "abwf:t:A:B:-")) != -1)
++	while ((ch = getopt(argc, argv, "abwf:l:t:e:A:B:-")) != -1)
  		switch (ch) {
  		case '-':		/* backward contemptible */
  		case 'a':
-@@ -93,11 +96,16 @@
+@@ -97,6 +98,7 @@
  				errx(1, "specified date is outside allowed range");
  			break;
  
 +		case 'l':
  		case 'A': /* days after current date */
--			f_dayAfter = atoi(optarg);
-+			atodays(ch, optarg, &f_dayAfter);
+ 			f_dayAfter = strtonum(optarg, 0, INT_MAX, &errstr);
+ 			if (errstr)
+@@ -104,6 +106,12 @@
  			f_SetdayAfter = 1;
  			break;
  
-+		case 'w':
-+			atodays(ch, optarg, &weekend);
++		case 'e':
++			weekend = strtonum(optarg, 0, INT_MAX, &errstr);
++ 			if (errstr)
++ 				errx(1, "-A %s: %s", optarg, errstr);
 +			break;
 +
  		case 'B': /* days before current date */
- 			f_dayBefore = atoi(optarg);
- 			break;
-@@ -237,13 +245,24 @@
- 	exit(0);
- }
- 
-+void
-+atodays(char ch, char *optarg, int *days)
-+{
-+	int u;
-+
-+	u = atoi(optarg);
-+	if ((u < 0) || (u > 366))
-+		warnx("warning: -%c %d out of range 0-366, ignored.\n", ch, u);
-+	else
-+		*days = u;
-+}
- 
- void
+ 			f_dayBefore = strtonum(optarg, 0, INT_MAX, &errstr);
+ 			if (errstr)
+@@ -255,7 +263,7 @@
  usage(void)
  {
  	(void)fprintf(stderr,
--	    "usage: calendar [-ab] [-A num] [-B num] [-f calendarfile] "
--	    "[-t [[[cc]yy]mm]dd]\n");
-+	    "usage: calendar [-ab] [-A num] [-B num] [-l num] [-w num]"
-+	    "[-f calendarfile] [-t [[[cc]yy][mm]]dd]\n");
+-	    "usage: calendar [-abw] [-A num] [-B num] [-f calendarfile] "
++	    "usage: calendar [-abw] [-A num] [-B num] [-l num] [-e num] [-f calendarfile] "
+ 	    "[-t [[[cc]yy]mm]dd]\n");
  	exit(1);
  }
+Nur in bsdmainutils/usr.bin/calendar: calendar.c.orig.
+diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.h bsdmainutils/usr.bin/calendar/calendar.h
+--- bsdmainutils/usr.bin/calendar.orig/calendar.h	2016-03-08 16:25:58.340534841 +0100
++++ bsdmainutils/usr.bin/calendar/calendar.h	2016-03-08 16:26:02.236572294 +0100
+@@ -103,6 +103,7 @@
+ #define	SECSPERDAY	(24 * 60 * 60)
+ #define	isleap(y) (((y) % 4) == 0 && (((y) % 100) != 0 || ((y) % 400) == 0))
  
---- bsdmainutils/usr.bin/calendar/calendar.h	2009-10-29 22:59:13.000000000 +0100
-+++ bsdmainutils/usr.bin/calendar/calendar.h	2009-10-29 23:08:00.000000000 +0100
-@@ -97,6 +97,7 @@
- 			      * calendar time--e.g.  Easter or easter depending
- 			      * days */
- 
-+extern int weekend;	/* how many days to look ahead if today is Friday */
++extern int weekend;    /* how many days to look ahead if today is Friday */
  extern int f_dayAfter;	/* days after current date */
  extern int f_dayBefore;	/* days before current date */
  extern int f_SetdayAfter; /* calendar invoked with -A */
---- bsdmainutils/usr.bin/calendar/day.c	2009-10-29 22:59:13.000000000 +0100
-+++ bsdmainutils/usr.bin/calendar/day.c	2009-10-29 23:11:33.000000000 +0100
-@@ -161,8 +161,8 @@
+Nur in bsdmainutils/usr.bin/calendar: calendar.h.orig.
+diff -ru bsdmainutils/usr.bin/calendar.orig/day.c bsdmainutils/usr.bin/calendar/day.c
+--- bsdmainutils/usr.bin/calendar.orig/day.c	2016-03-08 16:25:58.340534841 +0100
++++ bsdmainutils/usr.bin/calendar/day.c	2016-03-08 16:26:02.236572294 +0100
+@@ -164,8 +164,8 @@
  		cumdays = daytab[1];
  	else
  		cumdays = daytab[0];
