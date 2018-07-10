@@ -1,3 +1,9 @@
+bsdmainutils (9.0.12+nmu1pexip1) pexip; urgency=medium
+
+  * Migrate to Stretch
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 10 Jul 2018 00:46:13 +0000
+
 bsdmainutils (9.0.12+nmu1) unstable; urgency=medium
 
   * Non-maintainer upload.
