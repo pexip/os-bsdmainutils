@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 9), libncurses5-dev, quilt (>= 0.40), python, pytho
 Standards-Version: 3.9.8
 Vcs-Git: git://anonscm.debian.org/bsdmainutils/bsdmainutils.git
 Vcs-Browser: https://anonscm.debian.org/gitweb/?p=bsdmainutils/bsdmainutils.git
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster
 
 Package: bsdmainutils
 Architecture: any
