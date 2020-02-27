@@ -1,3 +1,9 @@
+bsdmainutils (11.1.2pexip1) pexip; urgency=medium
+
+  * Migrate to Buster
+
+ -- Vincent Sanders <vince@pexip.com>  Thu, 27 Feb 2020 22:46:44 +0000
+
 bsdmainutils (11.1.2) unstable; urgency=medium
 
   * Switch build dependency back from libtinfo to libncurses. (Closes: #885622)
