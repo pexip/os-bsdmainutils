@@ -1,0 +1,134 @@
+From 79bbacd5fcd9e81a0098d747b00b36d6c993f1f2 Mon Sep 17 00:00:00 2001
+From: Paul Seyfert <paul.seyfert@mib.infn.it>
+Date: Fri, 30 Dec 2016 14:51:16 +0100
+Subject: [PATCH] ncal: allow displaying weeks in row-wise calendar display
+
+---
+ usr.bin/ncal/ncal.c | 51 ++++++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 36 insertions(+), 15 deletions(-)
+
+diff --git a/usr.bin/ncal/ncal.c b/usr.bin/ncal/ncal.c
+index 418b77f..9cd1fcf 100644
+--- a/usr.bin/ncal/ncal.c
++++ b/usr.bin/ncal/ncal.c
+@@ -48,12 +48,13 @@ static const char rcsid[] =
+ 
+ /* Width of one month with backward compatibility and in regular mode*/
+ #define MONTH_WIDTH_B_J 27
+-#define MONTH_WIDTH_B 20
++#define MONTH_WIDTH_B_NW 20
++#define MONTH_WIDTH_B_WW 25
+ 
+ #define MONTH_WIDTH_R_J 24
+ #define MONTH_WIDTH_R 18
+ 
+-#define MAX_WIDTH 64
++#define MAX_WIDTH 79
+ 
+ typedef struct date date;
+ 
+@@ -667,7 +668,7 @@ monthrangeb(int y, int m, int jd_flag, int before, int after)
+ 	int	prevyear = -1;
+ 
+ 	mpl = jd_flag ? 2 : 3;
+-	mw = jd_flag ? MONTH_WIDTH_B_J : MONTH_WIDTH_B;
++	mw = jd_flag ? MONTH_WIDTH_B_J : (flag_weeks ? MONTH_WIDTH_B_WW : MONTH_WIDTH_B_NW );
+ 	wdss = (mpl == 2) ? " " : "";
+ 
+ 	while (before > 0) {
+@@ -725,11 +726,18 @@ monthrangeb(int y, int m, int jd_flag, int before, int after)
+ 
+ 		/* Day of the week names. */
+ 		for (i = 0; i < count; i++) {
+-			wprintf(L"%s%ls%s%ls%s%ls%s%ls%s%ls%s%ls%s%ls ",
+-				wdss, wds.names[6], wdss, wds.names[0],
+-				wdss, wds.names[1], wdss, wds.names[2],
+-				wdss, wds.names[3], wdss, wds.names[4],
+-				wdss, wds.names[5]);
++      if (flag_weeks)
++        wprintf(L" w| %s%ls%s%ls%s%ls%s%ls%s%ls%s%ls%s%ls  ",
++            wdss, wds.names[6], wdss, wds.names[0],
++            wdss, wds.names[1], wdss, wds.names[2],
++            wdss, wds.names[3], wdss, wds.names[4],
++            wdss, wds.names[5]);
++      else
++        wprintf(L"%s%ls%s%ls%s%ls%s%ls%s%ls%s%ls%s%ls ",
++            wdss, wds.names[6], wdss, wds.names[0],
++            wdss, wds.names[1], wdss, wds.names[2],
++            wdss, wds.names[3], wdss, wds.names[4],
++            wdss, wds.names[5]);
+ 		}
+ 		wprintf(L"\n");
+ 
+@@ -999,6 +1007,8 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+ 		firsts = first - (weekday(first)+1) % 7;
+ 	else
+ 		firsts = first - weekday(first);
++	/* undo the shift from ncal_backward to correct week number assignment */
++	weekstart--;
+ 
+ 	/*
+ 	 * Fill the lines with day of month or day of year (Julian day)
+@@ -1006,16 +1016,17 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+ 	 * column is one day number. print column index: k.
+ 	 */
+ 	for (i = 0; i != 6; i++) {
+-		l = 0;
++		/* additional shift to make space for weeks */
++		l = flag_weeks ? 4 : 0;
+ 		for (j = firsts + 7 * i, k = 0; j < last && k != dw * 7;
+-		    j++, k += dw) { 
++		    j++, k += dw) {
+ 			if (j >= first) {
+ 				if (jd_flag)
+ 					dt.d = j - jan1 + 1;
+ 				else
+ 					sdateb(j, &dt);
+ 				if (j == highlightdate && !flag_nohighlight)
+-					highlight(mlines->lines[i] + k,
++					highlight(mlines->lines[i] + k + l,
+ 					    ds + dt.d * dw, dw, &l);
+ 				else
+ 					memcpy(mlines->lines[i] + k + l,
+@@ -1025,10 +1036,20 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+ 		}
+ 		if (k == 0)
+ 			mlines->lines[i][1] = '\0';
+-		else
++		else {
+ 			mlines->lines[i][k + l] = '\0';
+-		mlines->extralen[i] = l;
++			if (flag_weeks) {
++				int year;
++				memcpy(mlines->lines[i], ds + week(firsts + 7 * i, &year)*dw, dw);
++				memcpy(mlines->lines[i] + 3, "|", 1);
++			}
++		}
++		/* store only highlighting extralength */
++		mlines->extralen[i] = l - (flag_weeks ? 4 : 0);
+ 	}
++
++	/* redo the shift from ncal_backward to correct week number assignment */
++	weekstart++;
+ }
+ 
+ /* Put the local names of weekdays into the wds. */
+@@ -1235,14 +1256,14 @@ highlight(char *dst, char *src, int len, int *extralen)
+ 		dst += len;
+ 		/* highlight off. */
+ 		memcpy(dst, term_se, strlen(term_se));
+-		*extralen = strlen(term_so) + strlen(term_se);
++		*extralen += strlen(term_so) + strlen(term_se);
+ 		return;
+ 	}
+ 
+ 	/*
+ 	 * Otherwise, print a _, backspace and the letter.
+ 	 */
+	*extralen = 0;
+ 	/* skip leading space. */
+ 	src++;
+ 	len--;
+-- 
+2.1.4
+

@@ -78,9 +78,8 @@ Author: Michael Meskes <meskes@debian.org>
  				wprintf(L"%-*ls  ",
  				    mw, wcenter(ws, year[i].name, mw));
  			else {
--				swprintf(ws, sizeof(ws), L"%-ls %d",
-+				swprintf(ws, (sizeof(ws)/sizeof(wchar_t)), L"%-ls %d",
- 				    year[i].name, M2Y(m + i));
+				swprintf(ws, sizeof(ws)/sizeof(ws[0]),
+ 				    L"%-ls %d", year[i].name, M2Y(m + i));
  				wprintf(L"%-*ls  ", mw, wcenter(ws1, ws, mw));
  			}
 -		printf("\n");

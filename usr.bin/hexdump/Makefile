@@ -1,4 +1,5 @@
-FLAGS = -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+FLAGS = -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -include bsd/string.h 
+LIBS += -lbsd
 
 PROG = hexdump
 SRC  = conv.c display.c hexdump.c hexsyntax.c odsyntax.c parse.c

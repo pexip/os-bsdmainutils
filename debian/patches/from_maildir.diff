@@ -1,13 +1,10 @@
-Description: Make program compile on Debian and work with Maildirs 
+Description: Make program work with Maildirs 
 Author: Michael Meskes <meskes@debian.org>
 
---- freebsd/usr.bin/from/from.c	2009-12-19 20:46:26.000000000 +0100
-+++ bsdmainutils/usr.bin/from/from.c	2010-01-21 11:43:20.000000000 +0100
-@@ -43,9 +43,10 @@
- #endif
- #endif /* not lint */
- #include <sys/cdefs.h>
--__FBSDID("$FreeBSD$");
+--- freebsd/usr.bin/from/from.c	2017-12-23 10:01:46.882485521 +0100
++++ bsdmainutils/usr.bin/from/from.c	2017-12-23 10:02:43.398940423 +0100
+@@ -44,6 +44,8 @@
+ __FBSDID("$FreeBSD: head/usr.bin/from/from.c 326025 2017-11-20 19:49:47Z pfg $");
  
  #include <sys/types.h>
 +#include <sys/stat.h>
@@ -15,15 +12,15 @@ Author: Michael Meskes <meskes@debian.org>
  #include <ctype.h>
  #include <err.h>
  #include <pwd.h>
-@@ -57,6 +58,7 @@
+@@ -55,6 +57,7 @@
  
- int match(const char *, const char *);
+ static int match(const char *, const char *);
  static void usage(void);
 +static int handle_file (char*, int, FILE *);
  
  int
  main(int argc, char **argv)
-@@ -66,6 +68,9 @@
+@@ -64,6 +67,9 @@
  	int ch, count, newline;
  	const char *file;
  	char *sender, *p;
@@ -33,7 +30,7 @@ Author: Michael Meskes <meskes@debian.org>
  #if MAXPATHLEN > BUFSIZ
  	char buf[MAXPATHLEN];
  #else
-@@ -111,6 +116,24 @@
+@@ -108,6 +114,24 @@
  		}
  	}
  
@@ -58,7 +55,7 @@ Author: Michael Meskes <meskes@debian.org>
  	/* read from stdin */
  	if (strcmp(file, "-") == 0) {
  		mbox = stdin;
-@@ -118,25 +141,48 @@
+@@ -115,25 +139,48 @@
  	else if ((mbox = fopen(file, "r")) == NULL) {
  		errx(1, "can't read %s", file);
  	}

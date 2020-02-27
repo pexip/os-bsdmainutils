@@ -7,7 +7,7 @@ diff -ruN bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar
 @@ -30,6 +30,7 @@
   */
  
- #include <sys/uio.h>
+ 
 +#include <wchar.h>
  
  extern struct passwd *pw;
@@ -94,6 +94,14 @@ diff -ruN bsdmainutils/usr.bin/calendar/calendar.h bsdmainutils/usr.bin/calendar
 diff -ruN bsdmainutils/usr.bin/calendar/day.c bsdmainutils/usr.bin/calendar/day.c
 --- bsdmainutils/usr.bin/calendar/day.c	2016-03-29 19:23:58.239050027 +0200
 +++ bsdmainutils/usr.bin/calendar/day.c	2016-03-29 19:24:12.055793324 +0200
+@@ -39,6 +39,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
++#include <wctype.h>
+ 
+ #include "pathnames.h"
+ #include "calendar.h"
 @@ -62,13 +62,13 @@
  	{ 0, -1, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 },
  };
@@ -380,7 +388,7 @@ diff -ruN bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
  	struct match *m;
  	FILE *fp;
  
-@@ -76,26 +102,45 @@
+@@ -76,22 +102,41 @@
  	cur_evt = NULL;
  	if ((fp = opencal()) == NULL)
  		return;
@@ -399,7 +407,7 @@ diff -ruN bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 +		else
 +			i = mbstowcs(buf, filebuf, 2048);
 +
-+		if (i == -1 )
++		if (i == -1)
 +			continue;
 +
 +		for (l = wcslen(buf); l > 0 && iswspace(buf[l - 1]); l--)
@@ -424,19 +432,12 @@ diff -ruN bsdmainutils/usr.bin/calendar/io.c bsdmainutils/usr.bin/calendar/io.c
 +					errx(1, "switch to locale ``%s'' cannot be honored", filebuf + 5);
 +			}
  			setnnames();
- 			/* XXX remove KOI8 lines after 5.9 is out */
 -			if (!strcmp(buf + 5, "ru_RU.UTF-8") ||
 -			    !strcmp(buf + 5, "uk_UA.UTF-8") ||
--			    !strcmp(buf + 5, "by_BY.UTF-8") ||
--			    !strcmp(buf + 5, "ru_RU.KOI8-R") ||
--			    !strcmp(buf + 5, "uk_UA.KOI8-U") ||
--			    !strcmp(buf + 5, "by_BY.KOI8-B")) {
+-			    !strcmp(buf + 5, "by_BY.UTF-8")) {
 +			if (!strcmp(filebuf + 5, "ru_RU.UTF-8") ||
 +			    !strcmp(filebuf + 5, "uk_UA.UTF-8") ||
-+			    !strcmp(filebuf + 5, "by_BY.UTF-8") ||
-+			    !strcmp(filebuf + 5, "ru_RU.KOI8-R") ||
-+			    !strcmp(filebuf + 5, "uk_UA.KOI8-U") ||
-+			    !strcmp(filebuf + 5, "by_BY.KOI8-B")) {
++			    !strcmp(filebuf + 5, "by_BY.UTF-8")) {
  				bodun_maybe++;
  				bodun = 0;
  				free(prefix);

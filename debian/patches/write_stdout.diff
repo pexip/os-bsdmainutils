@@ -1,0 +1,27 @@
+Description: Re-open stdout in a way that works on Linux.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/write/write.c	2017-12-20 11:37:51.796262348 +0100
++++ bsdmainutils/usr.bin/write/write.c	2017-12-20 12:54:59.348830683 +0100
+@@ -298,17 +268,13 @@
+ {
+ 	char *nows;
+ 	time_t now;
+-	char host[MAXHOSTNAMELEN];
++	char path[MAXPATHLEN], host[MAXHOSTNAMELEN];
+ 	wchar_t line[512];
+ 	int fd;
+ 
+-	fd = openat(devfd, tty, O_WRONLY);
+-	if (fd < 0)
+-		err(1, "openat(%s%s)", _PATH_DEV, tty);
+-	fclose(stdout);
+-	stdout = fdopen(fd, "w");
+-	if (stdout == NULL)
+-		err(1, "%s%s", _PATH_DEV, tty);
++	(void)snprintf(path, sizeof(path), "%s%s", _PATH_DEV, tty);
++	if ((freopen(path, "w", stdout)) == NULL)
++		err(1, "%s", path);
+ 
+ 	(void)signal(SIGINT, done);
+ 	(void)signal(SIGHUP, done);

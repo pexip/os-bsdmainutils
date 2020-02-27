@@ -1,0 +1,61 @@
+Author: Michael Meskes
+Description: Remove capsicum code
+
+--- bsdmainutils/usr.bin/hexdump/hexdump.c	2017-12-24 15:04:47.533127892 +0100
++++ bsdmainutils/usr.bin/hexdump/hexdump.c	2017-12-24 15:22:12.788210548 +0100
+@@ -44,8 +44,6 @@
+ __FBSDID("$FreeBSD: head/usr.bin/hexdump/hexdump.c 326025 2017-11-20 19:49:47Z pfg $");
+ 
+ #include <sys/types.h>
+-#include <sys/capsicum.h>
+-#include <capsicum_helpers.h>
+ #include <err.h>
+ #include <locale.h>
+ #include <stdlib.h>
+@@ -81,14 +79,6 @@
+ 	for (tfs = fshead; tfs; tfs = tfs->nextfs)
+ 		rewrite(tfs);
+ 
+-	/*
+-	 * Cache NLS data, for strerror, for err(3), before entering capability
+-	 * mode.
+-	 */
+-	caph_cache_catpages();
+-	if (caph_limit_stdio() < 0)
+-		err(1, "capsicum");
+-
+ 	(void)next(argv);
+ 	display();
+ 	exit(exitval);
+--- bsdmainutils/usr.bin/hexdump/display.c	2017-12-24 15:27:39.000000000 +0100
++++ bsdmainutils/usr.bin/hexdump/display.c	2017-12-24 15:27:51.260301759 +0100
+@@ -38,10 +38,8 @@
+ __FBSDID("$FreeBSD: head/usr.bin/hexdump/display.c 326025 2017-11-20 19:49:47Z pfg $");
+ 
+ #include <sys/param.h>
+-#include <sys/capsicum.h>
+ #include <sys/stat.h>
+ 
+-#include <capsicum_helpers.h>
+ #include <ctype.h>
+ #include <err.h>
+ #include <errno.h>
+@@ -361,18 +359,6 @@
+ 			statok = 0;
+ 		}
+ 
+-		if (caph_limit_stream(fileno(stdin), CAPH_READ) < 0)
+-			err(1, "unable to restrict %s",
+-			    statok ? *_argv : "stdin");
+-
+-		/*
+-		 * We've opened our last input file; enter capsicum sandbox.
+-		 */
+-		if (statok == 0 || *(_argv + 1) == NULL) {
+-			if (cap_enter() < 0 && errno != ENOSYS)
+-				err(1, "unable to enter capability mode");
+-		}
+-
+ 		if (skip)
+ 			doskip(statok ? *_argv : "stdin", statok);
+ 		if (*_argv)

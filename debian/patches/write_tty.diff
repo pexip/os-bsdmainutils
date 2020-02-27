@@ -1,0 +1,36 @@
+Description: Fix tty handling
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/write/write.c	2017-12-20 11:37:51.796262348 +0100
++++ bsdmainutils/usr.bin/write/write.c	2017-12-20 12:54:59.348830683 +0100
+@@ -86,7 +86,7 @@
+ 	time_t atime;
+ 	uid_t myuid;
+ 	int msgsok, myttyfd;
+-	char tty[MAXPATHLEN], *mytty;
++	char tty[MAXPATHLEN], *mytty = NULL;
+ 	const char *login;
+ 	int devfd;
+ 
+@@ -124,14 +124,19 @@
+ 		myttyfd = fileno(stdout);
+ 	else if (isatty(fileno(stderr)))
+ 		myttyfd = fileno(stderr);
+-	else
+-		errx(1, "can't find your tty");
++	else {
++		mytty = "(none)";
++		msgsok = 1;
++	}
++
++	if (!mytty) {	
+ 	if (!(mytty = ttyname(myttyfd)))
+ 		errx(1, "can't find your tty's name");
+ 	if (!strncmp(mytty, _PATH_DEV, strlen(_PATH_DEV)))
+ 		mytty += strlen(_PATH_DEV);
+ 	if (term_chk(devfd, mytty, &msgsok, &atime, 1))
+ 		exit(1);
++	}
+ 	if (!msgsok)
+ 		errx(1, "you have write permission turned off");
+ 

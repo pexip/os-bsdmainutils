@@ -1,16 +1,8 @@
-Description: Make program compile on Debian.
+Description: Remove incompatible getopt usage.
 Author: Michael Meskes <meskes@debian.org>
 
 --- freebsd/usr-bin/colcrt/colcrt.c	2009-09-23 14:51:28.000000000 +0200
 +++ bsdmainutils/usr.bin/colcrt/colcrt.c	2009-09-23 14:51:34.000000000 +0200
-@@ -44,7 +44,6 @@
- #endif
- 
- #include <sys/cdefs.h>
--__FBSDID("$FreeBSD$");
- 
- #include <err.h>
- #include <locale.h>
 @@ -90,19 +89,22 @@
  
  	setlocale(LC_ALL, "");

@@ -1,0 +1,29 @@
+Description: Remove capsicum code
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/col/col.c	2017-12-19 16:24:54.197178946 +0100
++++ bsdmainutils/usr.bin/col/col.c	2017-12-19 16:28:08.117289280 +0100
+@@ -47,10 +47,7 @@
+ #include <sys/cdefs.h>
+ __FBSDID("$FreeBSD: head/usr.bin/col/col.c 326025 2017-11-20 19:49:47Z pfg $");
+ 
+-#include <sys/capsicum.h>
+-
+-#include <capsicum_helpers.h>
+ #include <err.h>
+ #include <errno.h>
+ #include <locale.h>
+ #include <stdio.h>
+@@ -141,12 +140,6 @@
+ 
+ 	(void)setlocale(LC_CTYPE, "");
+ 
+-	if (caph_limit_stdio() == -1)
+-		err(1, "unable to limit stdio");
+-
+-	if (cap_enter() < 0 && errno != ENOSYS)
+-		err(1, "unable to enter capability mode");
+-
+ 	max_bufd_lines = 256;
+ 	compress_spaces = 1;		/* compress spaces into tabs */
+ 	while ((opt = getopt(argc, argv, "bfhl:px")) != -1)

@@ -1,15 +1,45 @@
+bsdmainutils (11.1.2) unstable; urgency=medium
+
+  * Switch build dependency back from libtinfo to libncurses. (Closes: #885622)
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 29 Dec 2017 10:26:58 +0100
+
+bsdmainutils (11.1.1) unstable; urgency=medium
+
+  * Update to latest FreeBSD/OpenBSD versions.
+  * Do not explicitly set dpkg-architecture variables.
+  * Fix dependency to reference the library that is really needed.
+  * Removed Giacomo from uploaders by his own request.
+  * Bumped Standards-Version to 4.1.2, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Wed, 27 Dec 2017 13:51:13 +0100
+
+bsdmainutils (9.0.14) unstable; urgency=medium
+
+  * Updated Thai holidays.
+    Thanks to Theppitak Karoonboonyanan <thep@debian.org> (Closes: 868732)
+  * Re-added fix for #859933 that was lost in the last upload.
+  * Added small bit lost in fix for #792867.
+
+ -- Michael Meskes <meskes@debian.org>  Sat, 21 Oct 2017 09:24:26 +0200
+
+bsdmainutils (9.0.13) unstable; urgency=medium
+
+  * Make sure the correct architecture python is included in cross builds.
+    Thanks to Helmut Grohne <helmut@subdivi.de> (Closes: #792867)
+  * Allow unicode characters in write messages.
+    Thanks to Nikolas Nyby <nikolas@gnu.org> (Closes: #876557)
+  * Added patch to ncal to show week number information even in backward mode.
+    Thanks to Paul Seyfert <paul.seyfert@mib.infn.it> (Closes: #850034)
+  * Bumped Standards-Version to 4.1.1, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 20 Oct 2017 15:11:05 +0200
+
 bsdmainutils (9.0.12+nmu1pexip1) pexip; urgency=medium
 
   * Migrate to Stretch
 
  -- John-Mark Bell <jmb@pexip.com>  Tue, 10 Jul 2018 00:46:13 +0000
-
-bsdmainutils (9.0.12+nmu1) unstable; urgency=medium
-
-  * Non-maintainer upload.
-  * Fix one newline too much in patch. (Closes: #859933)
-
- -- Thorsten Glaser <tg@mirbsd.de>  Wed, 12 Apr 2017 13:22:14 +0200
 
 bsdmainutils (9.0.12) unstable; urgency=medium
 
@@ -392,7 +422,7 @@ bsdmainutils (8.0.1) unstable; urgency=low
   * Patched new calendar sources to use wide-character functions.
   * Created patch to put Debian specific options back into calendar
     tool. (Closes: #293689)
-  * Updated all calendars from their FreeBSD sources.
+  * Updated all calendars from their FreeBSD sources. 
     (Closes: #388153, #413900, #446547, #542229)
   * Added/Fixed some calendar entries as reported by Debian users.
     (Closes: #554561, #337311, #525925, #493759, #381114, #280176))

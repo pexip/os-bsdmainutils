@@ -1,5 +1,7 @@
 PROG = bsd-write
 MAN = write.1
+LIBS += -lbsd
+FLAGS = -include fcntl.h -include time.h -include bsd/string.h 
 
 topdir=../..
 include $(topdir)/config.mk

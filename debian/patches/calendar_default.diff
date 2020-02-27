@@ -1,0 +1,37 @@
+--- bsdmainutils/usr.bin/calendar/io.c	2016-03-07 15:26:49.186659640 +0100
++++ bsdmainutils/usr.bin/calendar/io.c	2016-03-07 15:31:37.841085036 +0100
+@@ -329,9 +329,13 @@
+ 				errx(1, "cannot get home directory");
+ 			if (!(chdir(home) == 0 &&
+ 			    chdir(calendarHome) == 0 &&
+-			    (fdin = open(calendarFile, O_RDONLY)) != -1))
+-				errx(1, "no calendar file: ``%s'' or ``~/%s/%s''",
+-				    calendarFile, calendarHome, calendarFile);
++			    (fdin = open(calendarFile, O_RDONLY)) != -1)) {
++				/* Try the system-wide calendar file. */
++				if ((fdin = open(_PATH_DEFAULT, O_RDONLY)) == -1) {
++					errx(1, "no calendar file: ``%s'' or ``~/%s/%s''",
++					    calendarFile, calendarHome, calendarFile);
++				}
++			}
+ 		}
+ 	}
+ 
+@@ -363,7 +367,7 @@
+ 			(void)close(fderr);
+ 		}
+ 		execl(_PATH_CPP, "cpp", "-traditional", "-undef", "-U__GNUC__",
+-		    "-P", "-I.", _PATH_INCLUDE, (char *)NULL);
++		    "-P", "-I.", _PATH_EINCLUDE, _PATH_INCLUDE, (char *)NULL);
+ 		warn(_PATH_CPP);
+ 		_exit(1);
+ 	}
+--- bsdmainutils/usr.bin/calendar/pathnames.h	2016-03-07 15:26:49.186659640 +0100
++++ bsdmainutils/usr.bin/calendar/pathnames.h	2016-03-07 15:31:37.841085036 +0100
+@@ -37,3 +37,6 @@
+ 
+ 			/* XXX -- fix when cpp parses arguments rationally */
+ #define	_PATH_INCLUDE	"-I/usr/share/calendar"
++#define _PATH_EINCLUDE  "-I/etc/calendar"
++#define _PATH_DEFAULT   "/etc/calendar/default"
++

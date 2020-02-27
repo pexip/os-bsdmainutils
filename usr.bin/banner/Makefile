@@ -1,11 +1,12 @@
-PROG = printerbanner
+PROG = banner
+SRC = banner.c
 MAN = banner.6
+LIBS += -lbsd
+FLAGS = -include bsd/string.h
 
 topdir=../..
 include $(topdir)/config.mk
 
-printerbanner.o: banner.c
-	$(CC) -include $(topdir)/freebsd.h $(FLAGS) $(CFLAGS) -c -o $@ $<
-
 install-2:
 	mv $(mandir)/banner.6 $(mandir)/printerbanner.1
+	mv $(bindir)/banner $(bindir)/printerbanner
