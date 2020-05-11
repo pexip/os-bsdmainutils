@@ -1,4 +1,4 @@
-bsdmainutils (11.1.2pexip1) pexip; urgency=medium
+bsdmainutils (11.1.2+b1pexip1) pexip; urgency=medium
 
   * Migrate to Buster
 
