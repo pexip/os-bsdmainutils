@@ -1,0 +1,18 @@
+Description: fix retreiving non-standard _NL_TIME_WEEK_1STDAY
+Bug-Ubuntu: https://bugs.launchpad.net/glibc/+bug/1549850
+Bug: https://sourceware.org/bugzilla/show_bug.cgi?id=11828
+
+--- a/usr.bin/ncal/ncal.c
++++ b/usr.bin/ncal/ncal.c
+@@ -436,7 +436,10 @@
+ 		date first_week_d;
+ 		date sunday = { .y = 1997, .m = 11, .d = 30 };
+ 
+-		first_week_i = (intptr_t) nl_langinfo(_NL_TIME_WEEK_1STDAY);
++		union { char *str; unsigned int word; } u;
++		u.str = nl_langinfo(_NL_TIME_WEEK_1STDAY);
++
++		first_week_i = u.word;
+ 		first_week_d.d = first_week_i % 100;
+ 		first_week_i /= 100;
+ 		first_week_d.m = first_week_i % 100;

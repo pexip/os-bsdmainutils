@@ -1,0 +1,11 @@
+#!/bin/sh
+# /etc/cron.daily/calendar: BSD mainutils calendar daily maintenance script
+# Written by Austin Donnelly <and1000@debian.org>
+
+. /etc/default/calendar
+
+[ x$RUN_DAILY = xtrue ] || exit 0
+
+[ -x /usr/sbin/sendmail ] || exit 0
+
+/usr/bin/calendar -a

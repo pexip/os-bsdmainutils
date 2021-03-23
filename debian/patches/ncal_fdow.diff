@@ -2,9 +2,9 @@ Description: Handle first day of week and first week of year through locale
              or command line setting.
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/ncal.orig/calendar.c	2016-03-09 14:48:35.918752258 +0100
-+++ bsdmainutils/usr.bin/ncal/calendar.c	2016-03-09 14:48:38.270788312 +0100
-@@ -25,9 +25,11 @@
+--- bsdmainutils/usr.bin/ncal.orig/calendar.c	2020-08-04 12:47:50.871367494 +0200
++++ bsdmainutils/usr.bin/ncal/calendar.c	2020-08-04 12:53:04.700970762 +0200
+@@ -27,9 +27,11 @@
   */
  
  #include <sys/cdefs.h>
@@ -12,11 +12,11 @@ Author: Michael Meskes <meskes@debian.org>
  __FBSDID("$FreeBSD: head/lib/libcalendar/calendar.c 326219 2017-11-26 02:00:33Z pfg $");
  
  #include "calendar.h"
-+extern int weekstart;
++extern int weekstart, days_first_week;
  
  #ifndef NULL
  #define NULL 0
-@@ -257,11 +259,12 @@
+@@ -260,11 +262,12 @@
  	nd = ndaysgi(&idt);
  	/*
  	 * If more than 3 days of this week are in the preceding year, the
@@ -27,14 +27,14 @@ Author: Michael Meskes <meskes@debian.org>
  	 * answer.
  	 */
 -	if ((wd = weekday(nd)) > 3)
-+	/* 3 may or may not be correct, better use what the locale says */
-+	if ((wd = weekday(nd) + 1 - weekstart) >= *nl_langinfo(_NL_TIME_WEEK_1STWEEK))
++	/* 3 may or may not be correct, better use locale information */
++	if (7 - (wd = (weekday(nd) + 1 - weekstart) % 7) < days_first_week)
  		return (nd - wd + 7);
  	else
  		return (nd - wd);
---- bsdmainutils/usr.bin/ncal.orig/ncal.1	2016-03-09 14:48:35.918752258 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.1	2016-03-09 14:53:30.835534083 +0100
-@@ -47,7 +47,7 @@
+--- bsdmainutils/usr.bin/ncal.orig/ncal.1	2020-08-04 12:57:15.238138533 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.1	2020-08-04 12:56:23.557903370 +0200
+@@ -47,9 +47,10 @@
  .Fl m Ar month
  .Op Ar year
  .Nm ncal
@@ -42,17 +42,11 @@ Author: Michael Meskes <meskes@debian.org>
 +.Op Fl 3hjJpwySM
  .Op Fl A Ar number
  .Op Fl B Ar number
++.Op Fl W Ar number
  .Op Fl s Ar country_code
-@@ -56,7 +56,7 @@
- .Ar year
- .Oc
- .Nm ncal
--.Op Fl 3hJeo
-+.Op Fl 3hJeoSM
- .Op Fl A Ar number
- .Op Fl B Ar number
- .Op Ar year
-@@ -147,6 +147,10 @@
+ .Oo
+ .Op Ar month
+@@ -147,6 +148,14 @@
  Use
  .Ar yyyy-mm-dd
  as the current date (for debugging of highlighting).
@@ -60,29 +54,46 @@ Author: Michael Meskes <meskes@debian.org>
 +Weeks start on Monday.
 +.It Fl S
 +Weeks start on Sunday.
++.It Fl W Ar number
++First week of the year has at least
++.Ar number
++days.
  .El
  .Pp
  A single parameter specifies the year (1\(en9999) to be displayed;
---- bsdmainutils/usr.bin/ncal/ncal.c	2017-12-26 14:56:35.951349748 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.c	2017-12-26 15:01:19.141546863 +0100
-@@ -165,6 +165,7 @@
+--- bsdmainutils/usr.bin/ncal/ncal.c	2020-08-04 12:47:45.879340188 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.c	2020-08-04 12:51:53.544623913 +0200
+@@ -164,6 +164,8 @@
  static int nswitch;		/* user defined switch date */
  static int nswitchb;		/* switch date for backward compatibility */
  static int highlightdate;
 +int weekstart = -1;		/* day the week starts on (Sun [0] - Sat [6]) */
++int days_first_week = -1;       /* minimal length of the first week in year */
  
  static char	*center(char *s, char *t, int w);
  static wchar_t *wcenter(wchar_t *s, wchar_t *t, int w);
-@@ -259,7 +260,7 @@
+@@ -258,7 +260,7 @@
  
  	before = after = -1;
  
 -	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wy")) != -1)
-+	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySM")) != -1)
++	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMW:")) != -1)
  		switch (ch) {
  		case '3':
  			flag_3months = 1;
-@@ -348,6 +349,16 @@
+@@ -279,6 +281,11 @@
+ 				errx(EX_USAGE,
+ 				    "Argument to -B must be positive");
+ 			break;
++		case 'W':
++			if (flag_backward)
++				usage();
++			days_first_week = strtol(optarg, NULL, 10);
++			break;
+ 		case 'J':
+ 			if (flag_backward)
+ 				usage();
+@@ -347,6 +354,16 @@
  		case 'y':
  			flag_wholeyear = 1;
  			break;
@@ -99,7 +110,7 @@ Author: Michael Meskes <meskes@debian.org>
  		default:
  			usage();
  		}
-@@ -388,6 +399,27 @@
+@@ -387,6 +404,34 @@
  		usage();
  	}
  
@@ -124,21 +135,26 @@ Author: Michael Meskes <meskes@debian.org>
 +	}
 +#endif
 +
++	if (days_first_week == -1)
++#ifdef __GLIBC__
++		days_first_week = *nl_langinfo(_NL_TIME_WEEK_1STWEEK);
++#else
++		days_first_week = 4;
++#endif
++
  	if (flag_month != NULL) {
  		if (parsemonth(flag_month, &m, &y)) {
  			errx(EX_USAGE,
-@@ -508,8 +540,8 @@
+@@ -507,7 +552,7 @@
  	fputs(
  "Usage: cal [general options] [-hjy] [[month] year]\n"
  "       cal [general options] [-hj] [-m month] [year]\n"
 -"       ncal [general options] [-hJjpwy] [-s country_code] [[month] year]\n"
--"       ncal [general options] [-hJeo] [year]\n"
-+"       ncal [general options] [-hJjpwySM] [-s country_code] [[month] year]\n"
-+"       ncal [general options] [-hJeoSM] [year]\n"
++"       ncal [general options] [-hJjpwySM] [-s country_code] [-W number of days] [[month] year]\n"
+ "       ncal [general options] [-hJeo] [year]\n"
  "General options: [-NC3] [-A months] [-B months]\n"
  "For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
- 	    stderr);
-@@ -544,14 +576,6 @@
+@@ -543,14 +588,6 @@
  	date    dt;
  	struct tm tm;
  	char    buf[MAX_WIDTH];
@@ -153,7 +169,7 @@ Author: Michael Meskes <meskes@debian.org>
  	/* force orthodox easter for years before 1583 */
  	if (y < 1583)
  		orthodox = 1;
-@@ -568,7 +592,7 @@
+@@ -567,7 +604,7 @@
  	tm.tm_year = dt.y - 1900;
  	tm.tm_mon  = dt.m - 1;
  	tm.tm_mday = dt.d;
@@ -162,7 +178,7 @@ Author: Michael Meskes <meskes@debian.org>
  	wprintf(L"%s\n", buf);
  }
  
-@@ -803,10 +827,13 @@
+@@ -802,10 +839,13 @@
  		jan1 = firstday(y, 1);
  
  	/*
@@ -178,7 +194,7 @@ Author: Michael Meskes <meskes@debian.org>
  
  	/* Set ds (daystring) and dw (daywidth) according to the jd_flag. */
  	if (jd_flag) {
-@@ -963,7 +990,7 @@
+@@ -962,7 +1002,7 @@
  	memset(&tm, 0, sizeof(tm));
  
  	for (i = 0; i != 7; i++) {

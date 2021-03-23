@@ -1,9 +1,9 @@
 Description: Cleanup usage of conflicting options.
 Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
 
---- bsdmainutils/usr.bin/ncal.orig/ncal.c	2016-09-29 13:39:21.077012024 +0200
-+++ bsdmainutils/usr.bin/ncal/ncal.c	2016-09-29 13:41:35.581332960 +0200
-@@ -197,17 +197,18 @@
+--- bsdmainutils/usr.bin/ncal.orig/ncal.c	2020-08-04 13:16:47.523112729 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.c		2020-08-04 13:26:27.306710566 +0200	
+@@ -201,17 +201,18 @@
  	int	y = 0;			/* year */
  	int     flag_backward = 0;	/* user called cal--backward compat. */
  	int	ncal_backward = 0;	/* make output of ncal backward compat. */
@@ -25,12 +25,12 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  	char	*cp;			/* character pointer */
  	char	*flag_today = NULL;	/* debug: use date as being today */
  	char	*flag_month = NULL;	/* requested month as string */
-@@ -257,70 +258,80 @@
+@@ -263,75 +264,87 @@
  
  	before = after = -1;
  
--	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMb")) != -1)
-+	while ((ch = getopt(argc, argv, "31A:B:Cd:eH:hjJm:ops:wySMb")) != -1)
+-	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMW:b")) != -1)
++	while ((ch = getopt(argc, argv, "31A:B:Cd:eH:hjJm:ops:wySMW:b")) != -1)
  		switch (ch) {
  		case 'b':
  			if (flag_backward)
@@ -64,6 +64,13 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
 -			if (flag_before <= 0)
 -				errx(EX_USAGE,
 -				    "Argument to -B must be positive");
+ 			break;
+ 		case 'W':
+ 			if (flag_backward)
+ 				usage();
++			else
++				no_backward = 1;
+ 			days_first_week = strtol(optarg, NULL, 10);
  			break;
  		case 'J':
  			if (flag_backward)
@@ -123,7 +130,7 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  			flag_orthodox = 1;
  			flag_easter = 1;
  			break;
-@@ -333,6 +344,8 @@
+@@ -344,6 +357,8 @@
  		case 's':
  			if (flag_backward)
  				usage();
@@ -132,7 +139,7 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  			q = switches +
  			    sizeof(switches) / sizeof(struct djswitch);
  			for (p = switches;
-@@ -346,19 +359,27 @@
+@@ -357,19 +372,27 @@
  		case 'w':
  			if (flag_backward)
  				usage();
@@ -160,7 +167,7 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  			weekstart = 1;
  			break;
  		default:
-@@ -438,82 +459,90 @@
+@@ -456,82 +479,90 @@
  		}
  	}
  
@@ -312,26 +319,27 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  
  	/* Highlight a specified day or today .*/
  	if (flag_highlightdate != NULL) {
-@@ -548,12 +577,13 @@
+@@ -566,12 +597,13 @@
  {
  
  	fputs(
 -"Usage: cal [general options] [-hjy] [[month] year]\n"
 -"       cal [general options] [-hj] [-m month] [year]\n"
--"       ncal [general options] [-bhJjpwySM] [-s country_code] [[month] year]\n"
+-"       ncal [general options] [-bhJjpwySM] [-s country_code] [-W number of days] [[month] year]\n"
+-"       ncal [general options] [-hJeo] [year]\n"
+-"General options: [-NC3] [-A months] [-B months]\n"
+-"For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
 +"Usage: cal [general options] [-jy] [[month] year]\n"
 +"       cal [general options] [-j] [-m month] [year]\n"
 +"       ncal -C [general options] [-jy] [[month] year]\n"
 +"       ncal -C [general options] [-j] [-m month] [year]\n"
-+"       ncal [general options] [-bhJjpwySM] [-H yyyy-mm-dd] [-s country_code] [[month] year]\n"
- "       ncal [general options] [-bhJeoSM] [year]\n"
--"General options: [-NC3] [-A months] [-B months]\n"
--"For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
++"       ncal [general options] [-bhJjpwySM] [-H yyyy-mm-dd] [-s country_code] [-W number of days] [[month] year]\n"
++"       ncal [general options] [-Jeo] [year]\n"
 +"General options: [-31] [-A months] [-B months] [-d yyyy-mm]\n",
  	    stderr);
  	exit(EX_USAGE);
  }
-@@ -654,11 +684,16 @@
+@@ -658,11 +690,16 @@
  	mw = jd_flag ? MONTH_WIDTH_B_J : MONTH_WIDTH_B;
  	wdss = (mpl == 2) ? " " : "";
  
@@ -349,7 +357,7 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  	m1 = y * 12 + m - 1;
  	m2 = m1 + after;
  
-@@ -741,11 +776,16 @@
+@@ -745,11 +782,16 @@
  	mpl = jd_flag ? 3 : 4;
  	mw = jd_flag ? MONTH_WIDTH_R_J : MONTH_WIDTH_R;
  
@@ -367,72 +375,9 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  	m1 = y * 12 + m - 1;
  	m2 = m1 + after;
  
---- bsdmainutils/usr.bin/ncal.orig/ncal.1	2016-09-29 13:39:21.077012024 +0200
-+++ bsdmainutils/usr.bin/ncal/ncal.1	2016-09-29 13:46:34.858054197 +0200
-@@ -33,37 +33,56 @@
- .Nd displays a calendar and the date of Easter
- .Sh SYNOPSIS
- .Nm
--.Op Fl 3hjy
-+.Op Fl 31jy
- .Op Fl A Ar number
- .Op Fl B Ar number
-+.Op Fl d Ar yyyy-mm
- .Oo
- .Op Ar month
- .Ar year
- .Oc
- .Nm
--.Op Fl 3hj
-+.Op Fl 31j
- .Op Fl A Ar number
- .Op Fl B Ar number
-+.Op Fl d Ar yyyy-mm
- .Fl m Ar month
- .Op Ar year
- .Nm ncal
--.Op Fl 3bhjJpwySM
-+.Op Fl C
-+.Op Fl 31jy
- .Op Fl A Ar number
- .Op Fl B Ar number
--.Op Fl s Ar country_code
-+.Op Fl d Ar yyyy-mm
- .Oo
- .Op Ar month
- .Ar year
- .Oc
- .Nm ncal
--.Op Fl 3bhJeoSM
-+.Op Fl C
-+.Op Fl 31j
- .Op Fl A Ar number
- .Op Fl B Ar number
-+.Op Fl d Ar yyyy-mm
-+.Fl m Ar month
- .Op Ar year
- .Nm ncal
--.Op Fl CN
-+.Op Fl 31bhjJpwySM
-+.Op Fl A Ar number
-+.Op Fl B Ar number
- .Op Fl H Ar yyyy-mm-dd
- .Op Fl d Ar yyyy-mm
-+.Op Fl s Ar country_code
-+.Oo
-+.Op Ar month
-+.Ar year
-+.Oc
-+.Nm ncal
-+.Op Fl 31bhJeoSM
-+.Op Fl A Ar number
-+.Op Fl B Ar number
-+.Op Fl d Ar yyyy-mm
-+.Op Ar year
- .Sh DESCRIPTION
- The
- .Nm
-@@ -119,21 +138,41 @@
+--- bsdmainutils/usr.bin/ncal.orig/ncal.1	2020-08-04 13:16:47.523112729 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.1		2020-08-04 13:16:54.131139871 +0200
+@@ -120,25 +120,41 @@
  .It Fl w
  Print the number of the week below each week column.
  .It Fl y
@@ -473,28 +418,32 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
  .It Fl C
 -Switch to
 +Completely switch to
++.Nm cal
++mode. For
  .Nm cal
 -mode.
-+mode. For
-+.Nm cal
+-.It Fl N
+-Switch to
+-.Nm ncal
+-mode.
 +like output only, use
 +.Fl b
 +instead.
- .It Fl N
- Switch to
- .Nm ncal
-@@ -167,13 +206,12 @@
- will display a calendar for the month of August in the current
+ .It Fl d Ar yyyy-mm
+ Use
+ .Ar yyyy-mm
+@@ -175,13 +191,12 @@
  year).
  .Pp
--Not all options can be used together. For example
+ Not all options can be used together.
+-For example
 -.Dq Li -3 -A 2 -B 3 -y -m 7
 -would mean:
 -show me the three months around the seventh month, three before
 -that, two after that and the whole year.
 -.Nm ncal
 -will warn about these combinations.
-+Not all options can be used together. For example, the options 
++For example the options 
 +.Fl y , 3 , 
 +and 
 +.Fl 1 
@@ -502,4 +451,4 @@ Author: <selinger@mathstat.dal.ca>, Michael Meskes <meskes@łdebian.org>
 +ones take precedence over the earlier ones.
  .Pp
  A year starts on January 1.
- .Sh SEE ALSO
+ .Pp

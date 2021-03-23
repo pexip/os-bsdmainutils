@@ -11,7 +11,7 @@ diff --git a/usr.bin/ncal/ncal.c b/usr.bin/ncal/ncal.c
 index 418b77f..9cd1fcf 100644
 --- a/usr.bin/ncal/ncal.c
 +++ b/usr.bin/ncal/ncal.c
-@@ -48,12 +48,13 @@ static const char rcsid[] =
+@@ -48,12 +48,13 @@
  
  /* Width of one month with backward compatibility and in regular mode*/
  #define MONTH_WIDTH_B_J 27
@@ -27,7 +27,7 @@ index 418b77f..9cd1fcf 100644
  
  typedef struct date date;
  
-@@ -667,7 +668,7 @@ monthrangeb(int y, int m, int jd_flag, int before, int after)
+@@ -670,7 +671,7 @@
  	int	prevyear = -1;
  
  	mpl = jd_flag ? 2 : 3;
@@ -36,7 +36,7 @@ index 418b77f..9cd1fcf 100644
  	wdss = (mpl == 2) ? " " : "";
  
  	while (before > 0) {
-@@ -725,11 +726,18 @@ monthrangeb(int y, int m, int jd_flag, int before, int after)
+@@ -728,11 +729,18 @@
  
  		/* Day of the week names. */
  		for (i = 0; i < count; i++) {
@@ -60,7 +60,7 @@ index 418b77f..9cd1fcf 100644
  		}
  		wprintf(L"\n");
  
-@@ -999,6 +1007,8 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+@@ -1003,6 +1011,8 @@
  		firsts = first - (weekday(first)+1) % 7;
  	else
  		firsts = first - weekday(first);
@@ -69,7 +69,7 @@ index 418b77f..9cd1fcf 100644
  
  	/*
  	 * Fill the lines with day of month or day of year (Julian day)
-@@ -1006,16 +1016,17 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+@@ -1010,7 +1020,8 @@
  	 * column is one day number. print column index: k.
  	 */
  	for (i = 0; i != 6; i++) {
@@ -77,11 +77,9 @@ index 418b77f..9cd1fcf 100644
 +		/* additional shift to make space for weeks */
 +		l = flag_weeks ? 4 : 0;
  		for (j = firsts + 7 * i, k = 0; j < last && k != dw * 7;
--		    j++, k += dw) { 
-+		    j++, k += dw) {
+ 		    j++, k += dw) {
  			if (j >= first) {
- 				if (jd_flag)
- 					dt.d = j - jan1 + 1;
+@@ -1019,7 +1030,7 @@
  				else
  					sdateb(j, &dt);
  				if (j == highlightdate && !flag_nohighlight)
@@ -90,7 +88,7 @@ index 418b77f..9cd1fcf 100644
  					    ds + dt.d * dw, dw, &l);
  				else
  					memcpy(mlines->lines[i] + k + l,
-@@ -1025,10 +1036,20 @@ mkmonthb(int y, int m, int jd_flag, struct monthlines *mlines)
+@@ -1029,10 +1040,20 @@
  		}
  		if (k == 0)
  			mlines->lines[i][1] = '\0';
@@ -113,7 +111,7 @@ index 418b77f..9cd1fcf 100644
  }
  
  /* Put the local names of weekdays into the wds. */
-@@ -1235,14 +1256,14 @@ highlight(char *dst, char *src, int len, int *extralen)
+@@ -1240,7 +1261,7 @@
  		dst += len;
  		/* highlight off. */
  		memcpy(dst, term_se, strlen(term_se));
@@ -122,13 +120,3 @@ index 418b77f..9cd1fcf 100644
  		return;
  	}
  
- 	/*
- 	 * Otherwise, print a _, backspace and the letter.
- 	 */
-	*extralen = 0;
- 	/* skip leading space. */
- 	src++;
- 	len--;
--- 
-2.1.4
-

@@ -1,3 +1,122 @@
+bsdmainutils (12.1.7+nmu3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove obsolete /usr/bin/from alternative on upgrades.  (Closes: #984628)
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 23 Mar 2021 08:57:20 +0100
+
+bsdmainutils (12.1.7+nmu2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix ISO week calculation (Closes: #976192), thanks to Kate for the
+    initial patch.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 15 Feb 2021 11:31:35 +0100
+
+bsdmainutils (12.1.7+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Downgrade Depends: calendar to Suggests, like in buster.
+    (Closes: #981440)
+
+ -- Chris Hofstaedtler <zeha@debian.org>  Mon, 08 Feb 2021 09:04:48 +0000
+
+bsdmainutils (12.1.7) unstable; urgency=medium
+
+  * Fix broken locale for Russian calendars. (Closes: #930736, #945252)
+  * Fix Russian name.
+    Thanks to sergio <sergio+it@outerface.net>
+  * Mark bsdmainutils Multi-Arch: foreign again (Closes: #966818)
+  * Do not include Russian calendars in calendar.all because they only work
+    with the correct locale.
+  * Fixed week number calculation and added option to manually define when the
+    first week of the year starts.
+  * Added patch to check year argument for option '-d'.
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 04 Aug 2020 13:49:06 +0200
+
+bsdmainutils (12.1.6) unstable; urgency=medium
+
+  * Fix version check that was too optimistic. (Closes: #965202)
+  * Mention transitional status in short description. (Closes: #965203)
+  * Fixed backward mode to correctly calculate switch to Gregorian calendar.
+    (Closes: #945059, #961366)
+  * Do not list removed option on manpage. (Closes: #919099)
+  * Cal should not highlight the current day. (Closes: #904839)
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 23 Jul 2020 14:53:53 +0200
+
+bsdmainutils (12.1.5) unstable; urgency=medium
+
+  * Source only upload. (Closes: #965014)
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 14 Jul 2020 15:42:14 +0200
+
+bsdmainutils (12.1.4) unstable; urgency=medium
+
+  * Re-added libncurses-dev built dependency that was lost during the
+    transition.
+    (Closes: #964309)
+  * Fix config file handling. (Closes: #964389)
+  * Add patch to calendar to cleanup after fork(). (Closes: #946726)
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 14 Jul 2020 15:42:07 +0200
+
+bsdmainutils (12.1.3) unstable; urgency=medium
+
+  * Move (n)cal to its own package.
+  * Remove (printer)banner, from, look, lorder, and write programs.
+  * Change to full debhelper build system.
+  * Make bsdmainutils a transitional package.
+  * Fix incorrectly created cron file. (Closes: #963178)
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 25 Jun 2020 20:02:39 +0200
+
+bsdmainutils (12.1.2) unstable; urgency=medium
+
+  [ Michael Meskes ]
+  * Move to source format 3.0.
+  * Use correctly named default file. (Closes: #963178)
+  * Enabled hardening options.
+
+  [ Gianfranco Costamagna ]
+  * Add more Ubuntu dates to the calendar
+  * Add more Debian dates to the calendar
+  * Add patch from Ubuntu to fix 1st day of the week on Big Endian systems
+  * Update Breaks/Replaces to ensure smooth upgrades (Closes: #963177)
+
+ -- Michael Meskes <meskes@debian.org>  Mon, 22 Jun 2020 12:42:08 +0200
+
+bsdmainutils (12.1.1) unstable; urgency=medium
+
+  [ Josh Triplett ]
+  * Remove unexpanded '$Id$' tokens, unused since the transition to git
+  * Split the "calendar" program and associated cron job into a separate
+    "calendar" package. (Closes: #946384)
+
+  [ Michael Meskes ]
+  * Follow BSD and remove colcrt, it is only useful on very old terminals
+    anyway.
+  * Update to latest FreeBSD/OpenBSD versions.
+  * Remove col, colrm, column, hexdump, and ul so they can be provided by the
+    util-linux source package.
+    (Closes: #175371, #602477, #613329, #885539, #893497, #905742, #908975,
+     #922103, #955183, #961301)
+  * Revert to pre-compiled Judaic calendars for the time being.
+    (Closes: #925912, #936244)
+  * Allow look to read big files.
+    Thanks to Tomaž Šolc <tomaz.solc@tablix.org> (Closes: #893033)
+  * Apply Andreas Henriksson's patch to convert calendarJudaic.py to python3,
+    it cannot be used with python3-hdate removed, though.
+  * Fix calendar manpage.
+    Thanks to Bjarni Ingi Gislason <bjarniig@rhi.hi.is> (Closes: #899339)
+  * Use the correct locale property for month name.
+    Thanks to sergio <sergio@outerface.net> (Closes: #924668, #943757)
+  * Updated Thai holidays in holiday calendar.
+    Thanks to Theppitak Karoonboonyanan <theppitak@gmail.com> (Closes: #934804)
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 28 May 2020 11:17:53 +0200
+
 bsdmainutils (11.1.2) unstable; urgency=medium
 
   * Switch build dependency back from libtinfo to libncurses. (Closes: #885622)
@@ -410,7 +529,7 @@ bsdmainutils (8.0.1) unstable; urgency=low
   * Patched new calendar sources to use wide-character functions.
   * Created patch to put Debian specific options back into calendar
     tool. (Closes: #293689)
-  * Updated all calendars from their FreeBSD sources. 
+  * Updated all calendars from their FreeBSD sources.
     (Closes: #388153, #413900, #446547, #542229)
   * Added/Fixed some calendar entries as reported by Debian users.
     (Closes: #554561, #337311, #525925, #493759, #381114, #280176))

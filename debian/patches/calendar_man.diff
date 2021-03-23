@@ -1,14 +1,61 @@
 Description: Document fall back on system-wide default.
-Author: Michael Meskes <meskes@debian.org>
+Author: Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
 
---- bsdmainutils/usr.bin/calendar.orig/calendar.1	2016-03-11 12:09:20.754070717 +0100
-+++ bsdmainutils/usr.bin/calendar/calendar.1	2016-03-11 12:16:17.115157932 +0100
-@@ -87,7 +87,7 @@
- .It Fl f Ar calendarfile
+--- bsdmainutils/usr.bin/calendar/calendar.1.orig	2020-05-27 20:23:10.061412465 +0200
++++ bsdmainutils/usr.bin/calendar/calendar.1	2020-05-27 20:24:30.233866694 +0200
+@@ -75,6 +75,7 @@
  Use
  .Ar calendarfile
--as the default calendar file.
-+as the default calendar file. If this file is not accessible, the system-wide default is used.
+ as the default calendar file.
++If this file is not accessible, the system-wide default is used.
  .It Fl t Oo Oo Oo Ar cc Oc Ns Ar yy Oc Ns Ar mm Oc Ns Ar dd
  Act like the specified value is
  .Dq today
+@@ -134,7 +135,7 @@
+ Orthodox Easter for this year.
+ Weekdays may be followed by
+ .Dq -4
+-.Li ...
++.Li \&...\&
+ .Dq +5
+ (aliases last, first, second, third, fourth) for moving events like
+ .Dq the last Monday in April .
+@@ -159,7 +160,7 @@
+ directory
+ .Pa /usr/share/calendar .
+ Empty lines and lines protected by the C commenting syntax
+-.Pq Li /* ... */
++.Pq Li /* \&...\& */
+ are ignored.
+ .Pp
+ Some possible calendar entries
+@@ -172,7 +173,7 @@
+ #include <calendar.birthday>
+ 
+ 6/15\fB\et\fRJune 15 (if ambiguous, will default to month/day).
+-Jun. 15\fB\et\fRJune 15.
++Jun.\& 15\fB\et\fRJune 15.
+ 15 June\fB\et\fRJune 15.
+ Thursday\fB\et\fREvery Thursday.
+ June\fB\et\fREvery June 1st.
+@@ -182,7 +183,7 @@
+ 04/SunLast\fB\et\fRlast Sunday in April,
+ \fB\et\fRsummer time in Europe
+ Easter\fB\et\fREaster
+-Ostern-2\fB\et\fRGood Friday (2 days before Easter)
++Ostern\-2\fB\et\fRGood Friday (2 days before Easter)
+ Paskha\fB\et\fROrthodox Easter
+ .Ed
+ .Sh FILES
+@@ -244,9 +245,9 @@
+ .It Pa calendar.uk
+ UK calendar.
+ .It Pa calendar.ushistory
+-U.S. history.
++U.S.\& history.
+ .It Pa calendar.usholiday
+-U.S. holidays.
++U.S.\& holidays.
+ .It Pa calendar.world
+ World wide calendar.
+ .El

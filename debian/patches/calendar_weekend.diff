@@ -17,22 +17,24 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/cale
  Print lines from today and next
  .Ar num
  days (forward, future).
-+Defaults to one. (same as \-l)
++Defaults to one (same as \-l).
  .It Fl a
  Process the
  .Dq calendar
-@@ -71,6 +74,16 @@
+@@ -71,6 +74,18 @@
  days (backward, past).
  .It Fl b
  Enforce special date calculation mode for Cyrillic calendars.
 +.It Fl l Ar num
 +Print lines from today and next
 +.Ar num
-+days (forward, future). Defaults to one. (same as \-A)
++days (forward, future).
++Defaults to one (same as \-A).
 +.It Fl e Ar num
 +Print lines from today and next
 +.Ar num
-+days, only if today is Friday (forward, future). Defaults to two, which causes
++days, only if today is Friday (forward, future).
++Defaults to two, which causes
 +.Nm
 +to print entries through the weekend on Fridays.
  .It Fl f Ar calendarfile
@@ -52,12 +54,13 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/cale
  The
  .Dq CALENDAR
  variable can be used to specify the style.
-@@ -114,6 +134,10 @@
+@@ -114,6 +134,11 @@
  .Dq BODUN=<bodun_prefix>
  where <local_name> can be ru_RU.UTF-8, uk_UA.UTF-8 or by_BY.UTF-8.
  .Pp
 +Note that the locale is reset to the user's default for each new file that is
-+read. This is so that locales from one file do not accidentally carry over into
++read.
++This is so that locales from one file do not accidentally carry over into
 +another file.
 +.Pp
  Other lines should begin with a month and day.
@@ -72,7 +75,7 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/cale
  .Pa /usr/share/calendar .
  Empty lines and lines protected by the C commenting syntax
  .Pq Li /* ... */
-@@ -261,6 +287,38 @@
+@@ -261,6 +287,40 @@
  in the line.
  This is no longer true: the date is only recognized when it occurs
  at the beginning of a line.
@@ -80,8 +83,8 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/cale
 +The
 +.Nm
 +command will only display lines that use a <tab> character to separate the date
-+and description, or that begin with a <tab>. This is different than in previous
-+releases.
++and description, or that begin with a <tab>.
++This is different than in previous releases.
 +.Pp
 +The
 +Fl t
@@ -93,11 +96,13 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.1 bsdmainutils/usr.bin/cale
 +.Fl l
 +and
 +.Fl e
-+flags are Debian-specific enhancements. Option
++flags are Debian-specific enhancements.
++Option
 +.Fl e
 +used to be called
-+.FL w
-+in Debian, but this option is now used differently by upstream. Also, the original
++.Fl w
++in Debian, but this option is now used differently by upstream.
++Also, the original
 +.Nm
 +program did not accept
 +.Li 0
@@ -119,9 +124,9 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/calendar.c bsdmainutils/usr.bin/cale
  int bodun_always = 0;
  
 +int weekend = 2;
- int f_dayAfter = 0; /* days after current date */
- int f_dayBefore = 0; /* days before current date */
- int f_SetdayAfter = 0; /* calendar invoked with -A */
+ int f_dayAfter = 0;	/* days after current date */
+ int f_dayBefore = 0;	/* days before current date */
+ int f_Setday = 0;	/* calendar invoked with -A */
 @@ -75,7 +76,7 @@
  
  	(void)setlocale(LC_ALL, "");
@@ -185,6 +190,6 @@ diff -ru bsdmainutils/usr.bin/calendar.orig/day.c bsdmainutils/usr.bin/calendar/
 -	offset = tp->tm_wday == 5 ? 3 : 1;
 +	/* Friday displays Monday's events if not configured otherwise */
 +	offset = tp->tm_wday == 5 ? 1 + weekend : 1;
- 	if (f_SetdayAfter)
+ 	if (f_Setday)
  		offset = 0;	/* Except not when range is set explicitly */
  	header[5].iov_base = dayname;

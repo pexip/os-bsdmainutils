@@ -1,7 +1,7 @@
 /*
  * Australian holidays
  *
- * $FreeBSD: head/usr.bin/calendar/calendars/calendar.australia 205937 2010-03-30 21:11:16Z edwin $
+ * $FreeBSD: head/usr.bin/calendar/calendars/calendar.australia 345251 2019-03-17 22:26:50Z grog $
  */
 
 #ifndef _calendar_australia_
@@ -17,7 +17,7 @@ Jun/MonSecond	Queen's Birthday Holiday (Australia, except WA)
 Oct/SunFirst	Daylight Savings Time starts in ACT, NSW, SA and VIC.
 
 /* ACT, NSW, common */
-Mar 18		Canberra Day (ACT)
+Mar/MonSecond	Canberra Day (ACT)
 Sep/MonLast	Family & Community Day (ACT)
 Aug/MonFirst	Bank Holiday (ACT, NSW)
 Oct/MonFirst	Labour Day (ACT, NSW, SA)

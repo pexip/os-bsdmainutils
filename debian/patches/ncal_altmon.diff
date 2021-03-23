@@ -1,0 +1,29 @@
+--- a/usr.bin/ncal/ncal.c
++++ b/usr.bin/ncal/ncal.c
+@@ -871,7 +871,7 @@
+ 	memset(&tm, 0, sizeof(tm));
+ 	tm.tm_mon = m;
+ 	wcsftime(mlines->name, sizeof(mlines->name) / sizeof(mlines->name[0]),
+-		 L"%B", &tm);
++		 L"%OB", &tm);
+ 	mlines->name[0] = towupper(mlines->name[0]);
+ 
+ 	/*
+@@ -974,7 +974,7 @@
+ 	memset(&tm, 0, sizeof(tm));
+ 	tm.tm_mon = m;
+ 	wcsftime(mlines->name, sizeof(mlines->name) / sizeof(mlines->name[0]),
+-		 L"%B", &tm);
++		 L"%OB", &tm);
+ 	mlines->name[0] = towupper(mlines->name[0]);
+ 
+ 	/*
+@@ -1207,7 +1207,7 @@
+ 		*y = ny;
+ 		return (0);
+ 	}
+-	if (strptime(s, "%B", &tm) != NULL || strptime(s, "%b", &tm) != NULL) {
++	if (strptime(s, "%OB", &tm) != NULL || strptime(s, "%Ob", &tm) != NULL) {
+ 		*m = tm.tm_mon + 1;
+ 		return (0);
+ 	}

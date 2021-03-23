@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+# from dpkg-maintscript-helper, modified
+ensure_package_owns_file() {
+	local PACKAGE="$1"
+	local FILE="$2"
+
+	dpkg-query -L "$PACKAGE" | grep -F -q -x "$FILE"
+}
+
+# from dpkg-maintscript-helper, modified
+finish_mv_conffile() {
+	local OLDCONFFILE="$1"
+	local CONFFILE="$2"
+	local PACKAGE="$3"
+
+	rm $mvverbose -f "$OLDCONFFILE.dpkg-remove"
+
+	[ -e "$OLDCONFFILE.dpkg-backup" ] || return 0
+	ensure_package_owns_file "$PACKAGE" "$CONFFILE" || return 0
+
+	echo "Preserving user changes to $NEWCONFFILE (now owned by $PACKAGE)..."
+	if [ -e "$CONFFILE" ]; then
+		mv $mvverbose -f "$CONFFILE" "$CONFFILE.dpkg-new"
+	fi
+	mv $mvverbose -f "$OLDCONFFILE.dpkg-backup" "$CONFFILE"
+}
+
+if [ "$1" = configure ]; then
+   if dpkg --compare-versions "$2" lt 12.1.6; then
+	finish_mv_conffile /etc/default/bsdmainutils /etc/default/calendar calendar
+	finish_mv_conffile /etc/cron.daily/bsdmainutils /etc/cron.daily/calendar calendar
+   fi
+
+   if dpkg --compare-versions "$2" lt 12.1.4~ && grep -q bsdmainutils /etc/cron.daily/calendar; then
+	# fix cron file to use correct default file 
+	  sed -i 's#/etc/default/bsdmainutils#/etc/default/calendar#' /etc/cron.daily/calendar
+   fi
+fi
+
+#DEBHELPER#

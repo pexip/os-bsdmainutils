@@ -1,27 +1,43 @@
 Source: bsdmainutils
 Section: utils
-Priority: important
+Priority: optional
 Maintainer: Debian Bsdmainutils Team <pkg-bsdmainutils@teams.debian.net>
 Uploaders: Michael Meskes <meskes@debian.org>
-Build-Depends: debhelper (>= 9), libncurses-dev, quilt (>= 0.40), python:native, python-hdate:native, libbsd-dev
-Standards-Version: 4.1.2
-Vcs-Git: git://anonscm.debian.org/bsdmainutils/bsdmainutils.git
-Vcs-Browser: https://anonscm.debian.org/gitweb/?p=bsdmainutils/bsdmainutils.git
+Build-Depends: debhelper-compat (= 13), quilt (>= 0.40), libbsd-dev, libncurses-dev
+Standards-Version: 4.5.0
+Vcs-Browser: https://salsa.debian.org/meskes/bsdmainutils
+Vcs-Git: https://salsa.debian.org/meskes/bsdmainutils.git
+Rules-Requires-Root: no
 
 Package: bsdmainutils
+Architecture: all
+Multi-Arch: foreign
+Section: oldlibs
+Depends: ${misc:Depends}, bsdutils (>= 3.0-0), debianutils (>= 1.8),
+ bsdextrautils (>= 2.35.2-7), ncal
+Suggests: calendar, whois, vacation, mailutils
+Description: Transitional package for more utilities from FreeBSD
+ This is a transitional package, it can be safely removed.
+
+Package: ncal
 Architecture: any
 Multi-Arch: foreign
-Depends: ${shlibs:Depends}, ${misc:Depends}, bsdutils (>= 3.0-0), debianutils (>= 1.8)
-Breaks: bsdutils (<< 1:2.13-11)
-Suggests: cpp, wamerican | wordlist, whois, vacation
-Description: collection of more utilities from FreeBSD
- This package contains lots of small programs many people expect to find when
- they use a BSD-style Unix system.
- .
- It provides banner (as printerbanner), calendar, col, colcrt, colrm, column,
- from (as bsd-from), hexdump (or hd), look, lorder, ncal (or cal), ul, and
- write (as bsd-write).
- .
- This package used to contain whois and vacation, which are now distributed in
- their own packages. Also here was tsort, which is now in the "coreutils"
- package.
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: bsdmainutils (<< 12.1.3)
+Replaces: bsdmainutils (<< 12.1.3)
+Description: display a calendar and the date of Easter
+ This package contains the "ncal" program and the traditional "cal"
+ program, both are commonly found on BSD-style systems. This utility displays a
+ simple calendar in a traditional or an alternative and more advanced layout,
+ and the date of Easter.
+
+Package: calendar
+Architecture: any
+Multi-Arch: foreign
+Depends: ${shlibs:Depends}, ${misc:Depends}, cpp
+Breaks: bsdmainutils (<< 12.1.1)
+Replaces: bsdmainutils (<< 12.1.1)
+Description: display upcoming dates and provide reminders
+ This package contains the "calendar" program commonly found on BSD-style
+ systems, which displays upcoming relevant dates on a wide variety of
+ calendars.

@@ -1,5 +1,4 @@
 # config.mk
-# $Id$
 
 # Configuration variables for bsdmainutils build system. These variables
 # can be set here or through the environment.
@@ -43,8 +42,8 @@ endif
 
 # normal installation rule
 install-1: $(PROG)
-	install -o root -g root -m 755 $(PROG) $(bindir)
-	install -o root -g root -m 644 $(MAN) $(mandir)
+	install -m 755 $(PROG) $(bindir)
+	install -m 644 $(MAN) $(mandir)
 
 install: install-1 install-2
 

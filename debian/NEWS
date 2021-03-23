@@ -1,0 +1,19 @@
+bsdmainutils (12.1.1) unstable; urgency=medium
+
+  The "calendar" program, formerly provided in this package, now appears in
+  the separate package "calendar".
+
+  The tools "col", "colrm", "column", "hexdump", and "ul" are now provided as
+  "bsdextrautils" from the util-linux sources.
+
+ -- Michael Meskes <meskes@debian.org>  Wed, 27 May 2020 17:05:02 +0200
+
+bsdmainutils (12.1.3) unstable; urgency=medium
+
+  The tools "look" and "write" are also now part of "bsdextrautils" from the
+  util-linux sources.
+
+  The "from", "printerbanner", and "lorder" programs are discontinued. The
+  "mailutils" package contains an alternative implementation of "from".
+
+ -- Michael Meskes <meskes@debian.org>  Wed, 27 May 2020 17:05:02 +0200

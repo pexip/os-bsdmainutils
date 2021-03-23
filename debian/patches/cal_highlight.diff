@@ -1,0 +1,18 @@
+Description: Make sure cal does not highlight the current day.
+Author: Michael Meskes <meskes@debian.org>
+
+--- bsdmainutils/usr.bin/ncal/ncal.c.orig	2020-07-23 14:48:04.786737268 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.c	2020-07-23 14:50:19.271456657 +0200
+@@ -257,8 +257,11 @@
+ 		flag_backward = 1;
+ 
+ 	/* Set the switch date to United Kingdom if backwards compatible */
+-	if (flag_backward)
++	/* Also make sure cal does not highlight the curent day */
++	if (flag_backward) {
+ 		nswitchb = ndaysj(&ukswitch);
++		flag_nohighlight = 1;
++	}
+ 	else
+ 		nswitchb = nswitch; /* needed if flag_backward is set later */
+ 
