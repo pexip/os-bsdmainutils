@@ -1,0 +1,10 @@
+--- bsdmainutils/usr.bin/calendar/calendar.c.orig	2020-07-10 12:54:50.794377595 +0200
++++ bsdmainutils/usr.bin/calendar/calendar.c	2020-07-10 12:55:46.006196455 +0200
+@@ -199,6 +199,7 @@
+ 						exit(0);
+ 				}
+ 				cal();
++				endpwent();
+ 				exit(0);
+ 			}
+ 			/* parent: wait a reasonable time, then kill child if

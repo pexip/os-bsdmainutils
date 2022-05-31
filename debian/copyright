@@ -1,7 +1,6 @@
 This is a collection of programs from 4.4BSD-Lite that have not (yet)
 been re-written by FSF as GNU.  It was constructed for inclusion in
-Debian Linux.  As programs found here become available from GNU sources,
-they will be replaced.
+Debian Linux.
 
 This package was originally put together by Austin Donnelly
 <and1000@debian.org>, but is heavily based on bsdutils, originally put

@@ -43,6 +43,9 @@ Apr  8	Debian GNU/Linux 4.0 alias ``etch'' released, 2007
 Feb 14	Debian GNU/Linux 5.0 alias ``lenny'' released, 2009
 Feb  6	Debian GNU/Linux 6.0 alias ``squeeze'' released, 2011
 May  5	Debian GNU/Linux 7.0 alias ``wheezy'' released, 2013
+Apr  25	Debian GNU/Linux 8.0 alias ``jessie'' released, 2015
+Jun  17	Debian GNU/Linux 9.0 alias ``stretch'' released, 2017
+Jul  6	Debian GNU/Linux 10.0 alias ``buster'' released, 2019
 
 /* Notable bug report numbers */
 Jun  7	Debian Bug#100000 reported by David B. Harris, 2001

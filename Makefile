@@ -1,5 +1,4 @@
 # Makefile for the new bsdmainutils
-# $Id$
 
 # what programs to build
 BIN=$(wildcard usr.bin/*)

@@ -1,0 +1,50 @@
+usr/bin/calendar
+usr/share/man/man1/calendar.1
+
+usr.bin/calendar/calendars/de_DE.ISO8859-1/*		/usr/share/calendar/de_DE
+usr.bin/calendar/calendars/fr_FR.ISO8859-1/*		/usr/share/calendar/fr_FR
+usr.bin/calendar/calendars/hr_HR.ISO8859-2/*		/usr/share/calendar/hr_HR
+usr.bin/calendar/calendars/de_AT.ISO_8859-15/*		/usr/share/calendar/de_AT
+usr.bin/calendar/calendars/hu_HU.ISO8859-2/*		/usr/share/calendar/hu_HU
+usr.bin/calendar/calendars/uk_UA.KOI8-U/*		/usr/share/calendar/uk_UA
+usr.bin/calendar/calendars/ru_RU.UTF-8/*		/usr/share/calendar/ru_RU
+usr.bin/calendar/calendars/pt_BR.UTF-8/*		/usr/share/calendar/pt_BR
+
+usr.bin/calendar/calendars/calendar.southafrica		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.holiday		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.french		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.newzealand		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.lotr		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.world		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.german		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.croatian		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.christian		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.computer		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.russian		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.freebsd		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.usholiday		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.birthday		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.hungarian		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.music		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.australia		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.dutch		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.history		/usr/share/calendar
+usr.bin/calendar/calendars/calendar.ukrainian		/usr/share/calendar
+
+debian/calendars/calendar.debian			/usr/share/calendar
+debian/calendars/calendar.all				/usr/share/calendar
+debian/calendars/calendar.world				/usr/share/calendar
+debian/calendars/calendar.ubuntu			/usr/share/calendar
+debian/calendars/calendar.discordian			/usr/share/calendar
+debian/calendars/calendar.eu				/usr/share/calendar
+debian/calendars/calendar.argentina			/usr/share/calendar
+debian/calendars/calendar.pagan				/usr/share/calendar
+debian/calendars/calendar.belgium			/usr/share/calendar
+debian/calendars/calendar.kazakhstan			/usr/share/calendar
+debian/calendars/calendar.thai				/usr/share/calendar
+debian/calendars/calendar.judaic*			/usr/share/calendar
+debian/calendars/calendar.unitedkingdom			/usr/share/calendar
+
+debian/calendars/default				/etc/calendar
+
+debian/calendarJudaic.py				/usr/share/doc/calendar

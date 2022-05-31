@@ -1,8 +1,17 @@
-Description: Explain cal and make manpage better understandable
+Description: Explain cal and make manpage understandable
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/ncal/ncal.1	2014-10-17 11:11:47.179009560 +0200
-+++ bsdmainutils/usr.bin/ncal/ncal.1	2014-10-17 11:12:51.850729403 +0200
+--- bsdmainutils/usr.bin/ncal/ncal.1	2020-08-04 14:05:25.074220261 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.1	2020-08-04 14:05:59.662386394 +0200
+@@ -56,7 +56,7 @@
+ .Ar year
+ .Oc
+ .Nm ncal
+-.Op Fl 3hJeo
++.Op Fl Jeo
+ .Op Fl A Ar number
+ .Op Fl B Ar number
+ .Op Ar year
 @@ -81,8 +81,8 @@
  Turns off highlighting of today.
  .It Fl J
@@ -29,7 +38,7 @@ Author: Michael Meskes <meskes@debian.org>
  .It Fl o
  Display date of Orthodox Easter (Greek and Russian
  Orthodox Churches).
-@@ -183,6 +182,15 @@
+@@ -206,6 +205,15 @@
  .Nm ncal
  command appeared in
  .Fx 2.2.6 .

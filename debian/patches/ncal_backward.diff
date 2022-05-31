@@ -1,8 +1,8 @@
-Description: Add an option to ncal to use the oldstyle output.
+Description: Add an option to ncal to use oldstyle output.
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/ncal.orig/ncal.1	2016-03-12 12:14:25.344008991 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.1	2016-03-12 12:13:17.551507263 +0100
+--- bsdmainutils/usr.bin/ncal.orig/ncal.1	2020-08-04 13:07:46.876872210 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.1	2020-08-04 13:08:57.513167901 +0200
 @@ -47,7 +47,7 @@
  .Fl m Ar month
  .Op Ar year
@@ -11,28 +11,19 @@ Author: Michael Meskes <meskes@debian.org>
 +.Op Fl 3bhjJpwySM
  .Op Fl A Ar number
  .Op Fl B Ar number
- .Op Fl s Ar country_code
-@@ -56,7 +56,7 @@
- .Ar year
- .Oc
- .Nm ncal
--.Op Fl 3hJeoSM
-+.Op Fl 3bhJeoSM
- .Op Fl A Ar number
- .Op Fl B Ar number
- .Op Ar year
-@@ -150,6 +150,8 @@
- Weeks start on Monday.
- .It Fl S
- Weeks start on Sunday.
+ .Op Fl W Ar number
+@@ -155,6 +155,8 @@
+ First week of the year has at least
+ .Ar number
+ days.
 +.It Fl b
 +Use oldstyle format for ncal output.
  .El
  .Pp
  A single parameter specifies the year (1\(en9999) to be displayed;
---- bsdmainutils/usr.bin/ncal.orig/ncal.c	2016-03-12 12:14:25.344008991 +0100
-+++ bsdmainutils/usr.bin/ncal/ncal.c	2016-03-12 12:17:07.573563144 +0100
-@@ -196,6 +196,7 @@
+--- bsdmainutils/usr.bin/ncal.orig/ncal.c	2020-08-04 13:07:46.876872210 +0200
++++ bsdmainutils/usr.bin/ncal/ncal.c		2020-08-04 13:07:46.876872210 +0200
+@@ -200,6 +200,7 @@
  	int     m = 0;			/* month */
  	int	y = 0;			/* year */
  	int     flag_backward = 0;	/* user called cal--backward compat. */
@@ -40,12 +31,17 @@ Author: Michael Meskes <meskes@debian.org>
  	int     flag_wholeyear = 0;	/* user wants the whole year */
  	int	flag_julian_cal = 0;	/* user wants Julian Calendar */
  	int     flag_julian_day = 0;	/* user wants the Julian day numbers */
-@@ -256,8 +257,13 @@
+@@ -257,11 +258,18 @@
+ 	/* Set the switch date to United Kingdom if backwards compatible */
+ 	if (flag_backward)
+ 		nswitchb = ndaysj(&ukswitch);
++	else
++		nswitchb = nswitch; /* needed if flag_backward is set later */
  
  	before = after = -1;
  
--	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySM")) != -1)
-+	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMb")) != -1)
+-	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMW:")) != -1)
++	while ((ch = getopt(argc, argv, "3A:B:Cd:eH:hjJm:Nops:wySMW:b")) != -1)
  		switch (ch) {
 +		case 'b':
 +			if (flag_backward)
@@ -55,8 +51,8 @@ Author: Michael Meskes <meskes@debian.org>
  		case '3':
  			flag_3months = 1;
  			break;
-@@ -418,6 +424,12 @@
- 	}
+@@ -434,6 +442,12 @@
+ 		days_first_week = 3;
  #endif
  
 +	if (ncal_backward) 
@@ -68,18 +64,16 @@ Author: Michael Meskes <meskes@debian.org>
  	if (flag_month != NULL) {
  		if (parsemonth(flag_month, &m, &y)) {
  			errx(EX_USAGE,
-@@ -538,8 +550,8 @@
+@@ -554,7 +568,7 @@
  	fputs(
  "Usage: cal [general options] [-hjy] [[month] year]\n"
  "       cal [general options] [-hj] [-m month] [year]\n"
--"       ncal [general options] [-hJjpwySM] [-s country_code] [[month] year]\n"
--"       ncal [general options] [-hJeoSM] [year]\n"
-+"       ncal [general options] [-bhJjpwySM] [-s country_code] [[month] year]\n"
-+"       ncal [general options] [-bhJeoSM] [year]\n"
+-"       ncal [general options] [-hJjpwySM] [-s country_code] [-W number of days] [[month] year]\n"
++"       ncal [general options] [-bhJjpwySM] [-s country_code] [-W number of days] [[month] year]\n"
+ "       ncal [general options] [-hJeo] [year]\n"
  "General options: [-NC3] [-A months] [-B months]\n"
  "For debug the highlighting: [-H yyyy-mm-dd] [-d yyyy-mm]\n",
- 	    stderr);
-@@ -903,7 +915,7 @@
+@@ -906,7 +920,7 @@
  	date    dt;		/* handy date */
  	int     dw;		/* width of numbers */
  	int     first;		/* first day of month */
@@ -88,7 +82,7 @@ Author: Michael Meskes <meskes@debian.org>
  	int     i, j, k, l;	/* just indices */
  	int     jan1 = 0;	/* the first day of this year */
  	int     last;		/* the first day of next month */
-@@ -954,10 +966,13 @@
+@@ -957,10 +971,13 @@
  	}
  
  	/*

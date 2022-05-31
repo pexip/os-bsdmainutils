@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 # Filename: calendarJudaic.py
 #
 # License: no warranty close + no license (public domain)
@@ -72,10 +72,6 @@ days due to various considerations.
  *
  */
 
-/*
- * $$Id: calendarJudaic.py,v ${PLACE_HOLDER_FOR_VERSION}$$
- */
-
 #ifndef _calendar_judaic_
 #define _calendar_judaic_
 
@@ -108,7 +104,7 @@ LANG=UTF-8
                               h.get_hebrew_year_string()
   header = Template(template_for_header).substitute(
                                   substitutions_for_header)
-  print header
+  print(header)
 
   h.set_gdate(1, 1, year)
   julian = h.get_julian()
@@ -127,26 +123,26 @@ LANG=UTF-8
     parasha['diaspora'] = h.get_parasha_string(0)
     if holyday['Israel']:
       if holyday['Israel'] == holyday['diaspora']:
-        print "%02d/%02d*	%s" % (month, day, holyday['Israel'])
+        print("%02d/%02d*	%s" % (month, day, holyday['Israel']))
       else:
-        print "%02d/%02d*	%s (Israel only)" % \
-                                (month, day, holyday['Israel'])
+        print("%02d/%02d*	%s (Israel only)" % \
+                                (month, day, holyday['Israel']))
     elif holyday['diaspora']:
-      print "%02d/%02d*	%s (diaspora only)" % \
-                                (month, day, holyday['diaspora'])
+      print("%02d/%02d*	%s (diaspora only)" % \
+                                (month, day, holyday['diaspora']))
     if parasha['Israel']  and  parasha['Israel'] != 'none':
       if parasha['Israel'] == parasha['diaspora']:
-        print "%02d/%02d*	Parshat %s" % \
-                                (month, day, parasha['Israel'])
+        print("%02d/%02d*	Parshat %s" % \
+                                (month, day, parasha['Israel']))
       else:
-        print "%02d/%02d*	%s (Israel only)" % \
-                                (month, day, parasha['Israel'])
+        print("%02d/%02d*	%s (Israel only)" % \
+                                (month, day, parasha['Israel']))
     elif parasha['diaspora']  and  parasha['diaspora'] != 'none':
     # See http://bugs.debian.org/583092 why 'none' is required here.
-      print "%02d/%02d*	Parshat %s (diaspora only)" % \
-                                (month, day, parasha['diaspora'])
+      print("%02d/%02d*	Parshat %s (diaspora only)" % \
+                                (month, day, parasha['diaspora']))
 
-  print footer
+  print(footer)
 
   sys.exit()
 

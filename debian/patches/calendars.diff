@@ -1,8 +1,9 @@
 Description: Lots of corrections to calendar files.
 Author: Michael Meskes <meskes@debian.org>
 
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.australia	2017-12-27 10:23:06.540639080 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.australia	2017-12-27 10:24:00.626291361 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.australia bsdmainutils/usr.bin/calendar/calendars/calendar.australia
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.australia	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.australia	2020-05-28 11:02:58.209454791 +0200
 @@ -7,12 +7,12 @@
  #ifndef _calendar_australia_
  #define _calendar_australia_
@@ -19,33 +20,18 @@ Author: Michael Meskes <meskes@debian.org>
  Jun/MonSecond	Queen's Birthday Holiday (Australia, except WA)
  Oct/SunFirst	Daylight Savings Time starts in ACT, NSW, SA and VIC.
  
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.birthday	2017-12-27 10:25:49.445615803 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.birthday	2017-12-27 10:29:57.678510329 +0100
-@@ -15,6 +15,7 @@
- 01/04	Jakob Grimm born, 1785
- 01/04	Wilhelm Beer born, 1797, first astronomer to map Mars
- 01/05	DeWitt B. Brace born, 1859, inventor of spectrophotometer
-+01/07	Nikola Tesla died, 1943, supergenius, inventor AC Motor 
- 01/10	Ethan Allen born, 1738
- 01/11	Alexander Hamilton born in Nevis, British West Indies, 1757?
- 01/12	"Long" John Baldry is born in London, 1941
-@@ -126,6 +127,7 @@
- 04/16	Charles (Charlie) Chaplin (Sir) born in London, 1889
- 04/22	Kant born, 1724
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.birthday bsdmainutils/usr.bin/calendar/calendars/calendar.birthday
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.birthday	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.birthday	2020-05-28 11:02:58.209454791 +0200
+@@ -148,6 +148,7 @@
+ 04/23	William Shakespeare died, 1616
+ 04/26	William Shakespeare baptised, 1564
  04/27	Louis Victor de Broglie born, 1774, physicist
 +04/27	Samuel Morse born, 1791, the inventor of the single wire telegraph
  04/28	James Monroe, 5th President of the United States, born in Westmoreland
  		County, Viriginia, 1758
- 04/29	Jules Henri Poincare born, 1854, founder of topology
-@@ -179,6 +181,7 @@
- 07/07	P.T. Barnum dies, 1891
- 07/08	Count Ferdinand von Zeppelin born, 1838
- 07/10	John Calvin born, 1509
-+07/10	Nikola Tesla, born, 1856, supergenius, inventor AC Motor 
- 07/11	John Quincy Adams, 6th President of the United States, born in
- 		Braintree, Massachusetts, 1767
- 07/12	Henry David Thoreau born, 1817
-@@ -242,6 +245,7 @@
+ 04/28	Terry Pratchett (Sir) born, 1948, author
+@@ -279,6 +280,7 @@
  10/02	Mohandas K. Gandhi born at Porbandar, Kathiawad, India, 1869
  10/04	John V. Atanasoff born, 1903
  10/05	Ray Kroc (founder of McDonald's) born, 1902
@@ -53,16 +39,17 @@ Author: Michael Meskes <meskes@debian.org>
  10/05	Steve Jobs died at the age of 56, 2011
  10/12	Dennis MacAlistair Ritchie died at the age of 70, 2011
  10/13	Lenny Bruce is born in New York City, 1925
-@@ -265,6 +269,7 @@
- 10/31	Chiang Kai-Shek born, 1887
+@@ -303,6 +305,7 @@
  10/31	Dale Evans born, 1912
+ 11/01	Joseph Stalin's burial, 1961
  11/02	Daniel Boone born near Reading, PA, 1734
 +11/03	John Montague, 4th Earl of Sandwich, born 1718
  11/04	King William III of Orange born, 1650
  11/05	Roy Rogers born, 1912
  11/09	Carl Sagan born, 1934
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.brazilian	2017-12-27 10:53:29.639180900 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.brazilian	2017-12-27 10:54:31.479323108 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.brazilian bsdmainutils/usr.bin/calendar/calendars/calendar.brazilian
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.brazilian	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.brazilian	2020-05-28 11:02:58.209454791 +0200
 @@ -8,6 +8,6 @@
  #ifndef _calendar_brazilian_
  #define _calendar_brazilian_
@@ -71,8 +58,54 @@ Author: Michael Meskes <meskes@debian.org>
 +#include <pt_BR/calendar.all>
  
  #endif
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.holiday	2017-12-27 10:40:30.532190222 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.holiday	2017-12-27 10:43:49.061139324 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.croatian bsdmainutils/usr.bin/calendar/calendars/calendar.croatian
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.croatian	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.croatian	2020-05-28 11:02:58.213454816 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_croatian_
+ #define _calendar_croatian_
+ 
+-#include <hr_HR.ISO8859-2/calendar.all>
++#include <hr_HR/calendar.all>
+ 
+ #endif /* !_calendar_croatian_ */
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.dutch bsdmainutils/usr.bin/calendar/calendars/calendar.dutch
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.dutch	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.dutch	2020-05-28 11:02:58.213454816 +0200
+@@ -4,7 +4,7 @@
+  * Originally submitted by Edwin Groothuis <edwin@FreeBSD.org>
+  */
+ 
+-LANG=nl_NL.ISO8859-15
++LANG=UTF-8
+ Easter=Pasen
+ 
+ /*
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.french bsdmainutils/usr.bin/calendar/calendars/calendar.french
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.french	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.french	2020-05-28 11:02:58.213454816 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_french_
+ #define _calendar_french_
+ 
+-#include <fr_FR.ISO8859-1/calendar.all>
++#include <fr_FR/calendar.all>
+ 
+ #endif /* !_calendar_french_ */
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.german bsdmainutils/usr.bin/calendar/calendars/calendar.german
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.german	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.german	2020-05-28 11:02:58.213454816 +0200
+@@ -7,6 +7,6 @@
+ #ifndef _calendar_german_
+ #define _calendar_german_
+ 
+-#include <de_DE.ISO8859-1/calendar.all>
++#include <de_DE/calendar.all>
+ 
+ #endif /* !_calendar_german_ */
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.holiday bsdmainutils/usr.bin/calendar/calendars/calendar.holiday
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.holiday	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.holiday	2020-05-28 11:11:16.724253581 +0200
 @@ -7,6 +7,8 @@
  #ifndef _calendar_holiday_
  #define _calendar_holiday_
@@ -125,7 +158,12 @@ Author: Michael Meskes <meskes@debian.org>
  04/14	Day of the Americas in Honduras
  04/15	Bengali New Year in Bangladesh
  04/16	De Diego's Birthday celebrated in Puerto Rico
-@@ -159,10 +166,9 @@
+@@ -155,14 +162,14 @@
+ 05/01	US Law Day (decl. by Eisenhower)
+ 05/02	King's Birthday in Lesotho
+ 05/03	Constitution Memorial Day in Japan
++05/04	Coronation Day in Thailand
+ 05/04	Greenery Day in Japan
  05/04	Rhode Island Independence Day
  05/05	Battle of Puebla in Mexico
  05/05	Children's Day in Japan and South Korea
@@ -137,7 +175,7 @@ Author: Michael Meskes <meskes@debian.org>
  05/07	May Day in United Kingdom
  05/08	Buddha's Birthday in South Korea
  05/08	Elections for the National Assembly in Philippines
-@@ -177,7 +183,9 @@
+@@ -177,7 +184,9 @@
  05/14	Unification Day in Liberia
  05/15	Kamuzu Day in Malawi
  05/15	Vesak Day, observed in Singapore and Malaysia
@@ -147,7 +185,7 @@ Author: Michael Meskes <meskes@debian.org>
  05/16	Discovery Day in Cayman Islands
  05/17	Constitution Day in Nauru and Norway
  05/18	Flag Day in Haiti
-@@ -198,7 +206,7 @@
+@@ -198,7 +207,7 @@
  05/25	Memorial Day in New Mexico & Puerto Rico
  05/25	Revolution in the Sudan in Libyan Arab Republic
  05/27	Afghanistan attains sovereignty, 1921
@@ -156,7 +194,15 @@ Author: Michael Meskes <meskes@debian.org>
  05/28	Mothers Day in Central African Republic
  05/31	Pya Martyrs Day in Togo
  05/MonThird	Memorial Day in Michigan (3rd Monday)
-@@ -246,9 +254,8 @@
+@@ -208,6 +217,7 @@
+ 06/02	Corpus Christi in Paraguay
+ 06/03	Confederate Memorial Day in Kentucky & Louisiana
+ 06/03	Labor Day in Bahamas
++06/03	Queen's Birthday in Thailand
+ 06/03*	Bank Holiday in Rep. of Ireland
+ 06/04	Emancipation Day in Tonga
+ 06/04	Queen's Birthday in New Zealand
+@@ -246,9 +256,8 @@
  06/28	Mothers Day in Central African Republic
  06/29	Independence Day in Seychelles
  06/30	Day of the Army in Guatemala
@@ -168,7 +214,7 @@ Author: Michael Meskes <meskes@debian.org>
  07/01	Freedom Day in Suriname
  07/01	Independence Day in Burundi
  07/01	National Day in Rwanda
-@@ -271,7 +278,9 @@
+@@ -271,7 +280,9 @@
  07/10	Independence Day in Bahamas
  07/11	National Holiday in the Mongolian People's Republic
  07/12	Battle of Boyne celebrated in Northern Ireland
@@ -178,7 +224,7 @@ Author: Michael Meskes <meskes@debian.org>
  07/14	Anniversary of the Revolution in Iraq
  07/14	French National Festival
  07/14	National Holiday in Monaco
-@@ -285,6 +294,7 @@
+@@ -285,6 +296,7 @@
  07/18	Liberation Day in Nicaragua
  07/19	Martyrs Day in Burma
  07/20	Independence Day in Colombia
@@ -186,7 +232,7 @@ Author: Michael Meskes <meskes@debian.org>
  07/21	National Holiday in Belgium
  07/22	King's Birthday in Swaziland
  07/22	National Day in Poland
-@@ -301,6 +311,7 @@
+@@ -301,6 +313,7 @@
  07/26	National Day in Maldives
  07/27	Barbosa's Birthday (celebrated in Puerto Rico)
  07/28	Independence Days (2 days) in Peru
@@ -194,7 +240,16 @@ Author: Michael Meskes <meskes@debian.org>
  07/29	Olsok Eve in Norway to commemorate Norway's Viking King St. Olav
  07/29	Rain Day in Waynesburg, PA
  07/31	Revolution Day in Congo
-@@ -345,11 +356,12 @@
+@@ -327,7 +340,7 @@
+ 08/11	Heroes Day (2 days) in Zimbabwe
+ 08/11	Independence Day in Chad
+ 08/11	King Hussein's Accession to the Throne in Jordan
+-08/12	Queen's Birthday in Thailand
++08/12	Queen Sirikit's Birthday and Mother's Day in Thailand
+ 08/13	Proclamation of Independence in Central African Republic
+ 08/13	Women's Day in Tunisia
+ 08/14	Independence Day in Pakistan
+@@ -345,11 +358,12 @@
  08/17	Independence Day in Indonesia
  08/19	Independence Day in Afghanistan
  08/20	Constitution Day in Hungary
@@ -208,7 +263,7 @@ Author: Michael Meskes <meskes@debian.org>
  08/27	Liberation Day in Hong Kong
  08/28	Heroes Day in Philippines
  08/30	Huey P. Long Day in Louisiana
-@@ -366,6 +378,7 @@
+@@ -366,6 +380,7 @@
  09/07	Independence Day in Brazil
  09/09	Admission Day in California
  09/09	National Day in North Korea
@@ -216,7 +271,7 @@ Author: Michael Meskes <meskes@debian.org>
  09/10	Korean Thanksgiving Day (Chusuk) in South Korea
  09/10	Moon Festival in Taiwan
  09/10	National Day in Belize
-@@ -405,6 +418,8 @@
+@@ -405,6 +420,8 @@
  09/30	Botswana Day in Botswana
  09/MonThird	Respect for the Aged Day in Japan
  10/01	Armed Forces Day in South Korea
@@ -225,7 +280,7 @@ Author: Michael Meskes <meskes@debian.org>
  10/01	Independence Day in Nigeria
  10/01	National Liberation Day (2 days) in China
  10/01	Public Holiday in Botswana
-@@ -420,7 +435,7 @@
+@@ -420,7 +437,7 @@
  10/07	National Heroes Day in Jamaica
  10/08	Battle of Agamos in Peru
  10/08	Constitution Day in former USSR
@@ -234,7 +289,7 @@ Author: Michael Meskes <meskes@debian.org>
  10/08*	Fiji Day
  10/09	Independence Day in Uganda
  10/09	Independence of Guayaquil in Ecuador
-@@ -435,9 +450,10 @@
+@@ -435,9 +452,10 @@
  10/12	National Day in Equatorial Guinea and Spain
  10/12	Our Lady Aparecida Day in Brazil
  10/12	Pan American Day in Belize
@@ -246,7 +301,7 @@ Author: Michael Meskes <meskes@debian.org>
  10/15	Evacuation Day in Tunisia
  10/16	National Boss Day, USA
  10/17	Dessaline's Death Anniversary in Haiti
-@@ -475,7 +491,10 @@
+@@ -475,7 +493,10 @@
  11/04	Will Rogers Day, USA
  11/06	Green March Day in Morocco
  11/07	October Revolution Day in Hungary
@@ -257,7 +312,7 @@ Author: Michael Meskes <meskes@debian.org>
  11/10	King's Birthday in Bhutan
  11/11	Angola gains independence from Portugal, 1975
  11/11	Independence Day in Angola
-@@ -520,7 +539,7 @@
+@@ -520,7 +541,7 @@
  12/01	World AIDS Day
  12/02	National Holiday in United Arab Emirates
  12/03	National Holiday in Laos
@@ -266,7 +321,7 @@ Author: Michael Meskes <meskes@debian.org>
  12/06	Independence Day in Finland
  12/07	Delaware Day in Delaware
  12/07	Independence Day in Ivory Coast
-@@ -554,10 +573,32 @@
+@@ -554,10 +575,32 @@
  12/27	Constitution Day in North Korea
  12/27	Public Holiday in Lesotho, Zimbabwe
  12/29	Civic Holidays (3 days) in Costa Rica
@@ -299,8 +354,9 @@ Author: Michael Meskes <meskes@debian.org>
 +May 04	Holiday for a Nation in Japan 
 +
  #endif /* !_calendar_holiday_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.hungarian	2017-12-27 10:48:23.403285125 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.hungarian	2017-12-27 10:48:39.751236960 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.hungarian bsdmainutils/usr.bin/calendar/calendars/calendar.hungarian
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.hungarian	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.hungarian	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,6 @@
  #ifndef _calendar_hungarian_
  #define _calendar_hungarian_
@@ -309,8 +365,9 @@ Author: Michael Meskes <meskes@debian.org>
 +#include <hu_HU/calendar.all>
  
  #endif /* !_calendar_hungarian_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.lotr	2017-12-27 10:49:38.619109396 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.lotr	2017-12-27 10:49:49.855092760 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.lotr bsdmainutils/usr.bin/calendar/calendars/calendar.lotr
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.lotr	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.lotr	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,8 @@
  #ifndef _calendar_lotr_
  #define _calendar_lotr_
@@ -320,92 +377,30 @@ Author: Michael Meskes <meskes@debian.org>
  01/05	Fellowship enters Moria
  01/09	Fellowship reaches Lorien
  01/17	Passing of Gandalf
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.music	2017-12-27 10:50:15.347063628 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.music	2017-12-27 10:50:29.059052742 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.music bsdmainutils/usr.bin/calendar/calendars/calendar.music
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.music	2020-04-28 10:13:04.727343180 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.music	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,8 @@
  #ifndef _calendar_music_
- #define _calendar_music_
+ #define	_calendar_music_
  
 +LANG=UTF-8
 +
  01/01	Country Joe McDonald is born in El Monte, California, 1942
  01/03	Steven Stills is born in Dallas, 1945
  01/04	Jazz great Charlie Mingus dies at 57 in Cuernavaca, Mexico, 1979
-@@ -25,6 +27,7 @@
- 01/25	Bob Dylan plays the second "Hurricane" benefit, in the Astrodome, 1978
- 01/27	Bobby "Blue" Bland (Robert Calvin Bland) is born in Tennessee, 1930
- 01/27	Wolfgang Amadeus Mozart is born in Salzburg, Austria, 1756
-+01/27	Giuseppe Verdi dies in Milan, Italy, 1901
- 01/28	Jimi Hendrix headlines Madison Square Garden, 1970
- 01/30	Lightnin' Hopkins, the most-recorded blues artist ever, dies, 1982
- 01/31	Franz Schubert is born in Lichtenthal, Vienna, Austria, 1797
-@@ -53,6 +56,7 @@
- 03/01	Frederic Chopin is born in Zelazowa Wola, Warsaw, Poland, 1810
- 03/01	Jim Morrison is busted for obscenity in Miami, 1969
- 03/02	Blues guitarist Rory Gallagher is born in Ballyshannon, Ireland, 1949
-+03/02	Bedrich Smetana is born in Litomysl, Czech republic, 1824
- 03/03	Buffalo Springfield is formed in Los Angeles, 1966
- 03/04	Antonio Vivaldi born in Venice, Italy, 1678
- 03/07	Last Gilbert & Sullivan opera produced, 1896
-@@ -94,6 +98,7 @@
- 05/10	Dave Mason is born in Worcester, England, 1945
- 05/11	Bob Marley dies in his sleep in Miami, 1981
- 05/12	Pink Floyd performs the first quadrophonic concert, 1977
-+05/12	Bedrich Smetana dies in Prague, Czech republic, 1884
- 05/18	Gustav Mahler dies in Vienna, Austria, 1911
- 05/18	Rick Wakeman is born in West London, England, 1949
- 05/19	Pete Townshend is born in London, 1945
-@@ -125,6 +130,7 @@
- 06/27	John Entwistle dies in Las Vegas, 2002
- 07/02	Felix Pappalardi and Leslie West form Mountain, 1969
- 07/03	Jim Morrison dies in Paris, 1971
-+07/03	Leos Janacek is born in Hukvaldy, Czech republic, 1854
- 07/06	The Jefferson Airplane is formed in San Francisco, 1965
- 07/07	Gustav Mahler is born in Kalischt, Bohemia, 1860
- 07/07	Ringo Starr (Richard Starkey) born in Liverpool, England, 1940
-@@ -145,6 +151,7 @@
- 08/01	The Concert for Bangla Desh takes place at Madison Square Garden, 1971
- 08/04	John Lennon points out that "the Beatles are more popular than Jesus", 1966
- 08/10	Ian Anderson (Jethro Tull) is born in Edinburgh, Scotland, 1947
-+08/12	Leos Janacek dies in Ostrava, Czech republic, 1928
- 08/13	Dan Fogelberg is born in Peoria, Illinois, 1951
- 08/15	Beatles replace drummer Pete Best with Richard Starkey, 1962
- 08/15	The Beatles play Shea Stadium in New York, 1965
-@@ -153,8 +160,10 @@
- 08/16	Madonna Louise Ciccone born in Bay City, Michigan, 1958
- 08/21	Joe Strummer (The Clash), born John Mellor in Ankara, Turkey, 1952
- 08/23	Keith Moon is born in London, England, 1946
-+08/25	Leonard Bernstein is born in Lawrence, Massachusetts, 1918
- 08/26	Jimi Hendrix gives his last performance at the Isle of Wight, 1970
- 08/26	Jimi Hendrix's Electric Ladyland Studios opens in New York, 1970
-+09/04	Anton Bruckner is born in Ansfelden, Austria, 1824
- 09/04	Edvard Grieg dies in Bergen, Norway, 1907
- 09/07	Keith Moon (The Who) dies in London of a drug overdose, 1978
- 09/07	Warren Zevon dies in Los Angeles of lung cancer (mesothelioma), 2003
-@@ -177,8 +186,12 @@
- 10/09	John Entwistle is born in London, England, 1944
- 10/09	John Lennon born in Liverpool, England, 1940
- 10/10	John Prine is born in Maywood, Illinois, 1946
-+10/10	Giuseppe Verdi is born in Le Roncole, Italy, 1813
-+10/11	Anton Bruckner dies in Vienna, Austria, 1896
- 10/12	Ray Conniff dies after falling down and hitting his head, 2002
- 10/12	The Jimi Hendrix Experience is formed in London, 1966
-+10/13	Paul Simon is born in Newark, New Jersey, USA , 1941
-+10/14	Leonard Bernstein dies in New York, 1990
- 10/16	Bob Weir (Grateful Dead) is born in San Francisco, 1947
- 10/17	"Hair" opens at New York's Public Theater, 1967
- 10/17	Frederic Chopin dies in Paris, France, 1849
-@@ -216,7 +229,7 @@
- 11/26	Paul Hindemith is born in Hanau, Germany, 1895
- 11/27	Jimi Hendrix (Johnny Allen Hendrix) is born in Seattle, 1942
+@@ -481,7 +483,7 @@
  11/29	Pau Casals born in Vendrell, 1876
+ 11/29	Erich Korngold dies in Hollywood, 1957
+ 11/29	Giacomo Puccini dies due to throat cancer in Brussels, Belgium, 1924
 -11/30	George Harrison dies at 13:30 in L.A., 2001
 +11/29	George Harrison dies at 13:30 in L.A., 2001
- 12/04	Frank Zappa dies in his Laurel Canyon home shortly before 18:00, 1993
- 12/05	Wolfgang Amadeus Mozart dies in Vienna, Austria, 1791
- 12/06	First sound recording made by Thomas Edison, 1877
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.newzealand	2017-12-27 10:51:13.991039271 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.newzealand	2017-12-27 10:51:24.575040831 +0100
+ 11/30	Wilhelm Furtwangler dies in Baden-Baden, Germany, 1954
+ 11/30	Nicolas de Grigny dies, 1703
+ 12/01	Jeremiah Clarke dies, 1707
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.newzealand bsdmainutils/usr.bin/calendar/calendars/calendar.newzealand
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.newzealand	2020-04-28 10:13:04.731343165 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.newzealand	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,8 @@
  #ifndef _calendar_newzealand_
  #define _calendar_newzealand_
@@ -415,8 +410,9 @@ Author: Michael Meskes <meskes@debian.org>
  Jan 02	New Year Holiday (NZ)
  Jan 14	Anniversary Day (Southland)
  Jan 21	Anniversary Day (Wellington)
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.russian	2017-12-27 10:51:45.615049027 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.russian	2017-12-27 10:51:57.467056547 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.russian bsdmainutils/usr.bin/calendar/calendars/calendar.russian
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.russian	2020-04-28 10:13:04.731343165 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.russian	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,6 @@
  #ifndef _calendar_russian_
  #define _calendar_russian_
@@ -425,8 +421,9 @@ Author: Michael Meskes <meskes@debian.org>
 +#include <ru_RU/calendar.all>
  
  #endif /* !_calendar_russian_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.southafrica	2017-12-27 10:52:15.495071866 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.southafrica	2017-12-27 10:52:39.319099045 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.southafrica bsdmainutils/usr.bin/calendar/calendars/calendar.southafrica
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.southafrica	2020-04-28 10:13:04.731343165 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.southafrica	2020-05-28 11:02:58.209454791 +0200
 @@ -11,6 +11,8 @@
  #ifndef _calendar_southafrica_
  #define _calendar_southafrica_
@@ -436,8 +433,9 @@ Author: Michael Meskes <meskes@debian.org>
  03/01	Human Rights Day in South Africa
  04/27	Freedom Day in South Africa
  05/01	Workers Day in South Africa
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.ukrainian	2017-12-27 10:52:58.135125873 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.ukrainian	2017-12-27 10:53:12.011148584 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.ukrainian bsdmainutils/usr.bin/calendar/calendars/calendar.ukrainian
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.ukrainian	2020-04-28 10:13:04.731343165 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.ukrainian	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,6 @@
  #ifndef _calendar_ukrainian_
  #define _calendar_ukrainian_
@@ -446,8 +444,9 @@ Author: Michael Meskes <meskes@debian.org>
 +#include <uk_UA/calendar.all>
  
  #endif /* !_calendar_ukrainian_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.usholiday	2017-12-27 10:54:48.815370544 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.usholiday	2017-12-27 10:55:04.639416557 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/calendar.usholiday bsdmainutils/usr.bin/calendar/calendars/calendar.usholiday
+--- bsdmainutils/usr.bin/calendar/calendars/calendar.usholiday	2020-04-28 10:13:04.731343165 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/calendar.usholiday	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,8 @@
  #ifndef _calendar_usholiday_
  #define _calendar_usholiday_
@@ -457,19 +456,11 @@ Author: Michael Meskes <meskes@debian.org>
  01/01	New Year's Day
  01/14	Julian Calendar New Year's Day
  02/02	Groundhog Day
-@@ -30,7 +32,7 @@
- 09/22*	Autumnal Equinox
- 10/MonSecond	Columbus Day in USA (2nd Monday of October)
- 10/31	All Hallows Eve  (Halloween)
--11/05*	Election Day in USA (1st Tuesday after 1st Monday for even years)
-+11/TueFirst	Election Day in USA (1st Tuesday after 1st Monday for even years)
- 11/SunFirst	Daylight Savings Time ends in USA; clocks move back (1st Sunday of November)
- 11/11	Veterans' Day
- 11/ThuFourth	Thanksgiving Day (4th Thursday in November)
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_AT.ISO_8859-15/calendar.feiertag	2017-12-27 11:21:22.948795564 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag	2017-12-27 11:21:11.704696430 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag bsdmainutils/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag
+--- bsdmainutils/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag	2020-04-28 10:13:23.595274775 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag	2020-05-28 11:02:58.209454791 +0200
 @@ -4,10 +4,10 @@
-  * $FreeBSD: head/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag 129609 2004-05-23 13:22:01Z josef $
+  * $FreeBSD: head/usr.bin/calendar/calendars/de_AT.ISO_8859-15/calendar.feiertag 343560 2019-01-29 19:54:37Z gonzo $
   */
  
 -#ifndef _de_AT_ISO8859_15_feiertag_
@@ -525,8 +516,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _de_AT_ISO8859_15_feiertag_ */
 +#endif /*! _de_AT_feiertag_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.all	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all	2017-12-27 11:41:44.707455097 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all	2020-05-28 11:02:58.209454791 +0200
 @@ -4,14 +4,14 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.all 78047 2001-06-11 03:08:46Z ache $
   */
@@ -551,8 +543,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_de_DE.ISO8859-1_all_ */
 +#endif /* !_de_DE_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.feiertag	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag	2017-12-27 11:42:07.131311229 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag	2020-05-28 11:02:58.209454791 +0200
 @@ -4,10 +4,10 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.feiertag 162920 2006-10-01 09:22:05Z maxim $
   */
@@ -605,8 +598,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _de_DE_ISO8859_1_feiertag_ */
 +#endif /*! _de_DE_feiertag_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.geschichte	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte	2017-12-27 11:42:28.439185042 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.geschichte	2020-05-28 11:02:58.209454791 +0200
 @@ -2,12 +2,12 @@
   * deutsche Geschichte
   *
@@ -891,8 +885,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* _de_DE_ISO8859_1_geschichte_ */
 +#endif /* _de_DE_geschichte_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.kirche	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche	2017-12-27 11:42:45.063093432 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche	2020-05-28 11:02:58.209454791 +0200
 @@ -4,10 +4,10 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.kirche 78047 2001-06-11 03:08:46Z ache $
   */
@@ -913,8 +908,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_de_DE_ISO8859_1_kirche_ */
 +#endif /* !_de_DE_kirche_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.literatur	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur	2017-12-27 11:42:59.659017778 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur	2020-05-28 11:02:58.209454791 +0200
 @@ -4,10 +4,10 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.literatur 120829 2003-10-06 01:17:42Z grog $
   */
@@ -970,8 +966,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_de_DE_ISO8859_1_literatur_ */
 +#endif /* !_de_DE_literatur_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.musik	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik	2017-12-27 11:43:14.158946915 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik	2020-05-28 11:02:58.209454791 +0200
 @@ -4,18 +4,18 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.musik 163673 2006-10-24 23:18:07Z grog $
   */
@@ -1033,8 +1030,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_de_DE_ISO8859_1_musik_ */
 +#endif /* !_de_DE_musik_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/de_DE.ISO8859-1/calendar.wissenschaft	2017-12-27 11:41:13.067678364 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft	2017-12-27 11:43:26.854888285 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft
+--- bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft	2020-05-28 11:02:58.209454791 +0200
 @@ -4,16 +4,16 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/de_DE.ISO8859-1/calendar.wissenschaft 121109 2003-10-15 08:18:59Z tg $
   */
@@ -1057,8 +1055,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* ! _de_DE_ISO8859_1_wissenschaft_ */
 +#endif /* ! _de_DE_wissenschaft_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/fr_FR.ISO8859-1/calendar.all	2017-12-27 11:44:21.022672169 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all	2017-12-27 11:44:42.418601150 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.all	2020-05-28 11:02:58.209454791 +0200
 @@ -1,14 +1,14 @@
  /*
 - * Calendrier franÁais
@@ -1081,8 +1080,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_fr_FR.ISO8859-1_all_ */
 +#endif /* !_fr_FR_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/fr_FR.ISO8859-1/calendar.fetes	2017-12-27 11:44:21.022672169 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes	2017-12-27 11:44:57.250556408 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes
+--- bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.fetes	2020-05-28 11:02:58.209454791 +0200
 @@ -1,630 +1,630 @@
  /*
 - * FÍtes ‡ souhaiter
@@ -2024,8 +2024,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _fr_FR_ISO8859_1_fetes */
 +#endif /*! _fr_FR_fetes */
---- bsdmainutils/usr.bin/calendar/calendars.orig/fr_FR.ISO8859-1/calendar.french	2017-12-27 11:44:21.022672169 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french	2017-12-27 11:45:13.942510304 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french
+--- bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.french	2020-05-28 11:02:58.209454791 +0200
 @@ -7,6 +7,6 @@
  #ifndef _calendar_french_
  #define _calendar_french_
@@ -2034,8 +2035,9 @@ Author: Michael Meskes <meskes@debian.org>
 +#include <fr_FR/calendar.all>
  
  #endif /* !_calendar_french_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/fr_FR.ISO8859-1/calendar.jferies	2017-12-27 11:44:21.022672169 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies	2017-12-27 11:45:27.366476402 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies
+--- bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.jferies	2020-05-28 11:02:58.209454791 +0200
 @@ -1,46 +1,46 @@
  /*
 - * Jours fÈriÈs
@@ -2103,8 +2105,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _fr_FR_ISO8859_1_jferies_ */
 +#endif /*! _fr_FR_jferies_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/fr_FR.ISO8859-1/calendar.proverbes	2017-12-27 11:44:21.022672169 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes	2017-12-27 11:45:42.230442058 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes
+--- bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/fr_FR.ISO8859-1/calendar.proverbes	2020-05-28 11:02:58.209454791 +0200
 @@ -1,38 +1,38 @@
  /*
 - * Proverbes liÈs au calendrier
@@ -2650,8 +2653,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _fr_FR_ISO8859_1_proverbes_ */
 +#endif /*! _fr_FR_proverbes_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/hr_HR.ISO8859-2/calendar.all	2017-12-27 11:50:51.570346703 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all	2017-12-27 11:51:09.006369508 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all	2020-04-28 10:13:33.043240514 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all	2020-05-28 11:02:58.213454816 +0200
 @@ -4,9 +4,9 @@
   * $FreeBSD: head/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.all 232105 2012-02-24 11:40:20Z osa $
   */
@@ -2666,10 +2670,11 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_hr_HR_ISO8859_2_all_ */
 +#endif /* !_hr_HR_all */
---- bsdmainutils/usr.bin/calendar/calendars.orig/hr_HR.ISO8859-2/calendar.praznici	2017-12-27 11:50:51.570346703 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici	2017-12-27 11:51:29.130398779 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici
+--- bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici	2020-04-28 10:13:33.043240514 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici	2020-05-28 11:02:58.213454816 +0200
 @@ -4,41 +4,41 @@
-  * $FreeBSD: head/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici 232105 2012-02-24 11:40:20Z osa $
+  * $FreeBSD: head/usr.bin/calendar/calendars/hr_HR.ISO8859-2/calendar.praznici 349371 2019-06-25 14:50:03Z zec $
   */
  
 -#ifndef _hr_HR_ISO8859_2_praznici_
@@ -2681,53 +2686,54 @@ Author: Michael Meskes <meskes@debian.org>
 +LANG=UTF-8
  
 -/* dræavni praznici */
-+/* dr≈∏avni praznici */
- 01/01	Nova godina
- 05/01	Praznik rada
- 05/30	Tjelovo
--06/22	Dan antifaπistiËke borbe
--06/25	Dan dræavnosti
-+06/22	Dan antifa¬πisti√®ke borbe
-+06/25	Dan dr≈∏avnosti
- 08/05	Dan domovinske zahvalnosti
- 10/08	Dan neovisnosti
-  
--/* katoliËki blagdani */
-+/* katoli√®ki blagdani */
- 01/06		Sveta tri kralja
- Easter-2	Veliki petak
++/* dr≈æavni praznici */
+ 01/01		Nova godina
+ 01/06		Bogojavljenje ili Sveta tri kralja
  Easter		Uskrs
  Easter+1	Uskrsni ponedjeljak
- Easter+49	Duhovi
- Easter+50	Duhovni ponedjeljak
--Easter+39	UzaπaπÊe
-+Easter+39	Uza¬πa¬π√¶e
+ 05/01		Praznik rada
+ Easter+60	Tijelovo
+-06/22		Dan antifaπistiËke borbe
+-06/25		Dan dræavnosti
++06/22		Dan antifa≈°istiƒçke borbe
++06/25		Dan dr≈æavnosti
+ 08/05		Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja
  08/15		Velika Gospa
+ 10/08		Dan neovisnosti
  11/01		Svi sveti
 -12/25		BoæiÊ
-+12/25		Bo≈∏i√¶
- 12/26		Stjepandan
++12/25		Bo≈æiƒá
+ 12/26		Sveti Stjepan
+  
+-/* katoliËki blagdani */
++/* katoliƒçki blagdani */
+ Easter-2	Veliki petak
+-Easter+39	UzaπaπÊe
++Easter+39	Uza≈°a≈°ƒáe
+ Easter+49	Duhovi
+ Easter+50	Duhovni ponedjeljak
  
 -/* godiπnja doba */
 -03/21*	PoËetak proljeÊa
 -06/21*	PoËetak ljeta
--09/21*	PoËetak jesena
+-09/23*	PoËetak jeseni
 -12/21*	PoËetak zime
-+/* godi¬πnja doba */
-+03/21*	Po√®etak prolje√¶a
-+06/21*	Po√®etak ljeta
-+09/21*	Po√®etak jesena
-+12/21*	Po√®etak zime
++/* godi≈°nja doba */
++03/21*	Poƒçetak proljeƒáa
++06/21*	Poƒçetak ljeta
++09/23*	Poƒçetak jeseni
++12/21*	Poƒçetak zime
   
  /* ljetno vrijeme */
 -03/NedjeljaLast	PoËetak ljetnog vremena
-+03/NedjeljaLast	Po√®etak ljetnog vremena
++03/NedjeljaLast	Poƒçetak ljetnog vremena
  10/NedjeljaLast	Kraj ljetnog vremena
  
 -#endif /* !_hr_HR_ISO8859_2_praznici_ */
 +#endif /* !_hr_HR_praznici */
---- bsdmainutils/usr.bin/calendar/calendars.orig/hu_HU.ISO8859-2/calendar.all	2017-12-27 11:51:45.182424316 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all	2017-12-27 11:52:03.206455225 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.all	2020-05-28 11:02:58.213454816 +0200
 @@ -1,13 +1,13 @@
  /*
 - * Magyar kalend·rium
@@ -2748,8 +2754,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_hu_HU.ISO8859-2_all_ */
 +#endif /* !_hu_HU_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/hu_HU.ISO8859-2/calendar.nevnapok	2017-12-27 11:51:45.182424316 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok	2017-12-27 11:52:27.182499865 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok
+--- bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.nevnapok	2020-05-28 11:02:58.213454816 +0200
 @@ -1,386 +1,386 @@
  /*
 - * NÈvnapok
@@ -3360,8 +3367,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _hu_HU_ISO8859_2_nevnapok_ */
 +#endif /*! _hu_HU_nevnapok_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/hu_HU.ISO8859-2/calendar.unnepek	2017-12-27 11:51:45.182424316 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek	2017-12-27 11:52:41.306527981 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek
+--- bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek	2018-01-30 11:07:30.137833766 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/hu_HU.ISO8859-2/calendar.unnepek	2020-05-28 11:02:58.213454816 +0200
 @@ -1,53 +1,53 @@
  /*
 - * ‹nnepnapok
@@ -3457,8 +3465,79 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /*! _hu_HU_ISO8859_2_unnepek_ */
 +#endif /*! _hu_HU_unnepek_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/uk_UA.KOI8-U/calendar.all	2017-12-27 11:54:45.954828726 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all	2017-12-27 11:55:01.114871137 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.all bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.all	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.all	2020-05-28 11:02:58.213454816 +0200
+@@ -9,8 +9,8 @@
+ #ifndef _pt_BR_UTF_8_all_
+ #define _pt_BR_UTF_8_all_
+ 
+-#include <pt_BR.UTF-8/calendar.holidays>
+-#include <pt_BR.UTF-8/calendar.commemorative>
+-#include <pt_BR.UTF-8/calendar.mcommemorative>
++#include <pt_BR/calendar.holidays>
++#include <pt_BR/calendar.commemorative>
++#include <pt_BR/calendar.mcommemorative>
+ 
+ #endif /* !_pt_BR.UTF_8_all_ */
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.commemorative bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.commemorative
+--- bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.commemorative	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.commemorative	2020-05-28 11:02:58.213454816 +0200
+@@ -9,7 +9,7 @@
+ #ifndef _pt_BR_UTF_8_commemorative_
+ #define _pt_BR_UTF_8_commemorative_
+ 
+-LANG=pt_BR.UTF-8
++LANG=UTF-8
+ 
+ 01/06	Dia nacional do fot√≥grafo
+ 01/06	Dia da gratid√£o
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.holidays bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.holidays
+--- bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.holidays	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.holidays	2020-05-28 11:02:58.213454816 +0200
+@@ -11,7 +11,7 @@
+ #ifndef _pt_BR_UTF_8_holidays_
+ #define _pt_BR_UTF_8_holidays_
+ 
+-LANG=pt_BR.UTF-8
++LANG=UTF-8
+ 
+ 01/01	Dia da confraterniza√ß√£o universal e da paz
+ 04/21	Dia do Tiradentes
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.mcommemorative bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.mcommemorative
+--- bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.mcommemorative	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.mcommemorative	2020-05-28 11:02:58.213454816 +0200
+@@ -11,7 +11,7 @@
+ #ifndef _pt_BR_UTF_8_mcommemorative_
+ #define _pt_BR_UTF_8_mcommemorative_
+ 
+-LANG=pt_BR.UTF-8
++LANG=UTF-8
+ 
+ Easter-47	Carnaval
+ Easter-7	Domingo de Ramos
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.all bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.all	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.all	2020-05-28 11:02:58.213454816 +0200
+@@ -7,10 +7,10 @@
+ #ifndef _ru_RU_UTF_8_all_
+ #define _ru_RU_UTF_8_all_
+ 
+-#include <ru_RU.UTF-8/calendar.common>
+-#include <ru_RU.UTF-8/calendar.holiday>
+-#include <ru_RU.UTF-8/calendar.military>
+-#include <ru_RU.UTF-8/calendar.orthodox>
+-#include <ru_RU.UTF-8/calendar.pagan>
++#include <ru_RU/calendar.common>
++#include <ru_RU/calendar.holiday>
++#include <ru_RU/calendar.military>
++#include <ru_RU/calendar.orthodox>
++#include <ru_RU/calendar.pagan>
+ 
+ #endif /* !_ru_RU_UTF_8_all_ */
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all
+--- bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.all	2020-05-28 11:02:58.213454816 +0200
 @@ -1,14 +1,14 @@
  /*
 - * ıÀ“¡ßŒ”ÿÀ…  À¡Ã≈Œƒ¡“
@@ -3481,8 +3560,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_uk_UA_KOI8_U_all_ */
 +#endif /* !_uk_UA_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/uk_UA.KOI8-U/calendar.holiday	2017-12-27 11:54:45.954828726 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday	2017-12-27 11:55:11.926902082 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday
+--- bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.holiday	2020-05-28 11:02:58.213454816 +0200
 @@ -1,22 +1,22 @@
  /*
 - * ıÀ“¡ßŒ”ÿÀ¶ ƒ≈“÷¡◊Œ¶ ”◊—‘¡
@@ -3520,8 +3600,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_uk_UA_KOI8_U_holiday_ */
 +#endif /* !_uk_UA_holiday_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/uk_UA.KOI8-U/calendar.misc	2017-12-27 11:54:45.954828726 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc	2017-12-27 11:55:22.730933573 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc
+--- bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.misc	2020-05-28 11:02:58.213454816 +0200
 @@ -1,18 +1,18 @@
  /*
 - * ∂Œ€¶ √¶À¡◊¶ ƒ¡‘…
@@ -3550,8 +3631,9 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_uk_UA_KOI8_U_misc_ */
 +#endif /* !_uk_UA_misc_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/uk_UA.KOI8-U/calendar.orthodox	2017-12-27 11:54:45.954828726 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox	2017-12-27 11:55:34.482968459 +0100
+diff -ruN bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox
+--- bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox	2018-01-30 11:07:30.141833890 +0100
++++ bsdmainutils/usr.bin/calendar/calendars/uk_UA.KOI8-U/calendar.orthodox	2020-05-28 11:02:58.213454816 +0200
 @@ -1,35 +1,35 @@
  /*
 - * “¡◊œ”Ã¡◊Œ¶ ”◊—‘¡
@@ -3615,164 +3697,25 @@ Author: Michael Meskes <meskes@debian.org>
  
 -#endif /* !_uk_UA_KOI8_U_orthodox_ */
 +#endif /* !_uk_UA_orthodox_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.dutch	2017-12-27 10:32:58.613095873 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.dutch	2017-12-27 12:20:41.626744761 +0100
-@@ -4,7 +4,7 @@
-  * Originally submitted by Edwin Groothuis <edwin@FreeBSD.org>
-  */
- 
--LANG=nl_NL.ISO8859-15
-+LANG=UTF-8
- Easter=Pasen
- 
- /*
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.german	2017-12-27 10:34:42.887474624 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.german	2017-12-27 12:19:35.981872501 +0100
-@@ -7,6 +7,6 @@
- #ifndef _calendar_german_
- #define _calendar_german_
- 
--#include <de_DE.ISO8859-1/calendar.all>
-+#include <de_DE/calendar.all>
- 
- #endif /* !_calendar_german_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.french	2017-12-27 10:34:25.872303960 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.french	2017-12-27 12:19:25.581729905 +0100
-@@ -7,6 +7,6 @@
- #ifndef _calendar_french_
- #define _calendar_french_
- 
--#include <fr_FR.ISO8859-1/calendar.all>
-+#include <fr_FR/calendar.all>
- 
- #endif /* !_calendar_french_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/calendar.croatian	2017-12-27 10:32:37.858379663 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/calendar.croatian	2017-12-27 12:18:44.593155273 +0100
-@@ -7,6 +7,6 @@
- #ifndef _calendar_croatian_
- #define _calendar_croatian_
- 
--#include <hr_HR.ISO8859-2/calendar.all>
-+#include <hr_HR/calendar.all>
- 
- #endif /* !_calendar_croatian_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.all	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.all	2017-12-27 12:25:55.306392829 +0100
-@@ -7,10 +7,10 @@
- #ifndef _ru_RU_UTF_8_all_
- #define _ru_RU_UTF_8_all_
- 
--#include <ru_RU.UTF-8/calendar.common>
--#include <ru_RU.UTF-8/calendar.holiday>
--#include <ru_RU.UTF-8/calendar.military>
--#include <ru_RU.UTF-8/calendar.orthodox>
--#include <ru_RU.UTF-8/calendar.pagan>
-+#include <ru_RU/calendar.common>
-+#include <ru_RU/calendar.holiday>
-+#include <ru_RU/calendar.military>
-+#include <ru_RU/calendar.orthodox>
-+#include <ru_RU/calendar.pagan>
- 
- #endif /* !_ru_RU_UTF_8_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.common	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.common	2017-12-27 12:29:22.204474772 +0100
-@@ -7,7 +7,7 @@
- #ifndef _ru_RU_UTF_8_common_
- #define _ru_RU_UTF_8_common_
- 
--LANG=ru_RU.UTF-8
-+LANG=UTF-8
- 
- 12 —è–Ω–≤.	–î–µ–Ω—å —Ä–∞–±–æ—Ç–Ω–∏–∫–∞ –ø—Ä–æ–∫—É—Ä–∞—Ç—É—Ä—ã
- 13 —è–Ω–≤.	–î–µ–Ω—å —Ä–æ—Å—Å–∏–π—Å–∫–æ–π –ø–µ—á–∞—Ç–∏
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.holiday	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.holiday	2017-12-27 12:29:09.676353879 +0100
-@@ -7,7 +7,7 @@
- #ifndef _ru_RU_UTF_8_holiday_
- #define _ru_RU_UTF_8_holiday_
- 
--LANG=ru_RU.UTF-8
-+LANG=UTF-8
- 
-  1 —è–Ω–≤.	–ù–æ–≤—ã–π –≥–æ–¥
-  2 —è–Ω–≤.	–ù–æ–≤–æ–≥–æ–¥–Ω–∏–µ –∫–∞–Ω–∏–∫—É–ª—ã
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.military	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.military	2017-12-27 12:28:59.800258160 +0100
-@@ -7,7 +7,7 @@
- #ifndef _ru_RU_UTF_8_military_
- #define _ru_RU_UTF_8_military_
- 
--LANG=ru_RU.UTF-8
-+LANG=UTF-8
- 
- 27 —è–Ω–≤.	–î–µ–Ω—å —Å–Ω—è—Ç–∏—è –±–ª–æ–∫–∞–¥—ã –≥–æ—Ä–æ–¥–∞ –õ–µ–Ω–∏–Ω–≥—Ä–∞–¥–∞ (1944 –≥–æ–¥)
-  2 —Ñ–µ–≤—Ä.	–î–µ–Ω—å —Ä–∞–∑–≥—Ä–æ–º–∞ —Å–æ–≤–µ—Ç—Å–∫–∏–º–∏ –≤–æ–π—Å–∫–∞–º–∏ –Ω–µ–º–µ—Ü–∫–æ-—Ñ–∞—à–∏—Å—Ç—Å–∫–∏—Ö –≤–æ–π—Å–∫ –≤ –°—Ç–∞–ª–∏–Ω–≥—Ä–∞–¥—Å–∫–æ–π –±–∏—Ç–≤–µ (1943 –≥–æ–¥)
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.orthodox	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.orthodox	2017-12-27 12:28:41.764082389 +0100
-@@ -7,7 +7,7 @@
- #ifndef _ru_RU_UTF_8_orthodox_
- #define _ru_RU_UTF_8_orthodox_
- 
--LANG=ru_RU.UTF-8
-+LANG=UTF-8
- Paskha=–ü–∞—Å—Ö–∞
- 
- 21 —Å–µ–Ω—Ç.	–†–æ–∂–¥–µ—Å—Ç–≤–æ –ü—Ä–µ—Å–≤—è—Ç–æ–π –ë–æ–≥–æ—Ä–æ–¥–∏—Ü—ã
---- bsdmainutils/usr.bin/calendar/calendars.orig/ru_RU.UTF-8/calendar.pagan	2017-12-27 11:53:58.534703820 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.pagan	2017-12-27 12:28:51.192174428 +0100
-@@ -7,7 +7,7 @@
- #ifndef _ru_RU_UTF_8_pagan_
- #define _ru_RU_UTF_8_pagan_
- 
--LANG=ru_RU.UTF-8
-+LANG=UTF-8
- Paskha=–ü–∞—Å—Ö–∞
- 
- 21 –¥–µ–∫.*	–ó–∏–º–Ω–µ–µ —Å–æ–ª–Ω—Ü–µ—Å—Ç–æ—è–Ω–∏–µ
---- bsdmainutils/usr.bin/calendar/calendars.orig/pt_BR.UTF-8/calendar.all	2017-12-27 11:39:58.580305967 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.all	2017-12-27 12:26:09.446541625 +0100
-@@ -9,8 +9,8 @@
- #ifndef _pt_BR_UTF_8_all_
- #define _pt_BR_UTF_8_all_
- 
--#include <pt_BR.UTF-8/calendar.holidays>
--#include <pt_BR.UTF-8/calendar.commemorative>
--#include <pt_BR.UTF-8/calendar.mcommemorative>
-+#include <pt_BR/calendar.holidays>
-+#include <pt_BR/calendar.commemorative>
-+#include <pt_BR/calendar.mcommemorative>
- 
- #endif /* !_pt_BR.UTF_8_all_ */
---- bsdmainutils/usr.bin/calendar/calendars.orig/pt_BR.UTF-8/calendar.commemorative	2017-12-27 11:39:58.580305967 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.commemorative	2017-12-27 12:30:06.328896073 +0100
-@@ -9,7 +9,7 @@
- #ifndef _pt_BR_UTF_8_commemorative_
- #define _pt_BR_UTF_8_commemorative_
- 
--LANG=pt_BR.UTF-8
-+LANG=UTF-8
- 
- 01/06	Dia nacional do fot√≥grafo
- 01/06	Dia da gratid√£o
---- bsdmainutils/usr.bin/calendar/calendars.orig/pt_BR.UTF-8/calendar.holidays	2017-12-27 11:39:58.580305967 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.holidays	2017-12-27 12:29:48.212723924 +0100
-@@ -11,7 +11,7 @@
- #ifndef _pt_BR_UTF_8_holidays_
- #define _pt_BR_UTF_8_holidays_
- 
--LANG=pt_BR.UTF-8
-+LANG=UTF-8
- 
- 01/01	Dia da confraterniza√ß√£o universal e da paz
- 04/21	Dia do Tiradentes
---- bsdmainutils/usr.bin/calendar/calendars.orig/pt_BR.UTF-8/calendar.mcommemorative	2017-12-27 11:39:58.580305967 +0100
-+++ bsdmainutils/usr.bin/calendar/calendars/pt_BR.UTF-8/calendar.mcommemorative	2017-12-27 12:29:55.764795825 +0100
-@@ -11,7 +11,7 @@
- #ifndef _pt_BR_UTF_8_mcommemorative_
- #define _pt_BR_UTF_8_mcommemorative_
- 
--LANG=pt_BR.UTF-8
-+LANG=UTF-8
- 
- Easter-47	Carnaval
- Easter-7	Domingo de Ramos
+--- calendars/ru_RU.KOI8-R/calendar.pagan	2020-07-31 10:59:20.447244942 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.KOI8-R/calendar.pagan	2020-07-31 11:00:41.455623264 +0200
+@@ -33,7 +33,7 @@
+ 21 ¡◊«.	‰≈Œÿ Û‘“…¬œ«¡
+ 28 ¡◊«.	ı”–≈Œ…≈ ˙Ã¡‘œ«œ“À…
+ 14 ”≈Œ‘.	‰≈Œÿ ˜œÃ»¡ ˙Õ≈≈◊…ﬁ¡
+-22 ”≈Œ‘.*	œ◊œ“œ‘ À ⁄…Õ≈ (œ”≈ŒŒ≈≈ “¡◊Œœƒ≈Œ”‘◊…≈)
++22 ”≈Œ‘.*	Ô”≈ŒŒ≈≈ “¡◊Œœƒ≈Œ”‘◊…≈
+ 10 Œœ—¬.	‰≈Œÿ Ì¡Àœ€…
+ 21 Œœ—¬.	‰≈Œÿ Û◊¡“œ«¡ … Û≈Õ¡“«Ã¡
+  9 ƒ≈À.	‰≈Œÿ ‰¡÷ÿ¬œ«¡ … Ì¡“≈ŒŸ
+--- calendars/ru_RU.UTF-8/calendar.pagan	2020-07-31 10:59:20.451244961 +0200
++++ bsdmainutils/usr.bin/calendar/calendars/ru_RU.UTF-8/calendar.pagan	2020-07-31 11:00:04.359450388 +0200
+@@ -33,7 +33,7 @@
+ 21 –∞–≤–≥.	–î–µ–Ω—å –°—Ç—Ä–∏–±–æ–≥–∞
+ 28 –∞–≤–≥.	–£—Å–ø–µ–Ω–∏–µ –ó–ª–∞—Ç–æ–≥–æ—Ä–∫–∏
+ 14 —Å–µ–Ω—Ç.	–î–µ–Ω—å –í–æ–ª—Ö–∞ –ó–º–µ–µ–≤–∏—á–∞
+-22 —Å–µ–Ω—Ç.*	–ü–æ–≤–æ—Ä–æ—Ç –∫ –∑–∏–º–µ (–æ—Å–µ–Ω–Ω–µ–µ —Ä–∞–≤–Ω–æ–¥–µ–Ω—Å—Ç–≤–∏–µ)
++22 —Å–µ–Ω—Ç.*	–û—Å–µ–Ω–Ω–µ–µ —Ä–∞–≤–Ω–æ–¥–µ–Ω—Å—Ç–≤–∏–µ
+ 10 –Ω–æ—è–±.	–î–µ–Ω—å –ú–∞–∫–æ—à–∏
+ 21 –Ω–æ—è–±.	–î–µ–Ω—å –°–≤–∞—Ä–æ–≥–∞ –∏ –°–µ–º–∞—Ä–≥–ª–∞
+  9 –¥–µ–∫.	–î–µ–Ω—å –î–∞–∂—å–±–æ–≥–∞ –∏ –ú–∞—Ä–µ–Ω—ã
