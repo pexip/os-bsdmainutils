@@ -1,3 +1,9 @@
+bsdmainutils (12.1.7+nmu3pexip2) pexip-bullseye; urgency=medium
+
+  * Main bullseye build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Fri, 24 Jun 2022 13:54:53 +0100
+
 bsdmainutils (12.1.7+nmu3pexip1) pexip; urgency=medium
 
   * Initial bullseye build
