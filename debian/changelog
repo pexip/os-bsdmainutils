@@ -1,3 +1,9 @@
+bsdmainutils (12.1.7+nmu3pexip4) pexip-bullseye; urgency=medium
+
+  * Re-add XS-Pexip-Upstream, lost in error during earlier updates
+
+ -- Steve McIntyre <steve.mcintyre@pexip.com>  Wed, 28 Sep 2022 15:41:49 +0100
+
 bsdmainutils (12.1.7+nmu3pexip3) pexip-bullseye; urgency=medium
 
   * Bullseye rebuild for ARM64 inclusion

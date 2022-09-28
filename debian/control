@@ -9,6 +9,7 @@ Standards-Version: 4.5.0
 Vcs-Browser: https://salsa.debian.org/meskes/bsdmainutils
 Vcs-Git: https://salsa.debian.org/meskes/bsdmainutils.git
 Rules-Requires-Root: no
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
 
 Package: bsdmainutils
 Architecture: all
