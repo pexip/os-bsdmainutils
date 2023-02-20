@@ -38,7 +38,6 @@
 #include <calendar.pagan>
 #include <calendar.southafrica>
 #include <calendar.thai>
-#include <calendar.ubuntu>
 #include <calendar.ukrainian>
 #include <calendar.unitedkingdom>
 #include <calendar.usholiday>

@@ -38,7 +38,7 @@ $(PROG): $(objs)
 endif
 
 .c.o:
-	$(CC) -include $(topdir)/freebsd.h $(FLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) $(FLAGS) $(CFLAGS) -c -o $@ $<
 
 # normal installation rule
 install-1: $(PROG)

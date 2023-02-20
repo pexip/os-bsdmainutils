@@ -1,3 +1,15 @@
+bsdmainutils (12.1.8) unstable; urgency=medium
+
+  * Drop root privileges before opening calendar files. (Closes: #998206)
+  * Remove freebsd.h which is not really used in the compile process but is
+    causing FTBFS on musl.
+    (Closes: #989688)
+  * Fixed unicode error in calendar file (Closes: #1030808)
+  * Removed Ubuntu calendar (Closes: #1004751)
+  * Bumped Standards-Version to 4.6.2, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Mon, 20 Feb 2023 10:19:03 +0100
+
 bsdmainutils (12.1.7+nmu3) unstable; urgency=medium
 
   * Non-maintainer upload.
