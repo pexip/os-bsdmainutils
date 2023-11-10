@@ -34,7 +34,6 @@ usr.bin/calendar/calendars/calendar.ukrainian		/usr/share/calendar
 debian/calendars/calendar.debian			/usr/share/calendar
 debian/calendars/calendar.all				/usr/share/calendar
 debian/calendars/calendar.world				/usr/share/calendar
-debian/calendars/calendar.ubuntu			/usr/share/calendar
 debian/calendars/calendar.discordian			/usr/share/calendar
 debian/calendars/calendar.eu				/usr/share/calendar
 debian/calendars/calendar.argentina			/usr/share/calendar

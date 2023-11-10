@@ -19,6 +19,5 @@
 #include <calendar.discordian>
 #include <calendar.debian>
 #include <calendar.eu>
-#include <calendar.ubuntu>
 
 #endif /* !_calendar_world_ */
