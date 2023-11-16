@@ -1,3 +1,9 @@
+bsdmainutils (12.1.8pexip1) pexip-bookworm; urgency=medium
+
+  * Initial bookworm build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 16 Nov 2023 09:55:52 +0000
+
 bsdmainutils (12.1.8) unstable; urgency=medium
 
   * Drop root privileges before opening calendar files. (Closes: #998206)
