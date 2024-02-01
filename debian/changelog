@@ -1,3 +1,9 @@
+bsdmainutils (12.1.8+pexip24u3) pexip-bookworm; urgency=medium
+
+  * New versioning scheme
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 01 Feb 2024 15:53:02 +0000
+
 bsdmainutils (12.1.8pexip2) pexip-bookworm; urgency=medium
 
   * Bookworm build for product distribution
